@@ -1,0 +1,784 @@
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+const HomePage = () => {
+  return (
+    <div className=' bg-base-000 mx-auto  py-10 px-2 sm:px-6 lg:px-8'>
+      {/* Hero Section */}
+      <div className='hero py-10 '>
+        <div className='hero-content flex-col lg:flex-row-reverse'>
+          <img
+            src='./heropic.png'
+            alt='hero'
+            className='max-w-sm rounded-lg '
+          />
+
+          <div>
+            <h1 className='font-sans text-6xl font-bold text-left max-w-xl '>
+              Up Your
+              <span className='text-indigo-500'> Skills </span>
+              To<span className='text-indigo-500'> Advance </span>Your
+              <span className='text-indigo-500'> Career </span>Path
+            </h1>
+
+            <p className='font-sans text-s text-left max-w-sm my-5 '>
+              Provides you with the latest online learning system and material
+              that help your knowledge growing.
+            </p>
+
+            <div className='flex space-x-3 my-5'>
+              <div className='flex items-center box-border rounded-lg space-x-2 border-2 border-indigo-400 bg-zinc-100  p-2 '>
+                <span className='bg-indigo-500 p-1 rounded-lg text-white'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke-width='1.5'
+                    stroke='currentColor'
+                    className='w-6 h-6'
+                  >
+                    <path
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      d='M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z'
+                    />
+                  </svg>
+                </span>
+                <div className='static'>
+                  <p>Expert Tutors</p>
+                  <strong className='text-xl font-bold'></strong>
+                </div>
+              </div>
+
+              <div className='flex items-center box-border rounded-lg space-x-2 border-2 border-indigo-400 bg-zinc-100  p-2 '>
+                <span className='bg-indigo-500 p-1 rounded-lg text-white'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke-width='1.5'
+                    stroke='currentColor'
+                    className='w-6 h-6'
+                  >
+                    <path
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      d='M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z'
+                    />
+                    <path
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      d='M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z'
+                    />
+                  </svg>
+                </span>
+                <div className='static'>
+                  <p>Course</p>
+                  <strong className='text-xl font-bold'></strong>
+                </div>
+              </div>
+
+              <div className='flex items-center box-border rounded-lg space-x-2 border-2 border-indigo-400 bg-zinc-100  p-2 '>
+                <span className='bg-indigo-500 p-1 rounded-lg text-white'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke-width='1.5'
+                    stroke='currentColor'
+                    className='w-6 h-6'
+                  >
+                    <path
+                      stroke-linecap='round'
+                      d='M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z'
+                    />
+                  </svg>
+                </span>
+
+                <div className='static'>
+                  <p>Video Courses</p>
+                  <strong className='text-xl font-bold'></strong>
+                </div>
+              </div>
+            </div>
+            <div className=' space-x-3 '>
+              <Link href='/marketplace'>
+                <button className='btn btn-primary'>Get Started</button>
+              </Link>
+              {/* <button className='btn btn-primary'>Get free trial</button> */}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Our Services Section */}
+      <div className='py-10 w-ful'>
+        <p className='font-sans text-s font-bold text-indigo-500 text-center my-2 '>
+          Our Services
+        </p>
+        <h1 className='font-sans text-4xl font-bold text-center '>
+          Fostering a playful & engaging learning environment
+        </h1>
+
+        <div className='flex justify-center gap-5 p-10 '>
+          <div className=' w-80 rounded-lg bg-indigo-500 text-primary-content border border-slate-200 drop-shadow-;g'>
+            <div className='card-body'>
+              <div className='flex gap-4'>
+                <img src='./uiuxlogo.png' alt='uiuxlogo' />
+                <h2 className='card-title'>UI/UX Design</h2>
+              </div>
+              <p className='my-3'>
+                Lessons on design that cover the most recent developments.
+              </p>
+              <div className='card-actions'>
+                <button className='btn'>Learn More</button>
+              </div>
+            </div>
+          </div>
+
+          <div className='  w-80 rounded-lg  bg-white text-black border border-slate-200  drop-shadow-lg'>
+            <div className='card-body'>
+              <div className='flex gap-4'>
+                <img src='./3dlogo.png' alt='uiuxlogo' />
+                <h2 className='card-title'>3D Modeling</h2>
+              </div>
+              <p className='my-3'>
+                3D Modeling courses that cover the most recent 3D trends.
+              </p>
+              <div className='card-actions '>
+                <button className='btn '>Learn More</button>
+              </div>
+            </div>
+          </div>
+
+          <div className='w-80 rounded-lg  bg-white text-black border border-slate-200 drop-shadow-lg'>
+            <div className='card-body'>
+              <div className='flex gap-4'>
+                <img src='./videoeditlogo.png' alt='videoedit' />
+                <h2 className='card-title'>Video Editing</h2>
+              </div>
+              <p className='my-3'>
+                Classes in video editing learning form zero to hero.{' '}
+              </p>
+              <div className='card-actions'>
+                <button className='btn'>Learn More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Explore Button */}
+        <div className='flex justify-center'>
+          <button className='btn  bg-slate-200 text-black hover:text-white border border-slate-400'>
+            Explore All Category
+          </button>
+        </div>
+      </div>
+
+      {/* Explore Programs Section */}
+      <div className='py-10'>
+        <div className=' grid  '>
+          <p className='font-sans text-s font-bold text-indigo-500 my-2 '>
+            Explore Programs
+          </p>
+          <h1 className='font-sans text-4xl font-bold text-left '>
+            Our Most Popular className
+          </h1>
+          <p className='font-sans text-xl text-slate-500 text-left my-2 '>
+            Let's join our famous className, the knowledge provided will
+            definitely be useful for you.
+          </p>
+        </div>
+
+        {/* Crouse Card */}
+        <div className='flex gap-5 p-10 justify-center'>
+          {/* Card 1 */}
+          <a href='/#'>
+            <div className='card '>
+              <img
+                className='w-full h-full object-cover'
+                src='./figma.jpg'
+                alt='figma'
+              />
+
+              <div className='p-3 flex-col asp-3'>
+                <div className='flex items-center gap-2'>
+                  <span className='badgeuidesign'>UI Design</span>
+                </div>
+                <div>
+                  <h2 className='product-title' title='Figma UI UX Design'>
+                    Figma UI UX Design..
+                  </h2>
+                  <p className='text-xs font-bold'>Drnchrj Academy</p>
+                </div>
+
+                <div>
+                  <span className='flex font-sans text-s text-slate-500 my-2'>
+                    Use Figma to get a job in UI Design, User Interface, User
+                    Experience design.
+                  </span>
+                </div>
+                <div className='rating rating-sm gap-2 '>
+                  {/* <span className='text-s text-indigo-500 font-bold'>4.5</span>
+                  <div>
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                      checked
+                    />
+                  </div>
+                  <span className='text-slate-400'>(2,355)</span> */}
+                </div>
+                <div className='flex gap-2'>
+                  <span className='text-lg font-black'>$350</span>
+                  <span className='text-slate-400 line-through '>$500</span>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          {/* Card 2 */}
+          <a href='/#'>
+            <div className='card'>
+              <img
+                className='w-full h-full object-cover'
+                src='./spline.jpg'
+                alt='figma'
+              />
+
+              <div className='p-3 flex-col asp-3'>
+                <div className='flex items-center gap-2'>
+                  <span className='badgeuidesign'>UI Design</span>
+                  <span className='badgeddd'>3D Modeling</span>
+                </div>
+                <div>
+                  <h2 className='product-title' title='Figma UI UX Design'>
+                    Spline 3D Modeling & Website Design
+                  </h2>
+                  <p className='text-xs font-bold'>Drnchrj Academy</p>
+                </div>
+
+                <div>
+                  <span className='flex font-sans text-s text-slate-500 my-2'>
+                    Use Figma to get a job in UI Design, User Interface, User
+                    Experience design.
+                  </span>
+                </div>
+                <div className='rating rating-sm gap-2 '>
+                  {/* <span className='text-s text-indigo-500 font-bold'>4.0</span>
+                  <div>
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                      checked
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                  </div>
+                  <span className='text-slate-400'>(2,054)</span> */}
+                </div>
+                <div className='flex gap-2'>
+                  <span className='text-lg font-black'>$350</span>
+                  <span className='text-slate-400 line-through '>$500</span>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          {/* Card 3 */}
+          <a href='/#'>
+            <div className='card'>
+              <img
+                className='w-full h-full object-cover'
+                src='./videoedit.jpg'
+                alt='figma'
+              />
+
+              <div className='p-3 flex-col asp-3'>
+                <div className='flex items-center gap-2'>
+                  <span className='badgevideo'>Video Editing</span>
+                </div>
+                <div>
+                  <h2 className='product-title' title='Figma UI UX Design'>
+                    Davinci Resolve Video Editing
+                  </h2>
+                  <p className='text-xs font-bold'>Drnchrj Academy</p>
+                </div>
+
+                <div>
+                  <span className='flex font-sans text-s text-slate-500 my-2'>
+                    Use Figma to get a job in UI Design, User Interface, User
+                    Experience design.
+                  </span>
+                </div>
+                <div className='rating rating-sm gap-2 '>
+                  {/* <span className='text-s text-indigo-500 font-bold'>4.0</span>
+                  <div>
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                      checked
+                    />
+                    <input
+                      type='radio'
+                      name='rating-2'
+                      className='mask mask-star-2 bg-orange-400'
+                    />
+                  </div>
+                  <span className='text-slate-400'>(1,849)</span> */}
+                </div>
+                <div className='flex gap-2'>
+                  <span className='text-lg font-black'>$350</span>
+                  <span className='text-slate-400 line-through '>$500</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {/* Explore Button */}
+        <div className='flex justify-center'>
+          <button className='btn  bg-slate-200 text-black hover:text-white border border-slate-400'>
+            Explore All Programs
+          </button>
+        </div>
+      </div>
+
+      {/* Tutors Section */}
+      <div className='py-10'>
+        <div className='w-ful px-10'>
+          <p className='font-sans text-s font-bold text-indigo-500 text-center my-2 '>
+            Tutors
+          </p>
+          <h1 className='font-sans text-4xl font-bold text-center '>
+            Meet the Heroes
+          </h1>
+          <p className=' font-sans text-xl text-slate-500 text-center my-2 '>
+            On Ed-Circle, instructors from all over the world instruct millions
+            of students. We offer the knowledge and abilities.
+          </p>
+        </div>
+
+        {/* Tutors Card */}
+        <div className='flex justify-center gap-5  p-10'>
+          {/* Card 1 */}
+          <div className='card w-60 bg-zinc-50 shadow-xl'>
+            <figure className=' px-10 pt-10 '>
+              <div className='avatar'>
+                <div className='w-20 rounded-full'>
+                  <img src='./devanddesignlogo.jpg' />
+                </div>
+              </div>
+            </figure>
+            <div className='card-body items-center text-center '>
+              <h2 className='card-title text-lg '>Dev And Design</h2>
+              <p className='text-xs font-bold text-indigo-500'>
+                UI Design & Codeing Institute
+              </p>
+              <p className='text-xs'>
+                Welcome To Dev And Design. We Are Committed To Teaching You How
+                To Design And Code Products From Idea Stage To Final Product
+                Stage.
+              </p>
+              <div className='flex w-12 gap-4'>
+                <a href='/#'>
+                  {' '}
+                  <img src='./twitter.png' />
+                </a>
+                <a href='/#'>
+                  {' '}
+                  <img src='./linkin.png' />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className='card w-60 bg-zinc-50 shadow-xl'>
+            <figure className='px-10 pt-10'>
+              <div className='avatar'>
+                <div className='w-20 rounded-full'>
+                  <img src='https://yt3.googleusercontent.com/wk_ZmU4xaPeIsjbSaIGEIuwPEMhZlmnvoMnsZY3lE0MMgcyWdwb-3vHtS0BS21EeAxmzfBbbfg=s176-c-k-c0x00ffffff-no-rj' />
+                </div>
+              </div>
+            </figure>
+            <div className='card-body items-center text-center'>
+              <h2 className='card-title text-lg '>Minh Pham</h2>
+              <p className='text-xs font-bold text-indigo-500'>
+                3D Website Designer
+              </p>
+              <p className='text-xs'>
+                Award-winning Designer with 14+ years of experience in GUI,
+                Interaction, Animation, and 3D design. Design Lead at Fantasy
+                Interactive, sharing tools and inspiration to help designers
+                bring ideas to life.
+              </p>
+              <div className='flex w-12 gap-4'>
+                <a href='/#'>
+                  {' '}
+                  <img src='./twitter.png' />
+                </a>
+                <a href='/#'>
+                  {' '}
+                  <img src='./linkin.png' />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className='card w-60 bg-zinc-50 shadow-xl'>
+            <figure className='px-10 pt-10'>
+              <div className='avatar'>
+                <div className='w-20 rounded-full'>
+                  <img src='https://yt3.googleusercontent.com/ytc/AGIKgqNtYihfN7yJ2nS00KYqxP87dVZgUAbCMPaAY35Y0w=s176-c-k-c0x00ffffff-no-rj' />
+                </div>
+              </div>
+            </figure>
+            <div className='card-body items-center text-center'>
+              <h2 className='card-title text-lg '>GFXMentor</h2>
+              <p className='text-xs font-bold text-indigo-500'>
+                UI Design & Codeing Institute
+              </p>
+              <p className='text-xs'>
+                I have experience of 21 years in graphic design teaching. Now
+                I'm teaching it to everyone especially those who can't afford
+                expensive institutions.
+              </p>
+              <div className='flex w-12 gap-4'>
+                <a href='/#'>
+                  {' '}
+                  <img src='./twitter.png' />
+                </a>
+                <a href='/#'>
+                  {' '}
+                  <img src='./linkin.png' />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Carousel */}
+      <div className='carousel w-full'>
+        {/* Slide1 */}
+        <div id='slide1' className='carousel-item relative w-full'>
+          <section className='relative isolate carousel w-full overflow-hidden bg-zinc-50 px-6 py-24 sm:py-32 lg:px-8'>
+            <div className='carousel-item w-full mx-auto max-w-2xl lg:max-w-4xl'>
+              {/* <img className="mx-auto h-12" src="https://tailwindui.com/img/logos/workcation-logo-indigo-600.svg" alt="" /> */}
+              <figure className='mt-10'>
+                <blockquote className='text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9'>
+                  <p>
+                    "For UI/UX designers like myself, this platform offers
+                    up-to-date courses, practical insights, and a collaborative
+                    learning environment that have had a profound impact on my
+                    professional growth."
+                  </p>
+                </blockquote>
+                <figcaption className='mt-10'>
+                  <img
+                    className='mx-auto h-20 w-20 rounded-full'
+                    src='https://i.pinimg.com/736x/e8/cc/a0/e8cca04986164dfd7bdbeaf24b701275.jpg'
+                    alt=''
+                  />
+                  <div className='mt-4 flex items-center justify-center space-x-3 text-base'>
+                    <div className='font-semibold text-gray-900'>
+                      Rebecca Thompson
+                    </div>
+                    <svg
+                      viewBox='0 0 2 2'
+                      width={3}
+                      height={3}
+                      aria-hidden='true'
+                      className='fill-gray-900'
+                    >
+                      <circle cx={1} cy={1} r={1} />
+                    </svg>
+                    <div className='text-gray-600'>UI/UX Designer</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
+            <a
+              href='#slide4'
+              className='btn border-none bg-transparent btn-circle'
+            >
+              ❮
+            </a>
+            <a
+              href='#slide2'
+              className='btn border-none bg-transparent btn-circle'
+            >
+              ❯
+            </a>
+          </div>
+        </div>
+
+        {/* Slide2 */}
+        <div id='slide2' className='carousel-item relative w-full'>
+          <section className='relative isolate carousel w-full overflow-hidden bg-zinc-50 px-6 py-24 sm:py-32 lg:px-8'>
+            <div className='carousel-item w-full mx-auto max-w-2xl lg:max-w-4xl'>
+              {/* <img className="mx-auto h-12" src="https://tailwindui.com/img/logos/workcation-logo-indigo-600.svg" alt="" /> */}
+              <figure className='mt-10'>
+                <blockquote className='text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9'>
+                  <p>
+                    "This online learning platform transformed my video editing
+                    skills, providing comprehensive courses and expert
+                    instruction that significantly improved the quality of my
+                    projects."
+                  </p>
+                </blockquote>
+                <figcaption className='mt-10'>
+                  <img
+                    className='mx-auto h-20 w-20 rounded-full'
+                    src='./MEN1.jpg'
+                    alt=''
+                  />
+                  <div className='mt-4 flex items-center justify-center space-x-3 text-base'>
+                    <div className='font-semibold text-gray-900'>
+                      James Roberts
+                    </div>
+                    <svg
+                      viewBox='0 0 2 2'
+                      width={3}
+                      height={3}
+                      aria-hidden='true'
+                      className='fill-gray-900'
+                    >
+                      <circle cx={1} cy={1} r={1} />
+                    </svg>
+                    <div className='text-gray-600'>Freelance Videographer</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
+            <a
+              href='#slide1'
+              className='btn border-none bg-transparent btn-circle'
+            >
+              ❮
+            </a>
+            <a
+              href='#slide3'
+              className='btn border-none bg-transparent btn-circle'
+            >
+              ❯
+            </a>
+          </div>
+        </div>
+
+        {/* Slide3 */}
+        <div id='slide3' className='carousel-item relative w-full'>
+          <section className='relative isolate carousel w-full overflow-hidden bg-zinc-50 px-6 py-24 sm:py-32 lg:px-8'>
+            <div className='carousel-item w-full mx-auto max-w-2xl lg:max-w-4xl'>
+              {/* <img className="mx-auto h-12" src="https://tailwindui.com/img/logos/workcation-logo-indigo-600.svg" alt="" /> */}
+              <figure className='mt-10'>
+                <blockquote className='text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9'>
+                  <p>
+                    "With its tailored courses, experienced instructors, and
+                    engaging hands-on learning approach, this online platform
+                    empowered me to become a confident 3D modeler."
+                  </p>
+                </blockquote>
+                <figcaption className='mt-10'>
+                  <img
+                    className='mx-auto h-20 w-20 rounded-full'
+                    src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                    alt=''
+                  />
+                  <div className='mt-4 flex items-center justify-center space-x-3 text-base'>
+                    <div className='font-semibold text-gray-900'>
+                      Amanda Nelson
+                    </div>
+                    <svg
+                      viewBox='0 0 2 2'
+                      width={3}
+                      height={3}
+                      aria-hidden='true'
+                      className='fill-gray-900'
+                    >
+                      <circle cx={1} cy={1} r={1} />
+                    </svg>
+                    <div className='text-gray-600'>Aspiring 3D Modeler</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
+            <a
+              href='#slide2'
+              className='btn border-none bg-transparent btn-circle'
+            >
+              ❮
+            </a>
+            <a
+              href='#slide4'
+              className='btn border-none bg-transparent btn-circle'
+            >
+              ❯
+            </a>
+          </div>
+        </div>
+
+        {/* Slide4 */}
+        <div id='slide4' className='carousel-item relative w-full'>
+          <section className='relative isolate carousel w-full overflow-hidden bg-zinc-50 px-6 py-24 sm:py-32 lg:px-8'>
+            <div className='carousel-item w-full mx-auto max-w-2xl lg:max-w-4xl'>
+              {/* <img className="mx-auto h-12" src="https://tailwindui.com/img/logos/workcation-logo-indigo-600.svg" alt="" /> */}
+              <figure className='mt-10'>
+                <blockquote className='text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9'>
+                  <p>
+                    "As an architecture student, this platform's dedicated
+                    section on 3D modeling and visualization, featuring courses
+                    on AutoCAD, Revit, and rendering techniques, provided
+                    invaluable hands-on experience for creating stunning
+                    architectural visualizations."
+                  </p>
+                </blockquote>
+                <figcaption className='mt-10'>
+                  <img
+                    className='mx-auto h-20 w-20 rounded-full'
+                    src='./MEN2.jpg'
+                    alt=''
+                  />
+                  <div className='mt-4 flex items-center justify-center space-x-3 text-base'>
+                    <div className='font-semibold text-gray-900'>
+                      Alex Ramirez
+                    </div>
+                    <svg
+                      viewBox='0 0 2 2'
+                      width={3}
+                      height={3}
+                      aria-hidden='true'
+                      className='fill-gray-900'
+                    >
+                      <circle cx={1} cy={1} r={1} />
+                    </svg>
+                    <div className='text-gray-600'>Architecture Student</div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
+            <a
+              href='#slide3'
+              className='btn border-none bg-transparent btn-circle'
+            >
+              ❮
+            </a>
+            <a
+              href='#slide1'
+              className='btn border-none bg-transparent btn-circle'
+            >
+              ❯
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className='footer p-10 bg-base-200 text-base-content'>
+        <div>
+          logo
+          <p>
+            Top learning experiences that create more <br /> talent in the
+            world.
+          </p>
+        </div>
+        <div>
+          <span className='footer-title'>Services</span>
+          <a className='link link-hover'>Features</a>
+          <a className='link link-hover'>Design</a>
+          <a className='link link-hover'>Tutorials</a>
+          <a className='link link-hover'>Advertisement</a>
+        </div>
+        <div>
+          <span className='footer-title'>Company</span>
+          <a className='link link-hover'>About us</a>
+          <a className='link link-hover'>Contact</a>
+          <a className='link link-hover'>Jobs</a>
+          <a className='link link-hover'>Press kit</a>
+        </div>
+        <div>
+          <span className='footer-title'>Legal</span>
+          <a className='link link-hover'>Terms of use</a>
+          <a className='link link-hover'>Privacy policy</a>
+          <a className='link link-hover'>Cookie policy</a>
+        </div>
+      </footer>
+
+      {/* Copy Right */}
+      <footer className='footer footer-center p-4 bg-base-300 text-base-content'>
+        <div>
+          <p>Copyright © 2023 - All right reserved by LOGO Ltd</p>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+export default HomePage
