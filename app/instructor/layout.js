@@ -33,7 +33,7 @@ const InstructorRoute = ({ children }) => {
           <div className='nav_container'>
             <InstructorNav />
           </div>
-          <div className='w-full mt-10 flex justify-end'>
+          <div className='w-full flex justify-end'>
             <div className='w-full pl-[13rem] flex justify-center items-center'>
               {children}
             </div>

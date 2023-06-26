@@ -16,6 +16,7 @@ import UpdateLessonForm from '@/components/form/UpdateLessonForm'
 const CourseView = ({ params }) => {
   const [course, setCourse] = useState('')
   const [currentLesson, setCurrentLesson] = useState({})
+  const [signedUrl, setSignedUrl] = useState('')
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
   const video_input = useRef(null)
@@ -131,7 +132,7 @@ const CourseView = ({ params }) => {
   return (
     <>
       {course.lessons && (
-        <div className='flex flex-col items-center mb-5 w-full'>
+        <div className='flex flex-col items-center mb-5 w-full mt-10'>
           {/* model for update lesson */}
 
           <dialog id='my_modal' className='modal modal-bottom sm:modal-middle'>
@@ -152,6 +153,7 @@ const CourseView = ({ params }) => {
                 handleVideo={handleVideo}
                 handleUpdateLesson={handleUpdateLesson}
                 video_input={video_input}
+                signedUrl={signedUrl}
               />
               {/* <pre>{JSON.stringify(currentLesson, null, 4)}</pre> */}
             </form>
@@ -218,8 +220,19 @@ const CourseView = ({ params }) => {
                         <div
                           className='tooltip cursor-pointer z-30'
                           data-tip='Edit Lesson'
-                          onClick={() => {
+                          onClick={async () => {
                             setCurrentLesson(lesson)
+
+                            if (lesson.video && lesson.video.Location) {
+                              const { data } = await axios.post(
+                                `/api/course/get-signedurl`,
+                                {
+                                  filename: lesson.video.Key,
+                                }
+                              )
+                              setSignedUrl(data)
+                            }
+
                             window.my_modal.showModal()
                           }}
                         >

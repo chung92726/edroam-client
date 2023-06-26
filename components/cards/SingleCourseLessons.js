@@ -27,7 +27,7 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                     <span
                       className='mx-8 text-[16px] link text-purple-500 z-50'
                       onClick={() => {
-                        handlePreview(lesson.video.Location)
+                        handlePreview(lesson.video)
                       }}
                     >
                       {lesson.title}
@@ -39,7 +39,7 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                     <div
                       className='text-[14px] z-50 link text-purple-500'
                       onClick={() => {
-                        handlePreview(lesson.video.Location)
+                        handlePreview(lesson.video)
                       }}
                     >
                       Preview

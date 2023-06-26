@@ -99,7 +99,7 @@ const CourseEdit = ({ params }) => {
     }
   }
   return (
-    <div className='w-8/12'>
+    <div className='w-8/12 mt-10'>
       {/* <pre>{JSON.stringify(values, null, 4)}</pre> */}
       <CourseCreateForm
         handleImage={handleImage}

@@ -40,7 +40,7 @@ const InstructorDashboard = () => {
     sendBalanceRequest()
   }, [])
   return (
-    <div className='flex w-full flex-col mx-10'>
+    <div className='flex w-full flex-col mx-10 mt-10'>
       <div className='stats shadow'>
         <div className='stat'>
           <div className='stat-figure text-secondary'>

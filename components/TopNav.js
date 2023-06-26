@@ -39,6 +39,12 @@ const TopNav = () => {
 
   const router = useRouter()
 
+  const [toggle, setToggle] = useState(false)
+
+  const handleToggle = () => {
+    setToggle(!toggle)
+  }
+
   return (
     <div className='flex flex-col w-full fixed z-50'>
       <div className='navbar bg-base-100 h-[70px]'>
@@ -51,36 +57,41 @@ const TopNav = () => {
           >
             <img src='/EdRoam.png' className='w-[100px]' />
           </Link>
-          {user && user.role && user.role.includes('Instructor') ? (
-            <Link
-              href='/instructor/course/create'
-              className='mx-4 my-1 cursor-pointer '
-              onClick={() => setCurrentPage('login')}
-            >
-              <div className='flex flex-row items-center'>
-                <div className='btn btn-ghost rounded-btn text-[12px]'>
-                  <IoCreate className='inline-block ' />
-                  <p className='ml-[-5px]'>Create Course</p>
+          {user && user.role ? (
+            user.role.includes('Instructor') ? (
+              <Link
+                href='/instructor/course/create'
+                className='mx-4 my-1 cursor-pointer '
+                onClick={() => setCurrentPage('login')}
+              >
+                <div className='flex flex-row items-center'>
+                  <div className='btn btn-ghost rounded-btn text-[12px]'>
+                    <IoCreate className='inline-block ' />
+                    <p className='ml-[-5px]'>Create Course</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ) : (
-            <Link
-              href='/user/become-instructor'
-              className='mx-4 my-1 cursor-pointer '
-              onClick={() => setCurrentPage('login')}
-            >
-              <div className='flex flex-row items-center'>
-                <div className='btn btn-ghost rounded-btn text-[12px]'>
-                  <FaChalkboardTeacher className='inline-block ml-[-5px]' />
-                  <p className=' '>Become Instructor</p>
+              </Link>
+            ) : (
+              <Link
+                href='/user/become-instructor'
+                className='mx-4 my-1 cursor-pointer '
+                onClick={() => setCurrentPage('login')}
+              >
+                <div className='hidden md:flex flex-row items-center'>
+                  <div className='btn btn-ghost rounded-btn text-[12px]'>
+                    <FaChalkboardTeacher className='inline-block ml-[-5px]' />
+                    <p className=' '>Become Instructor</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          )}
+              </Link>
+            )
+          ) : null}
 
           <div className='dropdown dropdown-end'>
-            <label tabIndex={0} className='btn btn-ghost rounded-btn'>
+            <label
+              tabIndex={0}
+              className='btn btn-ghost rounded-btn max-sm:!pr-0'
+            >
               <div className='flex flex-row items-center text-[12px]'>
                 <BsShop className='inline-block mx-[0.5px]' />
                 <p className='mx-1'>Browse Course</p>
@@ -108,40 +119,50 @@ const TopNav = () => {
             </ul>
           </div>
         </div>
-        <div className='flex-none gap-2'>
+        <div className='hidden md:flex flex-row gap-2 mr-10'>
           {/* <div className='form-control'>
           <input
             type='text'
             placeholder='Search'
             className='input input-bordered w-24 md:w-auto'
           />
-        </div> */}
+          </div> */}
           {user ? (
             <div className='dropdown dropdown-end m-2 font-sans'>
-              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+              <div>
+                <input
+                  tabIndex={0}
+                  className='checkbox w-[45px] h-[40px] absolute -top-1 mr-6 z-40 opacity-0'
+                  type='checkbox'
+                  checked={toggle}
+                  onChange={handleToggle}
+                />
                 <div className='w-8 rounded-full'>
                   <img src={'/guest.png'} />
                 </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52'
-              >
-                <li>
-                  <Link href='/user'>Profile</Link>
-                </li>
-                {user && user.role && user.role.includes('Instructor') && (
+              </div>
+
+              {toggle && (
+                <ul
+                  tabIndex={0}
+                  className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52'
+                >
                   <li>
-                    <Link href='/instructor'>Instructor Dashboard</Link>
+                    <Link href='/user'>Profile</Link>
                   </li>
-                )}
-                <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a onClick={logout}>Logout</a>
-                </li>
-              </ul>
+                  {user && user.role && user.role.includes('Instructor') && (
+                    <li>
+                      <Link href='/instructor'>Instructor Dashboard</Link>
+                    </li>
+                  )}
+                  <li>
+                    <a>Settings</a>
+                  </li>
+                  <li>
+                    <a onClick={logout}>Logout</a>
+                  </li>
+                </ul>
+              )}
             </div>
           ) : (
             <ul className='menu menu-horizontal'>
@@ -167,6 +188,109 @@ const TopNav = () => {
                 </div>
               </Link>
             </ul>
+          )}
+        </div>
+        <div className='md:hidden flex flex-row gap-2 pr-5 max-sm:pr-0'>
+          {/* <div className='form-control'>
+          <input
+            type='text'
+            placeholder='Search'
+            className='input input-bordered w-24 md:w-auto'
+          />
+          </div> */}
+          {user ? (
+            <div className='dropdown dropdown-end m-2 font-sans'>
+              <div>
+                <input
+                  tabIndex={0}
+                  className='checkbox w-[40px] h-[40px] absolute -top-1 mr-5 z-40 opacity-0'
+                  type='checkbox'
+                  checked={toggle}
+                  onChange={handleToggle}
+                />
+                <div className='w-8 mr-2 rounded-full'>
+                  <img src={'/guest.png'} />
+                </div>
+              </div>
+              {toggle && (
+                <ul
+                  tabIndex={0}
+                  className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52'
+                >
+                  <li>
+                    <Link href='/user'>Profile</Link>
+                  </li>
+                  {user && user.role && user.role.includes('Instructor') ? (
+                    <li>
+                      <Link href='/instructor'>Instructor Dashboard</Link>
+                    </li>
+                  ) : (
+                    <li>
+                      <Link
+                        href='/user/become-instructor'
+                        onClick={() => setCurrentPage('login')}
+                      >
+                        Become Instructor
+                      </Link>
+                    </li>
+                  )}
+                  <li>
+                    <a>Settings</a>
+                  </li>
+                  <li>
+                    <a onClick={logout}>Logout</a>
+                  </li>
+                </ul>
+              )}
+            </div>
+          ) : (
+            <div className='dropdown dropdown-end m-2 font-sans'>
+              <div>
+                <input
+                  tabIndex={0}
+                  className='checkbox w-[40px] h-[40px] absolute -top-1 mr-5 z-40 opacity-0'
+                  type='checkbox'
+                  checked={toggle}
+                  onChange={handleToggle}
+                />
+
+                <div className='w-8 rounded-full'>
+                  <img src={'/guest.png'} />
+                </div>
+              </div>
+              {toggle && (
+                <ul
+                  tabIndex={0}
+                  className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52'
+                >
+                  <li>
+                    <Link
+                      href='/login'
+                      className='mx-2 my-1 cursor-pointer border-transparent'
+                      onClick={() => setCurrentPage('login')}
+                    >
+                      <div className='flex flex-row items-center'>
+                        <AiOutlineLogin className='inline-block mx-[0.5px]' />
+                        <p className='mx-1'>Login</p>
+                      </div>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      href='/register'
+                      className='mx-2 my-1 cursor-pointer border-transparent'
+                      onClick={() => setCurrentPage('register')}
+                    >
+                      <div className='flex flex-row items-center'>
+                        <RiRegisteredLine className='inline-block mx-[0.5px]' />
+                        <p className='mx-1'>Sign up</p>
+                      </div>
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </div>
           )}
         </div>
       </div>
