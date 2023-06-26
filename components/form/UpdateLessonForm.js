@@ -9,6 +9,7 @@ const UpdateLessonForm = ({
   progress,
   handleUpdateLesson,
   handleVideo,
+  signedUrl,
 
   video_input,
 }) => {
@@ -63,9 +64,24 @@ const UpdateLessonForm = ({
                 </span>
               </label>
               {!uploading &&
-                currentLesson &&
-                currentLesson.video &&
-                currentLesson.video.Location && (
+              currentLesson &&
+              currentLesson.video &&
+              currentLesson.video.Location ? (
+                <label className='w-[120px]'>
+                  <input
+                    type='file'
+                    name='video'
+                    onChange={handleVideo}
+                    accept='video/*'
+                    style={{ display: 'none' }}
+                    className='w-full'
+                  />
+                  <span className='justify-end text-blue-400 cursor-pointer'>
+                    Change Video
+                  </span>
+                </label>
+              ) : (
+                !uploading && (
                   <label className='w-[120px]'>
                     <input
                       type='file'
@@ -76,10 +92,11 @@ const UpdateLessonForm = ({
                       className='w-full'
                     />
                     <span className='justify-end text-blue-400 cursor-pointer'>
-                      Change Video
+                      Upload a Video
                     </span>
                   </label>
-                )}
+                )
+              )}
               {/* <input
                 type='file'
                 name='video'
@@ -102,7 +119,7 @@ const UpdateLessonForm = ({
               currentLesson.video.Location && (
                 <div className='flex justify-center items-center mb-4 rounded'>
                   <ReactPlayer
-                    url={currentLesson.video.Location}
+                    url={signedUrl}
                     width='100%'
                     height='100%'
                     controls={true}

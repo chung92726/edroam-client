@@ -153,7 +153,7 @@ const CourseView = ({ params }) => {
   return (
     <>
       {course && (
-        <div className='flex flex-col items-center mb-10'>
+        <div className='flex flex-col items-center mb-10 mt-10'>
           <div className='card-side w-10/12  max-w-screen-2xl lg:card-side bg-base-100 shadow-xl mt-6'>
             <dialog id='my_modal' className='modal'>
               <form method='dialog' className='modal-box relative'>

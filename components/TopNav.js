@@ -118,11 +118,13 @@ const TopNav = () => {
         </div> */}
           {user ? (
             <div className='dropdown dropdown-end m-2 font-sans'>
-              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
-                <div className='w-8 rounded-full'>
-                  <img src={'/guest.png'} />
-                </div>
-              </label>
+              <div className='tooltip tooltip-left' data-tip={user.email}>
+                <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+                  <div className='w-8 rounded-full '>
+                    <img src={user.picture} />
+                  </div>
+                </label>
+              </div>
               <ul
                 tabIndex={0}
                 className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52'

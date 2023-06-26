@@ -21,10 +21,14 @@ const SingleCourse = ({ params }) => {
     state: { user },
   } = useContext(Context)
   const router = useRouter()
-  const handlePreview = (preview) => {
-    console.log('3')
+  const handlePreview = async (preview) => {
+    console.log(preview)
+    const { data } = await axios.post(`/api/course/get-signedurl`, {
+      filename: preview.Key,
+    })
+    console.log(data)
     document.getElementById('my_modal_3').showModal()
-    setPreview(preview)
+    setPreview(data)
     setVideoPlay(true)
   }
   const fetchCourse = async () => {
@@ -168,7 +172,7 @@ const SingleCourse = ({ params }) => {
             course.lessons[0].video.Location ? (
               <div
                 onClick={() => {
-                  handlePreview(course.lessons[0].video.Location)
+                  handlePreview(course.lessons[0].video)
                 }}
                 className='relative cursor-pointer'
               >

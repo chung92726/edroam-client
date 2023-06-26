@@ -83,7 +83,7 @@ const CourseCreate = () => {
     }
   }
   return (
-    <div className='w-8/12'>
+    <div className='w-8/12 mt-10'>
       <CourseCreateForm
         handleImage={handleImage}
         handleSubmit={handleSubmit}

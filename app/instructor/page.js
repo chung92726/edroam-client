@@ -52,7 +52,7 @@ const InstructorIndex = () => {
   }
   return (
     <div>
-      <div className='flex flex-wrap flex-row justify-center items-center gap-4'>
+      <div className='flex flex-wrap flex-row justify-center items-center mt-10 gap-4'>
         {courses &&
           courses.map((course) => (
             <Link href={`/instructor/course/view/${course.slug}`}>

@@ -4,30 +4,41 @@ import Link from 'next/link'
 
 const HomePage = () => {
   return (
-    <div className=' bg-base-000 mx-auto  py-10 px-2 sm:px-6 lg:px-8'>
+    <div className=' bg-base-000 mx-auto py-10 px-2 sm:px-6 lg:px-8 w-full overflow-x-hidden'>
       {/* Hero Section */}
-      <div className='hero py-10 '>
-        <div className='hero-content flex-col lg:flex-row-reverse'>
+      <div className='hero py-10 mx-auto w-full '>
+        {/* blob background   */}
+        <div className=' flex items-center justify-center  w-full overflow-x-hidden'>
+          <div className='absolute lg:relative w-full max-w-lg  '>
+            <div className='absolute top-0 left-40 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob  overflow-x-hidden max-sm:w-40 max-sm:h-40 max-sm:left-10'></div>
+            <div className='absolute -top-20 left-5 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000 overflow-x-hidden max-sm:w-40 max-sm:h-10 max-sm:left-10'></div>
+            <div className='absolute -bottom-8 left-40 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-4000 overflow-x-hidden max-sm:w-40 max-sm:h-10 max-sm:left-20'></div>
+          </div>
+        </div>
+
+        <div className='hero-content flex-col items-center justify-center lg:flex-row-reverse w-full'>
           <img
             src='./heropic.png'
             alt='hero'
-            className='max-w-sm rounded-lg '
+            className=' max-w-sm py-10 rounded-lg max-sm:w-[300px]'
           />
 
-          <div>
-            <h1 className='font-sans text-6xl font-bold text-left max-w-xl '>
+          <div className=''>
+            <h1 className='  font-sans text-6xl font-bold max-w-xl text-left max-sm:text-[48px]'>
               Up Your
-              <span className='text-indigo-500'> Skills </span>
-              To<span className='text-indigo-500'> Advance </span>Your
-              <span className='text-indigo-500'> Career </span>Path
+              <span className='animate-pulse text-transparent bg-clip-text bg-gradient-to-r  from-indigo-500 via-purple-500 to-pink-500'>
+                {' '}
+                Digital Design Skills{' '}
+              </span>
+              To Advance Your Career Path
             </h1>
 
             <p className='font-sans text-s text-left max-w-sm my-5 '>
               Provides you with the latest online learning system and material
-              that help your knowledge growing.
+              that help your digital design knowledge growing.
             </p>
 
-            <div className='flex space-x-3 my-5'>
+            {/* <div className='flex space-x-3 my-5'>
               <div className='flex items-center box-border rounded-lg space-x-2 border-2 border-indigo-400 bg-zinc-100  p-2 '>
                 <span className='bg-indigo-500 p-1 rounded-lg text-white'>
                   <svg
@@ -101,10 +112,13 @@ const HomePage = () => {
                   <strong className='text-xl font-bold'></strong>
                 </div>
               </div>
-            </div>
+            </div> */}
+
             <div className=' space-x-3 '>
               <Link href='/marketplace'>
-                <button className='btn btn-primary'>Get Started</button>
+                <button className='btn btn-primary bg-indigo-500'>
+                  Get Started
+                </button>
               </Link>
               {/* <button className='btn btn-primary'>Get free trial</button> */}
             </div>
@@ -121,8 +135,8 @@ const HomePage = () => {
           Fostering a playful & engaging learning environment
         </h1>
 
-        <div className='flex justify-center gap-5 p-10 '>
-          <div className=' w-80 rounded-lg bg-indigo-500 text-primary-content border border-slate-200 drop-shadow-;g'>
+        <div className='flex flex-col items-center justify-center  gap-5 p-10  lg:flex-row'>
+          <div className='w-72 h-72  rounded-lg bg-indigo-500 text-primary-content border border-slate-200 drop-shadow-;g'>
             <div className='card-body'>
               <div className='flex gap-4'>
                 <img src='./uiuxlogo.png' alt='uiuxlogo' />
@@ -137,7 +151,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className='  w-80 rounded-lg  bg-white text-black border border-slate-200  drop-shadow-lg'>
+          <div className='w-72 h-72 rounded-lg  bg-white text-black border border-slate-200  drop-shadow-lg'>
             <div className='card-body'>
               <div className='flex gap-4'>
                 <img src='./3dlogo.png' alt='uiuxlogo' />
@@ -152,14 +166,15 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className='w-80 rounded-lg  bg-white text-black border border-slate-200 drop-shadow-lg'>
+          <div className='w-72 h-72 rounded-lg bg-white text-black border border-slate-200 drop-shadow-lg'>
             <div className='card-body'>
               <div className='flex gap-4'>
                 <img src='./videoeditlogo.png' alt='videoedit' />
                 <h2 className='card-title'>Video Editing</h2>
               </div>
               <p className='my-3'>
-                Classes in video editing learning form zero to hero.{' '}
+                Classes in video editing learning form offline editing to
+                special effects.{' '}
               </p>
               <div className='card-actions'>
                 <button className='btn'>Learn More</button>
@@ -178,24 +193,24 @@ const HomePage = () => {
 
       {/* Explore Programs Section */}
       <div className='py-10'>
-        <div className=' grid  '>
-          <p className='font-sans text-s font-bold text-indigo-500 my-2 '>
+        <div className='items-center justify-center grid  '>
+          <p className='text-center font-sans text-s font-bold text-indigo-500 my-2 '>
             Explore Programs
           </p>
-          <h1 className='font-sans text-4xl font-bold text-left '>
+          <h1 className='font-sans text-4xl font-bold text-center '>
             Our Most Popular className
           </h1>
-          <p className='font-sans text-xl text-slate-500 text-left my-2 '>
+          <p className='font-sans text-xl text-slate-500 text-center my-2 '>
             Let's join our famous className, the knowledge provided will
             definitely be useful for you.
           </p>
         </div>
 
         {/* Crouse Card */}
-        <div className='flex gap-5 p-10 justify-center'>
+        <div className='flex flex-col gap-5 p-10 justify-center items-center  lg:flex-row  '>
           {/* Card 1 */}
           <a href='/#'>
-            <div className='card '>
+            <div className='w-72 card '>
               <img
                 className='w-full h-full object-cover'
                 src='./figma.jpg'
@@ -219,8 +234,9 @@ const HomePage = () => {
                     Experience design.
                   </span>
                 </div>
-                <div className='rating rating-sm gap-2 '>
-                  {/* <span className='text-s text-indigo-500 font-bold'>4.5</span>
+
+                {/* <div className='rating rating-sm gap-2 '>
+                  <span className='text-s text-indigo-500 font-bold'>4.5</span>
                   <div>
                     <input
                       type='radio'
@@ -249,8 +265,9 @@ const HomePage = () => {
                       checked
                     />
                   </div>
-                  <span className='text-slate-400'>(2,355)</span> */}
-                </div>
+                  <span className='text-slate-400'>(2,355)</span>
+                </div> */}
+
                 <div className='flex gap-2'>
                   <span className='text-lg font-black'>$350</span>
                   <span className='text-slate-400 line-through '>$500</span>
@@ -261,7 +278,7 @@ const HomePage = () => {
 
           {/* Card 2 */}
           <a href='/#'>
-            <div className='card'>
+            <div className='w-72 card'>
               <img
                 className='w-full h-full object-cover'
                 src='./spline.jpg'
@@ -282,12 +299,13 @@ const HomePage = () => {
 
                 <div>
                   <span className='flex font-sans text-s text-slate-500 my-2'>
-                    Use Figma to get a job in UI Design, User Interface, User
-                    Experience design.
+                    Use Spline to design 3D model, Animation, 3D Website Design.
+                    and Make a real 3D website.
                   </span>
                 </div>
-                <div className='rating rating-sm gap-2 '>
-                  {/* <span className='text-s text-indigo-500 font-bold'>4.0</span>
+
+                {/* <div className='rating rating-sm gap-2 '>
+                  <span className='text-s text-indigo-500 font-bold'>4.0</span>
                   <div>
                     <input
                       type='radio'
@@ -316,8 +334,9 @@ const HomePage = () => {
                       className='mask mask-star-2 bg-orange-400'
                     />
                   </div>
-                  <span className='text-slate-400'>(2,054)</span> */}
-                </div>
+                  <span className='text-slate-400'>(2,054)</span>
+                </div> */}
+
                 <div className='flex gap-2'>
                   <span className='text-lg font-black'>$350</span>
                   <span className='text-slate-400 line-through '>$500</span>
@@ -328,7 +347,7 @@ const HomePage = () => {
 
           {/* Card 3 */}
           <a href='/#'>
-            <div className='card'>
+            <div className='w-72 card'>
               <img
                 className='w-full h-full object-cover'
                 src='./videoedit.jpg'
@@ -348,12 +367,13 @@ const HomePage = () => {
 
                 <div>
                   <span className='flex font-sans text-s text-slate-500 my-2'>
-                    Use Figma to get a job in UI Design, User Interface, User
-                    Experience design.
+                    Use Davinci Resolve to Offline Video Editing, Motion
+                    Tracking, Video Effects Editing.
                   </span>
                 </div>
-                <div className='rating rating-sm gap-2 '>
-                  {/* <span className='text-s text-indigo-500 font-bold'>4.0</span>
+
+                {/* <div className='rating rating-sm gap-2 '>
+                  <span className='text-s text-indigo-500 font-bold'>4.0</span>
                   <div>
                     <input
                       type='radio'
@@ -382,8 +402,9 @@ const HomePage = () => {
                       className='mask mask-star-2 bg-orange-400'
                     />
                   </div>
-                  <span className='text-slate-400'>(1,849)</span> */}
-                </div>
+                  <span className='text-slate-400'>(1,849)</span>
+                </div> */}
+
                 <div className='flex gap-2'>
                   <span className='text-lg font-black'>$350</span>
                   <span className='text-slate-400 line-through '>$500</span>
@@ -417,9 +438,9 @@ const HomePage = () => {
         </div>
 
         {/* Tutors Card */}
-        <div className='flex justify-center gap-5  p-10'>
+        <div className='flex flex-col items-center justify-center gap-5 p-10 lg:flex-row'>
           {/* Card 1 */}
-          <div className='card w-60 bg-zinc-50 shadow-xl'>
+          <div className='card w-72 bg-zinc-50 shadow-xl'>
             <figure className=' px-10 pt-10 '>
               <div className='avatar'>
                 <div className='w-20 rounded-full'>
@@ -427,7 +448,7 @@ const HomePage = () => {
                 </div>
               </div>
             </figure>
-            <div className='card-body items-center text-center '>
+            <div className='h-60 card-body items-center text-center '>
               <h2 className='card-title text-lg '>Dev And Design</h2>
               <p className='text-xs font-bold text-indigo-500'>
                 UI Design & Codeing Institute
@@ -451,7 +472,7 @@ const HomePage = () => {
           </div>
 
           {/* Card 2 */}
-          <div className='card w-60 bg-zinc-50 shadow-xl'>
+          <div className='card w-72 bg-zinc-50 shadow-xl'>
             <figure className='px-10 pt-10'>
               <div className='avatar'>
                 <div className='w-20 rounded-full'>
@@ -459,12 +480,12 @@ const HomePage = () => {
                 </div>
               </div>
             </figure>
-            <div className='card-body items-center text-center'>
+            <div className='h-60 card-body items-center text-center'>
               <h2 className='card-title text-lg '>Minh Pham</h2>
               <p className='text-xs font-bold text-indigo-500'>
                 3D Website Designer
               </p>
-              <p className='text-xs'>
+              <p className='text-xs overflow-ellipsis overflow-hidden '>
                 Award-winning Designer with 14+ years of experience in GUI,
                 Interaction, Animation, and 3D design. Design Lead at Fantasy
                 Interactive, sharing tools and inspiration to help designers
@@ -484,7 +505,7 @@ const HomePage = () => {
           </div>
 
           {/* Card 3 */}
-          <div className='card w-60 bg-zinc-50 shadow-xl'>
+          <div className='card w-72 bg-zinc-50 shadow-xl'>
             <figure className='px-10 pt-10'>
               <div className='avatar'>
                 <div className='w-20 rounded-full'>
@@ -492,7 +513,7 @@ const HomePage = () => {
                 </div>
               </div>
             </figure>
-            <div className='card-body items-center text-center'>
+            <div className='h-60 card-body items-center text-center'>
               <h2 className='card-title text-lg '>GFXMentor</h2>
               <p className='text-xs font-bold text-indigo-500'>
                 UI Design & Codeing Institute
@@ -521,11 +542,11 @@ const HomePage = () => {
       <div className='carousel w-full'>
         {/* Slide1 */}
         <div id='slide1' className='carousel-item relative w-full'>
-          <section className='relative isolate carousel w-full overflow-hidden bg-zinc-50 px-6 py-24 sm:py-32 lg:px-8'>
+          <section className='relative isolate carousel w-full overflow-hidden bg-zinc-50 px- py-24 sm:py-32 lg:px-8'>
             <div className='carousel-item w-full mx-auto max-w-2xl lg:max-w-4xl'>
               {/* <img className="mx-auto h-12" src="https://tailwindui.com/img/logos/workcation-logo-indigo-600.svg" alt="" /> */}
               <figure className='mt-10'>
-                <blockquote className='text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9'>
+                <blockquote className='text-center  text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9'>
                   <p>
                     "For UI/UX designers like myself, this platform offers
                     up-to-date courses, practical insights, and a collaborative
@@ -558,7 +579,7 @@ const HomePage = () => {
               </figure>
             </div>
           </section>
-          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
+          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 xl:justify-around'>
             <a
               href='#slide4'
               className='btn border-none bg-transparent btn-circle'
@@ -613,7 +634,7 @@ const HomePage = () => {
               </figure>
             </div>
           </section>
-          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
+          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 xl:justify-around'>
             <a
               href='#slide1'
               className='btn border-none bg-transparent btn-circle'
@@ -667,7 +688,7 @@ const HomePage = () => {
               </figure>
             </div>
           </section>
-          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
+          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 xl:justify-around'>
             <a
               href='#slide2'
               className='btn border-none bg-transparent btn-circle'
@@ -723,7 +744,7 @@ const HomePage = () => {
               </figure>
             </div>
           </section>
-          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
+          <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 xl:justify-around'>
             <a
               href='#slide3'
               className='btn border-none bg-transparent btn-circle'
