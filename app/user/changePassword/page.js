@@ -1,76 +1,79 @@
-'use client'
-import { useContext, useEffect, useState } from 'react'
-import { Context } from '@/context/index'
-import UserRoute from '@/components/routes/UserRoutes'
-import axios from 'axios'
-import { toast } from 'react-toastify'
+"use client";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "@/context/index";
+import UserRoute from "@/components/routes/UserRoutes";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ChangePasswordPage = () => {
   const [values, setValues] = useState({
-    oldPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-  })
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
   const handleChange = (e) => {
-    e.preventDefault()
-    setValues({ ...values, [e.target.name]: e.target.value })
-  }
+    e.preventDefault();
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const { oldPassword, newPassword, confirmPassword } = values
+    e.preventDefault();
+    const { oldPassword, newPassword, confirmPassword } = values;
     if (newPassword !== confirmPassword) {
-      toast.error('Passwords do not match')
-      return
+      toast.error("Passwords do not match");
+      return;
     }
     try {
-      const { data } = await axios.post('/api/user/change-password', {
+      const { data } = await axios.post("/api/user/change-password", {
         oldPassword,
         newPassword,
         confirmPassword,
-      })
+      });
       if (data.success) {
-        toast.success('password updated successfully')
-        const { data } = await axios.get('/api/logout')
-        window.location.reload()
+        toast.success("password updated successfully");
+        const { data } = await axios.get("/api/logout");
+        window.location.reload();
       }
     } catch (err) {
-      console.log(err)
-      toast.error('password update failed try again later')
+      console.log(err);
+      toast.error("password update failed try again later");
     }
-  }
+  };
   return (
     <UserRoute>
-      <div className='flex flex-col w-full bg-gray-100 h-[89vh] items-center justify-center py-10 px-10'>
+      <div className="text-center bg-gray-700 text-white w-full  py-[50px] flex flex-col justify-center text-[28px] items-start font-bold ">
+        <h1 className="text-4xl pl-10">Change Password</h1>
+      </div>
+      <div className="flex flex-col w-full bg-gray-100 h-[89vh] items-center justify-center py-10 px-10">
         {values && (
-          <div className='flex flex-col justify-center items-center gap-3 w-1/2 '>
+          <div className="flex flex-col justify-center items-center gap-3 w-1/2 ">
             <input
-              type='password'
-              name='oldPassword'
-              placeholder='Old Password'
+              type="password"
+              name="oldPassword"
+              placeholder="Old Password"
               onChange={handleChange}
               value={values.oldPassword}
-              className='input input-bordered w-full max-w-xl mx-2'
+              className="input input-bordered w-full max-w-xl mx-2"
             />
             <input
-              type='password'
-              name='newPassword'
-              placeholder='New Password'
+              type="password"
+              name="newPassword"
+              placeholder="New Password"
               onChange={handleChange}
               value={values.newPassword}
-              className='input input-bordered w-full max-w-xl mx-2'
+              className="input input-bordered w-full max-w-xl mx-2"
             />
             <input
-              type='password'
-              name='confirmPassword'
-              placeholder='Confirm Password'
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
               onChange={handleChange}
               value={values.confirmPassword}
-              className='input input-bordered w-full max-w-xl mx-2'
+              className="input input-bordered w-full max-w-xl mx-2"
             />
 
-            <div className='form-control w-full max-w-xl'>
+            <div className="form-control w-full max-w-xl">
               <button
-                className='btn btn-active btn-secondary'
+                className="btn btn-active btn-secondary"
                 onClick={handleSubmit}
               >
                 Save Changes
@@ -80,6 +83,6 @@ const ChangePasswordPage = () => {
         )}
       </div>
     </UserRoute>
-  )
-}
-export default ChangePasswordPage
+  );
+};
+export default ChangePasswordPage;

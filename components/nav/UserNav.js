@@ -41,27 +41,27 @@ const UserNav = () => {
         </li>
         <li
           className={
-            currentPage === 'user/changePassword'
-              ? 'text-blue-400 '
-              : 'hover:text-blue-400'
+            currentPage === "user/changePassword"
+              ? "text-blue-400 "
+              : "hover:text-blue-400"
           }
         >
-          <Link href='/user/changePassword'>
+          <Link href="/user/changePassword">
             <RiLockPasswordLine size={20} />
-            <p className='mx-2'>Change Password</p>
+            <p className="mx-2 hidden lg:block">Change Password</p>
           </Link>
         </li>
         <li
           className={
-            currentPage === 'user/history'
-              ? 'text-blue-400 '
-              : 'hover:text-blue-400'
+            currentPage === "user/history"
+              ? "text-blue-400 "
+              : "hover:text-blue-400"
           }
         >
-          <Link href='/user/history'>
+          <Link href="/user/history">
             <VscHistory size={20} />
             <p className="mx-2 hidden lg:block">Enrollment History</p>
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
