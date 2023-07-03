@@ -55,7 +55,7 @@ const TopNav = () => {
             className="btn btn-ghost normal-case text-xl"
             onClick={() => setCurrentPage("home")}
           >
-            <img src="/EdRoam.png" className="w-[100px]" />
+            <img src="/Proedu.png" className="w-[100px]" />
           </Link>
           {user && user.role ? (
             user.role.includes("Instructor") ? (
