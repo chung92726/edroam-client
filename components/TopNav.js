@@ -10,9 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { Context } from "../context/index";
 import { useRouter } from "next/navigation";
 import { FaChalkboardTeacher } from "react-icons/fa";
-import { BsShop } from "react-icons/bs";
+import { BsBook, BsShop } from "react-icons/bs";
 import { IoCreate } from "react-icons/io5";
 import axios from "axios";
+import MyLearningMenu from "./MyLearningMenu";
+
+
 const TopNav = () => {
   const [currentPage, setCurrentPage] = useState("");
   const path = usePathname();
@@ -49,7 +52,7 @@ const TopNav = () => {
     <div className="flex flex-col w-full fixed z-50">
       <div className="navbar bg-base-100 h-[70px]">
         <ToastContainer position="top-center" />
-        <div className="flex-1">
+        <div className="flex-1 max-md:justify-left">
           <Link
             href="/"
             className="btn btn-ghost normal-case text-xl"
@@ -65,7 +68,7 @@ const TopNav = () => {
                 onClick={() => setCurrentPage("login")}
               >
                 <div className="hidden md:flex flex-row items-center">
-                  <div className="btn btn-ghost rounded-btn text-[12px]">
+                  <div className="btn btn-ghost rounded-btn text-[12px] max-md:hidden">
                     <IoCreate className="inline-block " />
                     <p className="ml-[-5px]">Create Course</p>
                   </div>
@@ -74,7 +77,7 @@ const TopNav = () => {
             ) : (
               <Link
                 href="/user/become-instructor"
-                className="mx-4 my-1 cursor-pointer "
+                className="mx-4 my-1 cursor-pointer max-md:hidden"
                 onClick={() => setCurrentPage("login")}
               >
                 <div className="hidden md:flex flex-row items-center">
@@ -119,6 +122,22 @@ const TopNav = () => {
             </ul>
           </div>
         </div>
+        {user ? (
+          <div className="hidden md:flex dropdown dropdown-end">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost rounded-btn max-sm:!pr-0"
+            >
+              <div className="flex flex-row items-center text-[12px] gap-2 mr-2">
+                <BsBook className="inline-block mx-[0.5px]" />
+                <p>My Learning</p>
+              </div>
+            </label>
+            <MyLearningMenu
+              tabIndex={0}
+            />
+          </div>
+        ) : null}
         <div className="hidden md:flex flex-row gap-2 mr-10">
           {/* <div className='form-control'>
           <input
@@ -139,7 +158,7 @@ const TopNav = () => {
                 className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52"
               >
                 <li>
-                  <Link href="/user">Profile</Link>
+                  <Link href="/user/profile">Profile</Link>
                 </li>
                 {user && user.role && user.role.includes("Instructor") && (
                   <li>
@@ -200,7 +219,7 @@ const TopNav = () => {
                 className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-44"
               >
                 <li>
-                  <Link href="/user">Profile</Link>
+                  <Link href="/user/profile">Profile</Link>
                 </li>
                 {user && user.role && user.role.includes("Instructor") ? (
                   <li>
@@ -217,6 +236,9 @@ const TopNav = () => {
                     </Link>
                   </li>
                 )}
+                <li>
+                  <Link href="/user">My Learning</Link>
+                </li>
                 <li>
                   <a>Settings</a>
                 </li>
