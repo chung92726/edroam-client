@@ -32,7 +32,7 @@ const UserRoute = ({ children, showNav = true }) => {
               <UserNav />
             </div>
           )}
-          <div className="w-full  flex justify-end pl-[4rem] lg:pl-[13rem]">
+          <div className="w-full min-h-[calc(100vh-70px)] bg-gray-100 pl-[4rem] lg:pl-[13rem]">
             <div className={showNav ? "w-full" : "w-full"}>{children}</div>
           </div>
         </div>

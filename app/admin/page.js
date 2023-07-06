@@ -72,7 +72,7 @@ export const data = {
   datasets: [
     {
       label: "Revenue",
-      data: [302.22, 387.36, 468.45, 1253.53, 841.52, 947.42],
+      data: [3500, 3000, 3400, 4100, 3500, 4800],
       backgroundColor: "rgb(255, 99, 132)",
       stack: "Stack 0",
     },

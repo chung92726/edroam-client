@@ -105,16 +105,27 @@ const TopNav = () => {
                 <Link href="/marketplace">All Courses</Link>
               </li>
               <li>
-                <a>UI/UX Design Courses</a>
+                <Link href="/marketplace/WebDesign">WebDesign</Link>
+                {/* <a>Web Development Courses</a> */}
               </li>
               <li>
-                <a>Web Development Courses</a>
+                <Link href="/marketplace/UIUXDesign">UI/UX Design Courses</Link>
+                {/* <a>UI/UX Design Courses</a> */}
               </li>
               <li>
-                <a>3D Modelling Courses</a>
+                <Link href="/marketplace/GraphicDesign">
+                  Graphic Design Courses
+                </Link>
               </li>
               <li>
-                <a>Video Editing Courses</a>
+                <Link href="/marketplace/3DModeling">3D Modelling Courses</Link>
+                {/* <a>3D Modelling Courses</a> */}
+              </li>
+              <li>
+                <Link href="/marketplace/VideoEditing">
+                  Video Editing Courses
+                </Link>
+                {/* <a>Video Editing Courses</a> */}
               </li>
             </ul>
           </div>
