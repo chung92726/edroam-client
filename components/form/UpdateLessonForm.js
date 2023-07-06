@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
+import { AiOutlineFolderAdd } from 'react-icons/ai'
+import { BsFillTrash3Fill } from 'react-icons/bs'
 
 const UpdateLessonForm = ({
   currentLesson,
@@ -10,11 +12,79 @@ const UpdateLessonForm = ({
   handleUpdateLesson,
   handleVideo,
   signedUrl,
-
+  supplementary,
+  setSupplementary,
   video_input,
+  handleAddSupplementary,
+  handleSupplementary,
+  handleSupplementaryRemove,
+  supplementary_input,
 }) => {
   return (
     <div>
+      <dialog id='my_modal_3' className='modal '>
+        <form method='dialog' className='modal-box w-[350px]'>
+          <h3 className='font-bold text-md my-2'>Add Supplementary File</h3>
+          <input
+            type='text'
+            name='title'
+            placeholder='Title'
+            onChange={(e) =>
+              setSupplementary({ ...supplementary, title: e.target.value })
+            }
+            value={supplementary.title}
+            className='input input-bordered w-11/12 my-2'
+            required
+            autoFocus
+          />
+          <textarea
+            type='text'
+            name='description'
+            placeholder='Description'
+            onChange={(e) =>
+              setSupplementary({
+                ...supplementary,
+                description: e.target.value,
+              })
+            }
+            value={supplementary.description}
+            className='textarea textarea-bordered textarea-sm w-11/12  pb-10'
+          />
+          <input
+            type='file'
+            className='file-input file-input-bordered w-11/12 my-2'
+            onChange={handleAddSupplementary}
+            ref={supplementary_input}
+          />
+          {/* <pre>{JSON.stringify(supplementary, null, 4)}</pre> */}
+          <div className='modal-action'>
+            {/* if there is a button in form, it will close the modal */}
+            <button
+              className='btn  btn-info'
+              disabled={supplementary.uploading}
+              onClick={() => {
+                handleSupplementary()
+                window.my_modal_3.close()
+              }}
+            >
+              {supplementary.uploading ? (
+                <div className='flex justify-center items-center'>
+                  <span className='loading loading-spinner'></span>
+                  "loading"
+                </div>
+              ) : (
+                'Add File'
+              )}
+            </button>
+            <button
+              className='btn btn-error'
+              onClick={() => window.my_modal_3.close()}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </dialog>
       {currentLesson && (
         <form onSubmit={handleUpdateLesson}>
           <div className='flex flex-col justify-center items-center gap-3 w-full'>
@@ -127,6 +197,47 @@ const UpdateLessonForm = ({
                   />
                 </div>
               )}
+            <div className='form-control w-full max-w-md '>
+              <label className='label'>
+                <span className='label-text'>
+                  {uploading ? 'Uploading . . .' : 'Add Supplemental File'}
+                </span>
+                {!uploading && (
+                  <AiOutlineFolderAdd
+                    className='text-2xl text-blue-500 cursor-pointer'
+                    size={25}
+                    onClick={() => window.my_modal_3.showModal()}
+                  />
+                )}
+              </label>
+            </div>
+            <h1 className='font-bold'>Supplementary files: </h1>
+            <div className='flex flex-col justify-center items-start gap-2 w-full max-w-md'>
+              {currentLesson &&
+                currentLesson.supplementary_resources &&
+                currentLesson.supplementary_resources.map((file, i) => (
+                  <div className='flex justify-between items-center max-w-md w-full '>
+                    <a
+                      className='text-[16px] link link-secondary '
+                      href={file.file.Location}
+                      target='_blank'
+                    >
+                      {file.title}
+                    </a>
+                    <div
+                      className='tooltip tooltip-left'
+                      data-tip='Delete File'
+                    >
+                      <BsFillTrash3Fill
+                        className='text-red-500 cursor-pointer'
+                        onClick={() => {
+                          handleSupplementaryRemove(i)
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+            </div>
             <button
               className='btn btn-block btn-info'
               onClick={handleUpdateLesson}
