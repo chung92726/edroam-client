@@ -13,6 +13,7 @@ const CourseView = ({ params }) => {
   const [course, setCourse] = useState('')
   const video_input = useRef()
   const router = useRouter()
+  const supplementary_input = useRef()
   const { slug } = params
   useEffect(() => {
     loadCourse()
@@ -25,8 +26,16 @@ const CourseView = ({ params }) => {
     video: {},
     uploading: false,
     free_preview: false,
+    supplementary_resources: [],
   })
   const [progress, setProgress] = useState(0)
+  const [supplementary, setSupplementary] = useState({
+    title: '',
+    file: {},
+    description: '',
+    file_type: 'pdf',
+    uploading: false,
+  })
 
   const handleAddLesson = async (e) => {
     e.preventDefault()
@@ -42,6 +51,7 @@ const CourseView = ({ params }) => {
         video: {},
         uploading: false,
         free_preview: false,
+        supplementary_resources: [],
       })
       setProgress(0)
       setCourse(data)
@@ -105,6 +115,63 @@ const CourseView = ({ params }) => {
       console.log(err)
       toast.error('Video Remove Failed')
       setValues({ ...values, uploading: false })
+    }
+  }
+
+  const handleAddSupplementary = async (e) => {
+    e.preventDefault()
+    setSupplementary({ ...supplementary, uploading: true })
+    try {
+      const file = e.target.files[0]
+      const suppleMentaryData = new FormData()
+      suppleMentaryData.append('supplementary', file)
+      const { data } = await axios.post(
+        `/api/course/supplementary-upload/${course.instructor._id}`,
+        suppleMentaryData
+      )
+      setSupplementary({
+        ...supplementary,
+        uploading: false,
+        file: data,
+      })
+      toast.success('Supplementary Resource Uploaded')
+    } catch (err) {
+      toast.error('Supplementary Resource Upload Failed')
+      setSupplementary({ ...supplementary, uploading: false })
+    }
+  }
+
+  const handleSupplementary = async (e) => {
+    setValues({
+      ...values,
+      supplementary_resources: [
+        ...values.supplementary_resources,
+        supplementary,
+      ],
+    })
+    supplementary_input.current.value = ''
+    setSupplementary({
+      title: '',
+      file: {},
+      description: '',
+      file_type: 'pdf',
+      uploading: false,
+    })
+  }
+
+  const handleSupplementaryRemove = async (index) => {
+    try {
+      const { data } = await axios.post(
+        `/api/course/supplementary-remove/${course.instructor._id}`,
+        values.supplementary_resources[index].file
+      )
+      let allSupplementary = values.supplementary_resources
+      let filtered = allSupplementary.filter((item, i) => i !== index)
+      setValues({ ...values, supplementary_resources: filtered })
+      toast.success('Supplementary Resource Removed')
+    } catch (err) {
+      console.log(err)
+      toast.error('Supplementary Resource Remove Failed')
     }
   }
 
@@ -172,6 +239,12 @@ const CourseView = ({ params }) => {
                   progress={progress}
                   handleVideoRemove={handleVideoRemove}
                   video_input={video_input}
+                  supplementary={supplementary}
+                  setSupplementary={setSupplementary}
+                  handleAddSupplementary={handleAddSupplementary}
+                  supplementary_input={supplementary_input}
+                  handleSupplementary={handleSupplementary}
+                  handleSupplementaryRemove={handleSupplementaryRemove}
                 />
               </form>
               <form method='dialog' className='modal-backdrop'></form>

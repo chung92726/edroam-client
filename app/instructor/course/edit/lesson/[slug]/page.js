@@ -19,7 +19,15 @@ const CourseView = ({ params }) => {
   const [signedUrl, setSignedUrl] = useState('')
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [supplementary, setSupplementary] = useState({
+    title: '',
+    file: {},
+    description: '',
+    file_type: 'pdf',
+    uploading: false,
+  })
   const video_input = useRef(null)
+  const supplementary_input = useRef()
   const router = useRouter()
   const { slug } = params
   useEffect(() => {
@@ -128,6 +136,62 @@ const CourseView = ({ params }) => {
       toast.error('Lesson update failed')
     }
   }
+  const handleAddSupplementary = async (e) => {
+    e.preventDefault()
+    setSupplementary({ ...supplementary, uploading: true })
+    try {
+      const file = e.target.files[0]
+      const suppleMentaryData = new FormData()
+      suppleMentaryData.append('supplementary', file)
+      const { data } = await axios.post(
+        `/api/course/supplementary-upload/${course.instructor._id}`,
+        suppleMentaryData
+      )
+      setSupplementary({
+        ...supplementary,
+        uploading: false,
+        file: data,
+      })
+      toast.success('Supplementary Resource Uploaded')
+    } catch (err) {
+      toast.error('Supplementary Resource Upload Failed')
+      setSupplementary({ ...supplementary, uploading: false })
+    }
+  }
+
+  const handleSupplementary = async (e) => {
+    setCurrentLesson({
+      ...currentLesson,
+      supplementary_resources: [
+        ...currentLesson.supplementary_resources,
+        supplementary,
+      ],
+    })
+    supplementary_input.current.value = ''
+    setSupplementary({
+      title: '',
+      file: {},
+      description: '',
+      file_type: 'pdf',
+      uploading: false,
+    })
+  }
+
+  const handleSupplementaryRemove = async (index) => {
+    try {
+      const { data } = await axios.post(
+        `/api/course/supplementary-update-remove/${course.instructor._id}/${currentLesson._id}`,
+        currentLesson.supplementary_resources[index].file
+      )
+      let allSupplementary = currentLesson.supplementary_resources
+      let filtered = allSupplementary.filter((item, i) => i !== index)
+      setCurrentLesson({ ...currentLesson, supplementary_resources: filtered })
+      toast.success('Supplementary Resource Removed')
+    } catch (err) {
+      console.log(err)
+      toast.error('Supplementary Resource Remove Failed')
+    }
+  }
 
   return (
     <>
@@ -154,6 +218,12 @@ const CourseView = ({ params }) => {
                 handleUpdateLesson={handleUpdateLesson}
                 video_input={video_input}
                 signedUrl={signedUrl}
+                supplementary={supplementary}
+                setSupplementary={setSupplementary}
+                handleAddSupplementary={handleAddSupplementary}
+                handleSupplementary={handleSupplementary}
+                handleSupplementaryRemove={handleSupplementaryRemove}
+                supplementary_input={supplementary_input}
               />
               {/* <pre>{JSON.stringify(currentLesson, null, 4)}</pre> */}
             </form>
