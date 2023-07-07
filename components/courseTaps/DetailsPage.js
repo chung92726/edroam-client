@@ -80,7 +80,7 @@ const DetailsPage = ({
             <div className='flex flex-col justify-start items-start w-11/12'>
               <h1 className='font-bold text-[16px] mb-2 text-blue-500 flex items-center gap-2'>
                 {answer.answeredBy.name}{' '}
-                {answer.answeredBy._id == course.instructor._id && (
+                {answer.role === 'instructor' && (
                   <div className='badge badge-warning gap-2'>Instructor</div>
                 )}
               </h1>

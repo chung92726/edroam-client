@@ -108,6 +108,16 @@
   }
 }
 
+html {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+html::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
 .ant-menu-title-content {
   flex-wrap: wrap;
   white-space: normal;
@@ -118,13 +128,33 @@
 }
 
 .ant-menu-item {
-  height: 50px !important;
+  height: 65px !important;
   padding: 5px 15px !important;
   margin-bottom: 5px !important;
   display: flex !important;
   min-width: 55px !important;
   align-items: center !important;
   /* align-items: flex-start !important; */
+}
+
+.ant-menu {
+  -ms-overflow-style: none !important; /* for Internet Explorer, Edge */
+  scrollbar-width: none !important; /* for Firefox */
+  overflow-y: scroll !important;
+}
+
+.ant-menu::-webkit-scrollbar {
+  display: none !important; /* for Chrome, Safari, and Opera */
+}
+
+.ant-layout-sider-children {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+.ant-layout-sider-children::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }
 
 .ant-avatar {
