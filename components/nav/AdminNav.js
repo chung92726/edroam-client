@@ -18,7 +18,7 @@ const AdminNav = () => {
   return (
     <>
       <div className='user-nav fixed '>
-        <ul className='menu bg-gray-800 h-[100vh]  gap-5  pt-5 text-white text-[16px] w-52 rounded-[2px] transition-all ease-in-out duration-300'>
+        <ul className='menu bg-gray-800 h-[calc(100vh-70px)]  gap-5  pt-8 text-white text-[16px]  rounded-[2px] transition-all ease-in-out duration-300 w-[4rem] lg:w-[13rem]'>
           <li
             className={
               currentPage === 'admin' ? 'text-blue-400 ' : 'hover:text-blue-400'
