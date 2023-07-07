@@ -93,6 +93,7 @@ const QandA = ({ course, currentLesson }) => {
         {
           title,
           details,
+          instructorId: course.instructor._id,
         }
       )
       toast.success('Question published')

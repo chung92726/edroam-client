@@ -7,6 +7,7 @@ import { MdOutlineCreateNewFolder } from 'react-icons/md'
 import { ImUserTie } from 'react-icons/im'
 import { HiHome } from 'react-icons/hi'
 import { ImStatsBars2 } from 'react-icons/im'
+import { LuFileQuestion } from 'react-icons/lu'
 const InstructorNav = () => {
   const [currentPage, setCurrentPage] = useState('')
   const path = usePathname()
@@ -63,6 +64,18 @@ const InstructorNav = () => {
             <Link href='/instructor/mystudents'>
               <ImUserTie size={20} />
               <p className='mx-4'>My Students</p>
+            </Link>
+          </li>
+          <li
+            className={
+              currentPage === 'instructor/allquestions'
+                ? 'text-blue-400 '
+                : 'hover:text-blue-400'
+            }
+          >
+            <Link href='/instructor/allquestions'>
+              <LuFileQuestion size={20} />
+              <p className='mx-4'>All Q&A</p>
             </Link>
           </li>
         </ul>
