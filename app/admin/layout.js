@@ -29,14 +29,12 @@ const InstructorRoute = ({ children, params }) => {
   return (
     <>
       {ok && (
-        <div className='flex flex-row w-full bg-gray-100'>
+        <div className='flex flex-row w-full'>
           <div className='nav_container'>
             <AdminNav />
           </div>
-          <div className='w-full flex justify-end h-[93vh] '>
-            <div className='w-full pl-[13rem] flex justify-center items-start '>
-              {children}
-            </div>
+          <div className='w-full min-h-[calc(100vh-70px)] bg-gray-100 pl-[4rem] lg:pl-[13rem]'>
+            <div className='w-full'>{children}</div>
           </div>
         </div>
       )}
