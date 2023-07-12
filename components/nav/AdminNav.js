@@ -31,31 +31,31 @@ const AdminNav = () => {
           </li>
           <li
             className={
-              currentPage === 'admin/courses'
+              currentPage === 'admin/courses*'
                 ? 'text-blue-400 '
                 : 'hover:text-blue-400'
             }
           >
             <Link href='/admin/courses'>
               <FaBook size={20} />
-              <p className='mx-4 hidden lg:block'>Course</p>
+              <p className='mx-4 hidden lg:block'>Courses</p>
             </Link>
           </li>
           <li
             className={
-              currentPage === 'admin/members'
+              currentPage === 'admin/members*'
                 ? 'text-blue-400 '
                 : 'hover:text-blue-400'
             }
           >
             <Link href='/admin/members'>
               <FiUsers size={20} />
-              <p className='mx-4 hidden lg:block'>Member</p>
+              <p className='mx-4 hidden lg:block'>Members</p>
             </Link>
           </li>
           <li
             className={
-              currentPage === 'admin/students'
+              currentPage === 'admin/students*'
                 ? 'text-blue-400 '
                 : 'hover:text-blue-400'
             }
