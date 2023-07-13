@@ -128,7 +128,7 @@ const AllCourse = () => {
     {
       key: 'operation',
       title: 'Act',
-      dataIndex: 'banned',
+
       width: currentWidth > 768 ? 120 : 65,
 
       render: (e) => (

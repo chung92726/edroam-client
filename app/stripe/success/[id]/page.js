@@ -32,8 +32,8 @@ const StripeSuccess = ({ params }) => {
 
   return (
     <UserRoute showNav={false}>
-      <div className='flex flex-col justify-center items-center'>
-        <MdSecurityUpdateGood className='text-[100px] text-green-500 mt-20 mb-5' />
+      <div className='flex justify-center items-center h-[100vh]'>
+        <span className='loading loading-spinner w-32'></span>
         <h1 className='text-[20px] font-bold'>
           Payment Success. Redirecting... Do not refresh
         </h1>
