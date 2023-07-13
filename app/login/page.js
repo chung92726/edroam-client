@@ -6,6 +6,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import Link from 'next/link'
 import { Context } from '../../context/index'
 import { useRouter } from 'next/navigation'
+import { FacebookLoginButton } from 'react-social-login-buttons'
+import { GoogleLoginButton } from 'react-social-login-buttons'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -22,6 +24,43 @@ const Login = () => {
   useEffect(() => {
     if (user !== null) router.push('/user')
   }, [user])
+
+  const handleFacebookLogin = async () => {
+    try {
+      const res = await axios.get('/api/auth/facebook')
+      console.log('FACEBOOK LOGIN RESPONSE', res)
+      toast.success('Login Successful')
+      // save in local storage => the browser
+      window.localStorage.setItem('user', JSON.stringify(res.data))
+      // save in context
+      dispatch({
+        type: 'LOGIN',
+        payload: res.data,
+      })
+      // redirect
+      router.push('/user')
+    } catch (err) {
+      toast.error('Falied to login with facebook')
+    }
+  }
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await axios.get('/api/auth/google')
+      console.log('GOOGLE LOGIN RESPONSE', res)
+      toast.success('Login Successful')
+      // save in local storage => the browser
+      window.localStorage.setItem('user', JSON.stringify(res.data))
+      // save in context
+      dispatch({
+        type: 'LOGIN',
+        payload: res.data,
+      })
+      // redirect
+      router.push('/user')
+    } catch (err) {
+      toast.error('Falied to login with google')
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -50,6 +89,7 @@ const Login = () => {
       setLoading(false)
     }
   }
+
   return (
     <>
       {/* <ToastContainer position='top-center' /> */}
@@ -62,6 +102,18 @@ const Login = () => {
           <div className='w-full max-w-sm my-2 flex'>
             <h2 className='text-base font-bold mx-2'>Login</h2>
           </div>
+          <a href='/api/auth/facebook' className='w-full max-w-sm'>
+            <FacebookLoginButton
+              className='w-full max-w-sm my-3 text-[14px]'
+              style={{ fontSize: '14px' }}
+            />
+          </a>
+          <a href='/api/auth/google' className='w-full max-w-sm'>
+            <GoogleLoginButton
+              className='w-full max-w-sm my-3 text-[14px]'
+              style={{ fontSize: '14px' }}
+            />
+          </a>
 
           <input
             type='email'
