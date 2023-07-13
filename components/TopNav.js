@@ -1,52 +1,52 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { useState, useEffect, useContext } from "react";
-import { AiOutlineLogin } from "react-icons/ai";
-import { RiRegisteredLine } from "react-icons/ri";
-import { ToastContainer, toast } from "react-toastify";
-import { usePathname } from "next/navigation";
-import "react-toastify/dist/ReactToastify.css";
-import { Context } from "../context/index";
-import { useRouter } from "next/navigation";
-import { FaChalkboardTeacher } from "react-icons/fa";
-import { BsBook, BsShop } from "react-icons/bs";
-import { IoCreate } from "react-icons/io5";
-import axios from "axios";
-import MyLearningMenu from "./MyLearningMenu";
-
+import Link from "next/link"
+import { useState, useEffect, useContext } from "react"
+import { AiOutlineLogin } from "react-icons/ai"
+import { RiRegisteredLine } from "react-icons/ri"
+import { ToastContainer, toast } from "react-toastify"
+import { usePathname } from "next/navigation"
+import "react-toastify/dist/ReactToastify.css"
+import { Context } from "../context/index"
+import { useRouter } from "next/navigation"
+import { FaChalkboardTeacher } from "react-icons/fa"
+import { BsBook, BsShop } from "react-icons/bs"
+import { IoCreate } from "react-icons/io5"
+import axios from "axios"
+import MyLearningMenu from "./MyLearningMenu"
 
 const TopNav = () => {
-  const [currentPage, setCurrentPage] = useState("");
-  const path = usePathname();
+  const [currentPage, setCurrentPage] = useState("")
+  const path = usePathname()
 
   //global state
-  const { state, dispatch } = useContext(Context);
-  const { user } = state;
+  const { state, dispatch } = useContext(Context)
+  const { user } = state
+  const [img, setImg] = useState("")
 
   useEffect(() => {
-    setCurrentPage(path.substring(1, path.length));
-  }, [path]);
+    setCurrentPage(path.substring(1, path.length))
+  }, [path])
 
   const logout = async () => {
     try {
-      const { data } = await axios.get("/api/logout");
-      dispatch({ type: "LOGOUT" });
-      window.localStorage.removeItem("user");
-      toast.success("Logout Successfully");
-      router.push("/login");
+      const { data } = await axios.get("/api/logout")
+      dispatch({ type: "LOGOUT" })
+      window.localStorage.removeItem("user")
+      toast.success("Logout Successfully")
+      router.push("/login")
     } catch (err) {
-      toast.error(err.response.data);
+      toast.error(err.response.data)
     }
-  };
+  }
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false)
 
   const handleToggle = () => {
-    setToggle(!toggle);
-  };
+    setToggle(!toggle)
+  }
 
   return (
     <div className="flex flex-col w-full fixed z-50">
@@ -61,7 +61,8 @@ const TopNav = () => {
             <img src="/Proedu.png" className="w-[100px]" />
           </Link>
           {user && user.role ? (
-            user.role.includes("Instructor") ? (
+            user.role.includes("Instructor") ||
+            user.role.includes("Pending") ? (
               <Link
                 href="/instructor/course/create"
                 className="mx-4 my-1 cursor-pointer "
@@ -144,9 +145,7 @@ const TopNav = () => {
                 <p>My Learning</p>
               </div>
             </label>
-            <MyLearningMenu
-              tabIndex={0}
-            />
+            <MyLearningMenu tabIndex={0} />
           </div>
         ) : null}
         <div className="hidden md:flex flex-row gap-2 mr-10">
@@ -161,7 +160,13 @@ const TopNav = () => {
             <div className="dropdown dropdown-end m-2 font-sans">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-8 rounded-full">
-                  <img src={"/guest.png"} />
+                  <img
+                    src={
+                      user?.picture?.Location !== undefined
+                        ? user.picture.Location
+                        : "/guest.png"
+                    }
+                  />
                 </div>
               </label>
               <ul
@@ -171,11 +176,14 @@ const TopNav = () => {
                 <li>
                   <Link href="/user/profile">Profile</Link>
                 </li>
-                {user && user.role && user.role.includes("Instructor") && (
-                  <li>
-                    <Link href="/instructor">Instructor Dashboard</Link>
-                  </li>
-                )}
+                {user &&
+                  user.role &&
+                  (user.role.includes("Instructor") ||
+                    user.role.includes("Pending")) && (
+                    <li>
+                      <Link href="/instructor">Instructor Dashboard</Link>
+                    </li>
+                  )}
                 <li>
                   <a>Settings</a>
                 </li>
@@ -222,7 +230,13 @@ const TopNav = () => {
             <div className="dropdown dropdown-end m-2 font-sans">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-8 mr-2 rounded-full">
-                  <img src={"/guest.png"} />
+                  <img
+                    src={
+                      user?.picture?.Location !== undefined
+                        ? user.picture.Location
+                        : "/guest.png"
+                    }
+                  />
                 </div>
               </label>
               <ul
@@ -232,7 +246,10 @@ const TopNav = () => {
                 <li>
                   <Link href="/user/profile">Profile</Link>
                 </li>
-                {user && user.role && user.role.includes("Instructor") ? (
+                {user &&
+                user.role &&
+                (user.role.includes("Instructor") ||
+                  user.role.includes("Pending")) ? (
                   <li>
                     <Link href="/instructor">Instructor Dashboard</Link>
                     <Link href="/instructor/course/create">Create Course</Link>
@@ -301,7 +318,7 @@ const TopNav = () => {
       </div>
       <div className="text-center bg-gradient-to-r from-sky-500 to-indigo-500 text-yellow-100 w-full rounded h-[4px] flex flex-col justify-center text-[28px] items-start font-bold "></div>
     </div>
-  );
-};
+  )
+}
 
-export default TopNav;
+export default TopNav

@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useContext } from "react";
-import { Context } from "@/context";
+import { useState, useEffect, useContext } from "react"
+import { Context } from "@/context"
 
-import axios from "axios";
+import axios from "axios"
 // import { FaSackDollar } from 'react-icons/fa'
-import { TbHomeDollar } from "react-icons/tb";
-import { HiUserGroup } from "react-icons/hi";
-import { MdOutlinePendingActions } from "react-icons/md";
-import { LuSettings } from "react-icons/lu";
-import { toast } from "react-toastify";
-import { Bar } from "react-chartjs-2";
+import { TbHomeDollar } from "react-icons/tb"
+import { HiUserGroup } from "react-icons/hi"
+import { MdOutlinePendingActions } from "react-icons/md"
+import { LuSettings } from "react-icons/lu"
+import { toast } from "react-toastify"
+import { Bar } from "react-chartjs-2"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,17 +19,10 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js";
+} from "chart.js"
 
-import { stripeCurrencyFormatter } from "@/utils/helpers";
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import { stripeCurrencyFormatter } from "@/utils/helpers"
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 export const options = {
   plugins: {
     title: {
@@ -65,8 +58,8 @@ export const options = {
       },
     },
   },
-};
-const labels = ["January", "February", "March", "April", "May", "June"];
+}
+const labels = ["January", "February", "March", "April", "May", "June"]
 export const data = {
   labels,
   datasets: [
@@ -77,7 +70,7 @@ export const data = {
       stack: "Stack 0",
     },
   ],
-};
+}
 
 const data2 = {
   labels,
@@ -89,39 +82,53 @@ const data2 = {
       stack: "Stack 1",
     },
   ],
-};
+}
 
 const AdminDashboard = () => {
-  const [balance, setBalance] = useState({ pending: [] });
+  const [balance, setBalance] = useState({ pending: [] })
+  const [transaction, setTransaction] = useState()
 
   const sendBalanceRequest = async () => {
-    const { data } = await axios.get("/api/instructor/balance");
-    console.log(data);
-    setBalance(data);
-  };
-  const [loading, setLoading] = useState(false);
+    const { data } = await axios.get("/api/instructor/balance")
+    // console.log(data);
+    setBalance(data)
+  }
+  const [loading, setLoading] = useState(false)
 
   const handlePayoutSetting = async () => {
-    setLoading(true);
+    setLoading(true)
     try {
-      const { data } = await axios.get("/api/instructor/payout-settings");
-      window.location.href = data;
-      setLoading(false);
+      const { data } = await axios.get("/api/instructor/payout-settings")
+      window.location.href = data
+      setLoading(false)
     } catch (err) {
-      console.log(err);
-      toast.error("Unable to access settings. Try again later");
-      setLoading(false);
+      console.log(err)
+      toast.error("Unable to access settings. Try again later")
+      setLoading(false)
     }
-  };
+  }
+
+  const getTransaction = async () => {
+    const { data } = await axios.get("/api/admin/transactions")
+    console.log(data)
+    setTransaction(data)
+    let totalRevenue = 0
+    data.map((item) => {
+      console.log(item.amount)
+      totalRevenue += item.amount
+    })
+    console.log(totalRevenue)
+  }
 
   useEffect(() => {
-    sendBalanceRequest();
-  }, []);
+    sendBalanceRequest()
+    getTransaction()
+  }, [])
   return (
-    <div className="flex w-full flex-col mx-10 mt-10 justify-center items-center ">
-      <div className="stats shadow w-full">
+    <div className="flex w-full flex-col mt-10 justify-center items-center ">
+      <div className="stats shadow w-[90%]">
         <div className="stat">
-          <div className="stat-figure text-secondary">
+          <div className="stat-figure text-secondary hidden sm:block">
             <MdOutlinePendingActions size={30} className="text-purple-800" />
           </div>
           <div className="stat-title text-[16px]">Pending Balance</div>
@@ -141,15 +148,18 @@ const AdminDashboard = () => {
               <span className="loading loading-spinner loading-md mx-5"></span>
             )}
           </div>
-          <div className="stat-desc">
-            Paid Directly From Stripe to Your Bank Account Every 48 Hours
+          <div className="stat-desc whitespace-normal">
+            <p className=" break-words">
+              Paid Directly From Stripe to Your Bank Account Every 48 Hours
+            </p>
           </div>
         </div>
       </div>
-      <div className="flex flex-row gap-3 ">
-        <div className="flex flex-row mt-5 gap-3 flex-wrap w-[50%]">
-          <div className="flex flex-col w-full  border-b-[10px] border-purple-400 rounded-3xl">
-            <div className="stats shadow w-full h-full">
+
+      <div className="flex flex-col gap-3 justify-center items-center w-[90%] 2xl:flex-row 2xl:h-[18rem]">
+        <div className="flex flex-col mt-5 gap-3 w-full h-full">
+          <div className="flex flex-col border-b-[10px] border-purple-400 rounded-3xl 2xl:h-[50%]">
+            <div className="stats stats-vertical shadow lg:stats-horizontal h-full">
               <div className="stat ">
                 <div className="stat-figure text-secondary">
                   {/* <TbHomeDollar size={30} className='text-purple-800' /> */}
@@ -176,8 +186,8 @@ const AdminDashboard = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full border-b-[10px] border-blue-400 rounded-3xl">
-            <div className="stats shadow w-full h-full">
+          <div className="flex flex-col w-full border-b-[10px] border-blue-400 rounded-3xl 2xl:h-[50%]">
+            <div className="stats stats-vertical shadow  lg:stats-horizontal h-full">
               <div className="stat">
                 <div className="stat-figure text-secondary">
                   {/* <TbHomeDollar size={30} className='text-purple-800' /> */}
@@ -205,8 +215,8 @@ const AdminDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row mt-5 gap-3 w-[50%]">
-          <div className="stats stats-vertical shadow w-[33%]">
+        <div className="flex flex-col mt-5 gap-3 w-full h-full lg:flex-row">
+          <div className="stats stats-vertical shadow lg:w-[30%]">
             <div className="stat">
               <div className="stat-title text-[14px]">Total Members</div>
               <div className="stat-value text-[18px]">2K</div>
@@ -220,7 +230,7 @@ const AdminDashboard = () => {
               <div className="stat-value text-[18px]">17</div>
             </div>
           </div>
-          <div className="stats stats-vertical shadow w-[33%]">
+          <div className="stats stats-vertical shadow lg:w-[33%]">
             <div className="stat">
               <div className="stat-title text-[14px]">Total Course</div>
               <div className="stat-value text-[18px]">34</div>
@@ -234,7 +244,7 @@ const AdminDashboard = () => {
               <div className="stat-value text-[18px]">3</div>
             </div>
           </div>
-          <div className="stats stats-vertical shadow w-[33%]">
+          <div className="stats stats-vertical shadow lg:w-[33%]">
             <div className="stat">
               <div className="stat-title text-[14px]">Total instructors</div>
               <div className="stat-value text-[18px]">28</div>
@@ -250,8 +260,8 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="w-full mt-5 mb-10 flex flex-col justify-between xl:flex-row">
-        <div className="w-full xl:w-[48%]">
+      <div className="w-[90%] mt-5 mb-10 flex flex-col justify-between xl:flex-row">
+        <div className="w-full h-[50%] xl:w-[48%]">
           <Bar options={options} data={data} />
         </div>
         <div className="w-full xl:w-[48%]">
@@ -259,7 +269,7 @@ const AdminDashboard = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdminDashboard;
+export default AdminDashboard

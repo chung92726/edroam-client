@@ -6,12 +6,20 @@ import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { MdOutlineSaveAlt } from "react-icons/md";
 
 const ProfilePage = () => {
   const { state, dispatch } = useContext(Context);
   const { user } = state;
   const [img, setImg] = useState("");
   const [values, setValues] = useState({
+    name: "",
+    website: "",
+    biography: "",
+    picture: {},
+    loading: false,
+  });
+  const [orgValues, setOrgValues] = useState({
     name: "",
     website: "",
     biography: "",
@@ -60,10 +68,10 @@ const ProfilePage = () => {
 
   const handleSubmit = async () => {
     let s3Img;
-    if (user.picture !== "/guest.png") {
+    if (img) {
       setValues({ ...values, uploading: true });
 
-      if (user.picture.Bucket) {
+      if (user.picture?.Bucket) {
         await removeImg(user.picture);
       }
       s3Img = await uploadImg(img);
@@ -96,6 +104,7 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
+    setOrgValues(user);
     setValues(user);
     setImg(user && user.picture);
     console.log(user);
@@ -115,7 +124,16 @@ const ProfilePage = () => {
       </div>
       <div className="flex flex-col w-full items-center justify-center my-5">
         <div className="avatar w-[30%] aspect-square max-w-[180px]">
-          <img className="rounded-full" src={img} />
+          <img
+            className="rounded-full"
+            src={
+              img
+                ? img.Location !== undefined
+                  ? img.Location
+                  : img
+                : "/guest.png"
+            }
+          />
         </div>
         <div className="form-control justify-center items-center w-[90%] max-w-xl">
           <label className="label">
@@ -130,7 +148,15 @@ const ProfilePage = () => {
         </div>
 
         {values && (
-          <div className="flex flex-col justify-center items-center gap-3 mt-3 w-[90%]">
+          <div className="flex flex-col justify-center items-center gap-3 mt-5 w-[90%]">
+            <input
+              type="text"
+              name="email"
+              placeholder={values.email}
+              disabled
+              value={values.email}
+              className="input input-bordered w-full max-w-xl mx-2 !bg-white !text-gray-950 "
+            />
             <input
               type="text"
               name="name"
@@ -157,10 +183,21 @@ const ProfilePage = () => {
             />
             <div className="form-control w-full max-w-xl">
               <button
-                className="btn btn-active btn-secondary"
+                className="btn btn-secondary"
                 onClick={handleSubmit}
+                disabled={!values.name || orgValues === values}
               >
-                Save Changes
+                {values.loading ? (
+                  <>
+                    <span className="loading loading-spinner"></span>
+                    loading
+                  </>
+                ) : (
+                  <>
+                    <MdOutlineSaveAlt />
+                    Save Changes
+                  </>
+                )}
               </button>
             </div>
           </div>

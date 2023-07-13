@@ -40,12 +40,12 @@ const ChangePasswordPage = () => {
   };
   return (
     <UserRoute>
-      <div className="text-center bg-gray-700 text-white w-full  py-[50px] flex flex-col justify-center text-[28px] items-start font-bold ">
-        <h1 className="text-4xl pl-10">Change Password</h1>
+      <div className="flex flex-col justify-center items-start bg-gray-700 text-white font-bold w-full py-[30px] md:py-[50px]">
+        <h1 className="text-2xl pl-10 md:text-4xl">Change Password</h1>
       </div>
-      <div className="flex flex-col w-full bg-gray-100 h-[89vh] items-center justify-center py-10 px-10">
+      <div className="flex flex-col w-full items-center justify-center my-5">
         {values && (
-          <div className="flex flex-col justify-center items-center gap-3 w-1/2 ">
+          <div className="flex flex-col justify-center items-center gap-3 mt-5 w-[90%]">
             <input
               type="password"
               name="oldPassword"

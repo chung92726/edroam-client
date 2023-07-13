@@ -118,13 +118,16 @@ const UserIndex = () => {
 
   return (
     <UserRoute>
-      <div className="flex flex-col justify-center items-start bg-gray-700 text-white w-full pt-[20px] font-bold md:pt-[50px]">
+      {/* <div className="flex flex-col justify-center items-start bg-gray-700 text-white w-full pt-[20px] font-bold md:pt-[50px]">
         <h1 className="text-2xl pl-10 md:text-4xl">My Learning</h1>
         <div className="tabs mt-5 md:mt-10">
           <a className="tab tab-lifted tab-active">My Courses</a>
 
           <a className="tab tab-lifted text-white">Wishlist</a>
         </div>
+      </div> */}
+      <div className="flex flex-col justify-center items-start bg-gray-700 text-white font-bold w-full py-[30px] md:py-[50px]">
+        <h1 className="text-2xl pl-10 md:text-4xl">My Learning</h1>
       </div>
 
       {/* <div className="flex justify-center items-center"> */}
