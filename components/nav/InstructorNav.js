@@ -8,6 +8,7 @@ import { ImUserTie } from 'react-icons/im'
 import { HiHome } from 'react-icons/hi'
 import { ImStatsBars2 } from 'react-icons/im'
 import { LuFileQuestion } from 'react-icons/lu'
+import { BiBook } from 'react-icons/bi'
 const InstructorNav = () => {
   const [currentPage, setCurrentPage] = useState('')
   const path = usePathname()
@@ -76,6 +77,18 @@ const InstructorNav = () => {
             <Link href='/instructor/allquestions'>
               <LuFileQuestion size={20} />
               <p className='mx-4'>All Q&A</p>
+            </Link>
+          </li>
+          <li
+            className={
+              currentPage === 'instructor/quiz'
+                ? 'text-blue-400 '
+                : 'hover:text-blue-400'
+            }
+          >
+            <Link href='/instructor/quiz'>
+              <BiBook size={20} />
+              <p className='mx-4'>My Quiz</p>
             </Link>
           </li>
         </ul>
