@@ -179,6 +179,11 @@ html::-webkit-scrollbar {
   max-height: 230px;
   height: 230px;
   min-height: 230px;
+  background: #fff;
+}
+
+.ql-toolbar {
+  background: #eae9e9;
 }
 
 .ant-table-body {

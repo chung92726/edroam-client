@@ -5,7 +5,12 @@ import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import axios from 'axios'
+import Link from 'next/link'
 import { toast } from 'react-toastify'
+import { Table } from 'antd'
+import { MdOutlineDeleteForever } from 'react-icons/md'
+import { MdOutlineUnpublished } from 'react-icons/md'
+import { MdOutlinePublishedWithChanges } from 'react-icons/md'
 const Quill = dynamic(
   () => {
     return import('react-quill')
@@ -38,6 +43,8 @@ const instructorQuiz = () => {
   const [courses, setCourses] = useState([])
   const [lessons, setLessons] = useState([])
   const [loading, setLoading] = useState(false)
+  const [search, setSearch] = useState('')
+  const [quizzes, setQuizzes] = useState([])
 
   const [value, setValue] = useState({
     title: '',
@@ -58,11 +65,39 @@ const instructorQuiz = () => {
     setCourses(data)
   }
 
+  const loadQuiz = async () => {
+    const { data } = await axios.get(`/api/quiz/get-quizzes?search=${search}`)
+    console.log(data)
+    setQuizzes(data)
+  }
+
+  const publishQuiz = async (id) => {
+    const { data } = await axios.put(`/api/quiz/publish-quiz/${id}`)
+    toast.success('Quiz Published')
+    loadQuiz()
+  }
+
+  const unPublishQuiz = async (id) => {
+    const { data } = await axios.put(`/api/quiz/unpublish-quiz/${id}`)
+    toast.success('Quiz Unpublished')
+    loadQuiz()
+  }
+  const deleteQuiz = async (id) => {
+    if (window.confirm('Are you sure?')) {
+      const { data } = await axios.delete(`/api/quiz/delete-quiz/${id}`)
+      toast.success('Quiz Deleted')
+      loadQuiz()
+    }
+  }
+  useEffect(() => {
+    loadQuiz()
+  }, [search])
+
   const handleQuizCreate = async (e) => {
     e.preventDefault()
     try {
       setLoading(true)
-      const { data } = await axios.post('/api/instructor-quiz', value)
+      const { data } = await axios.post(`/api/quiz/create-quiz`, value)
       console.log(data)
       setLoading(false)
       toast.success('Quiz Created')
@@ -74,10 +109,127 @@ const instructorQuiz = () => {
         lesson: {},
         coursePassing: false,
       })
+      window.location.reload()
     } catch (err) {
       setLoading(false)
     }
   }
+
+  const columns = [
+    {
+      title: 'Quiz Title',
+      width: '30%',
+
+      render: (e) => {
+        return (
+          <Link
+            href={`/instructor/quiz/${e._id}`}
+            className='link link-primary text-[12px] font-bold'
+          >
+            {e.title}
+          </Link>
+        )
+      },
+      sorter: (a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+          return -1
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+          return 1
+        }
+        return 0
+      },
+      sortDirections: ['ascend', 'descend'],
+    },
+    {
+      title: 'Course Title',
+
+      dataIndex: 'courseTitle',
+      render: (e) => {
+        return <p className='text-[12px] font-bold'>{e}</p>
+      },
+      sorter: (a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+          return -1
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+          return 1
+        }
+        return 0
+      },
+      sortDirections: ['ascend', 'descend'],
+    },
+    {
+      title: 'Lesson Title',
+
+      dataIndex: 'lessonTitle',
+      render: (e) => {
+        return <p className='text-[12px] font-bold'>{e}</p>
+      },
+      sorter: (a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+          return -1
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+          return 1
+        }
+        return 0
+      },
+      sortDirections: ['ascend', 'descend'],
+    },
+
+    {
+      title: '',
+      key: 'operation',
+      //   fixed: 'right',
+      width: 80,
+
+      render: (e) => (
+        <div className='flex md:flex-row flex-col justify-start items-center gap-2'>
+          {/* <div className='tooltip tooltip-left' data-tip='Edit'>
+            <AiFillEdit size={20} className='cursor-pointer' />
+          </div> */}
+          {e.published ? (
+            <div className='tooltip tooltip-left' data-tip='Unpublish Quiz'>
+              <MdOutlineUnpublished
+                size={20}
+                className='text-red-500 cursor-pointer'
+                onClick={() => {
+                  unPublishQuiz(e._id)
+                }}
+              />
+            </div>
+          ) : (
+            <div className='tooltip tooltip-left' data-tip='publish Quiz'>
+              <MdOutlinePublishedWithChanges
+                size={20}
+                className={`${
+                  e.questions.length > 0 ? 'text-green-500' : 'text-gray-500'
+                } cursor-pointer`}
+                onClick={
+                  e.questions.length > 0
+                    ? () => {
+                        publishQuiz(e._id)
+                      }
+                    : null
+                }
+              />
+            </div>
+          )}
+          <div className='tooltip tooltip-left' data-tip='Delete Quiz'>
+            <MdOutlineDeleteForever
+              size={20}
+              className='text-red-500 cursor-pointer'
+              onClick={() => {
+                deleteQuiz(e._id)
+              }}
+            />
+          </div>
+        </div>
+      ),
+    },
+  ]
+
   return (
     <div className='w-full flex flex-col justify-start items-center  bg-blue-50 pb-6'>
       <div className='text-center  bg-gray-700 text-white w-full  py-[50px] flex flex-col justify-center text-[28px] items-start font-bold '>
@@ -116,14 +268,19 @@ const instructorQuiz = () => {
           <select
             className='select select-bordered select-sm'
             disabled={!value.course}
-            onChange={(e) => setValue({ ...value, lesson: e.target.value })}
+            onChange={(e) =>
+              setValue({
+                ...value,
+                lesson: e.target.value,
+              })
+            }
           >
             <option disabled selected>
               Choose Which Lesson to Add Quiz
             </option>
             {lessons &&
               lessons.map((lesson) => (
-                <option key={lesson._id} value={lesson._id}>
+                <option key={lesson._id} value={lesson._id} name={lesson.title}>
                   {lesson.title}
                 </option>
               ))}
@@ -154,7 +311,7 @@ const instructorQuiz = () => {
             }}
           >
             <option disabled selected>
-              Choose Quiz Passing Rate (Default 50%)
+              Choose Quiz Passing Rate
             </option>
             <option value={10}>10%</option>
             <option value={20}>20%</option>
@@ -209,7 +366,38 @@ const instructorQuiz = () => {
         />
       </div>
       <div className='w-[90%] max-w-[660px] mt-4 flex flex-col justify-start items-end'>
-        <button className='btn btn-active btn-secondary'>Create Quiz</button>
+        <button
+          className='btn btn-active btn-secondary'
+          onClick={handleQuizCreate}
+        >
+          Create Quiz
+        </button>
+      </div>
+      <div className='w-full border-t-4 pt-8 mt-8'>
+        <div className='w-full flex flex-col justify-start items-start mt-4'>
+          <h1 className='font-bold text-[24px] pl-10'>Your Quizzes</h1>
+        </div>
+        <div className=' flex flex-col justify-start items-center '>
+          <input
+            type='text'
+            placeholder='Search Quiz'
+            className='input    w-[90%] max-w-sm mb-2 '
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+
+          <Table
+            columns={columns}
+            dataSource={quizzes}
+            className='mt-8'
+            pagination={{
+              pageSize: 20,
+            }}
+            scroll={{
+              y: 480,
+            }}
+          />
+        </div>
       </div>
     </div>
   )
