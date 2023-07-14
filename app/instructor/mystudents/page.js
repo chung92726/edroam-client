@@ -1,21 +1,21 @@
-'use client'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { BiMessageSquareDots } from 'react-icons/bi'
+'use client';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BiMessageSquareDots } from 'react-icons/bi';
 
 const Mystudents = () => {
-  const [students, setStudents] = useState([])
+  const [students, setStudents] = useState([]);
   const loadStudents = async () => {
     try {
-      const { data } = await axios.get('/api/instructor/students')
-      setStudents(data)
+      const { data } = await axios.get('/api/instructor/students');
+      setStudents(data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
   useEffect(() => {
-    loadStudents()
-  }, [])
+    loadStudents();
+  }, []);
   return (
     <div className='w-full'>
       <div className='text-center  bg-gray-700 text-white w-full  py-[50px] flex flex-col justify-center text-[28px] items-start font-bold '>
@@ -30,7 +30,7 @@ const Mystudents = () => {
               <th>Student Icon</th>
               <th>Student Name</th>
               <th>Enrolled Courses (Your Courses)</th>
-              <th>Message</th>
+              {/* <th>Message</th> */}
             </tr>
           </thead>
           <tbody className='font-bold'>
@@ -70,7 +70,7 @@ const Mystudents = () => {
                       </div>
                     </div>
                   </td>
-                  <td>
+                  {/* <td>
                     <div
                       className='tooltip tooltip-left'
                       data-tip='message this student'
@@ -80,14 +80,14 @@ const Mystudents = () => {
                         className='cursor-pointer'
                       />
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Mystudents
+export default Mystudents;
