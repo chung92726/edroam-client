@@ -1,8 +1,28 @@
-import React from 'react';
-import Image from 'next/image';
+'use client';
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-const HomePage = () => {
+import HomeCourseCard from '../cards/HomeCourseCard';
+
+const HomePage = ({ params }) => {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const { data } = params
+        ? await axios.get(`/api/courses/${params}`)
+        : await axios.get(`/api/courses/`);
+
+      const limitedPrograms = data.slice(0, 3);
+
+      setCourses(limitedPrograms);
+      console.log(limitedPrograms);
+    };
+    fetchCourses();
+  }, []);
+
   return (
     <div>
       <div className=' bg-base-000 mx-auto py-10 px-2 sm:px-6 lg:px-8 w-full overflow-x-hidden'>
@@ -216,9 +236,12 @@ const HomePage = () => {
           </div>
 
           {/* Crouse Card */}
-          <div className='flex flex-col gap-5 p-10 justify-center items-center  lg:flex-row  '>
+          <div className='flex flex-col gap-5 p-10 w-full justify-center items-center lg:flex-row  '>
+            {courses.map((course) => (
+              <HomeCourseCard key={course.id} course={course} />
+            ))}
             {/* Card 1 */}
-            <a href='/#'>
+            {/* <a href='/#'>
               <div className='w-72 card '>
                 <img
                   className='w-full h-full object-cover'
@@ -236,57 +259,22 @@ const HomePage = () => {
                     </h2>
                     <p className='text-xs font-bold'>Drnchrj Academy</p>
                   </div>
-
                   <div>
                     <span className='flex font-sans text-s text-slate-500 my-2'>
                       Use Figma to get a job in UI Design, User Interface, User
                       Experience design.
                     </span>
                   </div>
-
-                  {/* <div className='rating rating-sm gap-2 '>
-                  <span className='text-s text-indigo-500 font-bold'>4.5</span>
-                  <div>
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                      checked
-                    />
-                  </div>
-                  <span className='text-slate-400'>(2,355)</span>
-                </div> */}
-
                   <div className='flex gap-2'>
                     <span className='text-lg font-black'>$350</span>
                     <span className='text-slate-400 line-through '>$500</span>
                   </div>
                 </div>
               </div>
-            </a>
+            </a> */}
 
             {/* Card 2 */}
-            <a href='/#'>
+            {/* <a href='/#'>
               <div className='w-72 card'>
                 <img
                   className='w-full h-full object-cover'
@@ -305,57 +293,22 @@ const HomePage = () => {
                     </h2>
                     <p className='text-xs font-bold'>Drnchrj Academy</p>
                   </div>
-
                   <div>
                     <span className='flex font-sans text-s text-slate-500 my-2'>
                       Use Spline to design 3D model, Animation, 3D Website
                       Design. and Make a real 3D website.
                     </span>
                   </div>
-
-                  {/* <div className='rating rating-sm gap-2 '>
-                  <span className='text-s text-indigo-500 font-bold'>4.0</span>
-                  <div>
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                      checked
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                  </div>
-                  <span className='text-slate-400'>(2,054)</span>
-                </div> */}
-
                   <div className='flex gap-2'>
                     <span className='text-lg font-black'>$350</span>
                     <span className='text-slate-400 line-through '>$500</span>
                   </div>
                 </div>
               </div>
-            </a>
+            </a> */}
 
             {/* Card 3 */}
-            <a href='/#'>
+            {/* <a href='/#'>
               <div className='w-72 card'>
                 <img
                   className='w-full h-full object-cover'
@@ -373,54 +326,19 @@ const HomePage = () => {
                     </h2>
                     <p className='text-xs font-bold'>Drnchrj Academy</p>
                   </div>
-
                   <div>
                     <span className='flex font-sans text-s text-slate-500 my-2'>
                       Use Davinci Resolve to Offline Video Editing, Motion
                       Tracking, Video Effects Editing.
                     </span>
                   </div>
-
-                  {/* <div className='rating rating-sm gap-2 '>
-                  <span className='text-s text-indigo-500 font-bold'>4.0</span>
-                  <div>
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                      checked
-                    />
-                    <input
-                      type='radio'
-                      name='rating-2'
-                      className='mask mask-star-2 bg-orange-400'
-                    />
-                  </div>
-                  <span className='text-slate-400'>(1,849)</span>
-                </div> */}
-
                   <div className='flex gap-2'>
                     <span className='text-lg font-black'>$350</span>
                     <span className='text-slate-400 line-through '>$500</span>
                   </div>
                 </div>
               </div>
-            </a>
+            </a> */}
           </div>
 
           {/* Explore Button */}
