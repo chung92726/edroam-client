@@ -339,7 +339,7 @@ const BecomeInstructor = () => {
                 disabled={
                   !values.name ||
                   !values.gender ||
-                  values.ageRange === 0 ||
+                  !values.ageRange ||
                   !values.website ||
                   !values.phoneNumber ||
                   !values.biography ||

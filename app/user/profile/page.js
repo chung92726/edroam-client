@@ -74,7 +74,7 @@ const ProfilePage = () => {
 
   const handleSubmit = async () => {
     let s3Img
-    if (img) {
+    if (img && img !== user.picture) {
       setValues({ ...values, uploading: true })
 
       if (user.picture?.Bucket) {
@@ -229,9 +229,7 @@ const ProfilePage = () => {
                   disabled={values.loading}
                   value={values.ageRange}
                 >
-                  <option disabled value="">
-                    --Choose an age range --
-                  </option>
+                  <option value="">--Choose an age range --</option>
                   <option value="1">18 to 24</option>
                   <option value="2">25 to 34</option>
                   <option value="3">35 to 44</option>
