@@ -1,27 +1,28 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useContext, useRef } from 'react'
-import { useRouter } from 'next/navigation'
-import axios from 'axios'
-import { Tabs } from 'antd'
-import { toast } from 'react-toastify'
-import LessonTaps from '@/components/adminPage/LessonTaps'
-import { MdArrowBack } from 'react-icons/md'
-import StudentTaps from '@/components/adminPage/StudentTaps'
+import { useState, useEffect, useContext, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { Tabs } from 'antd';
+import { toast } from 'react-toastify';
+import { MdArrowBack } from 'react-icons/md';
+import LessonTaps from '@/components/adminPage/LessonTaps';
+import StudentTaps from '@/components/adminPage/StudentTaps';
+import QandATaps from '@/components/adminPage/QandATaps';
 
 const CourseView = ({ params }) => {
-  const [course, setCourse] = useState('')
-  const [taps, setTaps] = useState('1')
-  const router = useRouter()
-  const [students, setStudents] = useState([])
+  const [course, setCourse] = useState('');
+  const [taps, setTaps] = useState('1');
+  const router = useRouter();
+  const [students, setStudents] = useState([]);
 
-  const { slug } = params
+  const { slug } = params;
   useEffect(() => {
-    loadCourse()
-  }, [slug])
+    loadCourse();
+  }, [slug]);
   useEffect(() => {
-    getCourseStudents()
-  }, [course])
+    getCourseStudents();
+  }, [course]);
   const items = [
     {
       key: '1',
@@ -35,103 +36,103 @@ const CourseView = ({ params }) => {
       key: '3',
       label: `Q&A`,
     },
-  ]
+  ];
 
   const tapsChange = (key) => {
-    setTaps(key)
-  }
+    setTaps(key);
+  };
 
   const getCourseStudents = async () => {
     const { data } = await axios.post(`/api/admin/course/students`, {
       courseId: course._id,
-    })
-    setStudents(data)
-    console.log(data)
-  }
+    });
+    setStudents(data);
+    console.log(data);
+  };
 
   const removeStudent = async (courseId, studentId) => {
     if (window.confirm('Are you sure?')) {
       const { data } = await axios.delete(
         `/api/admin/course/${courseId}/remove-student/${studentId}`
-      )
-      toast.success('Student Removed')
-      getCourseStudents()
+      );
+      toast.success('Student Removed');
+      getCourseStudents();
     }
-  }
+  };
 
   // function for adding lessons
 
   const loadCourse = async () => {
     try {
-      const { data } = await axios.get(`/api/admin/course/${slug}`)
-      setCourse(data)
-      console.log(data)
+      const { data } = await axios.get(`/api/admin/course/${slug}`);
+      setCourse(data);
+      console.log(data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   const deleteLesson = async (courseId, lessonId) => {
     if (window.confirm('Are you sure?')) {
       const { data } = await axios.delete(
         `/api/admin/lesson/${courseId}/${lessonId}`
-      )
-      toast.success('Lesson Deleted')
-      loadCourse()
+      );
+      toast.success('Lesson Deleted');
+      loadCourse();
     }
-  }
+  };
 
   const handlePublish = async (e, courseId) => {
     let answer = window.confirm(
       'Once you publish your course, it will be live in the marketplace for students to enroll. Are you sure you want to publish this course?'
-    )
-    if (!answer) return
+    );
+    if (!answer) return;
     try {
-      const { data } = await axios.put(`/api/admin/course/publish/${courseId}`)
-      setCourse(data)
-      toast.success('Course Published')
+      const { data } = await axios.put(`/api/admin/course/publish/${courseId}`);
+      setCourse(data);
+      toast.success('Course Published');
     } catch (err) {
-      toast.error('Course Publish Failed')
+      toast.error('Course Publish Failed');
     }
-  }
+  };
 
   const handleUnpublish = async (e, courseId) => {
     let answer = window.confirm(
       'Once you unpublish your course, it will no longer be live in the marketplace for students to enroll. Are you sure you want to unpublish this course?'
-    )
-    if (!answer) return
+    );
+    if (!answer) return;
     try {
       const { data } = await axios.put(
         `/api/admin/course/unpublish/${courseId}`
-      )
-      setCourse(data)
-      toast.success('Course Unpublished')
+      );
+      setCourse(data);
+      toast.success('Course Unpublished');
     } catch (err) {
-      toast.error('Course Unpublish Failed')
+      toast.error('Course Unpublish Failed');
     }
-  }
+  };
 
   const deleteCourse = async (slug) => {
     if (window.confirm('Are you sure?')) {
-      const { data } = await axios.delete(`/api/admin/courses/${slug}`)
-      toast.success('Course Deleted')
-      fetchCourses()
+      const { data } = await axios.delete(`/api/admin/courses/${slug}`);
+      toast.success('Course Deleted');
+      fetchCourses();
     }
-  }
+  };
 
   // student count
-  const [studentCount, setStudentCount] = useState(0)
+  const [studentCount, setStudentCount] = useState(0);
 
   const getStudentCount = async () => {
     const { data } = await axios.post(`/api/instructor/student-count`, {
       courseId: course._id,
-    })
-    setStudentCount(data.length)
-  }
+    });
+    setStudentCount(data.length);
+  };
 
   useEffect(() => {
-    course && getStudentCount()
-  }, [course])
+    course && getStudentCount();
+  }, [course]);
 
   return (
     <>
@@ -227,8 +228,8 @@ const CourseView = ({ params }) => {
                   <button
                     className='btn btn-error'
                     onClick={() => {
-                      deleteCourse(slug)
-                      router.push('/admin/courses')
+                      deleteCourse(slug);
+                      router.push('/admin/courses');
                     }}
                   >
                     Delete Course
@@ -264,14 +265,19 @@ const CourseView = ({ params }) => {
                   removeStudent={removeStudent}
                 />
               )}
-              {taps === '3' && <h1>Tap3</h1>}
+              {taps === '3' && (
+                <QandATaps
+                  course={course}
+                  // currentLesson={currentLesson}
+                />
+              )}
             </div>
           </div>
           {/* <pre>{JSON.stringify(course, null, 4)}</pre> */}
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default CourseView
+export default CourseView;
