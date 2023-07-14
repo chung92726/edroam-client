@@ -18,7 +18,7 @@ const HomeCourseCard = ({ course }) => {
     <Link href={`/course/${slug}`}>
       <div className='card bg-gray-50 w-72'>
         <img
-          className='object-cover w-[280px]'
+          className='object-cover w-[288px]'
           src={image && image.Location ? image.Location : './figma.jpg'}
           alt='figma'
         />
