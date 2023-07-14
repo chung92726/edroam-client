@@ -1,20 +1,20 @@
-'use client'
-import { useState, useEffect } from 'react'
-import { BsSearch } from 'react-icons/bs'
-import dynamic from 'next/dynamic'
-import axios from 'axios'
+'use client';
+import { useState, useEffect } from 'react';
+import { BsSearch } from 'react-icons/bs';
+import dynamic from 'next/dynamic';
+import axios from 'axios';
 // import Quill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
-import { toast } from 'react-toastify'
-import { MdComment } from 'react-icons/md'
-import DetailsPage from '@/components/courseTaps/DetailsPage'
+import 'react-quill/dist/quill.snow.css';
+import { toast } from 'react-toastify';
+import { MdComment } from 'react-icons/md';
+import DetailsPage from '@/components/courseTaps/DetailsPage';
 
 const Quill = dynamic(
   () => {
-    return import('react-quill')
+    return import('react-quill');
   },
   { ssr: false }
-)
+);
 
 const modules = {
   toolbar: [
@@ -34,95 +34,95 @@ const modules = {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
-}
+};
 
 const AllQuestions = ({ course, currentLesson }) => {
-  const [loading, setLoading] = useState(false)
-  const [search, setSearch] = useState('')
-  const [allsearch, setAllSearch] = useState('')
-  const [questions, setQuestions] = useState([])
-  const [allQuestions, setAllQuestions] = useState([])
-  const [allQuestionsCount, setAllQuestionsCount] = useState(0)
-  const [questionCount, setQuestionCount] = useState(0)
-  const [detailsPage, setDetailsPage] = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState(null)
-  const [comment, setComment] = useState('')
-  const [courses, setCourses] = useState(null)
-  const [courseFilter, setCourseFilter] = useState('')
-  const [courseFilter2, setCourseFilter2] = useState('')
-  const [sorting, setSorting] = useState('')
-  const [sorting2, setSorting2] = useState('')
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState('');
+  const [allsearch, setAllSearch] = useState('');
+  const [questions, setQuestions] = useState([]);
+  const [allQuestions, setAllQuestions] = useState([]);
+  const [allQuestionsCount, setAllQuestionsCount] = useState(0);
+  const [questionCount, setQuestionCount] = useState(0);
+  const [detailsPage, setDetailsPage] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [comment, setComment] = useState('');
+  const [courses, setCourses] = useState(null);
+  const [courseFilter, setCourseFilter] = useState('');
+  const [courseFilter2, setCourseFilter2] = useState('');
+  const [sorting, setSorting] = useState('');
+  const [sorting2, setSorting2] = useState('');
 
   useEffect(() => {
-    loadCourses()
-  }, [])
+    loadCourses();
+  }, []);
 
   const loadCourses = async () => {
-    const { data } = await axios.get('/api/instructor-courses')
-    setCourses(data)
-  }
+    const { data } = await axios.get('/api/instructor-courses');
+    setCourses(data);
+  };
 
   const loadCourseQuestions = async () => {
     try {
       const { data } = await axios.get(
         `/api/question?unansweredByInstructor=true&search=${search}&instructorQuery=true&courseId=${courseFilter}&sortBy=${sorting}`
-      )
-      setQuestions(data.questions)
-      setQuestionCount(data.totalCount)
+      );
+      setQuestions(data.questions);
+      setQuestionCount(data.totalCount);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   const loadAllCourseQuestions = async () => {
     try {
       const { data } = await axios.get(
         `/api/question?search=${allsearch}&instructorQuery=true&courseId=${courseFilter2}&sortBy=${sorting2}`
-      )
-      setAllQuestions(data.questions)
-      setAllQuestionsCount(data.totalCount)
+      );
+      setAllQuestions(data.questions);
+      setAllQuestionsCount(data.totalCount);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   const clickToDetailsPage = (question) => {
-    setCurrentQuestion(question)
-    setDetailsPage(true)
-  }
+    setCurrentQuestion(question);
+    setDetailsPage(true);
+  };
 
   const backToQandA = () => {
-    setDetailsPage(false)
-    setCurrentQuestion(null)
-    loadCourseQuestions()
-    loadAllCourseQuestions()
-  }
+    setDetailsPage(false);
+    setCurrentQuestion(null);
+    loadCourseQuestions();
+    loadAllCourseQuestions();
+  };
 
   useEffect(() => {
-    loadCourseQuestions()
-  }, [search, courseFilter, sorting])
+    loadCourseQuestions();
+  }, [search, courseFilter, sorting]);
 
   useEffect(() => {
-    loadAllCourseQuestions()
-  }, [allsearch, courseFilter2, sorting2])
+    loadAllCourseQuestions();
+  }, [allsearch, courseFilter2, sorting2]);
 
   const publishComment = async (questionId) => {
     try {
       if (!comment) {
-        return toast.error('Please fill all fields')
+        return toast.error('Please fill all fields');
       }
       const { data } = await axios.post(`/api/question/${questionId}`, {
         comment,
-      })
-      console.log(data)
-      toast.success('Answer published')
-      setCurrentQuestion(data)
-      setComment('')
+      });
+      console.log(data);
+      toast.success('Answer published');
+      setCurrentQuestion(data);
+      setComment('');
     } catch (err) {
-      console.log(err)
-      toast.error('Failed to publish answer')
+      console.log(err);
+      toast.error('Failed to publish answer');
     }
-  }
+  };
 
   return (
     <div className='w-full mx-8 mb-4 mt-8'>
@@ -143,7 +143,7 @@ const AllQuestions = ({ course, currentLesson }) => {
             Questions That Need Answers ({questionCount})
           </h1>
           <div className='flex flex-col md:flex-row w-full  items-center justify-center md:items-end '>
-            <div className='flex flex-row justify-center items-center w-full max-w-md mx-2 mb-2 bg-white border-2 rounded-lg'>
+            <div className='flex flex-row justify-center items-center w-full max-w-sm mx-2 mb-2 bg-white border-2 rounded-lg'>
               <input
                 type='text'
                 placeholder='Search Unanswered Questions'
@@ -233,10 +233,10 @@ const AllQuestions = ({ course, currentLesson }) => {
           </h1>
           {/* // ask question area */}
           <div className='flex flex-col md:flex-row w-full  items-center justify-center md:items-end '>
-            <div className='flex flex-row justify-center items-center w-full max-w-md mx-2 mb-2 bg-white border-2 rounded-lg'>
+            <div className='flex flex-row justify-center items-center w-full max-w-sm mx-2 mb-2 bg-white border-2 rounded-lg'>
               <input
                 type='text'
-                placeholder='Search Unanswered Questions'
+                placeholder='Search Questions'
                 className='input  input-ghost  w-full max-w-sm '
                 value={allsearch}
                 onChange={(e) => setAllSearch(e.target.value)}
@@ -321,7 +321,7 @@ const AllQuestions = ({ course, currentLesson }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default AllQuestions
+export default AllQuestions;
