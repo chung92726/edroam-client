@@ -693,9 +693,13 @@ const HomePage = ({ params }) => {
         </div>
         <div>
           <span className='footer-title'>Company</span>
-          <a className='link link-hover'>About us</a>
-          <a className='link link-hover'>Contact us</a>
-          <a className='link link-hover'>Corporate Services</a>
+          <Link href='/about'>
+            <div className='link link-hover'>About us</div>
+          </Link>
+          <Link href='/about#contact'>
+            <div className='link link-hover'>Contact us</div>
+          </Link>
+          {/* <a className='link link-hover'>Corporate Services</a> */}
         </div>
         <div>
           <span className='footer-title'>Legal</span>

@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const Overview = ({ course }) => {
   return (
     <div className='flex flex-col mx-4'>
       <div className='border-b-2'>
         <h1 className='font-bold text-[22px] my-2'>About This Course</h1>
-        <h2 className='font-bold text-[18px] my-2'>{course.name}</h2>
-        <p className='text-[14px] my-2'>{course.description}</p>
+        <h2 className='font-bold text-[18px] my-2 max-w-2xl'>{course.name}</h2>
+        <p className='text-[14px] my-2 max-w-2xl'>{course.description}</p>
         <p className='text-[14px] my-2'>Lessons: {course.lessons.length}</p>
         <p className='text-[14px] my-2'>
           Created at: {new Date(course.createdAt).toLocaleDateString()}
@@ -30,7 +30,7 @@ const Overview = ({ course }) => {
             <p>Web Developer</p>
           </div>
         </div>
-        <p className='my-2 w-full max-w-xl'>
+        <p className='my-2 w-full max-w-2xl'>
           Chung is a Web Developer from Sydney, Australia. He builds Web apps
           using JavaScript, Node JS, React JS, Vue JS, Laravel and other
           emerging platforms. He also wants to make the entire Web Development
@@ -40,7 +40,7 @@ const Overview = ({ course }) => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Overview
+export default Overview;
