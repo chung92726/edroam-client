@@ -20,33 +20,33 @@ const TopNav = () => {
   const path = usePathname();
 
   //global state
-  const { state, dispatch } = useContext(Context)
-  const { user } = state
-  const [img, setImg] = useState("")
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
+  const [img, setImg] = useState('');
 
   useEffect(() => {
-    setCurrentPage(path.substring(1, path.length))
-  }, [path])
+    setCurrentPage(path.substring(1, path.length));
+  }, [path]);
 
   const logout = async () => {
     try {
-      const { data } = await axios.get("/api/logout")
-      dispatch({ type: "LOGOUT" })
-      window.localStorage.removeItem("user")
-      toast.success("Logout Successfully")
-      router.push("/login")
+      const { data } = await axios.get('/api/logout');
+      dispatch({ type: 'LOGOUT' });
+      window.localStorage.removeItem('user');
+      toast.success('Logout Successfully');
+      router.push('/login');
     } catch (err) {
-      toast.error(err.response.data)
+      toast.error(err.response.data);
     }
-  }
+  };
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
 
   const handleToggle = () => {
-    setToggle(!toggle)
-  }
+    setToggle(!toggle);
+  };
 
   return (
     <div className='flex flex-col w-full fixed z-50'>
@@ -61,8 +61,8 @@ const TopNav = () => {
             <img src='/Proedu.png' className='w-[100px]' />
           </Link>
           {user && user.role ? (
-            user.role.includes("Instructor") ||
-            user.role.includes("Pending") ? (
+            user.role.includes('Instructor') ||
+            user.role.includes('Pending') ? (
               <Link
                 href='/instructor/course/create'
                 className='mx-4 my-1 cursor-pointer max-md:hidden'
@@ -157,14 +157,14 @@ const TopNav = () => {
           />
           </div> */}
           {user ? (
-            <div className="dropdown dropdown-end m-2 font-sans">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-8 rounded-full">
+            <div className='dropdown dropdown-end m-2 font-sans'>
+              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+                <div className='w-8 rounded-full'>
                   <img
                     src={
                       user?.picture?.Location !== undefined
                         ? user.picture.Location
-                        : "/guest.png"
+                        : '/guest.png'
                     }
                   />
                 </div>
@@ -178,15 +178,15 @@ const TopNav = () => {
                 </li>
                 {user &&
                   user.role &&
-                  (user.role.includes("Instructor") ||
-                    user.role.includes("Pending")) && (
+                  (user.role.includes('Instructor') ||
+                    user.role.includes('Pending')) && (
                     <li>
-                      <Link href="/instructor">Instructor Dashboard</Link>
+                      <Link href='/instructor'>Instructor Dashboard</Link>
                     </li>
                   )}
-                <li>
+                {/* <li>
                   <a>Settings</a>
-                </li>
+                </li> */}
                 <li>
                   <a onClick={logout}>Logout</a>
                 </li>
@@ -227,14 +227,14 @@ const TopNav = () => {
           />
           </div> */}
           {user ? (
-            <div className="dropdown dropdown-end m-2 font-sans">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-8 mr-2 rounded-full">
+            <div className='dropdown dropdown-end m-2 font-sans'>
+              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+                <div className='w-8 mr-2 rounded-full'>
                   <img
                     src={
                       user?.picture?.Location !== undefined
                         ? user.picture.Location
-                        : "/guest.png"
+                        : '/guest.png'
                     }
                   />
                 </div>
@@ -248,8 +248,8 @@ const TopNav = () => {
                 </li>
                 {user &&
                 user.role &&
-                (user.role.includes("Instructor") ||
-                  user.role.includes("Pending")) ? (
+                (user.role.includes('Instructor') ||
+                  user.role.includes('Pending')) ? (
                   <li>
                     <Link href='/instructor'>Instructor Dashboard</Link>
                     <Link href='/instructor/course/create'>Create Course</Link>
@@ -267,9 +267,9 @@ const TopNav = () => {
                 <li>
                   <Link href='/user'>My Learning</Link>
                 </li>
-                <li>
+                {/* <li>
                   <a>Settings</a>
-                </li>
+                </li> */}
                 <li>
                   <a onClick={logout}>Logout</a>
                 </li>
@@ -318,7 +318,7 @@ const TopNav = () => {
       </div>
       <div className='text-center bg-gradient-to-r from-sky-500 to-indigo-500 text-yellow-100 w-full rounded h-[4px] flex flex-col justify-center text-[28px] items-start font-bold '></div>
     </div>
-  )
-}
+  );
+};
 
-export default TopNav
+export default TopNav;
