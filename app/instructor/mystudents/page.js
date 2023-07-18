@@ -24,10 +24,10 @@ const Mystudents = () => {
       <div className='overflow-x-auto'>
         <table className='table bg-gray-100'>
           {/* head */}
-          <thead>
+          <thead className='whitespace-normal'>
             <tr>
               <th></th>
-              <th>Student Icon</th>
+              <th className='max-sm:hidden'>Student Icon</th>
               <th>Student Name</th>
               <th>Enrolled Courses (Your Courses)</th>
               {/* <th>Message</th> */}
@@ -40,9 +40,9 @@ const Mystudents = () => {
               students.map((student, index) => (
                 <tr key={index}>
                   <th>{index + 1}</th>
-                  <td>
-                    <div className='avatar'>
-                      <div className='w-12 rounded-full'>
+                  <td className='max-sm:hidden'>
+                    <div className='avatar max-sm:hidden'>
+                      <div className='w-12 rounded-full max-sm:hidden'>
                         <img src={student.picture} />
                       </div>
                     </div>
