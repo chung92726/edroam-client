@@ -1,41 +1,41 @@
-"use client"
+'use client'
 
-import { MdOutlineSaveAlt } from "react-icons/md"
-import Select from "react-select"
-import { useState } from "react"
-import dynamic from "next/dynamic"
-import "react-quill/dist/quill.snow.css"
+import { MdOutlineSaveAlt } from 'react-icons/md'
+import Select from 'react-select'
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+import 'react-quill/dist/quill.snow.css'
 
 const optionList = [
-  { value: "WebDesign", label: "Web Design" },
-  { value: "UIUXDesign", label: "UI/UX Design" },
-  { value: "GraphicDesign", label: "Graphic Design" },
-  { value: "3DModeling", label: "3D Modeling" },
-  { value: "VideoEditing", label: "Video Editing" },
-  { value: "Others", label: "Others" },
+  { value: 'WebDesign', label: 'Web Design' },
+  { value: 'UIUXDesign', label: 'UI/UX Design' },
+  { value: 'GraphicDesign', label: 'Graphic Design' },
+  { value: '3DModeling', label: '3D Modeling' },
+  { value: 'VideoEditing', label: 'Video Editing' },
+  { value: 'Others', label: 'Others' },
 ]
 
 const Quill = dynamic(
   () => {
-    return import("react-quill")
+    return import('react-quill')
   },
   { ssr: false }
 )
 
 const modules = {
   toolbar: [
-    [{ header: "1" }, { header: "2" }],
+    [{ header: '1' }, { header: '2' }],
     [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote", "code-block"],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
     [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
     ],
-    ["link", "image", "video"],
+    ['link', 'image', 'video'],
     [{ color: [] }, { background: [] }],
-    ["clean"],
+    ['clean'],
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
@@ -68,7 +68,7 @@ const CourseCreateForm = ({
       </option>
     )
   }
-  const [details, setDetails] = useState("")
+  const [details, setDetails] = useState('')
 
   return (
     <>
@@ -109,8 +109,8 @@ const CourseCreateForm = ({
               styles={{
                 control: (baseStyles, state) => ({
                   ...baseStyles,
-                  borderColor: "hsl(214,30%,32%, 0.2)",
-                  borderRadius: "0.5rem",
+                  borderColor: 'hsl(214,30%,32%, 0.2)',
+                  borderRadius: '0.5rem',
                 }),
               }}
               theme={(theme) => ({
@@ -118,7 +118,7 @@ const CourseCreateForm = ({
                 borderRadius: 0,
                 colors: {
                   ...theme.colors,
-                  primary: "hsl(214,30%,32%, 0.2)",
+                  primary: 'hsl(214,30%,32%, 0.2)',
                 },
               })}
               classNamePrefix='select'
@@ -150,7 +150,7 @@ const CourseCreateForm = ({
             <Quill
               modules={modules}
               theme='snow'
-              className='w-full border-2 rounded-lg bg-white'
+              className='custom-quill-container w-full border-2 rounded-lg bg-white'
               name='detailDescription'
               value={values.detailDescription}
               onChange={(e) =>
@@ -170,21 +170,21 @@ const CourseCreateForm = ({
               onChange={handleChange}
             >
               <option
-                selected={values.level === "All Levels"}
+                selected={values.level === 'All Levels'}
                 value='All Levels'
               >
                 All Levels
               </option>
-              <option selected={values.level === "Beginner"} value='Beginner'>
+              <option selected={values.level === 'Beginner'} value='Beginner'>
                 Beginner
               </option>
               <option
-                selected={values.level === "Intermediate"}
+                selected={values.level === 'Intermediate'}
                 value='Intermediate'
               >
                 Intermediate
               </option>
-              <option selected={values.level === "Expert"} value='Expert'>
+              <option selected={values.level === 'Expert'} value='Expert'>
                 Expert
               </option>
             </select>
@@ -197,10 +197,10 @@ const CourseCreateForm = ({
               className='select select-bordered w-full'
               onChange={handleChange}
             >
-              <option selected={values.language === "English"} value='English'>
+              <option selected={values.language === 'English'} value='English'>
                 English
               </option>
-              <option selected={!values.language === "Chinese"} value='Chinese'>
+              <option selected={!values.language === 'Chinese'} value='Chinese'>
                 Chinese
               </option>
             </select>
@@ -212,7 +212,7 @@ const CourseCreateForm = ({
             <select
               className='select select-bordered w-full '
               onChange={(v) => {
-                if (v.target.value == "true") {
+                if (v.target.value == 'true') {
                   setValues({ ...values, paid: true, price: 9.99 })
                 } else {
                   setValues({ ...values, paid: false, price: 0 })
@@ -272,7 +272,7 @@ const CourseCreateForm = ({
           <div className='form-control w-full max-w-xl mx-2'>
             <label className='label'>
               <span className='label-text'>
-                {values.uploading ? "Uploading . . ." : "UPLOAD COURSE IMAGE"}
+                {values.uploading ? 'Uploading . . .' : 'UPLOAD COURSE IMAGE'}
               </span>
             </label>
             <input

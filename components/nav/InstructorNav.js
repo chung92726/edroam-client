@@ -1,16 +1,16 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { useState, useEffect } from "react"
-import { usePathname } from "next/navigation"
-import { MdOutlineCreateNewFolder } from "react-icons/md"
-import { ImUserTie } from "react-icons/im"
-import { HiHome } from "react-icons/hi"
-import { ImStatsBars2 } from "react-icons/im"
-import { LuFileQuestion } from "react-icons/lu"
-import { BiBook } from "react-icons/bi"
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import { MdOutlineCreateNewFolder } from 'react-icons/md'
+import { ImUserTie } from 'react-icons/im'
+import { HiHome } from 'react-icons/hi'
+import { ImStatsBars2 } from 'react-icons/im'
+import { LuFileQuestion } from 'react-icons/lu'
+import { BiBook } from 'react-icons/bi'
 const InstructorNav = () => {
-  const [currentPage, setCurrentPage] = useState("")
+  const [currentPage, setCurrentPage] = useState('')
   const path = usePathname()
   useEffect(() => {
     setCurrentPage(path.substring(1, path.length))
@@ -21,9 +21,9 @@ const InstructorNav = () => {
         <ul className='menu bg-gray-800 h-[calc(100vh-70px)]  gap-5  pt-8 text-white text-[16px]  rounded-[2px] transition-all ease-in-out duration-300 w-[4rem] lg:w-[13rem]'>
           <li
             className={
-              currentPage === "instructor"
-                ? "text-blue-400 "
-                : "hover:text-blue-400"
+              currentPage === 'instructor'
+                ? 'text-blue-400 '
+                : 'hover:text-blue-400'
             }
           >
             <Link href='/instructor'>
@@ -33,9 +33,9 @@ const InstructorNav = () => {
           </li>
           <li
             className={
-              currentPage === "instructor/course/create"
-                ? "text-blue-400 "
-                : "hover:text-blue-400"
+              currentPage === 'instructor/course/create'
+                ? 'text-blue-400 '
+                : 'hover:text-blue-400'
             }
           >
             <Link href='/instructor/course/create'>
@@ -45,9 +45,9 @@ const InstructorNav = () => {
           </li>
           <li
             className={
-              currentPage === "instructor/dashboard"
-                ? "text-blue-400 "
-                : "hover:text-blue-400"
+              currentPage === 'instructor/dashboard'
+                ? 'text-blue-400 '
+                : 'hover:text-blue-400'
             }
           >
             <Link href='/instructor/dashboard'>
@@ -57,9 +57,9 @@ const InstructorNav = () => {
           </li>
           <li
             className={
-              currentPage === "instructor/mystudents"
-                ? "text-blue-400 "
-                : "hover:text-blue-400"
+              currentPage === 'instructor/mystudents'
+                ? 'text-blue-400 '
+                : 'hover:text-blue-400'
             }
           >
             <Link href='/instructor/mystudents'>
@@ -69,9 +69,9 @@ const InstructorNav = () => {
           </li>
           <li
             className={
-              currentPage === "instructor/allquestions"
-                ? "text-blue-400 "
-                : "hover:text-blue-400"
+              currentPage === 'instructor/allquestions'
+                ? 'text-blue-400 '
+                : 'hover:text-blue-400'
             }
           >
             <Link href='/instructor/allquestions'>
@@ -81,14 +81,14 @@ const InstructorNav = () => {
           </li>
           <li
             className={
-              currentPage === "instructor/quiz"
-                ? "text-blue-400 "
-                : "hover:text-blue-400"
+              currentPage === 'instructor/quiz'
+                ? 'text-blue-400 '
+                : 'hover:text-blue-400'
             }
           >
             <Link href='/instructor/quiz'>
               <BiBook size={20} />
-              <p className='mx-4'>My Quiz</p>
+              <p className='mx-2 hidden lg:block'>My Quiz</p>
             </Link>
           </li>
         </ul>

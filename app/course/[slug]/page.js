@@ -1,19 +1,21 @@
-"use client"
-import { useState, useEffect, useContext } from "react"
-import axios from "axios"
-import { currencyFormatter } from "@/utils/helpers"
-import ReactPlayer from "react-player"
-import Image from "next/image"
-import SingleCourseLessons from "@/components/cards/SingleCourseLessons"
-import { Context } from "@/context"
-import { useRouter } from "next/navigation"
-import { toast } from "react-toastify"
-import { loadStripe } from "@stripe/stripe-js"
+'use client'
+import { useState, useEffect, useContext, Suspense } from 'react'
+import axios from 'axios'
+import { currencyFormatter } from '@/utils/helpers'
+import ReactPlayer from 'react-player'
+import Image from 'next/image'
+import SingleCourseLessons from '@/components/cards/SingleCourseLessons'
+import CourseDescription from '@/components/cards/CourseDescription'
+import { Context } from '@/context'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+import { loadStripe } from '@stripe/stripe-js'
+import SingleCourseSkeleton from './loading.js'
 
 const SingleCourse = ({ params }) => {
   const [course, setCourse] = useState({})
   const [videoPlay, setVideoPlay] = useState(false)
-  const [preview, setPreview] = useState("")
+  const [preview, setPreview] = useState('')
   const [enroll, setEnroll] = useState(false)
   const { slug } = params
   const [loading, setLoading] = useState(false)
@@ -27,7 +29,7 @@ const SingleCourse = ({ params }) => {
       filename: preview.Key,
     })
     console.log(data)
-    document.getElementById("my_modal_3").showModal()
+    document.getElementById('my_modal_3').showModal()
     setPreview(data)
     setVideoPlay(true)
   }
@@ -55,7 +57,7 @@ const SingleCourse = ({ params }) => {
     setLoading(true)
     try {
       // check if user is logged in
-      if (!user) router.push("/login")
+      if (!user) router.push('/login')
       // check if already enrolled
       if (enroll.status)
         return router.push(`/user/course/${enroll.course.slug}`)
@@ -64,37 +66,43 @@ const SingleCourse = ({ params }) => {
       console.log(data)
       setLoading(false)
 
-      toast.success("Enrollment Success. Start Learning Now!")
+      toast.success('Enrollment Success. Start Learning Now!')
 
       router.push(`/user/course/${data.course.slug}`)
     } catch (err) {
       setLoading(false)
-      toast.error("Enrollment Failed. Try Again")
+      toast.error('Enrollment Failed. Try Again')
     }
   }
   const handlePaidEnrollment = async (e) => {
     e.preventDefault()
     setLoading(true)
     try {
-      if (!user) router.push("/login")
+      if (!user) router.push('/login')
       if (enroll.status)
         return router.push(`/user/course/${enroll.course.slug}`)
       const { data } = await axios.post(`/api/paid-enrollment/${course._id}`)
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
       stripe.redirectToCheckout({ sessionId: data })
     } catch (err) {
-      toast.error("Enrollment Failed. Try Again")
+      toast.error('Enrollment Failed. Try Again')
       setLoading(false)
     }
   }
   const handleCheckLogin = async (e) => {
-    router.push("/login")
+    router.push('/login')
   }
   const goToCourse = async (e) => {
     router.push(`/user/course/${course.slug}`)
   }
+
+  if (!course._id) {
+    return <SingleCourseSkeleton />
+  }
+
   return (
     <div className='bg-gray-100'>
+      {/* <SingleCourseSkeleton /> */}
       <dialog id='my_modal_3' className='modal'>
         <form method='dialog' className='modal-box'>
           <div className='flex justify-between items-center pb-2 border-b-2'>
@@ -146,7 +154,7 @@ const SingleCourse = ({ params }) => {
               Created By {course && course.instructor && course.instructor.name}
             </p>
             <p className='text-[10px] lg:text-[14px]'>
-              Last Updated{" "}
+              Last Updated{' '}
               {course &&
                 course.updatedAt &&
                 new Date(course.updatedAt).toLocaleDateString()}
@@ -154,16 +162,19 @@ const SingleCourse = ({ params }) => {
             <div className='flex gap-2'>
               <span className='text-[10px] lg:text-[14px]font-black'>
                 {course.paid
-                  ? currencyFormatter({ amount: course.price, currency: "usd" })
-                  : "Free"}
+                  ? currencyFormatter({
+                      amount: course.price,
+                      currency: 'usd',
+                    })
+                  : 'Free'}
               </span>
               <span className='text-slate-400 line-through text-[10px] lg:text-[14px]'>
                 {course.paid
                   ? currencyFormatter({
                       amount: course.price + 10,
-                      currency: "usd",
+                      currency: 'usd',
                     })
-                  : ""}
+                  : ''}
               </span>
             </div>
             <button
@@ -186,12 +197,12 @@ const SingleCourse = ({ params }) => {
                 </div>
               ) : user ? (
                 enroll.status ? (
-                  "Start Learning"
+                  'Start Learning'
                 ) : (
-                  "Enroll To This Course"
+                  'Enroll To This Course'
                 )
               ) : (
-                "Login To Enroll"
+                'Login To Enroll'
               )}
             </button>
           </div>
@@ -207,7 +218,7 @@ const SingleCourse = ({ params }) => {
                 className='relative cursor-pointer w-full h-[56vw] md:h-[25vw] lg:max-h-[300px]'
               >
                 <img
-                  src={course.image ? course.image.Location : "/course.png"}
+                  src={course.image ? course.image.Location : '/course.png'}
                   alt={course.name}
                   className='w-full h-full  object-cover'
                 />
@@ -224,7 +235,7 @@ const SingleCourse = ({ params }) => {
             ) : (
               <div>
                 <img
-                  src={course.image ? course.image.Location : "/course.png"}
+                  src={course.image ? course.image.Location : '/course.png'}
                   alt={course.name}
                   className='w-full h-[56vw] md:h-[25vw] lg:max-h-[300px] object-cover'
                 />
@@ -250,12 +261,12 @@ const SingleCourse = ({ params }) => {
                 </div>
               ) : user ? (
                 enroll.status ? (
-                  "Start Learning"
+                  'Start Learning'
                 ) : (
-                  "Enroll To This Course"
+                  'Enroll To This Course'
                 )
               ) : (
-                "Login To Enroll"
+                'Login To Enroll'
               )}
             </button>
           </div>
@@ -267,6 +278,9 @@ const SingleCourse = ({ params }) => {
           setPreview={setPreview}
           handlePreview={handlePreview}
         />
+      )}
+      {course && course.detailDescription && (
+        <CourseDescription detailDescription={course.detailDescription} />
       )}
     </div>
   )

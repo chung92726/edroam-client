@@ -1,26 +1,26 @@
-import React from "react"
-import "react-quill/dist/quill.snow.css"
-import dynamic from "next/dynamic"
+import React from 'react'
+import 'react-quill/dist/quill.snow.css'
+import dynamic from 'next/dynamic'
 const Quill = dynamic(
   () => {
-    return import("react-quill")
+    return import('react-quill')
   },
   { ssr: false }
 )
 
 const modules = {
   toolbar: [
-    [{ header: "1" }, { header: "2" }, { header: "3" }],
+    [{ header: '1' }, { header: '2' }, { header: '3' }],
     [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
     [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
     ],
-    ["link", "image", "video"],
-    ["clean"],
+    ['link', 'image', 'video'],
+    ['clean'],
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
@@ -70,7 +70,7 @@ const DetailsPage = ({
             toolbar: false,
           }}
           theme='snow'
-          className='w-full h-full border-2 rounded-lg !max-h-none'
+          className='w-full h-full border-2 rounded-lg'
           value={currentQuestion.content}
           readOnly={true}
         />
@@ -91,8 +91,8 @@ const DetailsPage = ({
             />
             <div className='flex flex-col justify-start items-start w-11/12'>
               <h1 className='font-bold text-[16px] mb-2 text-blue-500 flex items-center gap-2'>
-                {answer.answeredBy.name}{" "}
-                {answer.role === "instructor" && (
+                {answer.answeredBy.name}{' '}
+                {answer.role === 'instructor' && (
                   <div className='badge badge-warning gap-2'>Instructor</div>
                 )}
               </h1>
@@ -104,7 +104,7 @@ const DetailsPage = ({
                   toolbar: false,
                 }}
                 theme='snow'
-                className='w-full h-full border-2 rounded-lg max-h-none'
+                className='w-full h-full border-2 rounded-lg'
                 value={answer.content}
                 readOnly={true}
               />
@@ -119,21 +119,13 @@ const DetailsPage = ({
         <h1 className='font-bold my-4'>There is no reply for this question</h1>
       )}
       <p className='font-bold text-[16px] my-2'>Write Your Reply Here:</p>
-      {/* <div className='w-full mb-4 min-h-[230px] max-h-[230px] overflow-y-auto'> */}
       <Quill
         modules={modules}
         theme='snow'
-        className='ql-container w-full border-2 rounded-lg'
+        className='custom-quill-container w-full border-2 rounded-lg'
         value={comment}
         onChange={setComment}
-        style={{
-          overflowY: "auto",
-          maxHeight: "230px",
-          height: "230px",
-          minHeight: "230px",
-        }}
       />
-      {/* </div> */}
       <div className='w-full flex justify-end'>
         <button
           className='btn btn-neutral mr-2 !text-[12px]'

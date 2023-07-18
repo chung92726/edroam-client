@@ -219,7 +219,7 @@ const QandA = ({ course, currentLesson }) => {
             <Quill
               modules={modules}
               theme='snow'
-              className='w-full   border-2 rounded-lg'
+              className='custom-quill-container w-full border-2 rounded-lg'
               value={details}
               onChange={setDetails}
             />
