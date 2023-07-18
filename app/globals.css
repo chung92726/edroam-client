@@ -189,6 +189,11 @@ html::-webkit-scrollbar {
   min-height: 230px;
 }
 
+.custom-quill-container-quiz .ql-container {
+  overflow-y: auto;
+  max-height: 230px;
+}
+
 .custom-quill-container-none .ql-container {
   background: none;
   border: none !important;
