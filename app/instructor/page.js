@@ -81,7 +81,7 @@ const InstructorIndex = () => {
                   >
                     {course.published
                       ? 'Published'
-                      : course.lessons.length > 5
+                      : course.lessons.length >= 5
                       ? 'Ready to Publish'
                       : `${5 - course.lessons.length} more lessons to publish`}
                   </div>
