@@ -4,36 +4,37 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 
-const LearningCard = () => {
-  const [myLearning, setMyLearning] = useState([]);
+const LearningCard = ({ myLearning }) => {
+  // const [myLearning, setMyLearning] = useState([]);
 
-  const loadCompletedLessons = async (id) => {
-    // console.log(id);
-    const { data } = await axios.post(`/api/list-completed`, {
-      courseId: id,
-    });
-    return data;
-  };
+  // const loadCompletedLessons = async (id) => {
+  //   // console.log(id);
+  //   const { data } = await axios.post(`/api/list-completed`, {
+  //     courseId: id,
+  //   });
+  //   return data;
+  // };
 
-  const loadCourses = async () => {
-    const { data } = await axios.get('/api/user-courses');
+  // const loadCourses = async () => {
+  //   const { data } = await axios.get('/api/user-courses');
 
-    for (let i = 0; i < data.length; i++) {
-      // console.log(data[i].lessons.length);
-      const completed = await loadCompletedLessons(data[i]._id);
-      // console.log(completed.length);
-      data[i].completed = completed.length;
-    }
+  //   for (let i = 0; i < data.length; i++) {
+  //     // console.log(data[i].lessons.length);
+  //     const completed = await loadCompletedLessons(data[i]._id);
+  //     // console.log(completed.length);
+  //     data[i].completed = completed.length;
+  //   }
 
-    setMyLearning(data);
-  };
+  //   setMyLearning(data);
+  // };
 
-  useEffect(() => {
-    loadCourses();
-  }, []);
+  // useEffect(() => {
+  //   loadCourses();
+  // }, []);
 
   return (
     <div className='flex flex-col justify-center items-center w-full divide-y-2 divide-black-500'>
+      {/* <div className='overflow-y-hidden'> */}
       {myLearning.length !== 0 ? (
         myLearning.map((course) => (
           <Link
@@ -75,11 +76,12 @@ const LearningCard = () => {
             No course enrolled yet
           </h3>
           <p className='text-center font-sans text-slate-500 pb-4'>
-            Let's go to marketplace to explore more
+            Let's go to Library to explore more
           </p>
         </div>
       )}
-      <div className='w-full justify-center p-3 border-t-2 border-black-500'>
+      {/* </div> */}
+      {/* <div className='w-full justify-center p-3 border-t-2 border-black-500'>
         {myLearning.length !== 0 ? (
           <Link href='/user'>
             <button className='btn btn-primary bg-indigo-500 w-full'>
@@ -93,7 +95,7 @@ const LearningCard = () => {
             </button>
           </Link>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

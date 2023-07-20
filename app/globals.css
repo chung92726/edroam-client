@@ -217,3 +217,13 @@ html::-webkit-scrollbar {
 .ant-table-body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+
+.learningCardList {
+  -ms-overflow-style: none !important; /* for Internet Explorer, Edge */
+  scrollbar-width: none !important; /* for Firefox */
+  overflow-y: scroll !important;
+}
+
+.learningCardList::-webkit-scrollbar {
+  display: none !important; /* for Chrome, Safari, and Opera */
+}
