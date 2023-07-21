@@ -300,7 +300,11 @@ const singleCourse = ({ params }) => {
                     />
                   )}
               </div>
-              <CourseTaps course={course} currentLesson={currentLesson} />
+              <CourseTaps
+                course={course}
+                currentLesson={currentLesson}
+                slug={slug}
+              />
             </div>
           ) : (
             <div className='flex flex-col justify-center items-center mt-20'>

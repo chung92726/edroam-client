@@ -52,7 +52,7 @@ const QuizPage = ({ params }) => {
   const [lessons, setLessons] = useState([])
   const [loading, setLoading] = useState(false)
   const [questions, setQuestions] = useState([])
-  const [singleAnswer, setSingleAnswer] = useState('')
+
   const [questionFilter, setQuestionFilter] = useState('all')
 
   const [published, setPublished] = useState(false)
@@ -458,8 +458,6 @@ const QuizPage = ({ params }) => {
                 }
                 setQuestions={setQuestions}
                 addAnswer={addAnswer}
-                singleAnswer={singleAnswer}
-                setSingleAnswer={setSingleAnswer}
                 questionFilter={questionFilter}
                 deleteQuestion={deleteQuestion}
               />

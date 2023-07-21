@@ -37,8 +37,7 @@ const QuizQuestion = ({
   questions,
   setQuestions,
   addAnswer,
-  singleAnswer,
-  setSingleAnswer,
+
   questionFilter,
   deleteQuestion,
 }) => {
@@ -46,26 +45,30 @@ const QuizQuestion = ({
     <>
       {questions.map((question, index) => (
         <div className='flex flex-col w-full justify-start items-center px-2 py-4 border-2 rounded-lg my-2'>
-          {questionFilter === 'all' && (
-            <div className='w-11/12 max-w-[935px] flex justify-between items-center'>
-              <h1 className='text-[18px] font-bold'>Question {index + 1}</h1>
-              <div className='tooltip tooltip-left' data-tip='Delete Question'>
-                <MdCancelPresentation
-                  size={24}
-                  className='cursor-pointer text-red-500'
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        'Are you sure you want to delete this question?'
-                      )
-                    ) {
-                      deleteQuestion(index)
-                    }
-                  }}
-                />
-              </div>
+          <div className='w-11/12 max-w-[935px] flex justify-between items-center'>
+            <h1 className='text-[18px] font-bold'>
+              Question{' '}
+              {questionFilter === 'all'
+                ? index + 1
+                : Number(questionFilter) + 1}
+            </h1>
+            <div className='tooltip tooltip-left' data-tip='Delete Question'>
+              <MdCancelPresentation
+                size={24}
+                className='cursor-pointer text-red-500'
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Are you sure you want to delete this question?'
+                    )
+                  ) {
+                    deleteQuestion(index)
+                  }
+                }}
+              />
             </div>
-          )}
+          </div>
+
           <div className='w-11/12 max-w-[935px] mt-4 flex flex-col justify-start items-center'>
             <Quill
               modules={modules}
@@ -155,6 +158,7 @@ const QuizQuestion = ({
                         <input
                           type='checkbox'
                           className='toggle toggle-success'
+                          checked={answer.isCorrect}
                           onChange={() => {
                             setQuestions((prev) => {
                               const newQuestions = [...prev]
@@ -237,17 +241,18 @@ const QuizQuestion = ({
                         <input
                           type='checkbox'
                           className='toggle toggle-success'
-                          disabled={singleAnswer && singleAnswer !== i + 1}
+                          disabled={
+                            answer.isCorrect && answer.isCorrect === false
+                          }
+                          checked={answer.isCorrect}
                           onChange={(e) => {
-                            if (e.target.checked) {
-                              setSingleAnswer(i + 1)
-                            } else {
-                              setSingleAnswer(null)
-                            }
                             setQuestions((prev) => {
                               const newQuestions = [...prev]
-                              newQuestions[index].answers[i].isCorrect =
-                                !newQuestions[index].answers[i].isCorrect
+                              newQuestions[index].answers.forEach(
+                                (answer, answerIndex) => {
+                                  answer.isCorrect = answerIndex === i
+                                }
+                              )
                               return newQuestions
                             })
                           }}
