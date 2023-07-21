@@ -227,3 +227,13 @@ html::-webkit-scrollbar {
 .learningCardList::-webkit-scrollbar {
   display: none !important; /* for Chrome, Safari, and Opera */
 }
+
+.modal-box {
+  -ms-overflow-style: none !important; /* for Internet Explorer, Edge */
+  scrollbar-width: none !important; /* for Firefox */
+  overflow-y: scroll !important;
+}
+
+.modal-box::-webkit-scrollbar {
+  display: none !important; /* for Chrome, Safari, and Opera */
+}
