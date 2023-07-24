@@ -141,6 +141,7 @@ html::-webkit-scrollbar {
   -ms-overflow-style: none !important; /* for Internet Explorer, Edge */
   scrollbar-width: none !important; /* for Firefox */
   overflow-y: scroll !important;
+  padding-bottom: 5rem !important;
 }
 
 .ant-menu::-webkit-scrollbar {
