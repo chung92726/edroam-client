@@ -15,11 +15,14 @@ import { useRouter } from 'next/navigation';
 import { Menu, Button, Layout, theme, Avatar } from 'antd';
 import { FaPlayCircle } from 'react-icons/fa';
 import ReactPlayer from 'react-player';
-import { BsFillArrowLeftSquareFill } from 'react-icons/bs';
-import { BsFillArrowRightSquareFill } from 'react-icons/bs';
-import ReactMarkdown from 'react-markdown';
+import {
+  BsArrowLeftSquare,
+  BsArrowRightSquare,
+  BsFillArrowLeftSquareFill,
+  BsFillArrowRightSquareFill,
+} from 'react-icons/bs';
 import CourseTaps from '@/components/courseTaps/CourseTaps';
-import LessonsContentCard from '@/components/cards/LessonsContentCard';
+import LessonContentCard from '@/components/cards/LessonContentCard';
 
 const { Sider } = Layout;
 
@@ -266,15 +269,17 @@ const singleCourse = ({ params }) => {
                   course.lessons &&
                   course.lessons[currentLesson] &&
                   course.lessons[currentLesson].content && (
-                    <LessonsContentCard
+                    <LessonContentCard
                       content={course.lessons[currentLesson].content}
+                      course={course}
+                      currentLesson={currentLesson}
                     />
                   )
                 )}
                 {course.lessons &&
                   course.lessons[currentLesson] &&
                   !course.lessons[currentLesson].video && (
-                    <BsFillArrowLeftSquareFill
+                    <BsArrowLeftSquare
                       className='absolute text-gray-500 top-[50%] left-5 cursor-pointer'
                       size={30}
                       onClick={() => {
@@ -288,7 +293,7 @@ const singleCourse = ({ params }) => {
                 {course.lessons &&
                   course.lessons[currentLesson] &&
                   !course.lessons[currentLesson].video && (
-                    <BsFillArrowRightSquareFill
+                    <BsArrowRightSquare
                       className='absolute text-gray-500 top-[50%] right-5 cursor-pointer'
                       size={30}
                       onClick={() => {
