@@ -98,7 +98,8 @@ const InstructorDashboard = () => {
     setLoading(true)
     try {
       const { data } = await axios.get('/api/instructor/payout-settings')
-      window.location.href = data
+      // window.location.href = data
+      window.open(data, '_blank')
       setLoading(false)
     } catch (err) {
       console.log(err)
@@ -111,10 +112,10 @@ const InstructorDashboard = () => {
     sendBalanceRequest()
   }, [])
   return (
-    <div className='flex w-full flex-col mx-10 mt-10 justify-center items-center'>
-      <div className='stats shadow w-full'>
+    <div className='flex w-full flex-col mt-10 justify-center items-center'>
+      <div className='stats shadow w-[90%]'>
         <div className='stat'>
-          <div className='stat-figure text-secondary'>
+          <div className='stat-figure text-secondary hidden sm:block'>
             <MdOutlinePendingActions size={30} className='text-purple-800' />
           </div>
           <div className='stat-title text-[16px]'>Pending Balance</div>
@@ -134,14 +135,16 @@ const InstructorDashboard = () => {
               <span className='loading loading-spinner loading-md mx-5'></span>
             )}
           </div>
-          <div className='stat-desc'>
-            Paid Directly From Stripe to Your Bank Account Every 48 Hours
+          <div className='stat-desc whitespace-normal'>
+            <p className=' break-words'>
+              Paid Directly From Stripe to Your Bank Account Every 48 Hours
+            </p>
           </div>
         </div>
       </div>
-      <div className='flex flex-row mt-5 gap-3 flex-wrap w-full'>
+      <div className='flex flex-col mt-5 gap-3 flex-wrap w-[90%]'>
         <div className='flex flex-col w-full xl:w-[49%] border-b-[10px]  border-purple-400 rounded-3xl'>
-          <div className='stats shadow w-full '>
+          <div className='stats shadow w-full stats-vertical md:stats-horizontal'>
             <div className='stat '>
               <div className='stat-figure text-secondary'>
                 {/* <TbHomeDollar size={30} className='text-purple-800' /> */}

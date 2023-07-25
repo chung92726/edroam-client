@@ -1,21 +1,21 @@
-'use client';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BiMessageSquareDots } from 'react-icons/bi';
+'use client'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { BiMessageSquareDots } from 'react-icons/bi'
 
 const Mystudents = () => {
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState([])
   const loadStudents = async () => {
     try {
-      const { data } = await axios.get('/api/instructor/students');
-      setStudents(data);
+      const { data } = await axios.get('/api/instructor/students')
+      setStudents(data)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
   useEffect(() => {
-    loadStudents();
-  }, []);
+    loadStudents()
+  }, [])
   return (
     <div className='w-full'>
       <div className='text-center  bg-gray-700 text-white w-full  py-[50px] flex flex-col justify-center text-[28px] items-start font-bold '>
@@ -43,7 +43,15 @@ const Mystudents = () => {
                   <td>
                     <div className='avatar'>
                       <div className='w-12 rounded-full'>
-                        <img src={student.picture} />
+                        <img
+                          src={
+                            student.picture
+                              ? student.picture.Location !== undefined
+                                ? student.picture.Location
+                                : '/guest.png'
+                              : '/guest.png'
+                          }
+                        />
                       </div>
                     </div>
                   </td>
@@ -87,7 +95,7 @@ const Mystudents = () => {
         </table>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Mystudents;
+export default Mystudents

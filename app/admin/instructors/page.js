@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { MdOutlineDeleteForever } from 'react-icons/md'
 import { FaBan } from 'react-icons/fa'
-import { TiTickOutline } from 'react-icons/ti'
+import { TiTickOutline, TiTimesOutline } from 'react-icons/ti'
 
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -10,8 +10,10 @@ import { Table } from 'antd'
 import Link from 'next/link'
 
 const AllCourse = () => {
-  const [users, setUsers] = useState([])
+  const [instructors, setinstructors] = useState([])
   const [search, setSearch] = useState('')
+  const [pendingInstructors, setPendingInstructors] = useState([])
+  const [pendingSearch, setPendingSearch] = useState('')
 
   const [currentWidth, setCurrentWidth] = useState(0)
 
@@ -26,31 +28,46 @@ const AllCourse = () => {
     })
   }, [])
 
-  const fetchUsers = async () => {
+  const fetchInstructors = async () => {
     const { data } = await axios.get(
-      `/api/admin/get-all-users?searchTerm=${search}`
+      `/api/admin/get-all-instuctors?searchTerm=${search}`
     )
-
-    setUsers(data)
-    console.log(data)
+    setinstructors(data)
+    // console.log(data)
   }
-  useEffect(() => {
-    fetchUsers()
-  }, [search])
 
-  const banUser = async (userId) => {
+  const fetchPendingInstructors = async () => {
+    const { data } = await axios.get(
+      `/api/admin/get-all-pending?searchTerm=${pendingSearch}`
+    )
+    setPendingInstructors(data)
+    // console.log(data)
+  }
+
+  useEffect(() => {
+    fetchInstructors()
+    fetchPendingInstructors()
+  }, [search, pendingSearch])
+
+  const approveUser = async (userId) => {
     if (window.confirm('Are you sure?')) {
-      const { data } = await axios.put(`/api/admin/ban-user/${userId}`)
-      toast.success('User Banned')
-      fetchUsers()
+      const { data } = await axios.put(
+        `/api/admin/approve-instructor/${userId}`
+      )
+      toast.success('User Approved')
+      fetchInstructors()
+      fetchPendingInstructors()
     }
   }
 
-  const unBanUser = async (userId) => {
+  const unapproveUser = async (userId) => {
     if (window.confirm('Are you sure?')) {
-      const { data } = await axios.put(`/api/admin/unban-user/${userId}`)
-      toast.success('User Unbanned')
-      fetchUsers()
+      const { data } = await axios.put(
+        `/api/admin/unapprove-instructor/${userId}`
+      )
+      toast.success('User UnApproved')
+      fetchInstructors()
+      fetchPendingInstructors()
     }
   }
 
@@ -59,6 +76,7 @@ const AllCourse = () => {
       const { data } = await axios.delete(`/api/admin/delete-user/${userId}`)
       toast.success('Course Deleted')
       fetchUsers()
+      fetchPendingInstructors()
     }
   }
   const columns = [
@@ -99,32 +117,14 @@ const AllCourse = () => {
     },
 
     {
-      title: 'Role',
-      dataIndex: 'role',
-      render: (e) => (
-        <div className='flex flex-col justify-start items-start'>
-          {e.map((role, index) => (
-            <p className='font-bold' key={index}>
-              {role}
-            </p>
-          ))}
-        </div>
-      ),
-      filters: [
-        {
-          text: 'Subscriber',
-          value: 'Subscriber',
-        },
-        {
-          text: 'Instructor',
-          value: 'Instructor',
-        },
-        {
-          text: 'Admin',
-          value: 'Admin',
-        },
-      ],
-      onFilter: (value, record) => record.role.includes(value),
+      title: 'Status',
+
+      render: (e) =>
+        e.role.includes('Pending') ? (
+          <p className='font-bold'>Pending</p>
+        ) : (
+          <p className='font-bold'>Instructor</p>
+        ),
       width: 100,
     },
     {
@@ -135,26 +135,27 @@ const AllCourse = () => {
 
       render: (e) => (
         <div className='flex md:flex-row flex-col justify-start items-center gap-2'>
-          {/* <div className='tooltip tooltip-left' data-tip='Edit'>
-            <AiFillEdit size={20} className='cursor-pointer' />
-          </div> */}
-          {e.banned ? (
-            <div className='tooltip tooltip-right' data-tip='Unban User'>
+          {e.role.includes('Pending') ? (
+            <div className='tooltip tooltip-left' data-tip='Approve Intructor'>
               <TiTickOutline
                 size={20}
                 className='text-green-500 cursor-pointer'
-                onClick={() => unBanUser(e._id)}
+                onClick={() => approveUser(e._id)}
               />
             </div>
           ) : (
-            <div className='tooltip tooltip-right' data-tip='Ban User'>
-              <FaBan
+            <div
+              className='tooltip tooltip-left'
+              data-tip='UnApprove Intructor'
+            >
+              <TiTimesOutline
                 size={20}
                 className='text-red-500 cursor-pointer'
-                onClick={() => banUser(e._id)}
+                onClick={() => unapproveUser(e._id)}
               />
             </div>
           )}
+
           <div className='tooltip tooltip-left' data-tip='Delete User'>
             <MdOutlineDeleteForever
               size={20}
@@ -164,36 +165,48 @@ const AllCourse = () => {
           </div>
         </div>
       ),
-      filters: [
-        {
-          text: 'Banned User',
-          value: true,
-        },
-        {
-          text: 'Normal User',
-          value: false,
-        },
-      ],
-      onFilter: (value, record) => record.banned === value,
     },
   ]
 
   return (
     <div className='mt-8 flex flex-col justify-start items-center'>
       <h1 className='font-bold text-[20px] w-[95%] mb-4'>
-        All Members ({users.length})
+        Pending Instructors ({pendingInstructors.length})
       </h1>
       <input
         type='text'
-        placeholder='Search Members'
-        className='input    w-[90%] max-w-sm mb-2 '
+        placeholder='Search Pending'
+        className='input w-[90%] max-w-sm mb-2 '
+        value={search}
+        onChange={(e) => setPendingSearch(e.target.value)}
+      />
+
+      <Table
+        columns={columns}
+        dataSource={pendingInstructors}
+        className='mt-8'
+        pagination={{
+          pageSize: 20,
+        }}
+        scroll={{
+          y: 480,
+        }}
+      />
+
+      <h1 className='font-bold text-[20px] w-[95%] mb-4 mt-8'>
+        All Instructors ({instructors.length})
+      </h1>
+      <input
+        type='text'
+        placeholder='Search Instructors'
+        className='input w-[90%] max-w-sm mb-2 '
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
       <Table
         columns={columns}
-        dataSource={users}
+        dataSource={instructors}
         className='mt-8'
         pagination={{
           pageSize: 20,

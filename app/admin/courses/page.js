@@ -98,7 +98,7 @@ const AllCourse = () => {
       : {
           title: 'Status',
           dataIndex: 'published',
-          render: (e) => <a>{e ? 'Published' : 'Unpublished'}</a>,
+          render: (e) => <p>{e ? 'Published' : 'Unpublished'}</p>,
           filters: [
             {
               text: 'Published',
@@ -137,6 +137,9 @@ const AllCourse = () => {
 
   return (
     <div className='mt-8 flex flex-col justify-start items-center'>
+      <h1 className='font-bold text-[20px] w-[95%] mb-4'>
+        All Courses ({courses.length})
+      </h1>
       <input
         type='text'
         placeholder='Search Course'

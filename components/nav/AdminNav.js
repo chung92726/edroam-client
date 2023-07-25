@@ -15,6 +15,9 @@ const AdminNav = () => {
   useEffect(() => {
     setCurrentPage(path.substring(1, path.length))
   }, [path])
+  // useEffect(() => {
+  //   console.log(currentPage)
+  // }, [currentPage])
   return (
     <>
       <div className='user-nav fixed '>
@@ -31,7 +34,7 @@ const AdminNav = () => {
           </li>
           <li
             className={
-              currentPage === 'admin/courses*'
+              currentPage.includes('admin/courses')
                 ? 'text-blue-400 '
                 : 'hover:text-blue-400'
             }
@@ -43,7 +46,7 @@ const AdminNav = () => {
           </li>
           <li
             className={
-              currentPage === 'admin/members*'
+              currentPage.includes('admin/members')
                 ? 'text-blue-400 '
                 : 'hover:text-blue-400'
             }
@@ -55,12 +58,12 @@ const AdminNav = () => {
           </li>
           <li
             className={
-              currentPage === 'admin/students*'
+              currentPage.includes('admin/instructors')
                 ? 'text-blue-400 '
                 : 'hover:text-blue-400'
             }
           >
-            <Link href='/admin/students'>
+            <Link href='/admin/instructors'>
               <ImUserTie size={20} />
               <p className='mx-4 hidden lg:block'>Instructors</p>
             </Link>
