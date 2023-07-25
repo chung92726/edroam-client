@@ -233,9 +233,14 @@ const CourseView = ({ params }) => {
           {/* <pre>{JSON.stringify(course, null, 4)}</pre> */}
           <div className=' w-10/12  max-w-screen-2xl mb-5'>
             <div className='flex justify-between items-center'>
-              <h1 className='text-2xl font-bold'>{`${
-                course && course.lessons && course.lessons.length
-              } Lessons`}</h1>
+              <div className='flex flex-col md:flex-row w-full items-start md:items-center '>
+                <h1 className='text-2xl font-bold'>{`${
+                  course && course.lessons && course.lessons.length
+                } Lessons`}</h1>
+                <p className='text-sm text-gray-500 max-md:pb-3 md:px-5'>
+                  (Rearrange lessons by dragging them up or down.)
+                </p>
+              </div>
               <div
                 className='tooltip cursor-pointer'
                 data-tip='Back to course'
@@ -248,12 +253,12 @@ const CourseView = ({ params }) => {
               {course.lessons.map((lesson, index) => (
                 <div
                   tabIndex={index}
-                  className='collapse border-b-2 border-base-200 mt-2 mb-0 pt-3 rounded-md bg-white'
+                  className='border-b-2 border-base-200 mt-2 mb-0 pt-3 rounded-md bg-white'
                   draggable
                   onDragStart={(e) => handleDrag(e, index)}
                   onDrop={(e) => handleDrop(e, index)}
                 >
-                  <input type='checkbox' />
+                  {/* <input type='checkbox' /> */}
                   <div className='collapse-title text-xl font-medium max-sm:px-3'>
                     <div className='flex items-center  w-full'>
                       <div className='flex flex-col items-start sm:flex-row sm:items-center justify-between w-full '>
@@ -314,9 +319,9 @@ const CourseView = ({ params }) => {
                       </div>
                     </div>
                   </div>
-                  <div className='collapse-content'>
+                  {/* <div className='collapse-content'>
                     <p>{lesson && lesson.content}</p>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>

@@ -348,7 +348,7 @@ const CourseView = ({ params }) => {
             {course.lessons.map((lesson, index) => (
               <div
                 tabIndex={index}
-                className='collapse border-b-2 border-base-200 mt-4 rounded-md bg-white'
+                className='border-b-2 border-base-200 mt-4 rounded-md bg-white hover:disabled'
               >
                 {/* <input type='checkbox' /> */}
                 <div className='collapse-title text-xl font-medium flex w-full pr-0'>

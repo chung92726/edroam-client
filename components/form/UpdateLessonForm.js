@@ -1,9 +1,41 @@
-import React from 'react'
-import ReactPlayer from 'react-player'
-import { AiOutlineFolderAdd } from 'react-icons/ai'
-import { BsFillTrash3Fill } from 'react-icons/bs'
+import React from 'react';
+import ReactPlayer from 'react-player';
+import { AiOutlineFolderAdd } from 'react-icons/ai';
+import { BsFillTrash3Fill } from 'react-icons/bs';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css';
+
+const Quill = dynamic(
+  () => {
+    return import('react-quill');
+  },
+  { ssr: false }
+);
+
+const modules = {
+  toolbar: [
+    [{ header: '1' }, { header: '2' }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
+    ['link', 'image', 'video'],
+    [{ color: [] }, { background: [] }],
+    ['clean'],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};
 
 const UpdateLessonForm = ({
+  values,
+  setValues,
   currentLesson,
   setCurrentLesson,
   uploading,
@@ -63,8 +95,8 @@ const UpdateLessonForm = ({
               className='btn  btn-info'
               disabled={supplementary.uploading}
               onClick={() => {
-                handleSupplementary()
-                window.my_modal_3.close()
+                handleSupplementary();
+                window.my_modal_3.close();
               }}
             >
               {supplementary.uploading ? (
@@ -100,7 +132,7 @@ const UpdateLessonForm = ({
               required
               autoFocus
             />
-            <textarea
+            {/* <textarea
               type='text'
               name='content'
               placeholder='Content'
@@ -109,6 +141,16 @@ const UpdateLessonForm = ({
               }
               value={currentLesson.content}
               className='textarea textarea-bordered textarea-sm w-full max-w-screen-xl mx-2 pb-10'
+            /> */}
+            <Quill
+              modules={modules}
+              theme='snow'
+              className='custom-quill-container w-full border-2 rounded-lg bg-white mb-8'
+              name='content'
+              value={currentLesson.content}
+              onChange={(e) =>
+                setCurrentLesson({ ...currentLesson, content: e })
+              }
             />
             <select
               className='select select-bordered w-full max-w-screen-xl mx-2'
@@ -116,7 +158,7 @@ const UpdateLessonForm = ({
                 setCurrentLesson({
                   ...currentLesson,
                   free_preview: v.target.value,
-                })
+                });
               }}
               //   defaultValue={currentLesson.free_preview}
             >
@@ -231,7 +273,7 @@ const UpdateLessonForm = ({
                       <BsFillTrash3Fill
                         className='text-red-500 cursor-pointer'
                         onClick={() => {
-                          handleSupplementaryRemove(i)
+                          handleSupplementaryRemove(i);
                         }}
                       />
                     </div>
@@ -257,7 +299,7 @@ const UpdateLessonForm = ({
         </form>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default UpdateLessonForm
+export default UpdateLessonForm;
