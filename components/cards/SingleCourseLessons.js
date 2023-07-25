@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { useState } from 'react';
 
 const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
-  const [displayedLessons, setDisplayedLessons] = useState(5)
+  const [displayedLessons, setDisplayedLessons] = useState(5);
   const loadMoreLessons = () => {
-    setDisplayedLessons(lessons.length)
-  }
+    setDisplayedLessons(lessons.length);
+  };
   return (
     <div className='flex justify-center item-center'>
       <div className=' w-full lg:max-w-[1080px]'>
@@ -22,7 +22,7 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                 key={index}
                 className='collapse border-b-2 border-blue-200 rounded-none bg-gray-100  '
                 style={{
-                  transition: "opacity 0.5s",
+                  transition: 'opacity 0.5s',
                   opacity: displayedLessons >= index + 1 ? 1 : 0,
                 }}
               >
@@ -37,9 +37,9 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                       </div>
                       {lesson.free_preview ? (
                         <span
-                          className='mx-8 text-[14px] sm:text-[16px] link text-purple-500 z-50'
+                          className='mx-8 text-[14px] sm:text-[16px] link text-purple-500 z-40'
                           onClick={() => {
-                            handlePreview(lesson.video)
+                            handlePreview(lesson.video);
                           }}
                         >
                           {lesson.title}
@@ -52,9 +52,9 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                     </div>
                     {lesson.free_preview ? (
                       <div
-                        className='text-[14px] z-50 link text-purple-500 text-center min-w-[101px] mr-2'
+                        className='text-[14px] z-40 link text-purple-500 text-center min-w-[101px] mr-2'
                         onClick={() => {
-                          handlePreview(lesson.video)
+                          handlePreview(lesson.video);
                         }}
                       >
                         Preview
@@ -84,7 +84,7 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SingleCourseLessons
+export default SingleCourseLessons;

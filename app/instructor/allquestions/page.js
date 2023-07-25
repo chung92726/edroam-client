@@ -125,7 +125,7 @@ const AllQuestions = ({ course, currentLesson }) => {
   };
 
   return (
-    <div className='w-full mx-8 mb-4 mt-8'>
+    <div className='w-[95%] mx-8 mb-4 mt-8 overflow-x-hidden max-sm:mx-0 max-sm:w-full max-sm:px-2'>
       {detailsPage ? (
         <div className='w-full'>
           <DetailsPage
@@ -139,7 +139,7 @@ const AllQuestions = ({ course, currentLesson }) => {
         </div>
       ) : (
         <div className='w-full flex flex-col justify-start items-start max-w-2x1 '>
-          <h1 className='font-bold text-[20px] my-4'>
+          <h1 className='font-bold text-[20px] my-4 max-sm:pl-2'>
             Questions That Need Answers ({questionCount})
           </h1>
           <div className='flex flex-col md:flex-row w-full  items-center justify-center md:items-end '>
@@ -228,7 +228,7 @@ const AllQuestions = ({ course, currentLesson }) => {
               </div>
             ))}
 
-          <h1 className='font-bold text-[20px] my-4'>
+          <h1 className='font-bold text-[20px] my-4 max-sm:pl-2'>
             All Questions ({allQuestionsCount})
           </h1>
           {/* // ask question area */}

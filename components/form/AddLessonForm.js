@@ -1,6 +1,36 @@
-import React from 'react'
-import { AiOutlineFolderAdd } from 'react-icons/ai'
-import { BsFillTrash3Fill } from 'react-icons/bs'
+import React from 'react';
+import { AiOutlineFolderAdd } from 'react-icons/ai';
+import { BsFillTrash3Fill } from 'react-icons/bs';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css';
+
+const Quill = dynamic(
+  () => {
+    return import('react-quill');
+  },
+  { ssr: false }
+);
+
+const modules = {
+  toolbar: [
+    [{ header: '1' }, { header: '2' }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
+    ['link', 'image', 'video'],
+    [{ color: [] }, { background: [] }],
+    ['clean'],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};
 
 const AddLessonForm = ({
   values,
@@ -75,8 +105,8 @@ const AddLessonForm = ({
               className='btn  btn-info'
               disabled={supplementary.uploading}
               onClick={() => {
-                handleSupplementary()
-                window.my_modal_3.close()
+                handleSupplementary();
+                window.my_modal_3.close();
               }}
             >
               {supplementary.uploading ? (
@@ -103,24 +133,38 @@ const AddLessonForm = ({
             type='text'
             name='title'
             placeholder='Title'
-            onChange={(e) => setValues({ ...values, title: e.target.value })}
+            onChange={(e) => {
+              e.target.value.length <= 100 &&
+                setValues({ ...values, title: e.target.value });
+            }}
             value={values.title}
             className='input input-bordered w-full max-w-md mx-2'
             required
             autoFocus
           />
-          <textarea
+          <label className='label w-full justify-end py-0 '>
+            <span className='label-text-alt mx-2'>Max: 100 characters</span>
+          </label>
+          {/* <textarea
             type='text'
             name='content'
             placeholder='Content'
             onChange={(e) => setValues({ ...values, content: e.target.value })}
             value={values.content}
             className='textarea textarea-bordered textarea-sm w-full max-w-md mx-2 pb-10'
+          /> */}
+          <Quill
+            modules={modules}
+            theme='snow'
+            className='custom-quill-container w-full border-2 rounded-lg bg-white mb-8'
+            name='content'
+            value={values.content}
+            onChange={(e) => setValues({ ...values, content: e })}
           />
           <select
             className='select select-bordered w-full max-w-md mx-2'
             onChange={(v) => {
-              setValues({ ...values, free_preview: v.target.value })
+              setValues({ ...values, free_preview: v.target.value });
             }}
             defaultValue={values.free_preview}
           >
@@ -186,7 +230,7 @@ const AddLessonForm = ({
                   <BsFillTrash3Fill
                     className='text-red-500 cursor-pointer'
                     onClick={() => {
-                      handleSupplementaryRemove(i)
+                      handleSupplementaryRemove(i);
                     }}
                   />
                 </div>
@@ -212,7 +256,7 @@ const AddLessonForm = ({
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddLessonForm
+export default AddLessonForm;

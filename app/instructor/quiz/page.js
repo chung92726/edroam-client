@@ -358,7 +358,7 @@ const instructorQuiz = () => {
         <Quill
           modules={modules}
           theme='snow'
-          className='w-full  border-2 rounded-lg border-opacity-20'
+          className='w-full  border-2 rounded-lg border-opacity-20 custom-quill-container'
           value={value.description}
           onChange={(e) => {
             setValue({ ...value, description: e })

@@ -1,12 +1,12 @@
-import React from 'react'
-import 'react-quill/dist/quill.snow.css'
-import dynamic from 'next/dynamic'
+import React from 'react';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
 const Quill = dynamic(
   () => {
-    return import('react-quill')
+    return import('react-quill');
   },
   { ssr: false }
-)
+);
 
 const modules = {
   toolbar: [
@@ -26,7 +26,7 @@ const modules = {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
-}
+};
 
 const DetailsPage = ({
   backToQandA,
@@ -126,18 +126,18 @@ const DetailsPage = ({
         value={comment}
         onChange={setComment}
       />
-      <div className='w-full flex justify-end'>
+      <div className='w-full flex justify-end mt-3'>
         <button
           className='btn btn-neutral mr-2 !text-[12px]'
           onClick={() => {
-            publishComment(currentQuestion._id)
+            publishComment(currentQuestion._id);
           }}
         >
           Add an answer
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DetailsPage
+export default DetailsPage;

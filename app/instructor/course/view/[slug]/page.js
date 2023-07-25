@@ -221,8 +221,8 @@ const CourseView = ({ params }) => {
   return (
     <>
       {course && (
-        <div className='flex flex-col items-center mb-10 mt-10'>
-          <div className='card-side w-10/12  max-w-screen-2xl lg:card-side bg-base-100 shadow-xl mt-6'>
+        <div className='flex flex-col items-center mb-10 mt-10 overflow-hidden'>
+          <div className='card-side w-11/12 max-w-screen-lg lg:card-side bg-base-100 shadow-xl mt-6'>
             <dialog id='my_modal' className='modal'>
               <form method='dialog' className='modal-box relative'>
                 <div className='flex justify-end text-red-600 mb-4'>
@@ -250,15 +250,15 @@ const CourseView = ({ params }) => {
               </form>
               <form method='dialog' className='modal-backdrop'></form>
             </dialog>
-            <figure className='w-full pr-4 rounded flex justify-center items-center'>
+            <figure className='w-full pr-0 md:pr-4 rounded flex justify-center items-center'>
               <img
                 src={course.image ? course.image.Location : '/course.png'}
                 alt='CoursePic'
-                className='rounded w-6/12'
+                className='rounded w-full md:w-6/12'
               />
             </figure>
             <div className='card-body p-4 '>
-              <div className='w-full flex justify-between'>
+              <div className='w-full flex justify-between '>
                 <div
                   className={`badge  ${
                     course.published
@@ -270,11 +270,9 @@ const CourseView = ({ params }) => {
                 >
                   {course.published
                     ? 'Published'
-                    : course.lessons.length > 5
+                    : course.lessons.length >= 5
                     ? 'Ready to Publish'
-                    : `Not Ready  ${
-                        5 - course.lessons.length
-                      } more lessons needed`}
+                    : `${5 - course.lessons.length} more lessons to publish`}
                 </div>
 
                 <div
@@ -285,10 +283,10 @@ const CourseView = ({ params }) => {
                   <AiFillEdit size={25} className='mx-4' />
                 </div>
               </div>
-              <div className='stats shadow my-5 text-blue-500'>
-                <div className='stat place-items-center'>
+              <div className='stats shadow my-5 text-blue-500 max-md:flex max-md:flex-col max-md:divide-y max-md:divide-blue-100 max-md:divide-x-0'>
+                <div className='stat place-items-center '>
                   <div className='stat-title'>Enrolled</div>
-                  <div className='stat-value'>{studentCount}</div>
+                  <div className='stat-value max-sm:text-'>{studentCount}</div>
                   {/* <div className='stat-desc'>
                     From January 1st to February 1st
                   </div> */}
@@ -303,10 +301,10 @@ const CourseView = ({ params }) => {
               <h1 className='card-title mt-2'>{course.name}</h1>
 
               <div className='py-6'>{course.description}</div>
-              <div className='flex flex-row justify-start items-end h-full'>
+              <div className='flex flex-col md:flex-row justify-start md:items-end h-full'>
                 <div className='justify-start card-actions mx-2'>
                   <button
-                    className='btn btn-info'
+                    className='btn btn-info max-md:w-full max-md:mb-2'
                     onClick={() => window.my_modal.showModal()}
                   >
                     Add Lesson
@@ -315,14 +313,14 @@ const CourseView = ({ params }) => {
                 <div className='justify-start card-actions mx-2'>
                   {course.published ? (
                     <button
-                      className='btn btn-accent'
+                      className='btn btn-accent max-md:w-full'
                       onClick={(e) => handleUnpublish(e, course._id)}
                     >
                       Unpublish Course
                     </button>
                   ) : (
                     <button
-                      className='btn btn-accent'
+                      className='btn btn-accent max-md:w-full'
                       disabled={course.lessons.length < 5 ? true : false}
                       onClick={(e) => handlePublish(e, course._id)}
                     >
@@ -334,7 +332,7 @@ const CourseView = ({ params }) => {
             </div>
           </div>
           {/* <pre>{JSON.stringify(course, null, 4)}</pre> */}
-          <div className=' w-[90%] max-w-screen-2xl mt-16'>
+          <div className=' w-full  max-w-screen-lg mt-16 max-xl:px-4'>
             <div className='flex justify-between items-center'>
               <h1 className='text-2xl font-bold'>{`${course.lessons.length} Lessons in this Course`}</h1>
               <div
@@ -350,21 +348,27 @@ const CourseView = ({ params }) => {
             {course.lessons.map((lesson, index) => (
               <div
                 tabIndex={index}
-                className='collapse border-b-2 border-base-200 mt-4 rounded-none bg-white'
+                className='border-b-2 border-base-200 mt-4 rounded-md bg-white hover:disabled'
               >
-                <input type='checkbox' />
-                <div className='collapse-title text-xl font-medium'>
-                  <div>
-                    <div className='avatar placeholder'>
-                      <div className='w-8 rounded-full bg-base-200 text-black'>
-                        <span className='text-[14px]'>{index + 1}</span>
+                {/* <input type='checkbox' /> */}
+                <div className='collapse-title text-xl font-medium flex w-full pr-0'>
+                  <div className='flex flex-col items-start sm:flex-row sm:items-center justify-between w-full'>
+                    <div className='flex items-center'>
+                      <div className='avatar placeholder'>
+                        <div className='w-8 rounded-full bg-base-200 text-black'>
+                          <span className='text-[14px]'>{index + 1}</span>
+                        </div>
+                      </div>
+                      <div className='mx-2 md:mx-8 text-[14px] md:text-[16px] max-md:break-words max-md:overflow-x-hidden '>
+                        {lesson.title}
                       </div>
                     </div>
-                    <span className='mx-8 text-[16px]'>{lesson.title}</span>
                     {lesson.free_preview ? (
-                      <div className='badge badge-info gap-2'>Free Lesson</div>
+                      <div className='badge badge-info gap-2 min-w-[101px] mr-2  max-sm:ml-10 max-sm:mt-2'>
+                        Free Lesson
+                      </div>
                     ) : (
-                      <div className='badge badge-success gap-2'>
+                      <div className='badge badge-success gap-2 min-w-[101px] mr-2 max-sm:ml-10 max-sm:mt-2'>
                         Paid Lesson
                       </div>
                     )}

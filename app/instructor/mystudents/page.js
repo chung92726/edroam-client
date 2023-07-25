@@ -24,10 +24,10 @@ const Mystudents = () => {
       <div className='overflow-x-auto'>
         <table className='table bg-gray-100'>
           {/* head */}
-          <thead>
+          <thead className='whitespace-normal'>
             <tr>
               <th></th>
-              <th>Student Icon</th>
+              <th className='max-sm:hidden'>Student Icon</th>
               <th>Student Name</th>
               <th>Enrolled Courses (Your Courses)</th>
               {/* <th>Message</th> */}
