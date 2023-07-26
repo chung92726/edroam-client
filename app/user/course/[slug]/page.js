@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import {
   AppstoreOutlined,
   ContainerOutlined,
@@ -6,79 +6,81 @@ import {
   PieChartOutlined,
   MailOutlined,
   MenuUnfoldOutlined,
-} from '@ant-design/icons';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import StudentRoute from '@/components/routes/StudentRoute';
-import { useRouter } from 'next/navigation';
-import { Menu, Button, Layout, theme, Avatar } from 'antd';
-import { FaPlayCircle } from 'react-icons/fa';
-import ReactPlayer from 'react-player';
+} from '@ant-design/icons'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import StudentRoute from '@/components/routes/StudentRoute'
+import { useRouter } from 'next/navigation'
+import { Menu, Button, Layout, theme, Avatar } from 'antd'
+import { FaPlayCircle } from 'react-icons/fa'
+import ReactPlayer from 'react-player'
 import {
   BsArrowLeftSquare,
   BsArrowRightSquare,
   BsFillArrowLeftSquareFill,
   BsFillArrowRightSquareFill,
-} from 'react-icons/bs';
-import CourseTaps from '@/components/courseTaps/CourseTaps';
-import LessonContentCard from '@/components/cards/LessonContentCard';
+} from 'react-icons/bs'
+import CourseTaps from '@/components/courseTaps/CourseTaps'
+import LessonContentCard from '@/components/cards/LessonContentCard'
 
-const { Sider } = Layout;
+const { Sider } = Layout
 
-const { SubMenu, Item } = Menu;
+const { SubMenu, Item } = Menu
 const singleCourse = ({ params }) => {
-  const [course, setCourse] = useState({ lessons: [] });
-  const [loading, setLoading] = useState(false);
-  const [currentLesson, setCurrentLesson] = useState(-1);
-  const [collapsed, setCollapsed] = useState(false);
-  const [completedLessons, setCompletedLessons] = useState([]);
-  const [videoUrl, setVideoUrl] = useState('');
-  const [playerHover, setPlayerHover] = useState(false);
+  const [course, setCourse] = useState({ lessons: [] })
+  const [loading, setLoading] = useState(false)
+  const [playedSeconds, setPlayedSeconds] = useState(0)
+  const [currentVideo, setCurrentVideo] = useState(null)
+  const [currentLesson, setCurrentLesson] = useState(-1)
+  const [collapsed, setCollapsed] = useState(false)
+  const [completedLessons, setCompletedLessons] = useState([])
+  const [videoUrl, setVideoUrl] = useState('')
+  const [playerHover, setPlayerHover] = useState(false)
   const {
     token: { colorBgContainer },
-  } = theme.useToken();
-  const { slug } = params;
-  const router = useRouter();
+  } = theme.useToken()
+  const { slug } = params
+  const router = useRouter()
 
   const loadCourse = async () => {
     try {
-      const { data } = await axios.get(`/api/user/course/${slug}`);
-      setCourse(data);
+      const { data } = await axios.get(`/api/user/course/${slug}`)
+      setCourse(data)
     } catch (err) {
-      toast.error('You are not enrolled');
-      router.push('/login');
+      toast.error('You are not enrolled')
+      router.push('/login')
     }
-  };
+  }
   const loadCompletedLessons = async () => {
     const { data } = await axios.post(`/api/list-completed`, {
       courseId: course._id,
-    });
-    setCompletedLessons(data);
-  };
+    })
+    setCompletedLessons(data)
+  }
   const markCompleted = async () => {
     const { data } = await axios.post(`/api/mark-completed`, {
       courseId: course._id,
       lessonId: course.lessons[currentLesson]._id,
-    });
-    loadCompletedLessons();
-  };
+    })
+    loadCompletedLessons()
+  }
   const markCompletedAndNext = async () => {
     const { data } = await axios.post(`/api/mark-completed`, {
       courseId: course._id,
       lessonId: course.lessons[currentLesson]._id,
-    });
-    loadCompletedLessons();
+    })
+    loadCompletedLessons()
 
-    setCurrentLesson(currentLesson + 1);
-  };
+    setCurrentLesson(currentLesson + 1)
+  }
   const markInCompleted = async () => {
     const { data } = await axios.post(`/api/mark-incompleted`, {
       courseId: course._id,
       lessonId: course.lessons[currentLesson]._id,
-    });
-    loadCompletedLessons();
-  };
+    })
+    loadCompletedLessons()
+  }
 
   const getVideoUrl = async () => {
     if (
@@ -87,26 +89,68 @@ const singleCourse = ({ params }) => {
     ) {
       const { data } = await axios.post('/api/course/get-signedurl', {
         filename: course.lessons[currentLesson].video.Key,
-      });
-      setVideoUrl(data);
+      })
+      setVideoUrl(data)
     }
-  };
+  }
+
+  async function saveProgress(changeLesson = false) {
+    // Assume you have a function to get the user's ID
+
+    const data = {
+      courseId: course._id,
+      lessonId: course.lessons[currentLesson]._id,
+      lessonIndex: currentLesson,
+      videoId: course.lessons[currentLesson].video.Key,
+      timestamp: playedSeconds,
+    }
+
+    try {
+      await axios.post('/api/lesson-history/save-progess', data)
+    } catch (error) {
+      console.error('Failed to save progress:', error)
+    }
+  }
+
+  async function getCourseProgress() {
+    // Assume you have a function to get the user's ID
+
+    try {
+      const response = await axios.get(
+        `/api/lesson-history/get-progress/${course._id}`
+      )
+      console.log('hi')
+      console.log(response)
+      const { lessonIndex } = response.data
+
+      setCurrentLesson(lessonIndex)
+    } catch (error) {
+      console.error('Failed to get course progress:', error)
+    }
+  }
 
   useEffect(() => {
     if (course && currentLesson !== -1) {
-      getVideoUrl();
+      saveProgress()
     }
-  }, [currentLesson]);
+  }, [currentLesson])
 
   useEffect(() => {
-    if (slug) loadCourse();
-  }, [slug]);
+    if (course && currentLesson !== -1) {
+      getVideoUrl()
+    }
+  }, [currentLesson])
+
+  useEffect(() => {
+    if (slug) loadCourse()
+  }, [slug])
 
   useEffect(() => {
     if (course._id) {
-      loadCompletedLessons();
+      loadCompletedLessons()
+      getCourseProgress()
     }
-  }, [course]);
+  }, [course])
 
   return (
     <StudentRoute>
@@ -121,14 +165,14 @@ const singleCourse = ({ params }) => {
           collapsible
           collapsed={collapsed}
           onCollapse={(value) => {
-            setCollapsed(value);
-            console.log('coll');
+            setCollapsed(value)
+            console.log('coll')
           }}
           width={320}
           collapsedWidth={65}
           breakpoint='lg'
           onBreakpoint={(broken) => {
-            console.log(broken);
+            console.log(broken)
           }}
           style={{
             overflow: 'auto',
@@ -149,7 +193,13 @@ const singleCourse = ({ params }) => {
           >
             {course.lessons.map((lesson, index) => (
               <Item
-                onClick={() => setCurrentLesson(index)}
+                onClick={() => {
+                  if (currentLesson !== -1) {
+                    saveProgress()
+                    setPlayedSeconds(0)
+                  }
+                  setCurrentLesson(index)
+                }}
                 key={index.toString()}
                 style={{ styleInline: '0px', height: '100px' }}
                 icon={
@@ -218,10 +268,10 @@ const singleCourse = ({ params }) => {
                   <div
                     className='h-[82vh] relative w-full'
                     onMouseLeave={() => {
-                      setPlayerHover(false);
+                      setPlayerHover(false)
                     }}
                     onMouseEnter={() => {
-                      setPlayerHover(true);
+                      setPlayerHover(true)
                     }}
                   >
                     <ReactPlayer
@@ -231,6 +281,14 @@ const singleCourse = ({ params }) => {
                       height='100%'
                       controls
                       className='bg-black'
+                      onProgress={({ playedSeconds }) =>
+                        setPlayedSeconds(playedSeconds)
+                      }
+                      onPause={() => saveProgress()}
+                      onEnded={() => {
+                        saveProgress()
+                        markCompletedAndNext()
+                      }}
                       onContextMenu={(e) => e.preventDefault()}
                       config={{
                         file: {
@@ -239,7 +297,6 @@ const singleCourse = ({ params }) => {
                           },
                         },
                       }}
-                      onEnded={markCompletedAndNext}
                     />
                     {playerHover && (
                       <BsFillArrowLeftSquareFill
@@ -247,7 +304,7 @@ const singleCourse = ({ params }) => {
                         size={30}
                         onClick={() => {
                           if (currentLesson > 0) {
-                            setCurrentLesson(currentLesson - 1);
+                            setCurrentLesson(currentLesson - 1)
                           }
                         }}
                       />
@@ -258,7 +315,7 @@ const singleCourse = ({ params }) => {
                         size={30}
                         onClick={() => {
                           if (currentLesson < course.lessons.length - 1) {
-                            setCurrentLesson(currentLesson + 1);
+                            setCurrentLesson(currentLesson + 1)
                           }
                         }}
                       />
@@ -284,7 +341,7 @@ const singleCourse = ({ params }) => {
                       size={30}
                       onClick={() => {
                         if (currentLesson > 0) {
-                          setCurrentLesson(currentLesson - 1);
+                          setCurrentLesson(currentLesson - 1)
                         }
                       }}
                     />
@@ -298,7 +355,7 @@ const singleCourse = ({ params }) => {
                       size={30}
                       onClick={() => {
                         if (currentLesson < course.lessons.length - 1) {
-                          setCurrentLesson(currentLesson + 1);
+                          setCurrentLesson(currentLesson + 1)
                         }
                       }}
                     />
@@ -311,17 +368,12 @@ const singleCourse = ({ params }) => {
               />
             </div>
           ) : (
-            <div className='flex flex-col justify-center items-center mt-20'>
-              <FaPlayCircle size={100} className='text-blue-500' />
-              <h1 className='text-2xl font-bold mt-3'>
-                Click on the lesson to start
-              </h1>
-            </div>
+            <div className='flex flex-col justify-center items-center mt-20'></div>
           )}
         </Layout>
       </Layout>
     </StudentRoute>
-  );
-};
+  )
+}
 
-export default singleCourse;
+export default singleCourse
