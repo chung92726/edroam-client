@@ -7,7 +7,7 @@ import {
   MailOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import StudentRoute from '@/components/routes/StudentRoute'
@@ -23,6 +23,8 @@ import {
 } from 'react-icons/bs'
 import CourseTaps from '@/components/courseTaps/CourseTaps'
 import LessonContentCard from '@/components/cards/LessonContentCard'
+import PopupRating, { openModal } from '@/components/popupRating/PopupRating'
+import FullScreenContainer from '@/components/fullScreenContainer/FullScreenContainer'
 
 const { Sider } = Layout
 
@@ -101,7 +103,9 @@ const singleCourse = ({ params }) => {
       courseId: course._id,
       lessonId: course.lessons[currentLesson]._id,
       lessonIndex: currentLesson,
-      videoId: course.lessons[currentLesson].video.Key,
+      videoId: course.lessons[currentLesson].video
+        ? course.lessons[currentLesson].video.Key
+        : null,
       timestamp: playedSeconds,
     }
 
@@ -152,6 +156,30 @@ const singleCourse = ({ params }) => {
     }
   }, [course])
 
+  const video_player = useRef()
+
+  const [isReady, setIsReady] = useState(false)
+
+  const onReady = () => {
+    if (!isReady) {
+      if (course && course.lessons && course.lessons[currentLesson]) {
+        const timeToStart = parseFloat(
+          localStorage.getItem(`${course.lessons[currentLesson]._id}`)
+        )
+        // const timeToStart = 60 + 12.6
+        console.log(timeToStart)
+        if (!isNaN(timeToStart)) {
+          setPlayedSeconds(timeToStart)
+          video_player.current.seekTo(timeToStart)
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    setIsReady(false)
+  }, [course, currentLesson])
+
   return (
     <StudentRoute>
       <Layout
@@ -196,7 +224,6 @@ const singleCourse = ({ params }) => {
                 onClick={() => {
                   if (currentLesson !== -1) {
                     saveProgress()
-                    setPlayedSeconds(0)
                   }
                   setCurrentLesson(index)
                 }}
@@ -234,7 +261,7 @@ const singleCourse = ({ params }) => {
         >
           {currentLesson !== -1 ? (
             <div>
-              <div className='relative h-[90vh] overflow-y-auto'>
+              <div className='relative h-[75vh] overflow-y-auto'>
                 <div className='flex justify-between  py-3 px-5 bg-[#091626] items-center'>
                   <h1 className='text-[18px] font-bold text-indigo-200'>
                     {course &&
@@ -266,7 +293,7 @@ const singleCourse = ({ params }) => {
                 course.lessons[currentLesson].video &&
                 course.lessons[currentLesson].video.Location ? (
                   <div
-                    className='h-[82vh] relative w-full'
+                    className='h-[67vh] relative w-full'
                     onMouseLeave={() => {
                       setPlayerHover(false)
                     }}
@@ -279,15 +306,32 @@ const singleCourse = ({ params }) => {
                       url={videoUrl}
                       width='100%'
                       height='100%'
-                      controls
                       className='bg-black'
-                      onProgress={({ playedSeconds }) =>
-                        setPlayedSeconds(playedSeconds)
-                      }
+                      ref={video_player}
+                      controls
+                      onReady={() => {
+                        onReady()
+                        setIsReady(true)
+                      }}
+                      onProgress={({ playedSeconds, loadedSeconds }) => {
+                        if (
+                          playedSeconds != 0 &&
+                          playedSeconds != loadedSeconds
+                        ) {
+                          setPlayedSeconds(playedSeconds)
+                          localStorage.setItem(
+                            `${course.lessons[currentLesson]._id}`,
+                            playedSeconds
+                          )
+                        }
+                      }}
                       onPause={() => saveProgress()}
                       onEnded={() => {
                         saveProgress()
                         markCompletedAndNext()
+                        localStorage.removeItem(
+                          `${course.lessons[currentLesson]._id}`
+                        )
                       }}
                       onContextMenu={(e) => e.preventDefault()}
                       config={{
@@ -298,6 +342,7 @@ const singleCourse = ({ params }) => {
                         },
                       }}
                     />
+
                     {playerHover && (
                       <BsFillArrowLeftSquareFill
                         className='absolute text-gray-500 top-[40%] left-5 cursor-pointer'
@@ -326,11 +371,13 @@ const singleCourse = ({ params }) => {
                   course.lessons &&
                   course.lessons[currentLesson] &&
                   course.lessons[currentLesson].content && (
-                    <LessonContentCard
-                      content={course.lessons[currentLesson].content}
-                      course={course}
-                      currentLesson={currentLesson}
-                    />
+                    <FullScreenContainer>
+                      <LessonContentCard
+                        content={course.lessons[currentLesson].content}
+                        course={course}
+                        currentLesson={currentLesson}
+                      />
+                    </FullScreenContainer>
                   )
                 )}
                 {course.lessons &&

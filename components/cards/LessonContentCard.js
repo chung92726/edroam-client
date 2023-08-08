@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
+import { useState } from 'react'
+import 'react-quill/dist/quill.snow.css'
+import dynamic from 'next/dynamic'
 
 const Quill = dynamic(
   () => {
-    return import('react-quill');
+    return import('react-quill')
   },
   { ssr: false }
-);
+)
 
 const LessonContentCard = ({ course, currentLesson, content }) => {
   return (
-    <div className='flex justify-center item-center my-2'>
+    <div className='flex justify-center item-center my-2 h-full'>
       <div className='w-full lg:max-w-[1080px]'>
         {course.lessons[currentLesson].content.length > 0 ? (
           <Quill
@@ -30,7 +30,7 @@ const LessonContentCard = ({ course, currentLesson, content }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LessonContentCard;
+export default LessonContentCard

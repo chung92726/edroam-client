@@ -1,57 +1,57 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
-import axios from 'axios';
-import InstructorRoute from '@/components/routes/InstructorRoute';
-import Link from 'next/link';
-import { toast } from 'react-toastify';
+import axios from 'axios'
+import InstructorRoute from '@/components/routes/InstructorRoute'
+import Link from 'next/link'
+import { toast } from 'react-toastify'
 
 const InstructorIndex = () => {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([])
 
   useEffect(() => {
-    loadCourses();
-  }, []);
+    loadCourses()
+  }, [])
 
   const loadCourses = async () => {
-    const { data } = await axios.get('/api/instructor-courses');
-    setCourses(data);
-  };
+    const { data } = await axios.get('/api/instructor-courses')
+    setCourses(data)
+  }
 
   const handlePublish = async (e, courseId) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault()
+    e.stopPropagation()
     let answer = window.confirm(
       'Once you publish your course, it will be live in the marketplace for students to enroll. Are you sure you want to publish this course?'
-    );
-    if (!answer) return;
+    )
+    if (!answer) return
     try {
-      const { data } = await axios.put(`/api/course/publish/${courseId}`);
+      const { data } = await axios.put(`/api/course/publish/${courseId}`)
 
-      toast.success('Course Published');
-      loadCourses();
+      toast.success('Course Published')
+      loadCourses()
     } catch (err) {
-      toast.error(`Course Publish Failed, ${err.response.data}`);
+      toast.error(`Course Publish Failed, ${err.response.data}`)
     }
-  };
+  }
 
   const handleUnpublish = async (e, courseId) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault()
+    e.stopPropagation()
     let answer = window.confirm(
       'Once you unpublish your course, it will no longer be live in the marketplace for students to enroll. Are you sure you want to unpublish this course?'
-    );
-    if (!answer) return;
+    )
+    if (!answer) return
     try {
-      const { data } = await axios.put(`/api/course/unpublish/${courseId}`);
+      const { data } = await axios.put(`/api/course/unpublish/${courseId}`)
 
-      toast.success('Course Unpublished');
-      loadCourses();
+      toast.success('Course Unpublished')
+      loadCourses()
     } catch (err) {
-      toast.error('Course Unpublish Failed');
+      toast.error('Course Unpublish Failed')
     }
-  };
+  }
   return (
     <div>
       <div className='flex flex-col justify-center items-start bg-gray-700 text-white font-bold w-full py-[30px] md:py-[50px]'>
@@ -136,7 +136,7 @@ const InstructorIndex = () => {
           ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InstructorIndex;
+export default InstructorIndex
