@@ -178,6 +178,7 @@ const singleCourse = ({ params }) => {
 
   useEffect(() => {
     setIsReady(false)
+    console.log(video_player)
   }, [course, currentLesson])
 
   return (
