@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Overview = ({ course }) => {
@@ -26,7 +27,14 @@ const Overview = ({ course }) => {
             className='w-[50px] h-[50px] rounded-full'
           />
           <div className='flex flex-col'>
-            <h2 className='font-bold text-[18px] '>{course.instructor.name}</h2>
+            <Link
+              href={`/instructor-details/${course.instructor._id}`}
+              className='underline underline-offset-1 text-gray-800'
+            >
+              <h2 className='font-bold text-[18px] '>
+                {course.instructor.name}
+              </h2>
+            </Link>
             <p>Web Developer</p>
           </div>
         </div>

@@ -27,14 +27,6 @@ const HomeCourseCard = ({ course, i }) => {
         />
 
         <div className='p-3 flex-col asp-3'>
-          <div className='flex flex-wrap items-center gap-2'>
-            {category &&
-              category.map((c, index) => (
-                <span className='badgeuidesign' key={index}>
-                  {c.label}
-                </span>
-              ))}
-          </div>
           {/* <div className="flex items-center gap-2">
             {level && <span className="badgeuidesign">{level}</span>}
           </div>
@@ -55,6 +47,14 @@ const HomeCourseCard = ({ course, i }) => {
             <span className='flex font-sans text-[12px] text-slate-500 my-2 h-[55px]'>
               {description.substring(0, 100)}...
             </span>
+          </div>
+          <div className='flex flex-wrap items-center gap-x-2'>
+            {category &&
+              category.map((c, index) => (
+                <span className='badgeuidesign' key={index}>
+                  {c.label}
+                </span>
+              ))}
           </div>
           <div className='flex items-center gap-2 mb-2'>
             <RatingStars
