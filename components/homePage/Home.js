@@ -157,7 +157,7 @@ const HomePage = ({ params }) => {
           </h1>
 
           <div className='flex flex-col items-center justify-center  gap-5 p-10  lg:flex-row'>
-            <div className='w-72 h-72  rounded-lg bg-indigo-500 text-primary-content border border-slate-200 drop-shadow-;g'>
+            <div className='w-72 h-72  rounded-lg bg-indigo-500 text-primary-content border border-slate-200'>
               <div className='card-body'>
                 <div className='flex gap-4'>
                   <img src='./uiuxlogo.png' alt='uiuxlogo' />
@@ -174,7 +174,7 @@ const HomePage = ({ params }) => {
               </div>
             </div>
 
-            <div className='w-72 h-72 rounded-lg  bg-white text-black border border-slate-200  drop-shadow-lg'>
+            <div className='w-72 h-72 rounded-lg  bg-white text-black border border-slate-200'>
               <div className='card-body'>
                 <div className='flex gap-4'>
                   <img src='./3dlogo.png' alt='uiuxlogo' />
@@ -191,7 +191,7 @@ const HomePage = ({ params }) => {
               </div>
             </div>
 
-            <div className='w-72 h-72 rounded-lg bg-white text-black border border-slate-200 drop-shadow-lg'>
+            <div className='w-72 h-72 rounded-lg bg-white text-black border border-slate-200'>
               <div className='card-body'>
                 <div className='flex gap-4'>
                   <img src='./videoeditlogo.png' alt='videoedit' />
@@ -664,7 +664,7 @@ const HomePage = ({ params }) => {
       {/* Footer */}
       <footer className='footer p-10 bg-base-200 text-base-content'>
         <div>
-          <img src='/Proedu.png' className='w-[150px] mb-10' />
+          <img src='/xltra.png' className='w-[250px] mb-10' />
           <p>
             Top learning experiences that create more <br /> talent in the
             world.

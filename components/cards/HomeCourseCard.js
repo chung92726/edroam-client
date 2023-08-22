@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { currencyFormatter } from '@/utils/helpers';
+import RatingStars from '@/components/stars/RatingStars';
 
-const HomeCourseCard = ({ course }) => {
+const HomeCourseCard = ({ course, i }) => {
   const {
     name,
     instructor,
@@ -13,6 +14,8 @@ const HomeCourseCard = ({ course }) => {
     description,
     level,
     language,
+    averageRating,
+    numberOfReviews,
   } = course;
   return (
     <Link href={`/course/${slug}`}>
@@ -52,6 +55,13 @@ const HomeCourseCard = ({ course }) => {
             <span className='flex font-sans text-[12px] text-slate-500 my-2 h-[55px]'>
               {description.substring(0, 100)}...
             </span>
+          </div>
+          <div className='flex items-center gap-2 mb-2'>
+            <RatingStars
+              AverageRating={averageRating ? averageRating : 0}
+              index={i}
+            />
+            <span className='text-slate-400 text-sm'>({numberOfReviews})</span>
           </div>
           <div className='flex gap-2'>
             <span className='text-[14px] font-black'>

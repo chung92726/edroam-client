@@ -6,7 +6,7 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
     setDisplayedLessons(lessons.length);
   };
   return (
-    <div className='flex justify-center item-center'>
+    <div className='flex justify-center item-center pb-5'>
       <div className=' w-full lg:max-w-[1080px]'>
         <div className='flex flex-col justify-start mx-10 pt-6 pb-3'>
           <h4 className='text-[20px] font-bold mb-4'>Course content</h4>

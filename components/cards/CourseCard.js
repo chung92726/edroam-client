@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { currencyFormatter } from '@/utils/helpers'
-import RatingStars from '@/components/stars/RatingStars'
+import Link from 'next/link';
+import { currencyFormatter } from '@/utils/helpers';
+import RatingStars from '@/components/stars/RatingStars';
 
 const CourseCard = ({ course, i }) => {
   const {
@@ -16,25 +16,17 @@ const CourseCard = ({ course, i }) => {
     language,
     averageRating,
     numberOfReviews,
-  } = course
+  } = course;
   return (
     <Link href={`/course/${slug}`}>
-      <div className='card bg-gray-50 w-[90vw] sm:w-[45vw] xl:w-[30vw] 2xl:w-[440px] min-h-[566px]'>
+      <div className='card bg-gray-50 w-[90vw] sm:w-[45vw] xl:w-[30vw] 2xl:w-[440px] min-h-[580px]'>
         <img
           className='object-cover h-[50vw] sm:h-[25vw] xl:h-[17vw] 2xl:h-[250px]'
           src={image && image.Location ? image.Location : './figma.jpg'}
           alt='figma'
         />
 
-        <div className='p-3 flex flex-col asp-3 min-h-[307px] justify-between'>
-          <div className='flex flex-wrap items-center '>
-            {category &&
-              category.map((c, index) => (
-                <span className='badgeuidesign mr-2' key={index}>
-                  {c.label}
-                </span>
-              ))}
-          </div>
+        <div className='p-3 flex flex-col asp-3 min-h-[337px] justify-between'>
           {/* <div className="flex items-center gap-2">
             {level && <span className="badgeuidesign">{level}</span>}
           </div>
@@ -52,9 +44,17 @@ const CourseCard = ({ course, i }) => {
           </div>
 
           <div>
-            <span className='flex font-sans text-[12px] text-slate-500 my-2 h-[55px]'>
-              {description.substring(0, 120)}...
+            <span className='flex font-sans text-[12px] text-slate-500 mt-2 h-[55px]'>
+              {description.substring(0, 200)}...
             </span>
+          </div>
+          <div className='flex flex-wrap items-center '>
+            {category &&
+              category.map((c, index) => (
+                <span className='badgeuidesign mr-2' key={index}>
+                  {c.label}
+                </span>
+              ))}
           </div>
           <div className='flex items-center gap-2 mb-2'>
             <RatingStars
@@ -118,7 +118,7 @@ const CourseCard = ({ course, i }) => {
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default CourseCard
+export default CourseCard;
