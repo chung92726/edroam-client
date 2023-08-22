@@ -58,7 +58,7 @@ const TopNav = () => {
             className='btn btn-ghost normal-case text-xl'
             onClick={() => setCurrentPage('home')}
           >
-            <img src='/Proedu.png' className='w-[100px]' />
+            <img src='/xltra.png' className='w-[130px]' />
           </Link>
           {user && user.role ? (
             user.role.includes('Instructor') ||
@@ -94,7 +94,7 @@ const TopNav = () => {
           <div className='dropdown dropdown-end'>
             <label
               tabIndex={0}
-              className='btn btn-ghost rounded-btn px-0 max-md:!pl-4'
+              className='btn btn-ghost rounded-btn md:px-3 max-md:!pl-4'
             >
               <div className='flex flex-row items-center text-[12px]'>
                 <BsShop className='inline-block mx-[0.5px]' />
@@ -228,7 +228,10 @@ const TopNav = () => {
           </div> */}
           {user ? (
             <div className='dropdown dropdown-end m-2 font-sans'>
-              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+              <label
+                tabIndex={0}
+                className='btn btn-ghost btn-circle avatar mr-2'
+              >
                 <div className='w-8 mr-2 rounded-full'>
                   <img
                     src={
