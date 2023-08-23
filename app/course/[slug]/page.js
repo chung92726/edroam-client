@@ -1,5 +1,7 @@
 'use client';
-import { useState, useEffect, useContext, Suspense } from 'react';
+
+import { gsap } from 'gsap';
+import { useState, useEffect, useContext, Suspense, useRef } from 'react';
 import axios from 'axios';
 import { currencyFormatter } from '@/utils/helpers';
 import ReactPlayer from 'react-player';
@@ -11,8 +13,143 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { loadStripe } from '@stripe/stripe-js';
 import SingleCourseSkeleton from './loading.js';
+import RatingStars from '@/components/stars/RatingStars.js';
+import SingleCourseReviews from '@/components/cards/SingleCourseReviews.js';
+import Link from 'next/link';
 
-const SingleCourse = ({ params }) => {
+const StickyBar = ({
+  course,
+  loading,
+  user,
+  enroll,
+  goToCourse,
+  handlePaidEnrollment,
+  handleFreeEnrollment,
+  handleCheckLogin,
+}) => {
+  return (
+    <div
+      style={{
+        position: 'sticky',
+        zIndex: 1000,
+      }}
+      className='top-0 flex justify-center md:justify-between max-md:flex-col items-center py-3 px-4 md:px-10 bg-gray-700 shadow-md w-full z-40'
+    >
+      <div className=' max-md:mb-3'>
+        <div className='font-bold text-left text-base text-white lg:text-2xl'>
+          {course.name}
+        </div>
+        <div className='flex items-center max-md:mb-2'>
+          <span className='hidden md:block text-md font-bold text-indigo-400'>
+            {course.averageRating}
+          </span>{' '}
+          <span className='hidden md:block text-white'>&bull; </span>{' '}
+          <span className='hidden md:block text-md font-bold text-indigo-400'>
+            {course.numberOfReviews} reviews
+          </span>
+          <span className='text-[10px] lg:text-[14px] ml-2 text-white'>
+            Level: {course && course.level && course.level}
+          </span>
+          <span className='text-[10px] lg:text-[14px] ml-2 text-white'>
+            Language: {course && course.language && course.language}
+          </span>
+          <div className='block md:hidden text-[12px] lg:text-[16px] font-black text-white mx-4 '>
+            {course.paid
+              ? currencyFormatter({
+                  amount: course.price,
+                  currency: 'usd',
+                })
+              : 'Free'}
+          </div>
+          <span className='block md:hidden text-slate-400 line-through text-[10px] lg:text-[12px]'>
+            {course.paid
+              ? currencyFormatter({
+                  amount: course.price + 10,
+                  currency: 'usd',
+                })
+              : ''}
+          </span>
+        </div>
+      </div>
+      <div className=' flex flex-row justify-end items-center max-md:w-full'>
+        <div className='hidden md:block text-[12px] lg:text-[16px] font-black text-white md:mr-4 '>
+          {course.paid
+            ? currencyFormatter({
+                amount: course.price,
+                currency: 'usd',
+              })
+            : 'Free'}
+        </div>
+        <span className='hidden md:block text-slate-400 line-through text-[10px] lg:text-[12px]'>
+          {course.paid
+            ? currencyFormatter({
+                amount: course.price + 10,
+                currency: 'usd',
+              })
+            : ''}
+        </span>
+        <button
+          className='btn btn-primary hidden md:block ml-0 md:ml-8'
+          disabled={loading}
+          onClick={
+            user
+              ? enroll.status
+                ? goToCourse
+                : course.paid
+                ? handlePaidEnrollment
+                : handleFreeEnrollment
+              : handleCheckLogin
+          }
+        >
+          {loading ? (
+            <div>
+              <span className='loading loading-spinner'></span>
+              Loading...
+            </div>
+          ) : user ? (
+            enroll.status ? (
+              'Start Learning'
+            ) : (
+              'Enroll To This Course'
+            )
+          ) : (
+            'Login To Enroll'
+          )}
+        </button>
+        <button
+          className='btn btn-primary block md:hidden !py-0 w-full !px-4 !min-h-[2rem] !h-[2rem]'
+          disabled={loading}
+          onClick={
+            user
+              ? enroll.status
+                ? goToCourse
+                : course.paid
+                ? handlePaidEnrollment
+                : handleFreeEnrollment
+              : handleCheckLogin
+          }
+        >
+          {loading ? (
+            <div>
+              <span className='loading loading-spinner'></span>
+              Loading...
+            </div>
+          ) : user ? (
+            enroll.status ? (
+              'Start Learning'
+            ) : (
+              'Enroll To This Course'
+            )
+          ) : (
+            'Login To Enroll'
+          )}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
   const [course, setCourse] = useState({});
   const [videoPlay, setVideoPlay] = useState(false);
   const [preview, setPreview] = useState('');
@@ -23,6 +160,82 @@ const SingleCourse = ({ params }) => {
     state: { user },
   } = useContext(Context);
   const router = useRouter();
+  const stickyBarRef = useRef(null);
+  const enrollButtonRef = useRef(null);
+  const enrollButtonMdRef = useRef(null);
+
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      const largerScreenButtonVisible =
+        enrollButtonRef.current &&
+        enrollButtonRef.current.getBoundingClientRect().bottom > 0;
+      const smallerScreenButtonVisible =
+        enrollButtonMdRef.current &&
+        enrollButtonMdRef.current.getBoundingClientRect().bottom > 0;
+
+      if (!largerScreenButtonVisible && !smallerScreenButtonVisible) {
+        if (stickyBarRef.current.style.opacity !== '1') {
+          gsap.fromTo(
+            stickyBarRef.current,
+            { opacity: 0, y: -100 },
+            { opacity: 1, y: 0, duration: 0.2 }
+          );
+        }
+      } else {
+        // If the button is visible
+        if (stickyBarRef.current.style.opacity !== '0') {
+          gsap.to(stickyBarRef.current, {
+            opacity: 0,
+            y: -100,
+            duration: 0.5,
+          });
+        }
+      }
+    };
+
+    window.addEventListener('scroll', checkScrollPosition);
+
+    return () => {
+      window.removeEventListener('scroll', checkScrollPosition);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   const checkScrollPosition = () => {
+  //     if (enrollButtonRef.current) {
+  //       const buttonBottomPosition =
+  //         enrollButtonRef.current.getBoundingClientRect().bottom;
+  //       const viewportHeight = window.innerHeight;
+
+  //       if (buttonBottomPosition < 0) {
+  //         // If the button is not visible (i.e., scrolled above the top of the viewport)
+  //         if (stickyBarRef.current.style.opacity !== '1') {
+  //           gsap.fromTo(
+  //             stickyBarRef.current,
+  //             { opacity: 0, y: -100 },
+  //             { opacity: 1, y: 0, duration: 0.2 }
+  //           );
+  //         }
+  //       } else {
+  //         // If the button is visible
+  //         if (stickyBarRef.current.style.opacity !== '0') {
+  //           gsap.to(stickyBarRef.current, {
+  //             opacity: 0,
+  //             y: -100,
+  //             duration: 0.5,
+  //           });
+  //         }
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener('scroll', checkScrollPosition);
+
+  //   return () => {
+  //     window.removeEventListener('scroll', checkScrollPosition);
+  //   };
+  // }, []);
+
   const handlePreview = async (preview) => {
     console.log(preview);
     const { data } = await axios.post(`/api/course/get-signedurl`, {
@@ -33,13 +246,16 @@ const SingleCourse = ({ params }) => {
     setPreview(data);
     setVideoPlay(true);
   };
+
   const fetchCourse = async () => {
     const { data } = await axios.get(`/api/course/${params.slug}`);
     setCourse(data);
   };
+
   useEffect(() => {
     fetchCourse();
   }, []);
+
   useEffect(() => {
     const checkEnrollment = async () => {
       if (course._id) {
@@ -132,9 +348,9 @@ const SingleCourse = ({ params }) => {
           <button>close</button>
         </form>
       </dialog>
-      <div className='text-center bg-gray-700 text-white w-full pb-[20px] md:pt-[50px] flex flex-col justify-center text-[28px] items-center font-bold '>
+      <div className='text-center bg-gray-700 text-white w-full lg:pb-[100px] pb-[40px] md:pt-[50px] flex flex-col justify-center text-[28px] items-center font-bold '>
         <div className='flex flex-col-reverse justify-between items-center gap-4  md:flex-row md:items-start md:w-[90vw] lg:max-w-[1080px] lg:max-h-[363px]'>
-          <div className='flex flex-col justify-center items-start gap-4 w-[90vw] md:w-[45vw] '>
+          <div className='flex flex-col justify-center items-start gap-3 w-[90vw] md:w-[45vw] '>
             <h1 className='font-bold text-left text-2xl lg:text-3xl'>
               {course.name}
             </h1>
@@ -144,15 +360,45 @@ const SingleCourse = ({ params }) => {
                 course.description.substring(0, 300)}
               ...
             </p>
-            <div className='flex items-center gap-2 max-lg:flex-wrap'>
+            <div className='flex flex-wrap items-center gap-x-2'>
               {course.category &&
                 course.category
                   // .split(' ')
-                  .map((c) => <span className='badgeuidesign'>{c.label}</span>)}
+                  .map((c) => (
+                    <Link href={`/marketplace/${c.value}`}>
+                      <span className='badgeuidesign'>{c.label}</span>
+                    </Link>
+                  ))}
+            </div>
+            <div className='flex items-center gap-2'>
+              <h1 className='text-[20px] font-bold text-indigo-400'>
+                {course.averageRating}
+              </h1>
+              <RatingStars
+                AverageRating={course.averageRating ? course.averageRating : 0}
+                index={i}
+              />
+              <span className='text-slate-400 text-sm'>
+                ({course.numberOfReviews} reviews)
+              </span>
             </div>
             <p className='text-[10px] lg:text-[14px]'>
-              Created By {course && course.instructor && course.instructor.name}
+              Created By{' '}
+              <Link
+                href={`/instructor-details/${course.instructor._id}`}
+                className='underline underline-offset-1 text-gray-300 hover:text-white'
+              >
+                {course && course.instructor && course.instructor.name}
+              </Link>
             </p>
+            <div className='flex flex-row items-center gap-x-10'>
+              <p className='text-[10px] lg:text-[14px]'>
+                Level: {course && course.level && course.level}
+              </p>
+              <p className='text-[10px] lg:text-[14px]'>
+                Language: {course && course.language && course.language}
+              </p>
+            </div>
             <p className='text-[10px] lg:text-[14px]'>
               Last Updated{' '}
               {course &&
@@ -160,7 +406,7 @@ const SingleCourse = ({ params }) => {
                 new Date(course.updatedAt).toLocaleDateString()}
             </p>
             <div className='flex gap-2'>
-              <span className='text-[10px] lg:text-[14px]font-black'>
+              <span className='text-[12px] lg:text-[16px] font-black'>
                 {course.paid
                   ? currencyFormatter({
                       amount: course.price,
@@ -168,7 +414,7 @@ const SingleCourse = ({ params }) => {
                     })
                   : 'Free'}
               </span>
-              <span className='text-slate-400 line-through text-[10px] lg:text-[14px]'>
+              <span className='text-slate-400 line-through text-[10px] lg:text-[12px]'>
                 {course.paid
                   ? currencyFormatter({
                       amount: course.price + 10,
@@ -189,6 +435,7 @@ const SingleCourse = ({ params }) => {
                     : handleFreeEnrollment
                   : handleCheckLogin
               }
+              ref={enrollButtonMdRef}
             >
               {loading ? (
                 <div>
@@ -206,6 +453,7 @@ const SingleCourse = ({ params }) => {
               )}
             </button>
           </div>
+
           <div className='flex flex-col justify-center items-center w-[100vw] md:w-[45vw] '>
             {course &&
             course.lessons &&
@@ -242,7 +490,7 @@ const SingleCourse = ({ params }) => {
               </div>
             )}
             <button
-              className='btn btn-primary w-full mt-[15px] hidden md:block'
+              className='btn btn-primary w-full mt-[30px] hidden md:block'
               disabled={loading}
               onClick={
                 user
@@ -253,6 +501,7 @@ const SingleCourse = ({ params }) => {
                     : handleFreeEnrollment
                   : handleCheckLogin
               }
+              ref={enrollButtonRef}
             >
               {loading ? (
                 <div>
@@ -272,6 +521,23 @@ const SingleCourse = ({ params }) => {
           </div>
         </div>
       </div>
+      <div style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
+        <div
+          ref={stickyBarRef}
+          style={{ opacity: 0, transform: 'translateY(-100px)' }}
+        >
+          <StickyBar
+            course={course}
+            loading={loading}
+            user={user}
+            enroll={enroll}
+            goToCourse={goToCourse}
+            handlePaidEnrollment={handlePaidEnrollment}
+            handleFreeEnrollment={handleFreeEnrollment}
+            handleCheckLogin={handleCheckLogin}
+          />
+        </div>
+      </div>
       {course && course.lessons && (
         <SingleCourseLessons
           lessons={course.lessons}
@@ -282,6 +548,7 @@ const SingleCourse = ({ params }) => {
       {course && course.detailDescription && (
         <CourseDescription detailDescription={course.detailDescription} />
       )}
+      {course && <SingleCourseReviews course={course} />}
     </div>
   );
 };
