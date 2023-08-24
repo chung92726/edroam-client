@@ -48,10 +48,11 @@ const StickyBar = ({
             {course.numberOfReviews} reviews
           </span>
           <span className='text-[10px] lg:text-[14px] ml-2 text-white'>
-            Level: {course && course.level && course.level}
+            Level: <strong>{course && course.level && course.level}</strong>
           </span>
           <span className='text-[10px] lg:text-[14px] ml-2 text-white'>
-            Language: {course && course.language && course.language}
+            Language:{' '}
+            <strong>{course && course.language && course.language}</strong>
           </span>
           <div className='block md:hidden text-[12px] lg:text-[16px] font-black text-white mx-4 '>
             {course.paid
@@ -178,7 +179,7 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
           gsap.fromTo(
             stickyBarRef.current,
             { opacity: 0, y: -100 },
-            { opacity: 1, y: 0, duration: 0.2 }
+            { opacity: 1, y: 0, duration: 0 }
           );
         }
       } else {
@@ -187,7 +188,7 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
           gsap.to(stickyBarRef.current, {
             opacity: 0,
             y: -100,
-            duration: 0.5,
+            duration: 0,
           });
         }
       }
