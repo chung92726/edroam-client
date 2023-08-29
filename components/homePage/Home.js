@@ -3,10 +3,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-
 import HomeCourseCard from '../cards/HomeCourseCard';
+import { getDictionary } from '@/lib/dictionary';
 
-const HomePage = ({ params }) => {
+const HomePage = ({ params, home }) => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -150,10 +150,10 @@ const HomePage = ({ params }) => {
         {/* Our Services Section */}
         <div className='py-10 w-ful'>
           <p className='font-sans text-s font-bold text-indigo-500 text-center my-2 '>
-            Course Categories
+            {home.Course_Categories}
           </p>
           <h1 className='font-sans text-4xl font-bold text-center '>
-            Fostering a playful & engaging learning environment
+            {home.Course_Categories_sub}
           </h1>
 
           <div className='flex flex-col items-center justify-center  gap-5 p-10  lg:flex-row'>

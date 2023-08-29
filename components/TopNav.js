@@ -14,6 +14,7 @@ import { BsBook, BsShop } from 'react-icons/bs';
 import { IoCreate } from 'react-icons/io5';
 import axios from 'axios';
 import MyLearningMenu from './MyLearningMenu';
+// import Link from 'next-intl/link';
 
 const TopNav = () => {
   const [currentPage, setCurrentPage] = useState('');
@@ -106,7 +107,9 @@ const TopNav = () => {
               className='menu dropdown-content p-2 shadow bg-base-200 rounded-box w-64 mt-4'
             >
               <li>
-                <Link href='/marketplace'>All Courses</Link>
+                <Link href='/marketplace' locale='en'>
+                  All Courses
+                </Link>
               </li>
               <li>
                 <Link href='/marketplace/WebDesign'>WebDesign</Link>
