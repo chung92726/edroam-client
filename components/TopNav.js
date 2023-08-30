@@ -265,23 +265,6 @@ const TopNav = ({ dict, lang }) => {
           </label>
         </div>
 
-        {user ? (
-          <div className='flex justify-center items-center'>
-            <div className='hidden md:flex dropdown dropdown-end'>
-              <label
-                tabIndex={0}
-                className='btn btn-ghost rounded-btn max-sm:!pr-0'
-              >
-                <div className='flex flex-row items-center text-[12px] gap-2 mr-2'>
-                  <BsBook className='inline-block mx-[0.5px]' />
-                  <p>My Learning</p>
-                </div>
-              </label>
-              <MyLearningMenu tabIndex={0} />
-            </div>
-          </div>
-        ) : null}
-
         <div className='dropdown dropdown-hover'>
           <ReactCountryFlag
             countryCode={languages[lang]}
@@ -321,103 +304,120 @@ const TopNav = ({ dict, lang }) => {
           </ul>
         </div>
 
-        <div className='lg:hidden flex flex-row gap-2 pr-5 max-lg:pr-0'>
-          {/* <div className='form-control'>
+        {user ? (
+          <div className='flex justify-center items-center'>
+            <div className='hidden lg:flex dropdown dropdown-end'>
+              <label
+                tabIndex={0}
+                className='btn btn-ghost rounded-btn max-sm:!pr-0'
+              >
+                <div className='flex flex-row items-center text-[12px] gap-2 mr-2'>
+                  <BsBook className='inline-block mx-[0.5px]' />
+                  <p>My Learning</p>
+                </div>
+              </label>
+              <MyLearningMenu tabIndex={0} />
+            </div>
+          </div>
+        ) : null}
+
+        {/* <div className='lg:hidden flex flex-row gap-2 pr-5 max-lg:pr-0'> */}
+        {/* <div className='form-control'>
           <input
             type='text'
             placeholder='Search'
             className='input input-bordered w-24 md:w-auto'
           />
           </div> */}
-          {user ? (
-            <div className='dropdown dropdown-end m-2 font-sans'>
-              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
-                <div className='w-8 rounded-full'>
-                  <img
-                    src={
-                      user?.picture?.Location !== undefined
-                        ? user.picture.Location
-                        : '/guest.png'
-                    }
-                  />
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-44'
-              >
+        {user ? (
+          <div className='dropdown dropdown-end m-2 font-sans'>
+            <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+              <div className='w-8 rounded-full'>
+                <img
+                  src={
+                    user?.picture?.Location !== undefined
+                      ? user.picture.Location
+                      : '/guest.png'
+                  }
+                />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-44'
+            >
+              <li>
+                <Link href='/user/profile'>Profile</Link>
+              </li>
+              {user &&
+              user.role &&
+              (user.role.includes('Instructor') ||
+                user.role.includes('Pending')) ? (
                 <li>
-                  <Link href='/user/profile'>Profile</Link>
+                  <Link href='/instructor'>Instructor Dashboard</Link>
+                  <Link href='/instructor/course/create'>Create Course</Link>
                 </li>
-                {user &&
-                user.role &&
-                (user.role.includes('Instructor') ||
-                  user.role.includes('Pending')) ? (
-                  <li>
-                    <Link href='/instructor'>Instructor Dashboard</Link>
-                    <Link href='/instructor/course/create'>Create Course</Link>
-                  </li>
-                ) : (
-                  <li>
-                    <Link
-                      href='/user/become-instructor'
-                      onClick={() => setCurrentPage('login')}
-                    >
-                      Become Instructor
-                    </Link>
-                  </li>
-                )}
-                <li>
-                  <Link href='/user'>My Learning</Link>
-                </li>
-                {/* <li>
-                  <a>Settings</a>
-                </li> */}
-                <li>
-                  <a onClick={logout}>Logout</a>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <div className='dropdown dropdown-end m-2 font-sans'>
-              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
-                <div className='w-8 rounded-full'>
-                  <img src={'/guest.png'} />
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52 z-40'
-              >
+              ) : (
                 <li>
                   <Link
-                    href='/login'
-                    className='mx-2 my-1 cursor-pointer border-transparent'
+                    href='/user/become-instructor'
                     onClick={() => setCurrentPage('login')}
                   >
-                    <div className='flex flex-row items-center'>
-                      <AiOutlineLogin className='inline-block mx-[0.5px]' />
-                      <p className='mx-1'>Login</p>
-                    </div>
+                    Become Instructor
                   </Link>
                 </li>
+              )}
+              <li>
+                <Link href='/user'>My Learning</Link>
+              </li>
+              {/* <li>
+                  <a>Settings</a>
+                </li> */}
+              <li>
+                <a onClick={logout}>Logout</a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div className='dropdown dropdown-end m-2 font-sans'>
+            <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+              <div className='w-8 rounded-full'>
+                <img src={'/guest.png'} />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52 z-40'
+            >
+              <li>
+                <Link
+                  href='/login'
+                  className='mx-2 my-1 cursor-pointer border-transparent'
+                  onClick={() => setCurrentPage('login')}
+                >
+                  <div className='flex flex-row items-center'>
+                    <AiOutlineLogin className='inline-block mx-[0.5px]' />
+                    <p className='mx-1'>Login</p>
+                  </div>
+                </Link>
+              </li>
 
-                <li>
-                  <Link
-                    href='/register'
-                    className='mx-2 my-1 cursor-pointer border-transparent'
-                    onClick={() => setCurrentPage('register')}
-                  >
-                    <div className='flex flex-row items-center'>
-                      <RiRegisteredLine className='inline-block mx-[0.5px]' />
-                      <p className='mx-1'>Sign up</p>
-                    </div>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
+              <li>
+                <Link
+                  href='/register'
+                  className='mx-2 my-1 cursor-pointer border-transparent'
+                  onClick={() => setCurrentPage('register')}
+                >
+                  <div className='flex flex-row items-center'>
+                    <RiRegisteredLine className='inline-block mx-[0.5px]' />
+                    <p className='mx-1'>Sign up</p>
+                  </div>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+        {/* </div> */}
       </div>
       <div className='text-center bg-gradient-to-r from-sky-500 to-indigo-500 text-yellow-100 w-full rounded h-[4px] flex flex-col justify-center text-[28px] items-start font-bold '></div>
     </div>
