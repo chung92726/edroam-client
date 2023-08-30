@@ -113,7 +113,7 @@ const CourseCard = ({ course, i }) => {
             Last Updated{' '}
             {course &&
               course.updatedAt &&
-              new Date(course.updatedAt).toLocaleDateString()}
+              new Date(course.updatedAt).toLocaleDateString('en-GB')}
           </p>
         </div>
       </div>
