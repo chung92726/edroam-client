@@ -32,10 +32,10 @@ const GoogleCallback = ({ query }) => {
           // Redirect to the user page
           router.push('/user')
         } catch (err) {
-          toast.error('Failed to log in with Facebook')
+          toast.error('Failed to log in with Google')
         }
       } else {
-        toast.error('Failed to log in with Facebook')
+        toast.error('User not found Failed to log in with Google')
       }
     }
 

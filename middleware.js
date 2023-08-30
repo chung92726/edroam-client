@@ -86,9 +86,9 @@ export function middleware(request) {
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request)
     console.log('is missing')
-
+    const existingSearchParams = request.nextUrl.search
     const response = NextResponse.redirect(
-      new URL(`/${locale}/${pathname}`, request.url)
+      new URL(`/${locale}/${pathname}${existingSearchParams}`, request.url)
     )
 
     // Set cookie for subsequent requests

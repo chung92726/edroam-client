@@ -15,6 +15,7 @@ import { IoCreate } from 'react-icons/io5'
 import axios from 'axios'
 import MyLearningMenu from './MyLearningMenu'
 import ReactCountryFlag from 'react-country-flag'
+import { useSearchParams } from 'next/navigation'
 
 // import Link from 'next-intl/link';
 
@@ -27,6 +28,7 @@ const languages_array = ['en', 'zh', 'cn']
 const TopNav = ({ dict, lang }) => {
   const [currentPage, setCurrentPage] = useState('')
   const path = usePathname()
+  const searchParams = useSearchParams()
 
   //global state
   const { state, dispatch } = useContext(Context)
@@ -70,9 +72,21 @@ const TopNav = ({ dict, lang }) => {
     }
 
     // Construct the new URL with the selected language
-    const newPath = `/${language}/${segments.join('/')}`
+    let newPath = `/${language}/${segments.join('/')}`
+
+    // Build the query string from searchParams
+    const keys = Array.from(searchParams.keys())
+    if (keys.length > 0) {
+      const queryArray = keys.map((key) => {
+        const value = searchParams.get(key)
+        return `${key}=${value}`
+      })
+      newPath += '?' + queryArray.join('&')
+    }
+
     router.push(newPath)
   }
+
   return (
     <div className='flex flex-col w-full fixed z-50'>
       <div className='navbar bg-base-100 h-[70px]'>

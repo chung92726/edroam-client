@@ -5,7 +5,7 @@ module.exports = {
     const apiRewrites = [
       {
         source: '/api/:path*',
-        destination: 'http://192.168.0.147:8000/api/:path*', // Proxy to Backend
+        destination: 'http://localhost:8000/api/:path*', // Proxy to Backend
       },
     ]
     return [...apiRewrites]
