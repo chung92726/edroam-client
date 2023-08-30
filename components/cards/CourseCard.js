@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { currencyFormatter } from '@/utils/helpers';
-import RatingStars from '@/components/stars/RatingStars';
+import Link from 'next/link'
+import { currencyFormatter } from '@/utils/helpers'
+import RatingStars from '@/components/stars/RatingStars'
 
 const CourseCard = ({ course, i }) => {
   const {
@@ -16,13 +16,13 @@ const CourseCard = ({ course, i }) => {
     language,
     averageRating,
     numberOfReviews,
-  } = course;
+  } = course
   return (
     <Link href={`/course/${slug}`}>
       <div className='card bg-gray-50 w-[90vw] sm:w-[45vw] xl:w-[30vw] 2xl:w-[440px] min-h-[580px]'>
         <img
           className='object-cover h-[50vw] sm:h-[25vw] xl:h-[17vw] 2xl:h-[250px]'
-          src={image && image.Location ? image.Location : './figma.jpg'}
+          src={image && image.Location ? image.Location : '../figma.jpg'}
           alt='figma'
         />
 
@@ -118,7 +118,7 @@ const CourseCard = ({ course, i }) => {
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}
 
-export default CourseCard;
+export default CourseCard
