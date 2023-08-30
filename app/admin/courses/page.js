@@ -158,7 +158,7 @@ const AllCourse = () => {
       <Table
         columns={columns}
         dataSource={courses}
-        className='mt-8'
+        className='mt-8 custom-ant-none'
         pagination={{
           pageSize: 20,
         }}
