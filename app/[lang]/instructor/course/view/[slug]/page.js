@@ -38,16 +38,17 @@ const CourseView = ({ params }) => {
   })
 
   const handleAddLesson = async (e) => {
-    e.preventDefault()
+    // e.preventDefault()
+
     try {
       const { data } = await axios.post(
         `/api/course/lesson/${slug}/${course.instructor._id}`,
         values
       )
       setValues({
-        ...values,
+        // ...values,
         title: '',
-        content: '',
+        content: '<p><br></p>',
         video: {},
         uploading: false,
         free_preview: false,
@@ -68,7 +69,7 @@ const CourseView = ({ params }) => {
     try {
       const { data } = await axios.get(`/api/course/${slug}`)
       setCourse(data)
-      console.log(data.lessons.length)
+      // console.log(data.lessons.length)
     } catch (err) {
       console.log(err)
     }
@@ -214,8 +215,26 @@ const CourseView = ({ params }) => {
     setStudentCount(data.length)
   }
 
+  //total Revenue
+  const [totalRevenue, setTotalRevenue] = useState(0)
+
+  const getTotalRevanue = async () => {
+    const { data } = await axios.get(`/api/instructor/revenue/${course._id}`)
+    setTotalRevenue(data.totalRevenue)
+  }
+
   useEffect(() => {
     course && getStudentCount()
+    course && getTotalRevanue()
+    // console.log(totalRevenue)
+  }, [course])
+
+  // useEffect(() => {
+  //   console.log(values)
+  // }, [values])
+
+  useEffect(() => {
+    console.log(course)
   }, [course])
 
   return (
@@ -283,6 +302,13 @@ const CourseView = ({ params }) => {
                   <AiFillEdit size={25} className='mx-4' />
                 </div>
               </div>
+              {course?.mainPreview?.video?.Key ? (
+                <></>
+              ) : (
+                <div className='badge badge-error'>
+                  Must have 1 free video lesson for Main Preview to publish
+                </div>
+              )}
               <div className='stats shadow my-5 text-blue-500 max-md:flex max-md:flex-col max-md:divide-y max-md:divide-blue-100 max-md:divide-x-0'>
                 <div className='stat place-items-center '>
                   <div className='stat-title'>Enrolled</div>
@@ -294,12 +320,13 @@ const CourseView = ({ params }) => {
 
                 <div className='stat place-items-center'>
                   <div className='stat-title'>Total Revenue</div>
-                  <div className='stat-value '>4,200</div>
+                  <div className='stat-value '>{totalRevenue}</div>
                   {/* <div className='stat-desc '>↗︎ 40 (2%)</div> */}
                 </div>
               </div>
+              {/* <h1 className='card-title mt-2'>Course Name:</h1> */}
               <h1 className='card-title mt-2'>{course.name}</h1>
-
+              {/* <h1 className='card-title mt-2'>Course Short Description:</h1> */}
               <div className='py-6'>{course.description}</div>
               <div className='flex flex-col md:flex-row justify-start md:items-end h-full'>
                 <div className='justify-start card-actions mx-2'>
@@ -321,7 +348,11 @@ const CourseView = ({ params }) => {
                   ) : (
                     <button
                       className='btn btn-accent max-md:w-full'
-                      disabled={course.lessons.length < 5 ? true : false}
+                      disabled={
+                        course.lessons.length < 5 && !course?.mainPreview?.video
+                          ? true
+                          : false
+                      }
                       onClick={(e) => handlePublish(e, course._id)}
                     >
                       Publish Course
@@ -336,7 +367,7 @@ const CourseView = ({ params }) => {
             <div className='flex justify-between items-center'>
               <h1 className='text-2xl font-bold'>{`${course.lessons.length} Lessons in this Course`}</h1>
               <div
-                className='tooltip cursor-pointer'
+                className='tooltip tooltip-left cursor-pointer'
                 data-tip='Edit Lessons Details'
                 onClick={() =>
                   router.push(`/instructor/course/edit/lesson/${slug}`)
@@ -359,16 +390,21 @@ const CourseView = ({ params }) => {
                           <span className='text-[14px]'>{index + 1}</span>
                         </div>
                       </div>
-                      <div className='mx-2 md:mx-8 text-[14px] md:text-[16px] max-md:break-words max-md:overflow-x-hidden '>
+                      <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
                         {lesson.title}
-                      </div>
+                      </p>
                     </div>
-                    {lesson.free_preview ? (
-                      <div className='badge badge-info gap-2 min-w-[101px] mr-2  max-sm:ml-10 max-sm:mt-2'>
+                    {course?.mainPreview?.video?.Key !== undefined &&
+                    course?.mainPreview?.video?.Key === lesson?.video?.Key ? (
+                      <div className='badge badge-error gap-2 min-w-[110px] mr-2  max-sm:ml-10 max-sm:mt-2'>
+                        Main Preview
+                      </div>
+                    ) : lesson.free_preview ? (
+                      <div className='badge badge-info gap-2 min-w-[110px] mr-2  max-sm:ml-10 max-sm:mt-2'>
                         Free Lesson
                       </div>
                     ) : (
-                      <div className='badge badge-success gap-2 min-w-[101px] mr-2 max-sm:ml-10 max-sm:mt-2'>
+                      <div className='badge badge-success gap-2 min-w-[110px] mr-2 max-sm:ml-10 max-sm:mt-2'>
                         Paid Lesson
                       </div>
                     )}

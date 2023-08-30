@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import CourseCard from '@/components/cards/CourseCard'
+import { Pagination } from 'antd'
+import CourseCardSkeleton from '@/components/skeleton/CourseCardSkeleton'
 
 const marketplace = ({ params }) => {
   const [courses, setCourses] = useState([])
@@ -14,6 +16,11 @@ const marketplace = ({ params }) => {
   const [priceQuery, setPriceQuery] = useState(99.99)
   const [sortBy, setSortBy] = useState('')
   const [categoryQuery, setCategoryQuery] = useState('')
+  const [localSearchQuery, setLocalSearchQuery] = useState('')
+  const [localPriceQuery, setLocalPriceQuery] = useState(99.99)
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(10)
+  const [loading, setLoading] = useState(true)
 
   const router = useRouter()
 
@@ -26,104 +33,125 @@ const marketplace = ({ params }) => {
     'Others',
   ]
 
-  const sort = async (array, sortBy) => {
-    // console.log("sort");
-    switch (sortBy) {
-      case 'price':
-        return [...array].sort((a, b) => a.price - b.price)
-      case 'created':
-        return [...array].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      case 'updated':
-        return [...array].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
-      default:
-        return array
-    }
-  }
-
-  const search = async (array, keyword) => {
-    // console.log(keyword);
-    return array.filter(
-      (el) =>
-        el.name.toLowerCase().includes(keyword.toLowerCase()) ||
-        el.category
-          // .split(" ")
-          .filter((el) =>
-            el.value.toLowerCase().includes(keyword.toLowerCase())
-          )
-          .some((el) => el.value.toLowerCase().includes(keyword.toLowerCase()))
-    )
-  }
-
-  const levelFilter = async (array, keyword) => {
-    // console.log(array);
-    // console.log(keyword);
-    return array.filter((el) =>
-      el.level.toLowerCase().includes(keyword.toLowerCase())
-    )
-  }
-
-  const langFilter = async (array, keyword) => {
-    // console.log(array);
-    // console.log(keyword);
-    return array.filter((el) =>
-      el.language.toLowerCase().includes(keyword.toLowerCase())
-    )
-  }
-
-  const priceFilter = async (array, price) => {
-    // console.log(price);
-    return array.filter((el) => el.price <= price)
-  }
-
   const handleCategory = async (event) => {
-    // console.log(event.target.value.toLowerCase());
-    // setFilterQuery(event.target.value.toLowerCase());
     router.push(`/marketplace/${event.target.value}`)
+    setCategoryQuery(event.target.value)
   }
 
-  useEffect(() => {
-    const handlefilter = async () => {
-      let tmp = await search(courses, serchQuery)
-      tmp = await levelFilter(tmp, levelQuery)
-      tmp = await langFilter(tmp, langQuery)
-      tmp = await priceFilter(tmp, priceQuery)
-      tmp = await sort(tmp, sortBy)
-      setFiltered(tmp)
-    }
-    handlefilter()
-  }, [serchQuery, levelQuery, langQuery, priceQuery, sortBy])
+  const handleSearch = async () => {
+    router.push(`/marketplace/search/${localSearchQuery}`)
+  }
+
+  const handlePriceQuery = async () => {
+    localPriceQuery > 0 ? setPriceQuery(localPriceQuery) : setPriceQuery(0)
+  }
 
   useEffect(() => {
     const fetchCourses = async () => {
-      const { data } = params.slug
-        ? await axios.get(`/api/courses/${params.slug}`)
-        : await axios.get(`/api/courses/`)
-      // console.log(data);
-      setCourses(data)
-      setFiltered(data)
-      setCategoryQuery(params.slug)
+      // console.log(params.slug)
+
+      let endpoint = '/api/courses/search' // Default endpoint
+      let searchValue = serchQuery
+      let categoryValue = categoryQuery
+
+      if (params.slug) {
+        if (params.slug[0] === 'search') {
+          setLocalSearchQuery(params.slug[1])
+          searchValue = params.slug[1]
+        } else {
+          setCategoryQuery(params.slug[0])
+          categoryValue = params.slug[0]
+        }
+      }
+
+      const queryParts = []
+
+      if (categoryValue) {
+        queryParts.push(`category=${categoryValue}`)
+      }
+      if (searchValue) {
+        queryParts.push(`search=${searchValue}`)
+      }
+
+      if (categoryQuery) {
+        queryParts.push(`category=${categoryQuery}`)
+      }
+      if (serchQuery) {
+        queryParts.push(`search=${serchQuery}`)
+      }
+      if (levelQuery) {
+        queryParts.push(`level=${levelQuery}`)
+      }
+      if (langQuery) {
+        queryParts.push(`language=${langQuery}`)
+      }
+      if (priceQuery >= 0) {
+        queryParts.push(`price=${priceQuery}`)
+      }
+      if (sortBy) {
+        queryParts.push(`sort=${sortBy}`)
+      }
+      if (page) {
+        queryParts.push(`page=${page}`)
+      }
+      if (limit) {
+        queryParts.push(`limit=${limit}`)
+      }
+
+      if (queryParts.length) {
+        endpoint += '?' + queryParts.join('&')
+      }
+
+      try {
+        console.log(endpoint)
+        setLoading(true)
+        const { data } = await axios.get(endpoint)
+        console.log(data)
+        setCourses(data)
+        setFiltered(data.courses)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
     }
+
     if (params.slug) {
-      if (!category.some((el) => params.slug.includes(el))) {
+      if (
+        (!category.some((el) => params.slug[0].includes(el)) &&
+          params.slug[0] !== 'search') ||
+        (params.slug[0] === 'search' && params.slug[1] === undefined)
+      ) {
         router.push(`/marketplace`)
       }
     }
     fetchCourses()
-  }, [])
+  }, [levelQuery, langQuery, priceQuery, sortBy, page, limit])
+
+  useEffect(() => {
+    console.log(filtered)
+  }, [filtered])
 
   return (
     <div className='flex flex-col justify-center items-center mt-10 w-full mb-10'>
       <div className='flex flex-wrap justify-center items-center'>
-        <input
+        {localSearchQuery && (
+          <div className='flex font-bold text-2xl mx-[1.5vw] my-2 w-[90vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'>
+            Result for "{localSearchQuery}"
+          </div>
+        )}
+        {/* <input
           className='input input-bordered mx-[1.5vw] my-2 w-[90vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
-              setSerchQuery(event.target.value.toLowerCase())
+              // setSerchQuery(event.target.value.toLowerCase())
+              handleSearch()
             }
           }}
           type='text'
           placeholder='Search...'
-        />
+          value={localSearchQuery}
+          onChange={(e) => setLocalSearchQuery(e.target.value)}
+        /> */}
         <select
           className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'
           onChange={handleCategory}
@@ -163,8 +191,8 @@ const marketplace = ({ params }) => {
         >
           <option value=''>Sort By</option>
           <option value='price'>By lowest price</option>
-          <option value='created'>By lastest created</option>
-          <option value='updated'>By lastest updated</option>
+          <option value='-created'>By lastest created</option>
+          <option value='-updated'>By lastest updated</option>
         </select>
         <div className='flex flex-row justify-center items-center mx-[1.5vw] my-2 h-[3rem] w-[86vw] sm:w-[59vw] 2xl:w-[20vw] 2xl:mx-[0.5vw]'>
           <h1 className='mx-[1vw] my-2 2xl:mx-[0.5vw]'>Price:</h1>
@@ -173,23 +201,50 @@ const marketplace = ({ params }) => {
             min={-0.01}
             max='99.99'
             step={1}
-            value={priceQuery}
+            value={localPriceQuery}
             className='range range-xs my-2'
             onChange={(e) =>
               e.target.value > 0
-                ? setPriceQuery(e.target.value)
-                : setPriceQuery(0)
+                ? setLocalPriceQuery(e.target.value)
+                : setLocalPriceQuery(0)
             }
+            onMouseUp={handlePriceQuery}
+            onTouchEnd={handlePriceQuery}
           />
-          <p className='mx-[1vw] my-2 w-[60px] 2xl:mx-[0.5vw]'>${priceQuery}</p>
+          <p className='mx-[1vw] my-2 w-[60px] 2xl:mx-[0.5vw]'>
+            ${localPriceQuery}
+          </p>
         </div>
       </div>
 
-      <div className='flex flex-row justify-center w-full mt-10 flex-wrap gap-10 sm:gap-5'>
-        {filtered.map((course, i) => (
-          <CourseCard key={course._id} course={course} index={i} />
-        ))}
-      </div>
+      {filtered && loading == false ? (
+        <>
+          <div className='flex flex-row justify-center w-full mt-10 flex-wrap gap-10 sm:gap-5'>
+            {filtered.map((course, i) => (
+              <CourseCard key={course._id} course={course} index={i} />
+            ))}
+          </div>
+          <div className='mt-5'>
+            <Pagination
+              total={courses.total}
+              defaultPageSize={limit}
+              defaultCurrent={1}
+              current={page}
+              onChange={(page, pageSize) => {
+                setPage(page)
+              }}
+            />
+          </div>
+        </>
+      ) : (
+        <div className='flex flex-row justify-center w-full mt-10 flex-wrap gap-10 sm:gap-5'>
+          <CourseCardSkeleton />
+          <CourseCardSkeleton />
+          <CourseCardSkeleton />
+          <CourseCardSkeleton />
+          <CourseCardSkeleton />
+        </div>
+      )}
     </div>
   )
 }

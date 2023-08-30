@@ -81,7 +81,7 @@ const Login = () => {
       toast.success('Login in successfully')
       setEmail('')
       setPassword('')
-      console.log(data)
+      // console.log(data)
       setLoading(false)
       router.push('/user')
     } catch (err) {
@@ -126,7 +126,8 @@ const Login = () => {
           <span className='border-b border-black-500 my-3 w-full max-w-sm justify-center items-center'></span>
           <input
             type='email'
-            placeholder='Enter Email'
+            alt='email'
+            placeholder='Email'
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -134,7 +135,8 @@ const Login = () => {
           />
           <input
             type='password'
-            placeholder='Enter Password'
+            alt='password'
+            placeholder='Password'
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
