@@ -1,27 +1,26 @@
-'use client';
+'use client'
 
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import HomeCourseCard from '../cards/HomeCourseCard';
-import { getDictionary } from '@/lib/dictionary';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
+import HomeCourseCard from '../cards/HomeCourseCard'
 
-const HomePage = ({ params, home }) => {
-  const [courses, setCourses] = useState([]);
+const HomePage = ({ params, dict }) => {
+  const [courses, setCourses] = useState([])
 
   useEffect(() => {
     const fetchCourses = async () => {
       const { data } = params
         ? await axios.get(`/api/courses/${params}`)
-        : await axios.get(`/api/courses/`);
+        : await axios.get(`/api/courses/`)
 
-      const limitedPrograms = data.slice(0, 3);
+      const limitedPrograms = data.slice(0, 3)
 
-      setCourses(limitedPrograms);
-      console.log(limitedPrograms);
-    };
-    fetchCourses();
-  }, []);
+      setCourses(limitedPrograms)
+      console.log(limitedPrograms)
+    }
+    fetchCourses()
+  }, [])
 
   return (
     <div>
@@ -150,11 +149,9 @@ const HomePage = ({ params, home }) => {
         {/* Our Services Section */}
         <div className='py-10 w-ful'>
           <p className='font-sans text-s font-bold text-indigo-500 text-center my-2 '>
-            {home.Course_Categories}
+            {dict.home.Course_Categories_sub}
           </p>
-          <h1 className='font-sans text-4xl font-bold text-center '>
-            {home.Course_Categories_sub}
-          </h1>
+          <h1 className='font-sans text-4xl font-bold text-center '>'about'</h1>
 
           <div className='flex flex-col items-center justify-center  gap-5 p-10  lg:flex-row'>
             <div className='w-72 h-72  rounded-lg bg-indigo-500 text-primary-content border border-slate-200'>
@@ -722,7 +719,7 @@ const HomePage = ({ params, home }) => {
         </div>
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

@@ -1,54 +1,78 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { useState, useEffect, useContext } from 'react';
-import { AiOutlineLogin } from 'react-icons/ai';
-import { RiRegisteredLine } from 'react-icons/ri';
-import { ToastContainer, toast } from 'react-toastify';
-import { usePathname } from 'next/navigation';
-import 'react-toastify/dist/ReactToastify.css';
-import { Context } from '../context/index';
-import { useRouter } from 'next/navigation';
-import { FaChalkboardTeacher } from 'react-icons/fa';
-import { BsBook, BsShop } from 'react-icons/bs';
-import { IoCreate } from 'react-icons/io5';
-import axios from 'axios';
-import MyLearningMenu from './MyLearningMenu';
+import Link from 'next/link'
+import { useState, useEffect, useContext } from 'react'
+import { AiOutlineLogin } from 'react-icons/ai'
+import { RiRegisteredLine } from 'react-icons/ri'
+import { ToastContainer, toast } from 'react-toastify'
+import { usePathname } from 'next/navigation'
+import 'react-toastify/dist/ReactToastify.css'
+import { Context } from '../context/index'
+import { useRouter } from 'next/navigation'
+import { FaChalkboardTeacher } from 'react-icons/fa'
+import { BsBook, BsShop } from 'react-icons/bs'
+import { IoCreate } from 'react-icons/io5'
+import axios from 'axios'
+import MyLearningMenu from './MyLearningMenu'
+import ReactCountryFlag from 'react-country-flag'
+
 // import Link from 'next-intl/link';
 
-const TopNav = () => {
-  const [currentPage, setCurrentPage] = useState('');
-  const path = usePathname();
+const languages = {
+  en: 'US',
+  zh: 'HK',
+  cn: 'CN',
+}
+const languages_array = ['en', 'zh', 'cn']
+const TopNav = ({ dict, lang }) => {
+  const [currentPage, setCurrentPage] = useState('')
+  const path = usePathname()
 
   //global state
-  const { state, dispatch } = useContext(Context);
-  const { user } = state;
-  const [img, setImg] = useState('');
+  const { state, dispatch } = useContext(Context)
+  const { user } = state
+  const [img, setImg] = useState('')
 
   useEffect(() => {
-    setCurrentPage(path.substring(1, path.length));
-  }, [path]);
+    setCurrentPage(path.substring(1, path.length))
+  }, [path])
 
   const logout = async () => {
     try {
-      const { data } = await axios.get('/api/logout');
-      dispatch({ type: 'LOGOUT' });
-      window.localStorage.removeItem('user');
-      toast.success('Logout Successfully');
-      router.push('/login');
+      const { data } = await axios.get('/api/logout')
+      dispatch({ type: 'LOGOUT' })
+      window.localStorage.removeItem('user')
+      toast.success('Logout Successfully')
+      router.push('/login')
     } catch (err) {
-      toast.error(err.response.data);
+      toast.error(err.response.data)
     }
-  };
+  }
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false)
 
   const handleToggle = () => {
-    setToggle(!toggle);
-  };
+    setToggle(!toggle)
+  }
 
+  const changeLanguage = (language) => {
+    // If the router or path is not ready or defined, don't proceed
+    if (!router || !path) return
+
+    // Extract the segments of the current path
+    const segments = path.split('/').filter(Boolean) // Removes empty strings from the array
+
+    // If the first segment is a locale, remove it
+    if (languages_array.includes(segments[0])) {
+      segments.shift()
+    }
+
+    // Construct the new URL with the selected language
+    const newPath = `/${language}/${segments.join('/')}`
+    router.push(newPath)
+  }
   return (
     <div className='flex flex-col w-full fixed z-50'>
       <div className='navbar bg-base-100 h-[70px]'>
@@ -138,19 +162,59 @@ const TopNav = () => {
           </div>
         </div>
         {user ? (
-          <div className='hidden md:flex dropdown dropdown-end'>
-            <label
-              tabIndex={0}
-              className='btn btn-ghost rounded-btn max-sm:!pr-0'
-            >
-              <div className='flex flex-row items-center text-[12px] gap-2 mr-2'>
-                <BsBook className='inline-block mx-[0.5px]' />
-                <p>My Learning</p>
-              </div>
-            </label>
-            <MyLearningMenu tabIndex={0} />
+          <div className='flex justify-center items-center'>
+            <div className='hidden md:flex dropdown dropdown-end'>
+              <label
+                tabIndex={0}
+                className='btn btn-ghost rounded-btn max-sm:!pr-0'
+              >
+                <div className='flex flex-row items-center text-[12px] gap-2 mr-2'>
+                  <BsBook className='inline-block mx-[0.5px]' />
+                  <p>My Learning</p>
+                </div>
+              </label>
+              <MyLearningMenu tabIndex={0} />
+            </div>
           </div>
         ) : null}
+        <div className='dropdown dropdown-hover'>
+          <ReactCountryFlag
+            countryCode={languages[lang]}
+            className='emojiFlag rounded-md mx-1 px-2 py-2 hover:bg-gray-300 cursor-pointer'
+            style={{
+              fontSize: '35px',
+              lineHeight: '35px',
+            }}
+            svg
+          />
+          <ul
+            tabIndex={0}
+            className='dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-30'
+          >
+            {languages_array.map((language) => (
+              <li
+                key={language}
+                onClick={() => {
+                  if (lang !== language) {
+                    changeLanguage(language)
+                  }
+                }}
+              >
+                <a>
+                  <ReactCountryFlag
+                    countryCode={languages[language]}
+                    className='emojiFlag rounded-md  cursor-pointer'
+                    style={{
+                      fontSize: '20px',
+                      lineHeight: '20px',
+                    }}
+                    svg
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className='hidden md:flex flex-row gap-2 mr-10'>
           {/* <div className='form-control'>
           <input
@@ -324,7 +388,7 @@ const TopNav = () => {
       </div>
       <div className='text-center bg-gradient-to-r from-sky-500 to-indigo-500 text-yellow-100 w-full rounded h-[4px] flex flex-col justify-center text-[28px] items-start font-bold '></div>
     </div>
-  );
-};
+  )
+}
 
-export default TopNav;
+export default TopNav

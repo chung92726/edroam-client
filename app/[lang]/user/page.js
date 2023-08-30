@@ -1,51 +1,47 @@
-'use client';
+'use client'
 
-import { useContext, useEffect, useState } from 'react';
-import { Context } from '../../context/index';
-import UserRoute from '../../components/routes/UserRoutes';
-import axios from 'axios';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useContext, useEffect, useState } from 'react'
+import { Context } from '@/context/index'
+import UserRoute from '@/components/routes/UserRoutes'
+import axios from 'axios'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 const UserIndex = () => {
   const {
     state: { user },
-  } = useContext(Context);
+  } = useContext(Context)
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const [courses, setCourses] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [serchQuery, setSerchQuery] = useState('');
-  const [categoryQuery, setCategoryQuery] = useState('');
-  const [sortBy, setSortBy] = useState('');
-  const [levelQuery, setLevelQuery] = useState('');
-  const [langQuery, setLangQuery] = useState('');
+  const [courses, setCourses] = useState([])
+  const [filtered, setFiltered] = useState([])
+  const [serchQuery, setSerchQuery] = useState('')
+  const [categoryQuery, setCategoryQuery] = useState('')
+  const [sortBy, setSortBy] = useState('')
+  const [levelQuery, setLevelQuery] = useState('')
+  const [langQuery, setLangQuery] = useState('')
 
   const loadCompletedLessons = async (id) => {
     // console.log(id);
     const { data } = await axios.post(`/api/list-completed`, {
       courseId: id,
-    });
-    return data;
-  };
+    })
+    return data
+  }
 
   const sort = async (array, sortBy) => {
     // console.log("sort");
     switch (sortBy) {
       case 'price':
-        return [...array].sort((a, b) => a.price - b.price);
+        return [...array].sort((a, b) => a.price - b.price)
       case 'created':
-        return [...array].sort((a, b) =>
-          b.createdAt.localeCompare(a.createdAt)
-        );
+        return [...array].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
       case 'updated':
-        return [...array].sort((a, b) =>
-          b.updatedAt.localeCompare(a.updatedAt)
-        );
+        return [...array].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
       default:
-        return array;
+        return array
     }
-  };
+  }
 
   const search = async (array, keyword) => {
     // console.log(keyword);
@@ -56,8 +52,8 @@ const UserIndex = () => {
           .split(' ')
           .filter((el) => el.toLowerCase().includes(keyword.toLowerCase()))
           .includes(keyword.toLowerCase())
-    );
-  };
+    )
+  }
 
   const categoryFilter = async (array, keyword) => {
     // console.log(keyword);
@@ -66,55 +62,55 @@ const UserIndex = () => {
         // .split(" ")
         .filter((el) => el.value.toLowerCase().includes(keyword.toLowerCase()))
         .some((el) => el.value.toLowerCase().includes(keyword.toLowerCase()))
-    );
-  };
+    )
+  }
 
   const levelFilter = async (array, keyword) => {
     // console.log(array);
     // console.log(keyword);
     return array.filter((el) =>
       el.level.toLowerCase().includes(keyword.toLowerCase())
-    );
-  };
+    )
+  }
 
   const langFilter = async (array, keyword) => {
     // console.log(array);
     // console.log(keyword);
     return array.filter((el) =>
       el.language.toLowerCase().includes(keyword.toLowerCase())
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     const handlefilter = async () => {
-      let tmp = await search(courses, serchQuery);
-      tmp = await categoryFilter(tmp, categoryQuery);
-      tmp = await levelFilter(tmp, levelQuery);
-      tmp = await langFilter(tmp, langQuery);
-      tmp = await sort(tmp, sortBy);
-      setFiltered(tmp);
-    };
-    handlefilter();
+      let tmp = await search(courses, serchQuery)
+      tmp = await categoryFilter(tmp, categoryQuery)
+      tmp = await levelFilter(tmp, levelQuery)
+      tmp = await langFilter(tmp, langQuery)
+      tmp = await sort(tmp, sortBy)
+      setFiltered(tmp)
+    }
+    handlefilter()
     // console.log(categoryQuery);
-  }, [serchQuery, categoryQuery, levelQuery, langQuery, sortBy]);
+  }, [serchQuery, categoryQuery, levelQuery, langQuery, sortBy])
 
   const loadCourses = async () => {
-    const { data } = await axios.get('/api/user-courses');
+    const { data } = await axios.get('/api/user-courses')
 
     for (let i = 0; i < data.length; i++) {
       // console.log(data[i].lessons.length);
-      const completed = await loadCompletedLessons(data[i]._id);
+      const completed = await loadCompletedLessons(data[i]._id)
       // console.log(completed.length);
-      data[i].completed = completed.length;
+      data[i].completed = completed.length
     }
     // console.log(data);
-    setCourses(data);
-    setFiltered(data);
-  };
+    setCourses(data)
+    setFiltered(data)
+  }
 
   useEffect(() => {
-    loadCourses();
-  }, []);
+    loadCourses()
+  }, [])
 
   return (
     <UserRoute>
@@ -136,7 +132,7 @@ const UserIndex = () => {
           className='input input-bordered mx-[1%] my-2 w-[88%] 2xl:w-[24%]'
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
-              setSerchQuery(event.target.value.toLowerCase());
+              setSerchQuery(event.target.value.toLowerCase())
             }
           }}
           type='text'
@@ -252,7 +248,7 @@ const UserIndex = () => {
         </div>
       )}
     </UserRoute>
-  );
-};
+  )
+}
 
-export default UserIndex;
+export default UserIndex
