@@ -63,7 +63,8 @@ const Register = () => {
           </div>
           <input
             type='text'
-            placeholder='Enter Username'
+            placeholder='Name'
+            alt='name'
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -71,7 +72,8 @@ const Register = () => {
           />
           <input
             type='email'
-            placeholder='Enter Email'
+            alt='email'
+            placeholder='Email'
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -79,7 +81,8 @@ const Register = () => {
           />
           <input
             type='password'
-            placeholder='Enter Password'
+            alt='password'
+            placeholder='Password'
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={password}
             onChange={(e) => setPassword(e.target.value)}

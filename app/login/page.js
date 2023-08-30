@@ -1,94 +1,94 @@
-'use client';
+'use client'
 
-import { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import Link from 'next/link';
-import { Context } from '../../context/index';
-import { useRouter } from 'next/navigation';
-import { FacebookLoginButton } from 'react-social-login-buttons';
-import { GoogleLoginButton } from 'react-social-login-buttons';
+import { useState, useContext, useEffect } from 'react'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import Link from 'next/link'
+import { Context } from '../../context/index'
+import { useRouter } from 'next/navigation'
+import { FacebookLoginButton } from 'react-social-login-buttons'
+import { GoogleLoginButton } from 'react-social-login-buttons'
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   //   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const router = useRouter();
+  const router = useRouter()
 
   // global state
-  const { state, dispatch } = useContext(Context);
-  const { user } = state;
+  const { state, dispatch } = useContext(Context)
+  const { user } = state
   useEffect(() => {
-    if (user !== null) router.push('/user');
-  }, [user]);
+    if (user !== null) router.push('/user')
+  }, [user])
 
   const handleFacebookLogin = async () => {
     try {
-      const res = await axios.get('/api/auth/facebook');
-      console.log('FACEBOOK LOGIN RESPONSE', res);
-      toast.success('Login Successful');
+      const res = await axios.get('/api/auth/facebook')
+      console.log('FACEBOOK LOGIN RESPONSE', res)
+      toast.success('Login Successful')
       // save in local storage => the browser
-      window.localStorage.setItem('user', JSON.stringify(res.data));
+      window.localStorage.setItem('user', JSON.stringify(res.data))
       // save in context
       dispatch({
         type: 'LOGIN',
         payload: res.data,
-      });
+      })
       // redirect
-      router.push('/user');
+      router.push('/user')
     } catch (err) {
-      toast.error('Falied to login with facebook');
+      toast.error('Falied to login with facebook')
     }
-  };
+  }
   const handleGoogleLogin = async () => {
     try {
-      const res = await axios.get('/api/auth/google');
-      console.log('GOOGLE LOGIN RESPONSE', res);
-      toast.success('Login Successful');
+      const res = await axios.get('/api/auth/google')
+      console.log('GOOGLE LOGIN RESPONSE', res)
+      toast.success('Login Successful')
       // save in local storage => the browser
-      window.localStorage.setItem('user', JSON.stringify(res.data));
+      window.localStorage.setItem('user', JSON.stringify(res.data))
       // save in context
       dispatch({
         type: 'LOGIN',
         payload: res.data,
-      });
+      })
       // redirect
-      router.push('/user');
+      router.push('/user')
     } catch (err) {
-      toast.error('Falied to login with google');
+      toast.error('Falied to login with google')
     }
-  };
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // console.table({ name, email, password })
-    setLoading(true);
+    setLoading(true)
     try {
       const { data } = await axios.post(`/api/login`, {
         email,
         password,
-      });
+      })
       dispatch({
         type: 'LOGIN',
         payload: data,
-      });
+      })
       // save in local storage => the browser
-      window.localStorage.setItem('user', JSON.stringify(data));
+      window.localStorage.setItem('user', JSON.stringify(data))
 
-      toast.success('Login in successfully');
-      setEmail('');
-      setPassword('');
-      console.log(data);
-      setLoading(false);
-      router.push('/user');
+      toast.success('Login in successfully')
+      setEmail('')
+      setPassword('')
+      // console.log(data)
+      setLoading(false)
+      router.push('/user')
     } catch (err) {
-      toast.error(err.response.data);
-      setLoading(false);
+      toast.error(err.response.data)
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <>
@@ -126,7 +126,8 @@ const Login = () => {
           <span className='border-b border-black-500 my-3 w-full max-w-sm justify-center items-center'></span>
           <input
             type='email'
-            placeholder='Enter Email'
+            alt='email'
+            placeholder='Email'
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -134,7 +135,8 @@ const Login = () => {
           />
           <input
             type='password'
-            placeholder='Enter Password'
+            alt='password'
+            placeholder='Password'
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -169,7 +171,7 @@ const Login = () => {
         </form>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
