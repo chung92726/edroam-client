@@ -32,8 +32,13 @@ const forgotPassword = () => {
       const { data } = await axios.post(`/api/forgot-password`, {
         email,
       })
-      setSuccess(true)
-      toast.success('Check your email for the secret code')
+      if (data.ok) {
+        setSuccess(true)
+        toast.success('Check your email for the secret code')
+      } else {
+        setSuccess(false)
+        toast.error('Error sending Email')
+      }
       // save in local storage => the browser
 
       setLoading(false)
