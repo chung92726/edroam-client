@@ -14,10 +14,22 @@ import { BsBook, BsShop } from 'react-icons/bs'
 import { IoCreate } from 'react-icons/io5'
 import axios from 'axios'
 import MyLearningMenu from './MyLearningMenu'
+import ReactCountryFlag from 'react-country-flag'
 
-const TopNav = ({ isOpen, setIsOpen }) => {
+// import Link from 'next-intl/link';
+
+const languages = {
+  en: 'US',
+  zh: 'HK',
+  cn: 'CN',
+}
+const languages_array = ['en', 'zh', 'cn']
+
+const TopNav = ({ dict, lang }) => {
   const [currentPage, setCurrentPage] = useState('')
   const path = usePathname()
+
+  const [isOpen, setIsOpen] = useState(false)
 
   //global state
   const { state, dispatch } = useContext(Context)
@@ -55,29 +67,82 @@ const TopNav = ({ isOpen, setIsOpen }) => {
     router.push(`/marketplace/search/${localSearchQuery}`)
   }
 
+  const changeLanguage = (language) => {
+    // If the router or path is not ready or defined, don't proceed
+    if (!router || !path) return
+
+    // Extract the segments of the current path
+    const segments = path.split('/').filter(Boolean) // Removes empty strings from the array
+
+    // If the first segment is a locale, remove it
+    if (languages_array.includes(segments[0])) {
+      segments.shift()
+    }
+
+    // Construct the new URL with the selected language
+    const newPath = `/${language}/${segments.join('/')}`
+    router.push(newPath)
+  }
+
+  useEffect(() => {
+    // Function to prevent scrolling
+    const preventScroll = (e) => {
+      e.preventDefault()
+    }
+
+    if (isOpen) {
+      // Add the no-scroll class to the body
+      document.body.classList.add('no-scroll')
+
+      // Add the event listener to prevent default scrolling
+      window.addEventListener('touchmove', preventScroll, { passive: false })
+      window.addEventListener('wheel', preventScroll, { passive: false })
+    } else {
+      // Remove the no-scroll class from the body
+      document.body.classList.remove('no-scroll')
+
+      // Remove the event listener
+      window.removeEventListener('touchmove', preventScroll)
+      window.removeEventListener('wheel', preventScroll)
+    }
+
+    // Cleanup on component unmount
+    return () => {
+      document.body.classList.remove('no-scroll')
+      window.removeEventListener('touchmove', preventScroll)
+      window.removeEventListener('wheel', preventScroll)
+    }
+  }, [isOpen])
+
   return (
     <div className='flex flex-col w-full fixed z-50'>
       {isOpen && (
-        <div className='absolute top-[73px] bg-white z-20 w-full shadow-md rounded'>
-          <ul className='py-2'>
-            <li className='px-4 py-2'>
-              <input
-                className='input input-bordered w-full'
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    // setSerchQuery(event.target.value.toLowerCase())
-                    setIsOpen(false)
-                    handleSearch()
-                  }
-                }}
-                type='text'
-                placeholder='Search...'
-                value={localSearchQuery}
-                onChange={(e) => setLocalSearchQuery(e.target.value)}
-              />
-            </li>
-          </ul>
-        </div>
+        <>
+          <div className='absolute top-[73px] bg-white z-20 w-full shadow-md rounded'>
+            <ul className='py-2'>
+              <li className='px-4 py-2'>
+                <input
+                  className='input input-bordered w-full'
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      // setSerchQuery(event.target.value.toLowerCase())
+                      setIsOpen(false)
+                      handleSearch()
+                    }
+                  }}
+                  type='text'
+                  placeholder='Search...'
+                  value={localSearchQuery}
+                  onChange={(e) => setLocalSearchQuery(e.target.value)}
+                />
+              </li>
+            </ul>
+          </div>
+          <div
+            className='fixed top-[73px] inset-0 z-10 bg-black opacity-50 blur'
+            onClick={() => setIsOpen(false)}
+          ></div>
+        </>
       )}
       <div className='navbar bg-base-100 h-[70px]'>
         <ToastContainer position='top-center' />
@@ -87,7 +152,7 @@ const TopNav = ({ isOpen, setIsOpen }) => {
             className='btn btn-ghost normal-case text-xl'
             onClick={() => setCurrentPage('home')}
           >
-            <img src='/Proedu.png' className='w-[100px]' />
+            <img src='/xltra.png' className='w-[130px]' />
           </Link>
           {user && user.role ? (
             user.role.includes('Instructor') ||
@@ -135,7 +200,9 @@ const TopNav = ({ isOpen, setIsOpen }) => {
               className='menu dropdown-content p-2 shadow bg-base-200 rounded-box w-64 mt-4'
             >
               <li>
-                <Link href='/marketplace'>All Courses</Link>
+                <Link href='/marketplace' locale='en'>
+                  All Courses
+                </Link>
               </li>
               <li>
                 <Link href='/marketplace/WebDesign'>WebDesign</Link>
@@ -199,89 +266,61 @@ const TopNav = ({ isOpen, setIsOpen }) => {
         </div>
 
         {user ? (
-          <div className='hidden md:flex dropdown dropdown-end'>
-            <label
-              tabIndex={0}
-              className='btn btn-ghost rounded-btn max-sm:!pr-0'
-            >
-              <div className='flex flex-row items-center text-[12px] gap-2 mr-2'>
-                <BsBook className='inline-block mx-[0.5px]' />
-                <p>My Learning</p>
-              </div>
-            </label>
-            <MyLearningMenu tabIndex={0} />
-          </div>
-        ) : null}
-        <div className='hidden lg:flex flex-row gap-2 lg:mr-10'>
-          {/* <div className='form-control'>
-          <input
-            type='text'
-            placeholder='Search'
-            className='input input-bordered w-24 md:w-auto'
-          />
-          </div> */}
-          {user ? (
-            <div className='dropdown dropdown-end m-2 font-sans'>
-              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
-                <div className='w-8 rounded-full'>
-                  <img
-                    src={
-                      user?.picture?.Location !== undefined
-                        ? user.picture.Location
-                        : '/guest.png'
-                    }
-                  />
+          <div className='flex justify-center items-center'>
+            <div className='hidden md:flex dropdown dropdown-end'>
+              <label
+                tabIndex={0}
+                className='btn btn-ghost rounded-btn max-sm:!pr-0'
+              >
+                <div className='flex flex-row items-center text-[12px] gap-2 mr-2'>
+                  <BsBook className='inline-block mx-[0.5px]' />
+                  <p>My Learning</p>
                 </div>
               </label>
-              <ul
-                tabIndex={0}
-                className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52'
-              >
-                <li>
-                  <Link href='/user/profile'>Profile</Link>
-                </li>
-                {user &&
-                  user.role &&
-                  (user.role.includes('Instructor') ||
-                    user.role.includes('Pending')) && (
-                    <li>
-                      <Link href='/instructor'>Instructor Dashboard</Link>
-                    </li>
-                  )}
-                {/* <li>
-                  <a>Settings</a>
-                </li> */}
-                <li>
-                  <a onClick={logout}>Logout</a>
-                </li>
-              </ul>
+              <MyLearningMenu tabIndex={0} />
             </div>
-          ) : (
-            <ul className='menu menu-horizontal'>
-              <Link
-                href='/login'
-                className='mx-2 my-1 cursor-pointer border-transparent'
-                onClick={() => setCurrentPage('login')}
-              >
-                <div className='flex flex-row items-center'>
-                  <AiOutlineLogin className='inline-block mx-[0.5px]' />
-                  <p className='mx-1'>Login</p>
-                </div>
-              </Link>
+          </div>
+        ) : null}
 
-              <Link
-                href='/register'
-                className='mx-2 my-1 cursor-pointer border-transparent'
-                onClick={() => setCurrentPage('register')}
+        <div className='dropdown dropdown-hover'>
+          <ReactCountryFlag
+            countryCode={languages[lang]}
+            className='emojiFlag rounded-md mx-1 px-2 py-2 hover:bg-gray-300 cursor-pointer'
+            style={{
+              fontSize: '35px',
+              lineHeight: '35px',
+            }}
+            svg
+          />
+          <ul
+            tabIndex={0}
+            className='dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-30'
+          >
+            {languages_array.map((language) => (
+              <li
+                key={language}
+                onClick={() => {
+                  if (lang !== language) {
+                    changeLanguage(language)
+                  }
+                }}
               >
-                <div className='flex flex-row items-center'>
-                  <RiRegisteredLine className='inline-block mx-[0.5px]' />
-                  <p className='mx-1'>Sign up</p>
-                </div>
-              </Link>
-            </ul>
-          )}
+                <a>
+                  <ReactCountryFlag
+                    countryCode={languages[language]}
+                    className='emojiFlag rounded-md  cursor-pointer'
+                    style={{
+                      fontSize: '20px',
+                      lineHeight: '20px',
+                    }}
+                    svg
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
+
         <div className='lg:hidden flex flex-row gap-2 pr-5 max-lg:pr-0'>
           {/* <div className='form-control'>
           <input

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useContext } from 'react'
-import { Context } from '../../context/index'
+import { Context } from '@/context/index'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import Link from 'next/link'
