@@ -278,16 +278,18 @@ const TopNav = ({ dict, lang }) => {
           </label>
         </div>
 
-        <div className='dropdown dropdown-hover'>
-          <ReactCountryFlag
-            countryCode={languages[lang]}
-            className='emojiFlag rounded-md mx-1 px-2 py-2 hover:bg-gray-300 cursor-pointer'
-            style={{
-              fontSize: '35px',
-              lineHeight: '35px',
-            }}
-            svg
-          />
+        <div className='dropdown dropdown-end'>
+          <label tabIndex={0}>
+            <ReactCountryFlag
+              countryCode={languages[lang]}
+              className='emojiFlag rounded-md mx-1 px-2 py-2 hover:bg-gray-300 cursor-pointer'
+              style={{
+                fontSize: '35px',
+                lineHeight: '35px',
+              }}
+              svg
+            />
+          </label>
           <ul
             tabIndex={0}
             className='dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-30'
@@ -357,7 +359,7 @@ const TopNav = ({ dict, lang }) => {
             </label>
             <ul
               tabIndex={0}
-              className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-44'
+              className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-44'
             >
               <li>
                 <Link href='/user/profile'>Profile</Link>

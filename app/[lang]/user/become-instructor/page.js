@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { useContext, useEffect, useState, useRef } from 'react'
-import { Context } from '../../../context'
+import { Context } from '@/context'
 import { toast } from 'react-toastify'
 import Resizer from 'react-image-file-resizer'
 import { useRouter } from 'next/navigation'
