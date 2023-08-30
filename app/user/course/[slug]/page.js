@@ -229,7 +229,11 @@ const singleCourse = ({ params }) => {
                   setCurrentLesson(index)
                 }}
                 key={index.toString()}
-                style={{ styleInline: '0px', height: '100px' }}
+                style={{
+                  styleInline: '0px',
+                  height: '100px',
+                  wordBreak: 'break-words',
+                }}
                 icon={
                   <Avatar
                     size='small'
