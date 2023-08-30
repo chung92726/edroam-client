@@ -244,7 +244,7 @@ const TopNav = ({ dict, lang }) => {
           </div>
 
           <input
-            className='input input-bordered w-auto max-sm:hidden'
+            className='input input-bordered w-[30%] ml-2 max-sm:hidden'
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
                 // setSerchQuery(event.target.value.toLowerCase())
