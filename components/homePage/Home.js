@@ -1,26 +1,26 @@
-'use client'
+'use client';
 
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import HomeCourseCard from '../cards/HomeCourseCard'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import HomeCourseCard from '../cards/HomeCourseCard';
 
-const HomePage = ({ params, dict }) => {
-  const [courses, setCourses] = useState([])
+const HomePage = ({ params, home }) => {
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
       const { data } = params
         ? await axios.get(`/api/courses/${params}`)
-        : await axios.get(`/api/courses/`)
+        : await axios.get(`/api/courses/`);
 
-      const limitedPrograms = data.slice(0, 3)
+      const limitedPrograms = data.slice(0, 3);
 
-      setCourses(limitedPrograms)
-      console.log(limitedPrograms)
-    }
-    fetchCourses()
-  }, [])
+      setCourses(limitedPrograms);
+      console.log(limitedPrograms);
+    };
+    fetchCourses();
+  }, []);
 
   return (
     <div>
@@ -45,17 +45,16 @@ const HomePage = ({ params, dict }) => {
 
             <div className=''>
               <h1 className='  font-sans text-6xl font-bold max-w-xl text-left max-sm:text-[48px]'>
-                Up Your
+                {home.Up_Your}
                 <span className='animate-pulse text-transparent bg-clip-text bg-gradient-to-r  from-indigo-500 via-purple-500 to-pink-500'>
                   {' '}
-                  Digital Design Skills{' '}
+                  {home.Digital_Design_Skills}{' '}
                 </span>
-                To Advance Your Career Path
+                {home.To_Advance_Your_Career_Path}
               </h1>
 
               <p className='font-sans text-s text-left max-w-sm my-5 '>
-                Provides you with the latest online learning system and material
-                that help your digital design knowledge growing.
+                {home.Hero_descr}
               </p>
 
               {/* <div className='flex space-x-3 my-5'>
@@ -137,7 +136,7 @@ const HomePage = ({ params, dict }) => {
               <div className=' space-x-3 '>
                 <Link href='/marketplace'>
                   <button className='btn btn-primary bg-indigo-500'>
-                    Get Started
+                    {home.Get_Started}
                   </button>
                 </Link>
                 {/* <button className='btn btn-primary'>Get free trial</button> */}
@@ -149,23 +148,23 @@ const HomePage = ({ params, dict }) => {
         {/* Our Services Section */}
         <div className='py-10 w-ful'>
           <p className='font-sans text-s font-bold text-indigo-500 text-center my-2 '>
-            {dict.home.Course_Categories_sub}
+            {home.Course_Categories}
           </p>
-          <h1 className='font-sans text-4xl font-bold text-center '>'about'</h1>
+          <h1 className='font-sans text-4xl font-bold text-center '>
+            {home.Course_Categories_sub}
+          </h1>
 
           <div className='flex flex-col items-center justify-center  gap-5 p-10  lg:flex-row'>
             <div className='w-72 h-72  rounded-lg bg-indigo-500 text-primary-content border border-slate-200'>
               <div className='card-body'>
                 <div className='flex gap-4'>
                   <img src='./uiuxlogo.png' alt='uiuxlogo' />
-                  <h2 className='card-title'>UI/UX Design</h2>
+                  <h2 className='card-title'>{home.UIUX_Design}</h2>
                 </div>
-                <p className='my-3'>
-                  Lessons on design that cover the most recent developments.
-                </p>
+                <p className='my-3'>{home.UIUX_Descr}</p>
                 <Link href='/marketplace/UIUXDesign'>
                   <div className='card-actions'>
-                    <button className='btn'>Learn More</button>
+                    <button className='btn'>{home.Learn_More}</button>
                   </div>
                 </Link>
               </div>
@@ -175,14 +174,12 @@ const HomePage = ({ params, dict }) => {
               <div className='card-body'>
                 <div className='flex gap-4'>
                   <img src='./3dlogo.png' alt='uiuxlogo' />
-                  <h2 className='card-title'>3D Modeling</h2>
+                  <h2 className='card-title'>{home.ThreeD_Modeling}</h2>
                 </div>
-                <p className='my-3'>
-                  3D Modeling courses that cover the most recent 3D trends.
-                </p>
+                <p className='my-3'>{home.ThreeD_Descr}</p>
                 <Link href='/marketplace/3DModeling'>
                   <div className='card-actions '>
-                    <button className='btn '>Learn More</button>
+                    <button className='btn '>{home.Learn_More}</button>
                   </div>
                 </Link>
               </div>
@@ -192,15 +189,12 @@ const HomePage = ({ params, dict }) => {
               <div className='card-body'>
                 <div className='flex gap-4'>
                   <img src='./videoeditlogo.png' alt='videoedit' />
-                  <h2 className='card-title'>Video Editing</h2>
+                  <h2 className='card-title'>{home.Video_Editing}</h2>
                 </div>
-                <p className='my-3'>
-                  Lessons in video editing learning form offline editing to
-                  special effects.{' '}
-                </p>
+                <p className='my-3'>{home.Video_Descr} </p>
                 <Link href='/marketplace/VideoEditing'>
                   <div className='card-actions'>
-                    <button className='btn'>Learn More</button>
+                    <button className='btn'>{home.Learn_More}</button>
                   </div>
                 </Link>
               </div>
@@ -211,7 +205,7 @@ const HomePage = ({ params, dict }) => {
           <div className='flex justify-center'>
             <Link href='/marketplace'>
               <button className='btn  bg-slate-200 text-black hover:text-white border border-slate-400'>
-                Explore All Category
+                {home.Explore_All_Cat}
               </button>
             </Link>
           </div>
@@ -221,14 +215,13 @@ const HomePage = ({ params, dict }) => {
         <div className='py-10'>
           <div className='items-center justify-center grid  '>
             <p className='text-center font-sans text-s font-bold text-indigo-500 my-2 '>
-              Explore Programs
+              {home.Explore_Programs}
             </p>
             <h1 className='font-sans text-4xl font-bold text-center '>
-              Our Most Popular Programs
+              {home.Most_Popular}
             </h1>
             <p className='font-sans text-xl text-slate-500 text-center my-2 '>
-              Let's join our famous courses, the knowledge provided will
-              definitely be useful for your career.
+              {home.Explore_Programs_desc}
             </p>
           </div>
 
@@ -342,7 +335,7 @@ const HomePage = ({ params, dict }) => {
           <div className='flex justify-center'>
             <Link href='/marketplace'>
               <button className='btn  bg-slate-200 text-black hover:text-white border border-slate-400'>
-                Explore All Programs
+                {home.Explore_All_Programs}
               </button>
             </Link>
           </div>
@@ -352,14 +345,13 @@ const HomePage = ({ params, dict }) => {
         <div className='py-10'>
           <div className='w-ful px-10'>
             <p className='font-sans text-s font-bold text-indigo-500 text-center my-2 '>
-              Tutors
+              {home.Tutors}
             </p>
             <h1 className='font-sans text-4xl font-bold text-center '>
-              Meet the Heroes
+              {home.Tutors_Heroes}
             </h1>
             <p className=' font-sans text-xl text-slate-500 text-center my-2 '>
-              On ProEdu, instructors from all over the world instruct millions
-              of students. We offer the knowledge and abilities.
+              {home.Tutors_descr}
             </p>
           </div>
 
@@ -662,52 +654,51 @@ const HomePage = ({ params, dict }) => {
       <footer className='footer p-10 bg-base-200 text-base-content'>
         <div>
           <img src='/xltra.png' className='w-[250px] mb-10' />
-          <p>
-            Top learning experiences that create more <br /> talent in the
-            world.
-          </p>
+          <p>{home.Footer_descr}</p>
         </div>
         <div>
-          <span className='footer-title'>Browse Course</span>
+          <span className='footer-title'>{home.Browse_Course}</span>
           <Link href='/marketplace'>
-            <div className='link link-hover'>All Courses</div>
+            <div className='link link-hover'>{home.All_Course}</div>
           </Link>
           <Link href='/marketplace/WebDesign'>
-            <div className='link link-hover'>WebDesign</div>
+            <div className='link link-hover'>{home.WebDesign}</div>
           </Link>
           <Link href='/marketplace/UIUXDesign'>
-            <div className='link link-hover'>UI/UX Design Courses</div>
+            <div className='link link-hover'>{home.UIUX_Design_Courses}</div>
           </Link>
           <Link href='/marketplace/GraphicDesign'>
-            <div className='link link-hover'>Graphic Design Courses</div>
+            <div className='link link-hover'>{home.Graphic_Design}</div>
           </Link>
           <Link href='/marketplace/3DModeling'>
-            <div className='link link-hover'>3D Modelling Courses</div>
+            <div className='link link-hover'>
+              {home.ThreeD_Modelling_Courses}
+            </div>
           </Link>
           <Link href='/marketplace/VideoEditing'>
-            <div className='link link-hover'>Video Editing Courses</div>
+            <div className='link link-hover'>{home.Video_Editing_Courses}</div>
           </Link>
         </div>
         <div>
-          <span className='footer-title'>Company</span>
+          <span className='footer-title'>{home.Footer_Company}</span>
           <Link href='/about'>
-            <div className='link link-hover'>About us</div>
+            <div className='link link-hover'>{home.Footer_About}</div>
           </Link>
           <Link href='/about#contact'>
-            <div className='link link-hover'>Contact us</div>
+            <div className='link link-hover'>{home.Footer_Contact}</div>
           </Link>
           {/* <a className='link link-hover'>Corporate Services</a> */}
         </div>
         <div>
-          <span className='footer-title'>Legal</span>
+          <span className='footer-title'>{home.Footer_Legal}</span>
           <Link href='/terms'>
-            <div className='link link-hover'>Terms of use</div>
+            <div className='link link-hover'>{home.Footer_Terms}</div>
           </Link>
           <Link href='/privacy'>
-            <div className='link link-hover'>Privacy policy</div>
+            <div className='link link-hover'>{home.Footer_Privacy}</div>
           </Link>
           <Link href='/cookies'>
-            <div className='link link-hover'>Cookies policy</div>
+            <div className='link link-hover'>{home.Footer_Cookies}</div>
           </Link>
         </div>
       </footer>
@@ -715,11 +706,11 @@ const HomePage = ({ params, dict }) => {
       {/* Copy Right */}
       <footer className='footer footer-center p-4 bg-base-300 text-base-content'>
         <div>
-          <p>Copyright © 2023 - All right reserved by ProEdu Ltd</p>
+          <p>{home.Copyright}</p>
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
