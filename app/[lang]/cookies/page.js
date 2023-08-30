@@ -1,66 +1,71 @@
-"use client";
+'use client';
 
 const termsOfUse = [
   {
-    title: "How do we use cookies?",
+    title: 'Understanding Cookies',
     content:
-      "We use cookies to enhance your browsing experience and provide personalized features on our platform. Some of the ways we use cookies include:",
+      "Cookies are tiny text files placed on your device by websites you visit. They're used for multiple reasons: tracking browsing behavior, customizing user experiences, and serving relevant advertisements.",
   },
   {
-    title: "1. Essential Cookies",
+    title: 'How do we use cookies?',
     content:
-      "These cookies are necessary for the operation of our website. They enable you to navigate the site and use its features, such as accessing secure areas and making payments.",
+      'We use cookies to enhance your browsing experience and provide personalized features on our platform. Some of the ways we use cookies include:',
   },
   {
-    title: "2. Analytical Cookies",
+    title: '1. Essential Cookies',
     content:
-      "We use analytical cookies to collect information about how visitors use our website. This helps us analyze data, improve the performance of our platform, and understand user preferences. The information collected is anonymous and used for statistical purposes only.",
+      "These cookies are foundational for our website's functionality. They're indispensable, ensuring smooth navigation and seamless access to all features. Ensuring user sessions aren't interrupted, maintaining website security, and enabling functions like shopping carts or user logins.",
   },
   {
-    title: "3. Functional Cookies",
+    title: '2. Analytical Cookies',
     content:
-      "Functional cookies allow the website to remember choices you make and provide enhanced features. For example, they may remember your language preferences or customize the appearance of the site based on your settings.",
+      "By offering insights into user behavior, these cookies help us refine and optimize our platform's performance.They fetch data on page visit frequencies, user interaction patterns, and possible site bottlenecks, helping us implement user-preferred features. All collected data remains aggregated, ensuring user anonymity.",
   },
   {
-    title: "4. Advertising Cookies",
+    title: '3. Functional Cookies',
     content:
-      "Advertising cookies are used to deliver personalized advertisements to you based on your interests. These cookies may track your browsing habits across different websites and collect information to provide targeted advertising.",
+      "Functional cookies allow the website to remember choices you make and provide enhanced features. Whether it's remembering your language and region or modifying site visuals according to your preferences, functional cookies adapt our website to cater to your unique choices.",
   },
   {
-    title: "5. Third-Party Cookies",
+    title: '4. Advertising Cookies',
     content:
-      "Our website may contain content and links from third-party websites. These third parties may also place cookies on your device when you interact with their content. We do not have control over the cookies used by these third parties and recommend reviewing their privacy policies for more information.",
+      "Tailoring promotional content to resonate with your interests is the prime function of these cookies. They map your online activity, gauging your interests to curate ads that you'll find most relevant. This tracking spans various websites to form a cohesive user profile for enhanced targeting.",
   },
   {
-    title: "How to manage cookies?",
+    title: '5. Third-Party Cookies',
     content:
-      "You can typically accept or decline cookies, delete existing cookies, and set preferences for future cookie usage through your browser settings. However, please note that disabling or blocking cookies may impact your experience on our website and limit certain functionalities.",
+      'Our website may contain content and links from third-party websites. These third parties may also place cookies on your device when you interact with their content. We do not have control over the cookies used by these third parties and recommend reviewing their privacy policies for more information.',
   },
   {
-    title: "Changes to our Cookies Policy",
+    title: 'How to manage cookies?',
     content:
-      "We may update our Cookies Policy from time to time to reflect any changes in our practices or for legal or regulatory reasons. Any updates will be posted on this page.",
+      'You can typically accept or decline cookies, delete existing cookies, and set preferences for future cookie usage through your browser settings. However, please note that disabling or blocking cookies may impact your experience on our website and limit certain functionalities.',
   },
   {
-    title: "Contact Us",
+    title: 'Changes to our Cookies Policy',
     content:
-      "If you have any questions or concerns about our Cookies Policy, please contact us at Info@proedu.com",
+      'The digital landscape is ever-evolving, prompting us to regularly revisit our Cookies Policy. Changes will primarily arise from technological advancements, improved best practices, or shifts in legal frameworks. Stay updated by frequently checking this section.',
+  },
+  {
+    title: 'Get in Touch',
+    content:
+      'If you have any questions or concerns about our Cookies Policy, please contact us at query@xlearners.io',
   },
 ];
 
 const Cookies = () => {
   return (
-    <div className=" bg-base-000 mx-auto py-10 px-2 sm:px-6 lg:px-8 w-full overflow-x-hidden">
-      <div className="flex justify-center items-center text-3xl font-bold">
+    <div className=' bg-base-000 mx-auto py-10 px-2 sm:px-6 lg:px-8 w-full overflow-x-hidden'>
+      <div className='flex justify-center items-center text-3xl font-bold'>
         Cookies Policy
       </div>
       {termsOfUse.map((item) => (
-        <div key={item.title} className="">
+        <div key={item.title} className=''>
           <ol>
             <li>
-              <h3 className="text-xl font-bold py-5">{item.title}</h3>
+              <h3 className='text-xl font-bold py-5'>{item.title}</h3>
             </li>
-            <li className="text-sm pb-1">{item.content}</li>
+            <li className='text-sm pb-1'>{item.content}</li>
           </ol>
         </div>
       ))}

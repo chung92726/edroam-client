@@ -1,15 +1,15 @@
-import { i18n } from '@/next-i18next.config'
-import { getDictionary } from './dictionaries.js'
+import { i18n } from '@/next-i18next.config';
+import { getDictionary } from './dictionaries.js';
 
-import HomePage from '@/components/homePage/Home'
+import HomePage from '@/components/homePage/Home';
 
 const Home = async ({ params: { lang } }) => {
-  const dict = await getDictionary(lang)
+  const { home } = await getDictionary(lang);
   return (
     <>
-      <HomePage dict={dict} />
+      <HomePage home={home} />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
