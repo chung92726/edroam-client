@@ -151,6 +151,12 @@ const StickyBar = ({
 }
 
 const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
+  const urlParams = new URLSearchParams(window.location.search)
+  const referralCode = urlParams.get('cref')
+
+  if (referralCode) {
+    sessionStorage.setItem('courseReferralCode', referralCode)
+  }
   const [course, setCourse] = useState({})
   const [videoPlay, setVideoPlay] = useState(false)
   const [preview, setPreview] = useState('')
@@ -294,10 +300,13 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
   const handlePaidEnrollment = async (e) => {
     e.preventDefault()
     setLoading(true)
+    const referralCode = sessionStorage.getItem('referralCode')
     try {
       if (!user) router.push('/login')
       if (enroll.status)
-        return router.push(`/user/course/${enroll.course.slug}`)
+        return router.push(
+          `/user/course/${enroll.course.slug}/?cref=${referralCode}`
+        )
       const { data } = await axios.post(`/api/paid-enrollment/${course._id}`)
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
       stripe.redirectToCheckout({ sessionId: data })

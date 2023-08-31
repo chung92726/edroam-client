@@ -8,12 +8,14 @@ import AddLessonForm from '@/components/form/AddLessonForm'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 import { AiFillEdit } from 'react-icons/ai'
+import { generateCourseDirectLink, copyToClipboard } from '@/utils/helpers'
 
 const CourseView = ({ params }) => {
   const [course, setCourse] = useState('')
   const video_input = useRef()
   const router = useRouter()
   const supplementary_input = useRef()
+  const [directLink, setDirectLink] = useState('')
   const { slug } = params
   useEffect(() => {
     loadCourse()
@@ -36,6 +38,13 @@ const CourseView = ({ params }) => {
     file_type: 'pdf',
     uploading: false,
   })
+  const handleCopyClick = () => {
+    copyToClipboard(directLink)
+    toast.success('Link Copied')
+  }
+  const generateDirectLink = () => {
+    setDirectLink(generateCourseDirectLink(course.slug, course.referralCode))
+  }
 
   const handleAddLesson = async (e) => {
     // e.preventDefault()
@@ -68,6 +77,7 @@ const CourseView = ({ params }) => {
   const loadCourse = async () => {
     try {
       const { data } = await axios.get(`/api/course/${slug}`)
+      console.log(data)
       setCourse(data)
       // console.log(data.lessons.length)
     } catch (err) {
@@ -226,6 +236,7 @@ const CourseView = ({ params }) => {
   useEffect(() => {
     course && getStudentCount()
     course && getTotalRevanue()
+    course && generateDirectLink()
     // console.log(totalRevenue)
   }, [course])
 
@@ -233,15 +244,11 @@ const CourseView = ({ params }) => {
   //   console.log(values)
   // }, [values])
 
-  useEffect(() => {
-    console.log(course)
-  }, [course])
-
   return (
     <>
       {course && (
-        <div className='flex flex-col items-center mb-10 mt-10 overflow-hidden'>
-          <div className='card-side w-11/12 max-w-screen-lg lg:card-side bg-base-100 shadow-xl mt-6'>
+        <div className='flex flex-col items-center mb-10 mt-5 overflow-hidden'>
+          <div className='card-side w-11/12 max-w-screen-lg lg:card-side bg-base-100 shadow-xl mt-6 pt-5 rounded-xl'>
             <dialog id='my_modal' className='modal'>
               <form method='dialog' className='modal-box relative'>
                 <div className='flex justify-end text-red-600 mb-4'>
@@ -325,6 +332,27 @@ const CourseView = ({ params }) => {
                 </div>
               </div>
               {/* <h1 className='card-title mt-2'>Course Name:</h1> */}
+              {course && course.published && (
+                <div className='rounded-lg border-2 px-4 py-2 bg-slate-200'>
+                  <h2 className='font-bold text-[18px] my-2'>
+                    Direct Link for This Course
+                  </h2>
+                  <div className='flex flex-row justify-between items-center my-4'>
+                    <input
+                      type='text'
+                      readOnly
+                      value={directLink}
+                      className='w-11/12 bg-slate-400 font-bold rounded-lg py-3 px-2 border-2 text-white'
+                    />
+                    <button
+                      onClick={handleCopyClick}
+                      className='btn btn-primary mx-2'
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              )}
               <h1 className='card-title mt-2'>{course.name}</h1>
               {/* <h1 className='card-title mt-2'>Course Short Description:</h1> */}
               <div className='py-6'>{course.description}</div>

@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Link from 'next/link'
-import { Context } from '../../context/index'
+import { Context } from '@/context/index'
 import { useRouter } from 'next/navigation'
 
 const forgotPassword = () => {
