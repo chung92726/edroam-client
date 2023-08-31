@@ -38,5 +38,18 @@
     "Footer_Privacy": "Privacy policy",
     "Footer_Cookies": "Cookies policy",
     "Copyright": "Copyright © 2023 - All right reserved by XLearners"
+  },
+  "register": {
+    "title":"Register and Start Learning",
+    "send_offers":"Send me special offers, recommendations and learning tips.",
+    "T_C":"By signing up, you agree to our Terms of Use and Privacy Policy.",
+    "hv_acc":"Already have an account ?"
+  },
+  "login":{
+    "log_in": "Login", 
+    "or": "Or",
+    "forgot_password": "Forgot Password",
+    "hv_acc":"Don't have an account ?",
+    "signup":"Sign up"
   }
 }
