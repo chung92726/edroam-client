@@ -46,10 +46,11 @@
     "hv_acc": "已经注册账号了吗？"
     },
     "login":{
-      "log_in": "Login", 
-      "or": "Or",
-      "forgot_password": "Forgot Password",
-      "hv_acc":"Don't have an account ?",
-      "signup":"Sign up"
-    }
+      "log_in": "登录", 
+      "or": "或",
+      "forgot_password": "忘记密码",
+      "hv_acc":"还没有帐号吗？",
+      "signup":"注册帐号"
+}
+
 }
