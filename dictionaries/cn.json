@@ -38,5 +38,19 @@
     "Footer_Privacy": "隐私政策",
     "Footer_Cookies": "Cookie 政策",
     "Copyright": "版权所有 © 2023 - XLearners"
-  }
+  }, 
+  "register": {
+    "title": "注册并开始学习",
+    "send_offers": "发送特别优惠、课程推荐及学习提示给我。",
+    "T_C": "注册即表示您同意我们的使用条款和隐私政策。",
+    "hv_acc": "已经注册账号了吗？"
+    },
+    "login":{
+      "log_in": "登录", 
+      "or": "或",
+      "forgot_password": "忘记密码",
+      "hv_acc":"还没有帐号吗？",
+      "signup":"注册帐号"
+}
+
 }

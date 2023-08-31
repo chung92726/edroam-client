@@ -38,5 +38,19 @@
     "Footer_Privacy": "私隱政策",
     "Footer_Cookies": "Cookie 政策",
     "Copyright": "版權所有 © 2023 - XLearners"
-  }
+  },
+  "register": {
+    "title": "註冊並開始學習",
+    "send_offers": "傳送特別優惠、課程推薦及學習貼士給我。",
+    "T_C": "註冊即表示您同意我們的使用條款和隱私政策。",
+    "hv_acc": "已經註冊帳號了嗎？"
+    },
+    "login":{
+      "log_in": "登入", 
+      "or": "或",
+      "forgot_password": "忘記密碼",
+      "hv_acc":"還沒有帳號嗎？",
+      "signup":"註冊帳號"
+}
+
 }
