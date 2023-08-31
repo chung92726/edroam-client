@@ -31,3 +31,23 @@ export const getNumberOfDays = (start, end) => {
 
   return diffInDays
 }
+
+export const generateCourseDirectLink = (courseSlug, referralCode) => {
+  return `localhost:3000/course/${courseSlug}?cref=${referralCode}`
+}
+
+export const copyToClipboard = (text) => {
+  // Create a temporary textarea element
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  document.body.appendChild(textarea)
+
+  // Select the content
+  textarea.select()
+
+  // Copy the selected content
+  document.execCommand('copy')
+
+  // Remove the temporary textarea
+  document.body.removeChild(textarea)
+}
