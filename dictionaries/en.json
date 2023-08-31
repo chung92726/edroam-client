@@ -40,16 +40,28 @@
     "Copyright": "Copyright © 2023 - All right reserved by XLearners"
   },
   "register": {
-    "title":"Register and Start Learning",
-    "send_offers":"Send me special offers, recommendations and learning tips.",
-    "T_C":"By signing up, you agree to our Terms of Use and Privacy Policy.",
-    "hv_acc":"Already have an account ?"
+    "title": "Register and Start Learning",
+    "send_offers": "Send me special offers, recommendations and learning tips.",
+    "T_C": "By signing up, you agree to our Terms of Use and Privacy Policy.",
+    "hv_acc": "Already have an account ?"
   },
-  "login":{
-    "log_in": "Login", 
+  "login": {
+    "log_in": "Login",
     "or": "Or",
     "forgot_password": "Forgot Password",
-    "hv_acc":"Don't have an account ?",
-    "signup":"Sign up"
+    "hv_acc": "Don't have an account ?",
+    "signup": "Sign up"
+  },
+  "user": {
+    "changePwPage": {
+      "toast_not_match": "Passwords do not match",
+      "toast_updated": "password updated successfully",
+      "toast_failed": "password update failed try again later",
+      "Change_Password": "Change Password",
+      "Old_Password": "Old Password",
+      "New_Password": "New Password",
+      "Confirm_Password": "Confirm Password",
+      "Save_Changes": "Save Changes"
+    }
   }
 }
