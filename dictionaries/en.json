@@ -82,6 +82,10 @@
     "officehr_2":"Mon - Fri",
     "officehr_3":"0900 - 1800"
   },
+  "mkt_place": {
+
+  },
+  
   "userRoute": {
     "My_Learning": "My Learning",
     "My_Profile": "My Profile",
