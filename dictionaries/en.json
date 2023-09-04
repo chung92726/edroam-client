@@ -65,6 +65,23 @@
     "PlaceholderEmail": "Email",
     "PlaceholderPw": "Password"
   },
+  "about":{
+    "unlock": "Unlock Your Creative Potential in the Digital World!",
+    "aboutus": "About Us",
+    "welcome": "Welcome to XLearners, the ultimate online learning destination for digital designers! Whether you're a beginner taking your first steps into the exciting world of digital design or an experienced professional looking to refine your skills, we're here to empower you on your creative journey.",
+    "why": "At XLearners, we offer a diverse range of comprehensive video tutorials in Website Design, UI/UX and Graphic Design and more. Our carefully curated courses are crafted by industry experts, ensuring that you receive top-quality instruction and practical knowledge that you can immediately apply to your projects.",
+    "mission": "Our mission is to provide an interactive and immersive learning experience, equipping you with the tools and techniques needed to thrive in the fast-paced digital landscape. Our user-friendly platform makes it easy to navigate through our extensive course library, allowing you to tailor your learning path to your specific interests and goals.",
+    "vision": "We believe that creativity knows no boundaries, which is why ProEdu is accessible to learners from all walks of life. Whether you prefer to learn at your own pace or engage in collaborative discussions with fellow designers, our platform provides the flexibility and support you need to succeed.",
+    "joinus": "Join our vibrant community of digital designers and unlock your creative potential today. Together, let's embark on an inspiring journey where innovation and imagination take center stage. Get ready to create, design, and bring your ideas to life with XLearners!",
+    "contactus": "Contact Us",
+    "emailcolon": "Email:    ",
+    "email": "info@x-learners.com",
+    "phonecolon": "Phone:    ",
+    "phone":"+852 2408 3103",
+    "officehr_1":"Our office hours is",
+    "officehr_2":"Mon - Fri",
+    "officehr_3":"0900 - 1800"
+  },
   "userRoute": {
     "My_Learning": "My Learning",
     "My_Profile": "My Profile",
