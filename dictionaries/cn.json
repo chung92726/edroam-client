@@ -82,6 +82,28 @@
     "officehr_2": "周一至周五",
     "officehr_3": "0900 - 1800"
   },
+  "mkt_place": {
+    "result4": "搜索结果为 ",
+    "all_cat": "所有分类",
+    "web_des": "网页设计",
+    "uiux_des": "UI/UX 设计",
+    "graphic_des": "平面设计",
+    "threed_mod": "3D 建模",
+    "video_edit": "视频剪辑",
+    "others": "其他",
+    "all_level": "所有级别",
+    "beginner": "初学者",
+    "intermediate": "進階",
+    "expert": "专家",
+    "all_lang": "所有语言",
+    "eng": "英语",
+    "chi": "中文",
+    "sort_by": "排序方式",
+    "lowest_price": "按最低价格",
+    "latest_created": "按最新创建",
+    "latest_updated": "按最新更新",
+    "price": "费用："
+  },
   "userRoute": {
     "My_Learning": "我的课堂",
     "My_Profile": "我的资料",

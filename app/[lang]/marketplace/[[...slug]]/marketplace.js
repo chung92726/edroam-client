@@ -137,7 +137,7 @@ const marketplace = ({ params }) => {
         {localSearchQuery && (
           <div className='flex font-bold text-2xl mx-[1.5vw] my-2 w-[90vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'>
             <span>
-            Result for 
+            {mkt_place.result4}
               </span>
               "{localSearchQuery}"
           </div>
@@ -160,45 +160,45 @@ const marketplace = ({ params }) => {
           onChange={handleCategory}
           value={categoryQuery}
         >
-          <option value=''>All Category</option>
-          <option value='WebDesign'>Web Design</option>
-          <option value='UIUXDesign'>UI/UX Design</option>
-          <option value='GraphicDesign'>Graphic Design</option>
-          <option value='3DModeling'>3D Modeling</option>
-          <option value='VideoEditing'>Video Editing</option>
-          <option value='Others'>Others</option>
+          <option value=''>{mkt_place.all_cat}</option>
+          <option value='WebDesign'>{mkt_place.web_des}</option>
+          <option value='UIUXDesign'>{mkt_place.uiux_des}</option>
+          <option value='GraphicDesign'>{mkt_place.graphic_des}</option>
+          <option value='3DModeling'>{mkt_place.threed_mod}</option>
+          <option value='VideoEditing'>{mkt_place.video_edit}</option>
+          <option value='Others'>{mkt_place.others}</option>
         </select>
         <select
           className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[12vw] 2xl:mx-[0.5vw]'
           onChange={(e) => setLevelQuery(e.target.value)}
           value={levelQuery}
         >
-          <option value=''>All Levels</option>
-          <option value='Beginner'>Beginner</option>
-          <option value='Intermediate'>Intermediate</option>
-          <option value='Expert'>Expert</option>
+          <option value=''>{mkt_place.all_level}</option>
+          <option value='Beginner'>{mkt_place.beginner}</option>
+          <option value='Intermediate'>{mkt_place.intermediate}</option>
+          <option value='Expert'>{mkt_place.expert}</option>
         </select>
         <select
           className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'
           onChange={(e) => setLangQuery(e.target.value)}
           value={langQuery}
         >
-          <option value=''>All Language</option>
-          <option value='English'>English</option>
-          <option value='Chinese'>Chinese</option>
+          <option value=''>{mkt.all_lang}</option>
+          <option value='English'>{mkt_place.eng}</option>
+          <option value='Chinese'>{mkt_place.chi}</option>
         </select>
         <select
           className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[10vw] 2xl:mx-[0.5vw]'
           onChange={(e) => setSortBy(e.target.value)}
           value={sortBy}
         >
-          <option value=''>Sort By</option>
-          <option value='price'>By lowest price</option>
-          <option value='-created'>By lastest created</option>
-          <option value='-updated'>By lastest updated</option>
+          <option value=''>{mkt_place.sort_by}</option>
+          <option value='price'>{mkt_place.lowest_price}</option>
+          <option value='-created'>{mkt_place.latest_price}</option>
+          <option value='-updated'>{mkt_place.latest_updated}</option>
         </select>
         <div className='flex flex-row justify-center items-center mx-[1.5vw] my-2 h-[3rem] w-[86vw] sm:w-[59vw] 2xl:w-[20vw] 2xl:mx-[0.5vw]'>
-          <h1 className='mx-[1vw] my-2 2xl:mx-[0.5vw]'>Price:</h1>
+          <h1 className='mx-[1vw] my-2 2xl:mx-[0.5vw]'>{mkt_place.price}</h1>
           <input
             type='range'
             min={-0.01}
