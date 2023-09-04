@@ -156,7 +156,7 @@ const Login = ({ login }) => {
             {loading ? (
               <span className='loading loading-spinner loading-md'></span>
             ) : (
-              [`${login.log_in}`]
+              `${login.Login}`
             )}
           </button>
           <div className='w-full max-w-sm my-3'>

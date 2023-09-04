@@ -65,7 +65,7 @@
     "PlaceholderEmail": "電郵地址",
     "PlaceholderPw": "密碼"
   },
-  "about":{
+  "about": {
     "unlock": "在數位世界中開發您的創意潛力！",
     "aboutus": "關於我們",
     "welcome": "歡迎來到 XLearners，數位設計師的最佳線上學習平台！無論您是想踏出成為數位設計師第一步的初學者，還是經驗豐富想要提升技能的專業人士，我們會助您發展屬於您的創意之旅。",
@@ -77,11 +77,11 @@
     "emailcolon": "電子郵件：",
     "email": "info@x-learners.com",
     "phonecolon": "電話號碼：",
-    "phone":"+852 2408 3103",
-    "officehr_1":"我們的辦公時間是",
-    "officehr_2":"週一至週五",
-    "officehr_3":"0900 - 1800"
-},
+    "phone": "+852 2408 3103",
+    "officehr_1": "我們的辦公時間是",
+    "officehr_2": "週一至週五",
+    "officehr_3": "0900 - 1800"
+  },
   "userRoute": {
     "My_Learning": "我的課堂",
     "My_Profile": "我的資料",
@@ -113,6 +113,38 @@
     "By": "創作者",
     "Learn": "立即開始!"
   },
+  "userBeInstructorPage": {
+    "toast_updated": "成功更新個人資料。",
+    "toast_failed": "更新失敗。請稍後再試。",
+    "Upload_ProfileImg": "上傳新的用戶圖片",
+    "Notice": "(*請注意*：只有您提供的名稱、個人簡介和社交媒體鏈結會對外公開。)",
+    "Email": "電郵地址",
+    "Name": "名稱",
+    "Male": "男性",
+    "Female": "女性",
+    "Age": "年齡",
+    "ChooseAge": "--選擇年齡範圍--",
+    "To": "至",
+    "Over": "或以上",
+    "Website": "網站",
+    "Placeholder_eg": "例： ",
+    "Youtube": "Youtube",
+    "Facebook": "Facebook",
+    "Instagram": "Instagram",
+    "Twitter": "Twitter / X",
+    "Wechat": "微信",
+    "WechatId": "微信ID",
+    "Tiktok": "抖音",
+    "Contact_no": "聯絡電話",
+    "Bio": "個人簡介",
+    "Bio_Placeholder": "簡述您的背景、專業知識和資歷等",
+    "TeachExp": "教學經驗",
+    "TeachExp_Placeholder": "簡述您的教學經驗",
+    "Course_Detail": "課程摘要",
+    "Course_Detail_Placeholder": "簡述您即將要創建的課程內容",
+    "Loading": "加載中...",
+    "Continue": "繼續"
+  },
   "userProfilePage": {
     "toast_updated": "成功更新個人資料。",
     "toast_failed": "更新失敗。請稍後再試。",
@@ -137,7 +169,7 @@
     "Contact_no": "聯絡電話",
     "Phone_no": "電話號碼",
     "Bio": "個人簡介",
-    "Bio_Placeholder": "簡述您的背景、專業知識和資格",
+    "Bio_Placeholder": "簡述您的背景、專業知識和資歷等",
     "Loading": "加載中...",
     "Save": "儲存更變"
   },

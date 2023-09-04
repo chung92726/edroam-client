@@ -65,7 +65,7 @@
     "PlaceholderEmail": "Email",
     "PlaceholderPw": "Password"
   },
-  "about":{
+  "about": {
     "unlock": "Unlock Your Creative Potential in the Digital World!",
     "aboutus": "About Us",
     "welcome": "Welcome to XLearners, the ultimate online learning destination for digital designers! Whether you're a beginner taking your first steps into the exciting world of digital design or an experienced professional looking to refine your skills, we're here to empower you on your creative journey.",
@@ -77,10 +77,10 @@
     "emailcolon": "Email:    ",
     "email": "info@x-learners.com",
     "phonecolon": "Phone:    ",
-    "phone":"+852 2408 3103",
-    "officehr_1":"Our office hours is",
-    "officehr_2":"Mon - Fri",
-    "officehr_3":"0900 - 1800"
+    "phone": "+852 2408 3103",
+    "officehr_1": "Our office hours is",
+    "officehr_2": "Mon - Fri",
+    "officehr_3": "0900 - 1800"
   },
   "userRoute": {
     "My_Learning": "My Learning",
@@ -113,6 +113,38 @@
     "By": "By",
     "Learn": "LEARN NOW!"
   },
+  "userBeInstructorPage": {
+    "toast_updated": "Profile updated successfully.",
+    "toast_failed": "Profile update failed. Please try again later.",
+    "Upload_ProfileImg": "Upload a New Profile Image",
+    "Notice": "(*Please note*: Only your Name, Biography, and the social media links you provided will be visible to the public.)",
+    "Email": "Email",
+    "Name": "Name",
+    "Male": "Male",
+    "Female": "Female",
+    "Age": "Age",
+    "ChooseAge": "--Choose an age range--",
+    "To": "to",
+    "Over": "or above",
+    "Website": "Website",
+    "Placeholder_eg": "e.g. ",
+    "Youtube": "Youtube",
+    "Facebook": "Facebook",
+    "Instagram": "Instagram",
+    "Twitter": "Twitter / X",
+    "Wechat": "WeChat",
+    "WechatId": "WeChat ID",
+    "Tiktok": "TikTok",
+    "Contact_no": "Contact Number",
+    "Bio": "Biography",
+    "Bio_Placeholder": "A brief description of your background, expertise, and qualifications",
+    "TeachExp": "Teaching experience",
+    "TeachExp_Placeholder": "A brief description of your teaching experience",
+    "Course_Detail": "Course Details",
+    "Course_Detail_Placeholder": "A brief description of the Course you want to create",
+    "Loading": "loading...",
+    "Continue": "Continue"
+  },
   "userProfilePage": {
     "toast_updated": "Profile updated successfully.",
     "toast_failed": "Profile update failed. Please try again later.",
@@ -131,7 +163,7 @@
     "Youtube": "Youtube",
     "Facebook": "Facebook",
     "Instagram": "Instagram",
-    "Twitter": "Twitter",
+    "Twitter": "Twitter / X",
     "Wechat": "WeChat",
     "Tiktok": "TikTok",
     "Contact_no": "Contact Number",
