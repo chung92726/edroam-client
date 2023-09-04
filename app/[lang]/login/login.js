@@ -1,94 +1,94 @@
-'use client'
+'use client';
 
-import { useState, useContext, useEffect } from 'react'
-import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify'
-import Link from 'next/link'
-import { Context } from '@/context/index'
-import { useRouter } from 'next/navigation'
-import { FacebookLoginButton } from 'react-social-login-buttons'
-import { GoogleLoginButton } from 'react-social-login-buttons'
+import { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import Link from 'next/link';
+import { Context } from '@/context/index';
+import { useRouter } from 'next/navigation';
+import { FacebookLoginButton } from 'react-social-login-buttons';
+import { GoogleLoginButton } from 'react-social-login-buttons';
 
-const Login = ({login}) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+const Login = ({ login }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   //   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const router = useRouter()
+  const router = useRouter();
 
   // global state
-  const { state, dispatch } = useContext(Context)
-  const { user } = state
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
   useEffect(() => {
-    if (user !== null) router.push('/user')
-  }, [user])
+    if (user !== null) router.push('/user');
+  }, [user]);
 
   const handleFacebookLogin = async () => {
     try {
-      const res = await axios.get('/api/auth/facebook')
-      console.log('FACEBOOK LOGIN RESPONSE', res)
-      toast.success('Login Successful')
+      const res = await axios.get('/api/auth/facebook');
+      console.log('FACEBOOK LOGIN RESPONSE', res);
+      toast.success(`${login.LoginSuccess}`);
       // save in local storage => the browser
-      window.localStorage.setItem('user', JSON.stringify(res.data))
+      window.localStorage.setItem('user', JSON.stringify(res.data));
       // save in context
       dispatch({
         type: 'LOGIN',
         payload: res.data,
-      })
+      });
       // redirect
-      router.push('/user')
+      router.push('/user');
     } catch (err) {
-      toast.error('Falied to login with facebook')
+      toast.error(`${login.FaliedtoLoginFb}`);
     }
-  }
+  };
   const handleGoogleLogin = async () => {
     try {
-      const res = await axios.get('/api/auth/google')
-      console.log('GOOGLE LOGIN RESPONSE', res)
-      toast.success('Login Successful')
+      const res = await axios.get('/api/auth/google');
+      console.log('GOOGLE LOGIN RESPONSE', res);
+      toast.success(`${login.LoginSuccess}`);
       // save in local storage => the browser
-      window.localStorage.setItem('user', JSON.stringify(res.data))
+      window.localStorage.setItem('user', JSON.stringify(res.data));
       // save in context
       dispatch({
         type: 'LOGIN',
         payload: res.data,
-      })
+      });
       // redirect
-      router.push('/user')
+      router.push('/user');
     } catch (err) {
-      toast.error('Falied to login with google')
+      toast.error(`${login.FaliedtoLoginGlg}`);
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // console.table({ name, email, password })
-    setLoading(true)
+    setLoading(true);
     try {
       const { data } = await axios.post(`/api/login`, {
         email,
         password,
-      })
+      });
       dispatch({
         type: 'LOGIN',
         payload: data,
-      })
+      });
       // save in local storage => the browser
-      window.localStorage.setItem('user', JSON.stringify(data))
+      window.localStorage.setItem('user', JSON.stringify(data));
 
-      toast.success('Login in successfully')
-      setEmail('')
-      setPassword('')
+      toast.success(`${login.LoginSuccess}`);
+      setEmail('');
+      setPassword('');
       // console.log(data)
-      setLoading(false)
-      router.push('/user')
+      setLoading(false);
+      router.push('/user');
     } catch (err) {
-      toast.error(err.response.data)
-      setLoading(false)
+      toast.error(err.response.data);
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -100,18 +100,21 @@ const Login = ({login}) => {
           className='justify-center items-center form-control'
         >
           <div className='w-full max-w-sm my-2 flex'>
-            <h2 className='text-base font-bold mx-2'>{login.log_in}</h2>
+            <h2 className='text-base font-bold mx-2'>{login.Login}</h2>
           </div>
           <a href='/api/auth/facebook' className='w-full max-w-sm'>
             <FacebookLoginButton
               className='w-full max-w-sm my-3 font-bold'
+              placeholder={login.LoginFb}
               style={{
                 fontSize: '16px',
 
                 borderRadius: '5px',
                 boxShadow: 'rgba(0, 0, 0, 0.8) 2px 2px 5px',
               }}
-            />
+            >
+              <span>{login.LoginFb}</span>
+            </FacebookLoginButton>
           </a>
           <a href='/api/auth/google' className='w-full max-w-sm'>
             <GoogleLoginButton
@@ -121,13 +124,15 @@ const Login = ({login}) => {
                 borderRadius: '5px',
                 boxShadow: 'rgba(0, 0, 0, 0.8) 2px 2px 5px',
               }}
-            />
+            >
+              <span>{login.LoginGlg}</span>
+            </GoogleLoginButton>
           </a>
           <span className='border-b border-black-500 my-3 w-full max-w-sm justify-center items-center'></span>
           <input
             type='email'
             alt='email'
-            placeholder='Email'
+            placeholder={login.PlaceholderEmail}
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -136,7 +141,7 @@ const Login = ({login}) => {
           <input
             type='password'
             alt='password'
-            placeholder='Password'
+            placeholder={login.PlaceholderPw}
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -151,27 +156,27 @@ const Login = ({login}) => {
             {loading ? (
               <span className='loading loading-spinner loading-md'></span>
             ) : (
-              'Login'
+              [`${login.log_in}`]
             )}
           </button>
           <div className='w-full max-w-sm my-3'>
             <p className='mx-2 text-[12px] text-center'>
-              {login.or}{' '}
+              {login.Or}{' '}
               <Link href='/forgot-password' className='link link-primary'>
-                {login.forgot_password}
+                {login.Forgot_Pw}
               </Link>
             </p>
             <p className='text-center text-[14px] my-2'>
-              {login.hv_acc}{' '}
+              {login.Have_Acc}{' '}
               <Link href='/register' className='link link-primary'>
-                {login.signup}
+                {login.Signup}
               </Link>
             </p>
           </div>
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

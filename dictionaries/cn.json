@@ -25,11 +25,11 @@
     "Footer_descr": "顶尖的学习体验可以成就更多的人才",
     "Browse_Course": "浏览课程",
     "All_Course": "所有课程",
-    "WebDesign": "网页设计",
+    "WebDesign": "网页设计课程",
     "UIUX_Design_Courses": "用户界面/用户体验设计课程",
     "Graphic_Design": "平面设计课程",
     "ThreeD_Modelling_Courses": "3D 建模课程",
-    "Video_Editing_Courses": "影片编辑课程",
+    "Video_Editing_Courses": "视频编辑课程",
     "Footer_Company": "企业",
     "Footer_About": "关于我们",
     "Footer_Contact": "联络我们",
@@ -40,28 +40,78 @@
     "Copyright": "版权所有 © 2023 - XLearners"
   },
   "register": {
-    "title": "注册并开始学习",
-    "send_offers": "发送特别优惠、课程推荐及学习提示给我。",
+    "Title": "注册并开始学习",
+    "Send_Offers": "发送特别优惠、课程推荐及学习提示给我。",
     "T_C": "注册即表示您同意我们的使用条款和隐私政策。",
-    "hv_acc": "已经注册账号了吗？"
+    "Have_Acc": "已经注册账号了吗？",
+    "RegSuccess": "成功注册账号。请登录。",
+    "PlaceholderName": "帐号名称",
+    "PlaceholderEmail": "电子邮箱",
+    "PlaceholderPw": "密码",
+    "PlaceholderRegister": "注册账号",
+    "Login": "登录"
   },
   "login": {
-    "log_in": "登录",
-    "or": "或",
-    "forgot_password": "忘记密码",
-    "hv_acc": "还没有帐号吗？",
-    "signup": "注册帐号"
+    "Login": "登录",
+    "Or": "或",
+    "Forgot_Pw": "忘记密码",
+    "Have_Acc": "还没有帐号吗？",
+    "Signup": "注册帐号",
+    "FaliedtoLoginFb": "无法连接 Facebook",
+    "FaliedtoLoginGlg": "无法连接 Google",
+    "LoginSuccess": "成功登录",
+    "LoginFb": "连接 Facebook 登录",
+    "LoginGlg": "连接 Google 登录",
+    "PlaceholderEmail": "电子邮箱",
+    "PlaceholderPw": "密码"
+  },
+  "userRoute": {
+    "My_Learning": "我的课堂",
+    "My_Profile": "我的资料",
+    "Change_Pw": "更改密码",
+    "Enrol_History": "课堂购买记录"
+  },
+  "userMyLearning": {
+    "My_Learning": "我的课堂",
+    "PlaceholderSearch": "搜索课堂...",
+    "PlaceholderAll_Cat": "所有类别",
+    "PlaceholderWebDesign": "网页设计课程",
+    "PlaceholderUIUX": "用户界面/用户体验设计课程",
+    "PlaceholderGraph": "平面设计课程",
+    "Placeholder3D": "3D 建模课程",
+    "PlaceholderVideo": "视频编辑课程",
+    "PlaceholderOthers": "其他",
+    "PlaceholderAll_Lvls": "所有级别",
+    "PlaceholderBeginner": "初学者",
+    "PlaceholderInter": "中级",
+    "PlaceholderExpert": "高级",
+    "PlaceholderAll_Lang": "所有语言",
+    "PlaceholderEng": "英语",
+    "PlaceholderCn": "中文",
+    "PlaceholderSort": "排序方式",
+    "PlaceholderLast_Create": "最新创建",
+    "PlaceholderLast_Update": "最新更新",
+    "Complete": "完成度",
+    "Lessons": "课",
+    "By": "创作者",
+    "Learn": "立即开始!"
   },
   "user": {
     "changePwPage": {
       "toast_not_match": "密码不匹配",
-      "toast_updated": "成功密码更新",
+      "toast_updated": "成功更新密码",
       "toast_failed": "密码更新失败，请再尝试",
       "Change_Password": "更改密码",
       "Old_Password": "旧密码",
       "New_Password": "新密码",
       "Confirm_Password": "确认密码",
       "Save_Changes": "储存更变"
+    },
+    "historyPage": {
+      "Columns_Course_Name": "课堂名称",
+      "Columns_Price": "价格",
+      "Columns_Date": "日期",
+      "My_Enrol_History": "我的课堂购买记录"
     }
   }
 }

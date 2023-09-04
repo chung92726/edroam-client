@@ -1,11 +1,11 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
-import { Context } from '@/context/index';
+
+import { useState } from 'react';
 import UserRoute from '@/components/routes/UserRoutes';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const ChangePasswordPage = ({ user }) => {
+const ChangePasswordPage = ({ user, userRoute }) => {
   const [values, setValues] = useState({
     oldPassword: '',
     newPassword: '',
@@ -39,7 +39,7 @@ const ChangePasswordPage = ({ user }) => {
     }
   };
   return (
-    <UserRoute>
+    <UserRoute userRoute={userRoute}>
       <div className='flex flex-col justify-center items-start bg-gray-700 text-white font-bold w-full py-[30px] md:py-[50px]'>
         <h1 className='text-2xl pl-10 md:text-4xl'>
           {user.changePwPage.Change_Password}

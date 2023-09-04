@@ -40,17 +40,89 @@
     "Copyright": "Copyright © 2023 - All right reserved by XLearners"
   },
   "register": {
-    "title": "Register and Start Learning",
-    "send_offers": "Send me special offers, recommendations and learning tips.",
+    "Title": "Register and Start Learning",
+    "Send_Offers": "Send me special offers, recommendations and learning tips.",
     "T_C": "By signing up, you agree to our Terms of Use and Privacy Policy.",
-    "hv_acc": "Already have an account ?"
+    "Have_Acc": "Already have an account ?",
+    "RegSuccess": "Account Registred Successfully. Please Login.",
+    "PlaceholderName": "Name",
+    "PlaceholderEmail": "Email",
+    "PlaceholderPw": "Password",
+    "PlaceholderRegister": "Register",
+    "Login": "Login"
   },
   "login": {
-    "log_in": "Login",
-    "or": "Or",
-    "forgot_password": "Forgot Password",
-    "hv_acc": "Don't have an account ?",
-    "signup": "Sign up"
+    "Login": "Login",
+    "Or": "Or",
+    "Forgot_Pw": "Forgot Password",
+    "Have_Acc": "Don't have an account ?",
+    "Signup": "Sign up",
+    "FaliedtoLoginFb": "Falied to login with Facebook",
+    "FaliedtoLoginGlg": "Falied to login with Google",
+    "LoginSuccess": "Login successfully",
+    "LoginFb": "login with Facebook",
+    "LoginGlg": "login with Google",
+    "PlaceholderEmail": "Email",
+    "PlaceholderPw": "Password"
+  },
+  "userRoute": {
+    "My_Learning": "My Learning",
+    "My_Profile": "My Profile",
+    "Change_Pw": "Change Password",
+    "Enrol_History": "Enrollment History"
+  },
+  "userMyLearning": {
+    "My_Learning": "My Learning",
+    "PlaceholderSearch": "Search...",
+    "PlaceholderAll_Cat": "All Category",
+    "PlaceholderWebDesign": "Web Design",
+    "PlaceholderUIUX": "UI/UX Design",
+    "PlaceholderGraph": "Graphic Design",
+    "Placeholder3D": "3D Modeling",
+    "PlaceholderVideo": "Video Editing",
+    "PlaceholderOthers": "Others",
+    "PlaceholderAll_Lvls": "All Levels",
+    "PlaceholderBeginner": "Beginner",
+    "PlaceholderInter": "Intermediate",
+    "PlaceholderExpert": "Expert",
+    "PlaceholderAll_Lang": "All Language",
+    "PlaceholderEng": "English",
+    "PlaceholderCn": "Chinese",
+    "PlaceholderSort": "Sort By",
+    "PlaceholderLast_Create": "By lastest created",
+    "PlaceholderLast_Update": "By lastest updated",
+    "Complete": "Completed",
+    "Lessons": "lessons",
+    "By": "By",
+    "Learn": "LEARN NOW!"
+  },
+  "userProfilePage": {
+    "toast_updated": "Profile updated successfully.",
+    "toast_failed": "Profile update failed. Please try again later.",
+    "My_Profile": "My Profile",
+    "Upload_ProfileImg": "Upload a New Profile Image",
+    "Email": "Email",
+    "Name": "Name",
+    "Male": "Male",
+    "Female": "Female",
+    "Age": "Age",
+    "ChooseAge": "--Choose an age range--",
+    "To": "to",
+    "Over": "or above",
+    "Website": "Website",
+    "PlaceholderLast_Url": "url",
+    "Youtube": "Youtube",
+    "Facebook": "Facebook",
+    "Instagram": "Instagram",
+    "Twitter": "Twitter",
+    "Wechat": "WeChat",
+    "Tiktok": "TikTok",
+    "Contact_no": "Contact Number",
+    "Phone_no": "Phone Number",
+    "Bio": "Biography",
+    "Bio_Placeholder": "A brief description of your background, expertise, and qualifications",
+    "Loading": "loading...",
+    "Save": "Save Changes"
   },
   "user": {
     "changePwPage": {
@@ -62,6 +134,12 @@
       "New_Password": "New Password",
       "Confirm_Password": "Confirm Password",
       "Save_Changes": "Save Changes"
+    },
+    "historyPage": {
+      "Columns_Course_Name": "Course Name",
+      "Columns_Price": "Price",
+      "Columns_Date": "Date",
+      "My_Enrol_History": "My Enrollment History"
     }
   }
 }
