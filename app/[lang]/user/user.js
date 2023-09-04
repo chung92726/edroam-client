@@ -169,12 +169,10 @@ const UserIndex = ({ userMyLearning, userRoute }) => {
           onChange={(e) => setLevelQuery(e.target.value)}
           value={levelQuery}
         >
-          <option value=''>{userMyLearning.PlaceholderAll_Lvls}</option>
-          <option value='Beginner'>{userMyLearning.PlaceholderBeginner}</option>
-          <option value='Intermediate'>
-            {userMyLearning.PlaceholderInter}
-          </option>
-          <option value='Expert'>{userMyLearning.PlaceholderExpert}</option>
+          <option value=''>{userMyLearning['All Levels']}</option>
+          <option value='Beginner'>{userMyLearning.Beginner}</option>
+          <option value='Intermediate'>{userMyLearning.Intermediate}</option>
+          <option value='Expert'>{userMyLearning.Expert}</option>
         </select>
         <select
           className='select select-bordered mx-[1%] my-2 w-[44%] md:w-[20.5%] 2xl:w-[14%]'
@@ -182,8 +180,8 @@ const UserIndex = ({ userMyLearning, userRoute }) => {
           value={langQuery}
         >
           <option value=''>{userMyLearning.PlaceholderAll_Lang}</option>
-          <option value='English'>{userMyLearning.PlaceholderEng}</option>
-          <option value='Chinese'>{userMyLearning.PlaceholderCn}</option>
+          <option value='English'>{userMyLearning.English}</option>
+          <option value='Chinese'>{userMyLearning.Chinese}</option>
         </select>
         <select
           className='select select-bordered mx-[1%] my-2 w-[44%] md:w-[20.5%] 2xl:w-[14%]'
@@ -264,8 +262,10 @@ const UserIndex = ({ userMyLearning, userRoute }) => {
                       {course.instructor.name}
                     </p>
                   </div>
-                  <p className='text-[12px] '>{course.level}</p>
-                  <p className='text-[12px] '>{course.language}</p>
+                  <p className='text-[12px] '>{userMyLearning[course.level]}</p>
+                  <p className='text-[12px] '>
+                    {userMyLearning[course.language]}
+                  </p>
                   <div className='card-actions justify-end'>
                     <button
                       className='btn btn-sm btn-info text-[12px] filter hover:contrast-50'

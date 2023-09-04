@@ -81,13 +81,13 @@
     "Placeholder3D": "3D 建模課程",
     "PlaceholderVideo": "影片編輯課程",
     "PlaceholderOthers": "其他",
-    "PlaceholderAll_Lvls": "所有級別",
-    "PlaceholderBeginner": "初學者",
-    "PlaceholderInter": "中階",
-    "PlaceholderExpert": "高階",
+    "All Levels": "所有級別",
+    "Beginner": "初學者",
+    "Intermediate": "中階",
+    "Expert": "高階",
     "PlaceholderAll_Lang": "所有語言",
-    "PlaceholderEng": "英語",
-    "PlaceholderCn": "中文",
+    "English": "英語",
+    "Chinese": "中文",
     "PlaceholderSort": "排序方式",
     "PlaceholderLast_Create": "最新創建",
     "PlaceholderLast_Update": "最新更新",
@@ -139,7 +139,8 @@
       "Columns_Course_Name": "課堂名稱",
       "Columns_Price": "價格",
       "Columns_Date": "日期",
-      "My_Enrol_History": "我的課堂購買記錄"
+      "My_Enrol_History": "我的課堂購買記錄",
+      "Free": "免費"
     }
   }
 }

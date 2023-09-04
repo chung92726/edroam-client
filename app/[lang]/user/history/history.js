@@ -37,7 +37,10 @@ const EnrollmentHistory = ({ user, userRoute }) => {
       data.push({
         key: index,
         name: enrollment.course.name,
-        price: enrollment.price > 0 ? `$${enrollment.price}` : 'Free',
+        price:
+          enrollment.price > 0
+            ? `$${enrollment.price}`
+            : `${user.historyPage.Free}`,
         date: new Date(enrollment.createdAt).toLocaleDateString(),
         slug: enrollment.course.name,
       })

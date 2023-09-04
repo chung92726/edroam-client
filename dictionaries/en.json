@@ -81,13 +81,13 @@
     "Placeholder3D": "3D Modeling",
     "PlaceholderVideo": "Video Editing",
     "PlaceholderOthers": "Others",
-    "PlaceholderAll_Lvls": "All Levels",
-    "PlaceholderBeginner": "Beginner",
-    "PlaceholderInter": "Intermediate",
-    "PlaceholderExpert": "Expert",
+    "All Levels": "All Levels",
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Expert": "Expert",
     "PlaceholderAll_Lang": "All Language",
-    "PlaceholderEng": "English",
-    "PlaceholderCn": "Chinese",
+    "English": "English",
+    "Chinese": "Chinese",
     "PlaceholderSort": "Sort By",
     "PlaceholderLast_Create": "By lastest created",
     "PlaceholderLast_Update": "By lastest updated",
@@ -139,7 +139,8 @@
       "Columns_Course_Name": "Course Name",
       "Columns_Price": "Price",
       "Columns_Date": "Date",
-      "My_Enrol_History": "My Enrollment History"
+      "My_Enrol_History": "My Enrollment History",
+      "Free": "Free"
     }
   }
 }

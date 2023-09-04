@@ -1,11 +1,11 @@
 import { getDictionary } from '../dictionaries';
-import UserProfile from './user.js';
+import UserMyLearning from './user.js';
 
 const UserIndex = async ({ params: { lang } }) => {
   const { userMyLearning, userRoute } = await getDictionary(lang);
   return (
     <>
-      <UserProfile userMyLearning={userMyLearning} userRoute={userRoute} />
+      <UserMyLearning userMyLearning={userMyLearning} userRoute={userRoute} />
     </>
   );
 };
