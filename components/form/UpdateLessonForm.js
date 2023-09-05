@@ -36,19 +36,18 @@ const modules = {
 
 const UpdateLessonForm = ({
   course,
-  values,
-  setValues,
+
   currentLesson,
   setCurrentLesson,
   uploading,
-  setUploading,
+
   progress,
   handleUpdateLesson,
   handleVideo,
   signedUrl,
   supplementary,
   setSupplementary,
-  video_input,
+
   handleAddSupplementary,
   handleSupplementary,
   handleSupplementaryRemove,
@@ -209,6 +208,22 @@ const UpdateLessonForm = ({
               <option value={'true'}>Free Preview Video</option>
               <option value={'false'}>Paid to Watch Video</option>
             </select>
+            <div className='w-full max-w-md mx-2 my-2 flex justify-between items-center'>
+              <p className='font-bold text-[14px]'>
+                Lesson Duration (minutes){' '}
+              </p>
+              <input
+                value={currentLesson.duration}
+                className='w-12 border-2 px-2 py-1 rounded-lg text-[12px]'
+                onChange={(e) => {
+                  setCurrentLesson({
+                    ...currentLesson,
+                    duration: e.target.value,
+                  })
+                }}
+                disabled={currentLesson.video ? true : false}
+              ></input>
+            </div>
             {/* <div className='w-full flex justify-start  items-center'>
               <input
                 type='checkbox'

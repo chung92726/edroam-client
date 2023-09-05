@@ -12,12 +12,16 @@ import { AiFillEdit } from 'react-icons/ai'
 import { MdDeleteForever } from 'react-icons/md'
 import { AiOutlineCloseCircle, AiOutlinePlaySquare } from 'react-icons/ai'
 import UpdateLessonForm from '@/components/form/UpdateLessonForm'
+import { calculateVideoDuration, formatDuration } from '@/utils/helpers'
+import { FaPhotoVideo } from 'react-icons/fa'
 
 const CourseView = ({ params }) => {
   const [course, setCourse] = useState('')
   const [currentLesson, setCurrentLesson] = useState({
     title: '',
     content: '',
+    duration: 1,
+    video: {},
   })
   const [signedUrl, setSignedUrl] = useState('')
   const [uploading, setUploading] = useState(false)
@@ -111,6 +115,7 @@ const CourseView = ({ params }) => {
       }
       // upload new video
       const file = e.target.files[0]
+      const durationInMinutes = await calculateVideoDuration(file)
       const videoData = new FormData()
       videoData.append('video', file)
       videoData.append('courseId', course._id)
@@ -124,7 +129,11 @@ const CourseView = ({ params }) => {
         }
       )
       // once response is received
-      setCurrentLesson({ ...currentLesson, video: data })
+      setCurrentLesson({
+        ...currentLesson,
+        video: data,
+        duration: durationInMinutes,
+      })
       setUploading(false)
       setProgress(0)
       toast.success('Video upload successful')
@@ -313,6 +322,20 @@ const CourseView = ({ params }) => {
                           <div className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
                             {lesson && lesson.title}
                           </div>
+                          <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
+                            {lesson.video ? (
+                              <div className='flex justify-start items-center gap-2'>
+                                <span className='text-gray-400'>
+                                  {formatDuration(lesson.duration)}
+                                </span>
+                                <FaPhotoVideo className='mx-2' />
+                              </div>
+                            ) : (
+                              <span className='text-gray-400'>
+                                {Math.ceil(lesson.duration)} minutes
+                              </span>
+                            )}
+                          </p>
                         </div>
                         <div className='min-w-[110px]'>
                           {course?.mainPreview?.video?.Key !== undefined &&

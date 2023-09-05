@@ -204,6 +204,17 @@ const AddLessonForm = ({
             <option value='true'>Free Preview Video</option>
             <option value='false'>Paid to Watch Video</option>
           </select>
+          <div className='w-full max-w-md mx-2 my-2 flex justify-between items-center'>
+            <p className='font-bold text-[14px]'>Lesson Duration (minutes) </p>
+            <input
+              value={values.duration}
+              className='w-12 border-2 px-2 py-1 rounded-lg text-[12px]'
+              onChange={(e) => {
+                setValues({ ...values, duration: e.target.value })
+              }}
+              disabled={values.video.Location ? true : false}
+            ></input>
+          </div>
           <div className='form-control w-full max-w-md mx-2'>
             <label className='label'>
               <span className='label-text'>

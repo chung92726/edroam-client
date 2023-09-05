@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { gsap } from 'gsap';
-import { useState, useEffect, useContext, Suspense, useRef } from 'react';
-import axios from 'axios';
-import { currencyFormatter } from '@/utils/helpers';
-import ReactPlayer from 'react-player';
-import Image from 'next/image';
-import SingleCourseLessons from '@/components/cards/SingleCourseLessons';
-import CourseDescription from '@/components/cards/CourseDescription';
-import { Context } from '@/context';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
-import { loadStripe } from '@stripe/stripe-js';
-import SingleCourseSkeleton from './loading.js';
-import RatingStars from '@/components/stars/RatingStars.js';
-import SingleCourseReviews from '@/components/cards/SingleCourseReviews.js';
-import Link from 'next/link';
+import { gsap } from 'gsap'
+import { useState, useEffect, useContext, Suspense, useRef } from 'react'
+import axios from 'axios'
+import { currencyFormatter } from '@/utils/helpers'
+import ReactPlayer from 'react-player'
+import Image from 'next/image'
+import SingleCourseLessons from '@/components/cards/SingleCourseLessons'
+import CourseDescription from '@/components/cards/CourseDescription'
+import { Context } from '@/context'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+import { loadStripe } from '@stripe/stripe-js'
+import SingleCourseSkeleton from './loading.js'
+import RatingStars from '@/components/stars/RatingStars.js'
+import SingleCourseReviews from '@/components/cards/SingleCourseReviews.js'
+import Link from 'next/link'
 
 const StickyBar = ({
   course,
@@ -147,38 +147,38 @@ const StickyBar = ({
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const referralCode = urlParams.get('cref');
+  const urlParams = new URLSearchParams(window.location.search)
+  const referralCode = urlParams.get('cref')
 
   if (referralCode) {
-    sessionStorage.setItem('courseReferralCode', referralCode);
+    sessionStorage.setItem('courseReferralCode', referralCode)
   }
-  const [course, setCourse] = useState({});
-  const [videoPlay, setVideoPlay] = useState(false);
-  const [preview, setPreview] = useState('');
-  const [enroll, setEnroll] = useState(false);
-  const { slug } = params;
-  const [loading, setLoading] = useState(false);
+  const [course, setCourse] = useState({})
+  const [videoPlay, setVideoPlay] = useState(false)
+  const [preview, setPreview] = useState('')
+  const [enroll, setEnroll] = useState(false)
+  const { slug } = params
+  const [loading, setLoading] = useState(false)
   const {
     state: { user },
-  } = useContext(Context);
-  const router = useRouter();
-  const stickyBarRef = useRef(null);
-  const enrollButtonRef = useRef(null);
-  const enrollButtonMdRef = useRef(null);
+  } = useContext(Context)
+  const router = useRouter()
+  const stickyBarRef = useRef(null)
+  const enrollButtonRef = useRef(null)
+  const enrollButtonMdRef = useRef(null)
 
   useEffect(() => {
     const checkScrollPosition = () => {
       const largerScreenButtonVisible =
         enrollButtonRef.current &&
-        enrollButtonRef.current.getBoundingClientRect().bottom > 0;
+        enrollButtonRef.current.getBoundingClientRect().bottom > 0
       const smallerScreenButtonVisible =
         enrollButtonMdRef.current &&
-        enrollButtonMdRef.current.getBoundingClientRect().bottom > 0;
+        enrollButtonMdRef.current.getBoundingClientRect().bottom > 0
 
       if (stickyBarRef.current) {
         if (!largerScreenButtonVisible && !smallerScreenButtonVisible) {
@@ -187,7 +187,7 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
               stickyBarRef.current,
               { opacity: 0, y: -100 },
               { opacity: 1, y: 0, duration: 0 }
-            );
+            )
           }
         } else {
           // If the button is visible
@@ -196,100 +196,100 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
               opacity: 0,
               y: -100,
               duration: 0,
-            });
+            })
           }
         }
       }
-    };
+    }
 
-    window.addEventListener('scroll', checkScrollPosition);
+    window.addEventListener('scroll', checkScrollPosition)
 
     return () => {
-      window.removeEventListener('scroll', checkScrollPosition);
-    };
-  }, []);
+      window.removeEventListener('scroll', checkScrollPosition)
+    }
+  }, [])
 
   const handlePreview = async (preview) => {
-    console.log(preview);
+    console.log(preview)
     const { data } = await axios.post(`/api/course/get-signedurl`, {
       filename: preview.Key,
-    });
-    console.log(data);
-    document.getElementById('my_modal_3').showModal();
-    setPreview(data);
-    setVideoPlay(true);
-  };
+    })
+    console.log(data)
+    document.getElementById('my_modal_3').showModal()
+    setPreview(data)
+    setVideoPlay(true)
+  }
 
   const fetchCourse = async () => {
-    const { data } = await axios.get(`/api/course/${params.slug}`);
-    setCourse(data);
-  };
+    const { data } = await axios.get(`/api/course/${params.slug}`)
+    setCourse(data)
+  }
 
   useEffect(() => {
-    fetchCourse();
-  }, []);
+    fetchCourse()
+  }, [])
 
   useEffect(() => {
     const checkEnrollment = async () => {
       if (course._id) {
-        const { data } = await axios.get(`/api/check-enrollment/${course._id}`);
-        setEnroll(data);
+        const { data } = await axios.get(`/api/check-enrollment/${course._id}`)
+        setEnroll(data)
       }
-    };
-    if (user && course) {
-      checkEnrollment();
     }
-  }, [user, course]);
+    if (user && course) {
+      checkEnrollment()
+    }
+  }, [user, course])
 
   const handleFreeEnrollment = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
     try {
       // check if user is logged in
-      if (!user) router.push('/login');
+      if (!user) router.push('/login')
       // check if already enrolled
       if (enroll.status)
-        return router.push(`/user/course/${enroll.course.slug}`);
+        return router.push(`/user/course/${enroll.course.slug}`)
 
-      const { data } = await axios.post(`/api/free-enrollment/${course._id}`);
-      console.log(data);
-      setLoading(false);
+      const { data } = await axios.post(`/api/free-enrollment/${course._id}`)
+      console.log(data)
+      setLoading(false)
 
-      toast.success('Enrollment Success. Start Learning Now!');
+      toast.success('Enrollment Success. Start Learning Now!')
 
-      router.push(`/user/course/${data.course.slug}`);
+      router.push(`/user/course/${data.course.slug}`)
     } catch (err) {
-      setLoading(false);
-      toast.error('Enrollment Failed. Try Again');
+      setLoading(false)
+      toast.error('Enrollment Failed. Try Again')
     }
-  };
+  }
   const handlePaidEnrollment = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const referralCode = sessionStorage.getItem('referralCode');
+    e.preventDefault()
+    setLoading(true)
+    const referralCode = sessionStorage.getItem('courseReferralCode')
     try {
-      if (!user) router.push('/login');
+      if (!user) router.push('/login')
       if (enroll.status)
         return router.push(
           `/user/course/${enroll.course.slug}/?cref=${referralCode}`
-        );
-      const { data } = await axios.post(`/api/paid-enrollment/${course._id}`);
-      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
-      stripe.redirectToCheckout({ sessionId: data });
+        )
+      const { data } = await axios.post(`/api/paid-enrollment/${course._id}`)
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
+      stripe.redirectToCheckout({ sessionId: data })
     } catch (err) {
-      toast.error('Enrollment Failed. Try Again');
-      setLoading(false);
+      toast.error('Enrollment Failed. Try Again')
+      setLoading(false)
     }
-  };
+  }
   const handleCheckLogin = async (e) => {
-    router.push('/login');
-  };
+    router.push('/login')
+  }
   const goToCourse = async (e) => {
-    router.push(`/user/course/${course.slug}`);
-  };
+    router.push(`/user/course/${course.slug}`)
+  }
 
   if (!course._id) {
-    return <SingleCourseSkeleton />;
+    return <SingleCourseSkeleton />
   }
 
   return (
@@ -437,7 +437,7 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
             course.lessons[0].video.Location ? (
               <div
                 onClick={() => {
-                  handlePreview(course.lessons[0].video);
+                  handlePreview(course.lessons[0].video)
                 }}
                 className='relative cursor-pointer w-full h-[56vw] md:h-[25vw] lg:max-h-[300px]'
               >
@@ -526,7 +526,7 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
       )}
       {course && <SingleCourseReviews course={course} />}
     </div>
-  );
-};
+  )
+}
 
-export default SingleCourse;
+export default SingleCourse
