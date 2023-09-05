@@ -1,21 +1,21 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { useState, useEffect, useContext } from 'react'
-import { AiOutlineLogin } from 'react-icons/ai'
-import { RiRegisteredLine } from 'react-icons/ri'
-import { ToastContainer, toast } from 'react-toastify'
-import { usePathname } from 'next/navigation'
-import 'react-toastify/dist/ReactToastify.css'
-import { Context } from '../context/index'
-import { useRouter } from 'next/navigation'
-import { FaChalkboardTeacher } from 'react-icons/fa'
-import { BsBook, BsShop } from 'react-icons/bs'
-import { IoCreate } from 'react-icons/io5'
-import axios from 'axios'
-import MyLearningMenu from './MyLearningMenu'
-import ReactCountryFlag from 'react-country-flag'
-import { useSearchParams } from 'next/navigation'
+import Link from 'next/link';
+import { useState, useEffect, useContext } from 'react';
+import { AiOutlineLogin } from 'react-icons/ai';
+import { RiRegisteredLine } from 'react-icons/ri';
+import { ToastContainer, toast } from 'react-toastify';
+import { usePathname } from 'next/navigation';
+import 'react-toastify/dist/ReactToastify.css';
+import { Context } from '../context/index';
+import { useRouter } from 'next/navigation';
+import { FaChalkboardTeacher } from 'react-icons/fa';
+import { BsBook, BsShop } from 'react-icons/bs';
+import { IoCreate } from 'react-icons/io5';
+import axios from 'axios';
+import MyLearningMenu from './MyLearningMenu';
+import ReactCountryFlag from 'react-country-flag';
+import { useSearchParams } from 'next/navigation';
 
 // import Link from 'next-intl/link';
 
@@ -23,109 +23,109 @@ const languages = {
   en: 'US',
   zh: 'HK',
   cn: 'CN',
-}
-const languages_array = ['en', 'zh', 'cn']
+};
+const languages_array = ['en', 'zh', 'cn'];
 
 const TopNav = ({ dict, lang }) => {
-  const [currentPage, setCurrentPage] = useState('')
-  const path = usePathname()
-  const searchParams = useSearchParams()
+  const [currentPage, setCurrentPage] = useState('');
+  const path = usePathname();
+  const searchParams = useSearchParams();
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   //global state
-  const { state, dispatch } = useContext(Context)
-  const { user } = state
-  const [img, setImg] = useState('')
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
+  const [img, setImg] = useState('');
 
   useEffect(() => {
-    setCurrentPage(path.substring(1, path.length))
-  }, [path])
+    setCurrentPage(path.substring(1, path.length));
+  }, [path]);
 
   const logout = async () => {
     try {
-      const { data } = await axios.get('/api/logout')
-      dispatch({ type: 'LOGOUT' })
-      window.localStorage.removeItem('user')
-      toast.success('Logout Successfully')
-      router.push('/login')
+      const { data } = await axios.get('/api/logout');
+      dispatch({ type: 'LOGOUT' });
+      window.localStorage.removeItem('user');
+      toast.success('Logout Successfully');
+      router.push('/login');
     } catch (err) {
-      toast.error(err.response.data)
+      toast.error(err.response.data);
     }
-  }
+  };
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
 
   const handleToggle = () => {
-    setToggle(!toggle)
-  }
+    setToggle(!toggle);
+  };
 
-  const [localSearchQuery, setLocalSearchQuery] = useState('')
+  const [localSearchQuery, setLocalSearchQuery] = useState('');
 
   const handleSearch = async () => {
-    setLocalSearchQuery('')
-    router.push(`/marketplace/search/${localSearchQuery}`)
-  }
+    setLocalSearchQuery('');
+    router.push(`/marketplace/search/${localSearchQuery}`);
+  };
 
   const changeLanguage = (language) => {
     // If the router or path is not ready or defined, don't proceed
-    if (!router || !path) return
+    if (!router || !path) return;
 
     // Extract the segments of the current path
-    const segments = path.split('/').filter(Boolean) // Removes empty strings from the array
+    const segments = path.split('/').filter(Boolean); // Removes empty strings from the array
 
     // If the first segment is a locale, remove it
     if (languages_array.includes(segments[0])) {
-      segments.shift()
+      segments.shift();
     }
 
     // Construct the new URL with the selected language
-    let newPath = `/${language}/${segments.join('/')}`
+    let newPath = `/${language}/${segments.join('/')}`;
 
     // Build the query string from searchParams
-    const keys = Array.from(searchParams.keys())
+    const keys = Array.from(searchParams.keys());
     if (keys.length > 0) {
       const queryArray = keys.map((key) => {
-        const value = searchParams.get(key)
-        return `${key}=${value}`
-      })
-      newPath += '?' + queryArray.join('&')
+        const value = searchParams.get(key);
+        return `${key}=${value}`;
+      });
+      newPath += '?' + queryArray.join('&');
     }
 
-    router.push(newPath)
-  }
+    router.push(newPath);
+  };
 
   useEffect(() => {
     // Function to prevent scrolling
     const preventScroll = (e) => {
-      e.preventDefault()
-    }
+      e.preventDefault();
+    };
 
     if (isOpen) {
       // Add the no-scroll class to the body
-      document.body.classList.add('no-scroll')
+      document.body.classList.add('no-scroll');
 
       // Add the event listener to prevent default scrolling
-      window.addEventListener('touchmove', preventScroll, { passive: false })
-      window.addEventListener('wheel', preventScroll, { passive: false })
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+      window.addEventListener('wheel', preventScroll, { passive: false });
     } else {
       // Remove the no-scroll class from the body
-      document.body.classList.remove('no-scroll')
+      document.body.classList.remove('no-scroll');
 
       // Remove the event listener
-      window.removeEventListener('touchmove', preventScroll)
-      window.removeEventListener('wheel', preventScroll)
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('wheel', preventScroll);
     }
 
     // Cleanup on component unmount
     return () => {
-      document.body.classList.remove('no-scroll')
-      window.removeEventListener('touchmove', preventScroll)
-      window.removeEventListener('wheel', preventScroll)
-    }
-  }, [isOpen])
+      document.body.classList.remove('no-scroll');
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('wheel', preventScroll);
+    };
+  }, [isOpen]);
 
   return (
     <div className='flex flex-col w-full fixed z-50'>
@@ -139,8 +139,8 @@ const TopNav = ({ dict, lang }) => {
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
                       // setSerchQuery(event.target.value.toLowerCase())
-                      setIsOpen(false)
-                      handleSearch()
+                      setIsOpen(false);
+                      handleSearch();
                     }
                   }}
                   type='text'
@@ -248,7 +248,7 @@ const TopNav = ({ dict, lang }) => {
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
                 // setSerchQuery(event.target.value.toLowerCase())
-                handleSearch()
+                handleSearch();
               }
             }}
             type='text'
@@ -299,7 +299,7 @@ const TopNav = ({ dict, lang }) => {
                 key={language}
                 onClick={() => {
                   if (lang !== language) {
-                    changeLanguage(language)
+                    changeLanguage(language);
                   }
                 }}
               >
@@ -394,49 +394,87 @@ const TopNav = ({ dict, lang }) => {
             </ul>
           </div>
         ) : (
-          <div className='dropdown dropdown-end m-2 font-sans'>
-            <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
-              <div className='w-8 rounded-full'>
-                <img src={'/guest.png'} />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52 z-40'
-            >
-              <li>
-                <Link
-                  href='/login'
-                  className='mx-2 my-1 cursor-pointer border-transparent'
-                  onClick={() => setCurrentPage('login')}
-                >
-                  <div className='flex flex-row items-center'>
-                    <AiOutlineLogin className='inline-block mx-[0.5px]' />
-                    <p className='mx-1'>Login</p>
-                  </div>
-                </Link>
-              </li>
+          <>
+            <div className='hidden md:block mr-5'>
+              <label
+                tabIndex={0}
+                className='btn btn-ghost rounded-btn  max-md:!pl-4 px-2'
+              >
+                <div className='flex flex-row items-center text-[12px]'>
+                  <Link
+                    href='/login'
+                    className='mx-2 my-1 cursor-pointer border-transparent'
+                    onClick={() => setCurrentPage('login')}
+                  >
+                    <div className='flex flex-row items-center'>
+                      <AiOutlineLogin className='inline-block mx-[0.5px]' />
+                      <p className='mx-1'>Login</p>
+                    </div>
+                  </Link>
+                </div>
+              </label>
+              <label
+                tabIndex={0}
+                className='btn btn-ghost rounded-btn  max-md:!pl-4 px-2 bg-indigo-300'
+              >
+                <div className='flex flex-row items-center text-[12px] '>
+                  <Link
+                    href='/register'
+                    className='mx-2 my-1 cursor-pointer border-transparent '
+                    onClick={() => setCurrentPage('register')}
+                  >
+                    <div className='flex flex-row items-center'>
+                      <RiRegisteredLine className='inline-block mx-[0.5px]' />
+                      <p className='mx-1'>Sign up</p>
+                    </div>
+                  </Link>
+                </div>
+              </label>
+            </div>
+            <div className='dropdown dropdown-end m-2 font-sans block md:hidden'>
+              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+                <div className='w-8 rounded-full'>
+                  <img src={'/guest.png'} />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-100 rounded-box w-52 z-40'
+              >
+                <li>
+                  <Link
+                    href='/login'
+                    className='mx-2 my-1 cursor-pointer border-transparent'
+                    onClick={() => setCurrentPage('login')}
+                  >
+                    <div className='flex flex-row items-center'>
+                      <AiOutlineLogin className='inline-block mx-[0.5px]' />
+                      <p className='mx-1'>Login</p>
+                    </div>
+                  </Link>
+                </li>
 
-              <li>
-                <Link
-                  href='/register'
-                  className='mx-2 my-1 cursor-pointer border-transparent'
-                  onClick={() => setCurrentPage('register')}
-                >
-                  <div className='flex flex-row items-center'>
-                    <RiRegisteredLine className='inline-block mx-[0.5px]' />
-                    <p className='mx-1'>Sign up</p>
-                  </div>
-                </Link>
-              </li>
-            </ul>
-          </div>
+                <li>
+                  <Link
+                    href='/register'
+                    className='mx-2 my-1 cursor-pointer border-transparent'
+                    onClick={() => setCurrentPage('register')}
+                  >
+                    <div className='flex flex-row items-center'>
+                      <RiRegisteredLine className='inline-block mx-[0.5px]' />
+                      <p className='mx-1'>Sign up</p>
+                    </div>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </>
         )}
         {/* </div> */}
       </div>
       <div className='text-center bg-gradient-to-r from-sky-500 to-indigo-500 text-yellow-100 w-full rounded h-[4px] flex flex-col justify-center text-[28px] items-start font-bold '></div>
     </div>
-  )
-}
+  );
+};
 
-export default TopNav
+export default TopNav;
