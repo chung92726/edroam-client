@@ -432,23 +432,25 @@ const CourseView = ({ params }) => {
                           <span className='text-[14px]'>{index + 1}</span>
                         </div>
                       </div>
-                      <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
-                        {lesson.title}
-                      </p>
-                      <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
-                        {lesson.video ? (
-                          <div className='flex justify-start items-center gap-2'>
+                      <div className='flex flex-col justify-start items-start'>
+                        <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
+                          {lesson.title}
+                        </p>
+                        <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
+                          {lesson.video ? (
+                            <div className='flex justify-start items-center gap-2'>
+                              <span className='text-gray-400'>
+                                {formatDuration(lesson.duration)}
+                              </span>
+                              <FaPhotoVideo className='mx-2' />
+                            </div>
+                          ) : (
                             <span className='text-gray-400'>
-                              {formatDuration(lesson.duration)}
+                              {Math.ceil(lesson.duration)} minutes
                             </span>
-                            <FaPhotoVideo className='mx-2' />
-                          </div>
-                        ) : (
-                          <span className='text-gray-400'>
-                            {Math.ceil(lesson.duration)} minutes
-                          </span>
-                        )}
-                      </p>
+                          )}
+                        </p>
+                      </div>
                     </div>
                     {course?.mainPreview?.video?.Key !== undefined &&
                     course?.mainPreview?.video?.Key === lesson?.video?.Key ? (

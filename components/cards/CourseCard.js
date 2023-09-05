@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { currencyFormatter } from '@/utils/helpers'
 import RatingStars from '@/components/stars/RatingStars'
+import { formatDurationToHoursAndMinutes } from '@/utils/helpers'
 
 const CourseCard = ({ course, i }) => {
   const {
@@ -11,8 +12,10 @@ const CourseCard = ({ course, i }) => {
     slug,
     paid,
     category,
+    totalDuration,
     description,
     level,
+    lessons,
     language,
     averageRating,
     numberOfReviews,
@@ -44,13 +47,13 @@ const CourseCard = ({ course, i }) => {
           </div>
 
           <div>
-            <span className='flex font-sans text-[12px] text-slate-500 mt-2 h-[55px]'>
-              {description.substring(0, 200)}...
+            <span className='flex font-sans text-[12px] text-slate-500 mt-2 h-[55px] mb-2'>
+              {description.substring(0, 180)}...
             </span>
           </div>
           <div className='flex flex-wrap items-center '>
             {category &&
-              category.map((c, index) => (
+              category.slice(0, 3).map((c, index) => (
                 <span className='badgeuidesign mr-2' key={index}>
                   {c.label}
                 </span>
@@ -109,6 +112,12 @@ const CourseCard = ({ course, i }) => {
           </div>
           <p className='text-[14px]'>{level && level}</p>
           <p className='text-[14px]'>{language && language}</p>
+          <p className='text-[14px]'>{lessons && lessons.length} Lessons</p>
+          <p className='text-[14px]'>
+            Duration:{' '}
+            {totalDuration &&
+              formatDurationToHoursAndMinutes(Math.floor(totalDuration))}
+          </p>
           <p className='text-[14px]'>
             Last Updated{' '}
             {course &&

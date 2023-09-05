@@ -85,11 +85,8 @@ const singleCourse = ({ params }) => {
   }
 
   const getVideoUrl = async () => {
-    if (
-      course.lessons[currentLesson].video &&
-      course.lessons[currentLesson].video.Location
-    ) {
-      const { data } = await axios.post('/api/course/get-signedurl', {
+    if (course.lessons[currentLesson].video) {
+      const { data } = await axios.post('/api/course/get-course-signedurl', {
         filename: course.lessons[currentLesson].video.Key,
       })
       setVideoUrl(data)
@@ -295,8 +292,7 @@ const singleCourse = ({ params }) => {
                 {course &&
                 course.lessons &&
                 course.lessons[currentLesson] &&
-                course.lessons[currentLesson].video &&
-                course.lessons[currentLesson].video.Location ? (
+                course.lessons[currentLesson].video ? (
                   <div
                     className='h-[67vh] relative w-full'
                     onMouseLeave={() => {

@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { formatDuration } from '@/utils/helpers'
+import { FaPhotoVideo } from 'react-icons/fa'
 
 const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
   const [displayedLessons, setDisplayedLessons] = useState(5)
@@ -35,20 +37,36 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                           <span className='text-[14px]'>{index + 1}</span>
                         </div>
                       </div>
-                      {lesson.free_preview ? (
-                        <span
-                          className='mx-8 text-[14px] sm:text-[16px] break-all link text-purple-500 z-40'
-                          onClick={() => {
-                            handlePreview(lesson.video)
-                          }}
-                        >
-                          {lesson.title}
-                        </span>
-                      ) : (
-                        <div className='mx-8 text-[14px] sm:text-[16px] break-all'>
-                          {lesson.title}
-                        </div>
-                      )}
+                      <div className='flex flex-col justify-start'>
+                        {lesson.free_preview ? (
+                          <span
+                            className='mx-8 text-[14px] sm:text-[16px] break-all link text-purple-500 z-40'
+                            onClick={() => {
+                              handlePreview(lesson.video)
+                            }}
+                          >
+                            {lesson.title}
+                          </span>
+                        ) : (
+                          <div className='mx-8 text-[14px] sm:text-[16px] break-all'>
+                            {lesson.title}
+                          </div>
+                        )}
+                        <p className='mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
+                          {lesson.video ? (
+                            <div className='flex justify-start items-center gap-2'>
+                              <span className='text-gray-400'>
+                                {formatDuration(lesson.duration)}
+                              </span>
+                              <FaPhotoVideo className='mx-2' />
+                            </div>
+                          ) : (
+                            <span className='text-gray-400'>
+                              {Math.ceil(lesson.duration)} minutes
+                            </span>
+                          )}
+                        </p>
+                      </div>
                     </div>
                     {lesson.free_preview ? (
                       <div

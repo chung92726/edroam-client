@@ -85,3 +85,20 @@ export function formatDuration(minutes) {
 
   return `${minutesStr}:${secondsStr}`
 }
+
+export function formatDurationToHoursAndMinutes(minutes) {
+  const hours = Math.floor(minutes / 60)
+  const remainingMinutes = Math.floor(minutes % 60)
+
+  let result = ''
+
+  if (hours > 0) {
+    result += `${hours} hour${hours > 1 ? 's' : ''} `
+  }
+
+  if (remainingMinutes > 0 || result === '') {
+    result += `${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}`
+  }
+
+  return result.trim()
+}

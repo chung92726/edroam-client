@@ -3,7 +3,11 @@
 import { gsap } from 'gsap'
 import { useState, useEffect, useContext, Suspense, useRef } from 'react'
 import axios from 'axios'
-import { currencyFormatter } from '@/utils/helpers'
+import {
+  currencyFormatter,
+  formatDuration,
+  formatDurationToHoursAndMinutes,
+} from '@/utils/helpers'
 import ReactPlayer from 'react-player'
 import Image from 'next/image'
 import SingleCourseLessons from '@/components/cards/SingleCourseLessons'
@@ -16,6 +20,7 @@ import SingleCourseSkeleton from './loading.js'
 import RatingStars from '@/components/stars/RatingStars.js'
 import SingleCourseReviews from '@/components/cards/SingleCourseReviews.js'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 const StickyBar = ({
   course,
@@ -151,7 +156,7 @@ const StickyBar = ({
 }
 
 const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
-  const urlParams = new URLSearchParams(window.location.search)
+  const urlParams = useSearchParams()
   const referralCode = urlParams.get('cref')
 
   if (referralCode) {
@@ -270,10 +275,10 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
     try {
       if (!user) router.push('/login')
       if (enroll.status)
-        return router.push(
-          `/user/course/${enroll.course.slug}/?cref=${referralCode}`
-        )
-      const { data } = await axios.post(`/api/paid-enrollment/${course._id}`)
+        return router.push(`/user/course/${enroll.course.slug}`)
+      const { data } = await axios.post(
+        `/api/paid-enrollment/${course._id}?cref=${referralCode}`
+      )
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
       stripe.redirectToCheckout({ sessionId: data })
     } catch (err) {
@@ -325,7 +330,7 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
         </form>
       </dialog>
       <div className='text-center bg-gray-700 text-white w-full lg:pb-[100px] pb-[40px] md:pt-[50px] flex flex-col justify-center text-[28px] items-center font-bold '>
-        <div className='flex flex-col-reverse justify-between items-center gap-4  md:flex-row md:items-start md:w-[90vw] lg:max-w-[1080px] lg:max-h-[363px]'>
+        <div className='flex flex-col-reverse justify-between items-center gap-4  md:flex-row md:items-start md:w-[90vw] lg:max-w-[1080px] lg:max-h-[430px]'>
           <div className='flex flex-col justify-center items-start gap-3 w-[90vw] md:w-[45vw] '>
             <h1 className='font-bold text-left text-2xl lg:text-3xl'>
               {course.name}
@@ -375,6 +380,17 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
                 Language: {course && course.language && course.language}
               </p>
             </div>
+            <div className='flex flex-row items-center gap-x-10'>
+              <p className='text-[10px] lg:text-[14px]'>
+                {course && course.lessons && course.lessons.length} Lessons
+              </p>
+              <p className='text-[10px] lg:text-[14px]'>
+                Total Duration:{' '}
+                {course &&
+                  formatDurationToHoursAndMinutes(course.totalDuration)}{' '}
+              </p>
+            </div>
+
             <p className='text-[10px] lg:text-[14px]'>
               Last Updated{' '}
               {course &&

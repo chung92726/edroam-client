@@ -319,23 +319,25 @@ const CourseView = ({ params }) => {
                               <span className='text-[14px]'>{index + 1}</span>
                             </div>
                           </div>
-                          <div className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
-                            {lesson && lesson.title}
-                          </div>
-                          <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
-                            {lesson.video ? (
-                              <div className='flex justify-start items-center gap-2'>
+                          <div className-='flex flex-col items-start'>
+                            <div className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
+                              {lesson && lesson.title}
+                            </div>
+                            <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
+                              {lesson.video ? (
+                                <div className='flex justify-start items-center gap-2'>
+                                  <span className='text-gray-400'>
+                                    {formatDuration(lesson.duration)}
+                                  </span>
+                                  <FaPhotoVideo className='mx-2' />
+                                </div>
+                              ) : (
                                 <span className='text-gray-400'>
-                                  {formatDuration(lesson.duration)}
+                                  {Math.ceil(lesson.duration)} minutes
                                 </span>
-                                <FaPhotoVideo className='mx-2' />
-                              </div>
-                            ) : (
-                              <span className='text-gray-400'>
-                                {Math.ceil(lesson.duration)} minutes
-                              </span>
-                            )}
-                          </p>
+                              )}
+                            </p>
+                          </div>
                         </div>
                         <div className='min-w-[110px]'>
                           {course?.mainPreview?.video?.Key !== undefined &&
@@ -393,7 +395,7 @@ const CourseView = ({ params }) => {
 
                             if (lesson?.video && lesson?.video?.Location) {
                               const { data } = await axios.post(
-                                `/api/course/get-signedurl`,
+                                `/api/course/get-course-signedurl`,
                                 {
                                   filename: lesson.video.Key,
                                 }
