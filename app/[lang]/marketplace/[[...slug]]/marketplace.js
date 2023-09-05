@@ -191,7 +191,7 @@ const marketplace = ({ params, marketPlace }) => {
         >
           <option value=''>{marketPlace.sort_by}</option>
           <option value='price'>{marketPlace.lowest_price}</option>
-          <option value='-created'>{marketPlace.latest_price}</option>
+          <option value='-created'>{marketPlace.latest_created}</option>
           <option value='-updated'>{marketPlace.latest_updated}</option>
         </select>
         <div className='flex flex-row justify-center items-center mx-[1.5vw] my-2 h-[3rem] w-[86vw] sm:w-[59vw] 2xl:w-[20vw] 2xl:mx-[0.5vw]'>
