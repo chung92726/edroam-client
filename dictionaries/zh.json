@@ -1,4 +1,27 @@
 {
+  "topNav": {
+    "toast_success": "已登出",
+    "Create_Course": "創建課程",
+    "Become_Instructor": "成為導師",
+    "Browse_Course": "瀏覽課程",
+    "All_Course": "所有課程",
+    "WebDesign": "網頁設計課程",
+    "UIUX_Design": "用戶界面/用戶體驗設計課程",
+    "Graphic_Design": "平面設計課程",
+    "ThreeD_Modelling": "3D 建模課程",
+    "Video_Editing": "影片編輯課程",
+    "Search_Placeholder": "搜尋...",
+    "My_Learning": "我的課堂",
+    "Profile": "我的資料",
+    "Dashboard": "導師儀表板",
+    "Login": "登入",
+    "Logout": "登出",
+    "Signup": "註冊帳號",
+    "Go_My_Learning": "前往我的課堂",
+    "Start_Learn": "開始學習!",
+    "No_course": "沒有課堂購買記錄",
+    "Explore": "請前往影片庫探索更多"
+  },
   "home": {
     "Up_Your": "提升您的",
     "Digital_Design_Skills": "數碼設計技能",

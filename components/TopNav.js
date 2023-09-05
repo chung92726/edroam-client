@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useContext } from 'react';
 import { AiOutlineLogin } from 'react-icons/ai';
-import { RiRegisteredLine } from 'react-icons/ri';
+import { RiMenu3Line, RiRegisteredLine } from 'react-icons/ri';
 import { ToastContainer, toast } from 'react-toastify';
 import { usePathname } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,7 +26,7 @@ const languages = {
 };
 const languages_array = ['en', 'zh', 'cn'];
 
-const TopNav = ({ dict, lang }) => {
+const TopNav = ({ dict, lang, topNav }) => {
   const [currentPage, setCurrentPage] = useState('');
   const path = usePathname();
   const searchParams = useSearchParams();
@@ -47,7 +47,7 @@ const TopNav = ({ dict, lang }) => {
       const { data } = await axios.get('/api/logout');
       dispatch({ type: 'LOGOUT' });
       window.localStorage.removeItem('user');
-      toast.success('Logout Successfully');
+      toast.success(`${topNav.toast_success}`);
       router.push('/login');
     } catch (err) {
       toast.error(err.response.data);
@@ -162,7 +162,7 @@ const TopNav = ({ dict, lang }) => {
         <div className='flex-1 max-md:justify-left'>
           <Link
             href='/'
-            className='btn btn-ghost normal-case text-xl'
+            className='btn btn-ghost normal-case text-xl max-sm:pr-0'
             onClick={() => setCurrentPage('home')}
           >
             <img src='/xltra.png' className='w-[130px]' />
@@ -178,7 +178,7 @@ const TopNav = ({ dict, lang }) => {
                 <div className='hidden md:flex flex-row items-center'>
                   <div className='btn btn-ghost rounded-btn text-[12px] max-md:hidden max-lg:hidden'>
                     <IoCreate className='inline-block' />
-                    <p className='ml-[-5px]'>Create Course</p>
+                    <p className='ml-[-5px]'>{topNav.Create_Course}</p>
                   </div>
                 </div>
               </Link>
@@ -191,7 +191,7 @@ const TopNav = ({ dict, lang }) => {
                 <div className='hidden md:flex flex-row items-center'>
                   <div className='btn btn-ghost rounded-btn text-[12px]'>
                     <FaChalkboardTeacher className='inline-block ml-[-5px]' />
-                    <p className=' '>Become Instructor</p>
+                    <p className=' '>{topNav.Become_Instructor}</p>
                   </div>
                 </div>
               </Link>
@@ -205,7 +205,7 @@ const TopNav = ({ dict, lang }) => {
             >
               <div className='flex flex-row items-center text-[12px]'>
                 <BsShop className='inline-block mx-[0.5px] max-[430px]:hidden' />
-                <p className='mx-1'>Browse Course</p>
+                <p className='mx-1'>{topNav.Browse_Course}</p>
               </div>
             </label>
             <ul
@@ -214,29 +214,31 @@ const TopNav = ({ dict, lang }) => {
             >
               <li>
                 <Link href='/marketplace' locale='en'>
-                  All Courses
+                  {topNav.All_Course}
                 </Link>
               </li>
               <li>
-                <Link href='/marketplace/WebDesign'>WebDesign</Link>
+                <Link href='/marketplace/WebDesign'>{topNav.WebDesign}</Link>
                 {/* <a>Web Development Courses</a> */}
               </li>
               <li>
-                <Link href='/marketplace/UIUXDesign'>UI/UX Design Courses</Link>
+                <Link href='/marketplace/UIUXDesign'>{topNav.UIUX_Design}</Link>
                 {/* <a>UI/UX Design Courses</a> */}
               </li>
               <li>
                 <Link href='/marketplace/GraphicDesign'>
-                  Graphic Design Courses
+                  {topNav.Graphic_Design}
                 </Link>
               </li>
               <li>
-                <Link href='/marketplace/3DModeling'>3D Modelling Courses</Link>
+                <Link href='/marketplace/3DModeling'>
+                  {topNav.ThreeD_Modelling}
+                </Link>
                 {/* <a>3D Modelling Courses</a> */}
               </li>
               <li>
                 <Link href='/marketplace/VideoEditing'>
-                  Video Editing Courses
+                  {topNav.Video_Editing}
                 </Link>
                 {/* <a>Video Editing Courses</a> */}
               </li>
@@ -252,7 +254,7 @@ const TopNav = ({ dict, lang }) => {
               }
             }}
             type='text'
-            placeholder='Search...'
+            placeholder={topNav.Search_Placeholder}
             value={localSearchQuery}
             onChange={(e) => setLocalSearchQuery(e.target.value)}
           />
@@ -328,10 +330,10 @@ const TopNav = ({ dict, lang }) => {
               >
                 <div className='flex flex-row items-center text-[12px] gap-2 mr-2'>
                   <BsBook className='inline-block mx-[0.5px]' />
-                  <p>My Learning</p>
+                  <p>{topNav.My_Learning}</p>
                 </div>
               </label>
-              <MyLearningMenu tabIndex={0} />
+              <MyLearningMenu tabIndex={0} topNav={topNav} />
             </div>
           </div>
         ) : null}
@@ -357,20 +359,40 @@ const TopNav = ({ dict, lang }) => {
                 />
               </div>
             </label>
+
             <ul
               tabIndex={0}
-              className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-44'
+              className='mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-80'
             >
+              <div className=' flex flex-row  items-center border-b border-slate-400 p-2 mb-2 w-full'>
+                <div className='w-20 rounded-full pr-2'>
+                  <img
+                    src={
+                      user?.picture?.Location !== undefined
+                        ? user.picture.Location
+                        : '/guest.png'
+                    }
+                    width='60px'
+                    height='60px'
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <p className='pb-2 font-bold'>{user.name}</p>
+                  <p className='text-gray-600'>{user.email}</p>
+                </div>
+              </div>
               <li>
-                <Link href='/user/profile'>Profile</Link>
+                <Link href='/user/profile'>{topNav.Profile}</Link>
               </li>
               {user &&
               user.role &&
               (user.role.includes('Instructor') ||
                 user.role.includes('Pending')) ? (
                 <li>
-                  <Link href='/instructor'>Instructor Dashboard</Link>
-                  <Link href='/instructor/course/create'>Create Course</Link>
+                  <Link href='/instructor'>{topNav.Dashboard}</Link>
+                  <Link href='/instructor/course/create'>
+                    {topNav.Create_Course}
+                  </Link>
                 </li>
               ) : (
                 <li>
@@ -378,18 +400,18 @@ const TopNav = ({ dict, lang }) => {
                     href='/user/become-instructor'
                     onClick={() => setCurrentPage('login')}
                   >
-                    Become Instructor
+                    {topNav.Become_Instructor}
                   </Link>
                 </li>
               )}
               <li>
-                <Link href='/user'>My Learning</Link>
+                <Link href='/user'>{topNav.My_Learning}</Link>
               </li>
               {/* <li>
                   <a>Settings</a>
                 </li> */}
               <li>
-                <a onClick={logout}>Logout</a>
+                <a onClick={logout}>{topNav.Logout}</a>
               </li>
             </ul>
           </div>
@@ -408,14 +430,14 @@ const TopNav = ({ dict, lang }) => {
                   >
                     <div className='flex flex-row items-center'>
                       <AiOutlineLogin className='inline-block mx-[0.5px]' />
-                      <p className='mx-1'>Login</p>
+                      <p className='mx-1'>{topNav.Login}</p>
                     </div>
                   </Link>
                 </div>
               </label>
               <label
                 tabIndex={0}
-                className='btn btn-ghost rounded-btn  max-md:!pl-4 px-2 bg-indigo-300'
+                className='btn btn-ghost rounded-btn  max-md:!pl-4 px-2 border-indigo-500 '
               >
                 <div className='flex flex-row items-center text-[12px] '>
                   <Link
@@ -424,17 +446,20 @@ const TopNav = ({ dict, lang }) => {
                     onClick={() => setCurrentPage('register')}
                   >
                     <div className='flex flex-row items-center'>
-                      <RiRegisteredLine className='inline-block mx-[0.5px]' />
-                      <p className='mx-1'>Sign up</p>
+                      <RiRegisteredLine className='  inline-block mx-[0.5px]' />
+                      <p className='mx-1 '>{topNav.Signup}</p>
                     </div>
                   </Link>
                 </div>
               </label>
             </div>
             <div className='dropdown dropdown-end m-2 font-sans block md:hidden'>
-              <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
+              <label
+                tabIndex={0}
+                className='btn btn-ghost btn-circle justify-center items-center'
+              >
                 <div className='w-8 rounded-full'>
-                  <img src={'/guest.png'} />
+                  <RiMenu3Line size={24} />
                 </div>
               </label>
               <ul
@@ -449,7 +474,7 @@ const TopNav = ({ dict, lang }) => {
                   >
                     <div className='flex flex-row items-center'>
                       <AiOutlineLogin className='inline-block mx-[0.5px]' />
-                      <p className='mx-1'>Login</p>
+                      <p className='mx-1'>{topNav.Login}</p>
                     </div>
                   </Link>
                 </li>
@@ -462,7 +487,7 @@ const TopNav = ({ dict, lang }) => {
                   >
                     <div className='flex flex-row items-center'>
                       <RiRegisteredLine className='inline-block mx-[0.5px]' />
-                      <p className='mx-1'>Sign up</p>
+                      <p className='mx-1'>{topNav.Signup}</p>
                     </div>
                   </Link>
                 </li>

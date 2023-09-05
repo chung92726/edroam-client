@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 
-const LearningCard = ({ myLearning }) => {
+const LearningCard = ({ myLearning, topNav }) => {
   // const [myLearning, setMyLearning] = useState([]);
 
   // const loadCompletedLessons = async (id) => {
@@ -33,7 +33,7 @@ const LearningCard = ({ myLearning }) => {
   // }, []);
 
   return (
-    <div className='flex flex-col justify-center items-center w-full divide-y-2 divide-black-500'>
+    <div className='flex flex-col justify-center items-center w-full divide-y-2 divide-slate-300'>
       {/* <div className='overflow-y-hidden'> */}
       {myLearning.length !== 0 ? (
         myLearning.map((course) => (
@@ -73,10 +73,10 @@ const LearningCard = ({ myLearning }) => {
       ) : (
         <div className='flex flex-col p-8 justify-center items-center'>
           <h3 className='text-lg font-sans font-semibold py-4'>
-            No course enrolled yet
+            {topNav.No_course}
           </h3>
           <p className='text-center font-sans text-slate-500 pb-4'>
-            Let's go to Library to explore more
+            {topNav.Explore}
           </p>
         </div>
       )}

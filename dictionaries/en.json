@@ -1,4 +1,27 @@
 {
+  "topNav": {
+    "toast_success": "Logout Successfully",
+    "Create_Course": "Create Course",
+    "Become_Instructor": "Become Instructor",
+    "Browse_Course": "Browse Course",
+    "All_Course": "All Courses",
+    "WebDesign": "Web Design Courses",
+    "UIUX_Design": "UI/UX Design Courses",
+    "Graphic_Design": "Graphic Design Courses",
+    "ThreeD_Modelling": "3D Modelling Courses",
+    "Video_Editing": "Video Editing Courses",
+    "Search_Placeholder": "Search...",
+    "My_Learning": "My Learning",
+    "Profile": "Profile",
+    "Dashboard": "Instructor Dashboard",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Signup": "Sign up",
+    "Go_My_Learning": "Go to My Learning",
+    "Start_Learn": "Start Learning Today!",
+    "No_course": "No course enrolled yet",
+    "Explore": "Let's go to Library to explore more!"
+  },
   "home": {
     "Up_Your": "Up Your",
     "Digital_Design_Skills": "Digital Design Skills",

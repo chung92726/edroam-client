@@ -54,7 +54,7 @@ const Register = ({ register }) => {
       <div className='mt-10'>
         <form
           onSubmit={handleSubmit}
-          className='justify-center items-center form-control'
+          className='justify-center items-center form-control max-sm:mx-5'
         >
           <div className='w-full max-w-sm my-2 flex'>
             <h2 className='text-base font-bold mx-2'>{register.Title}</h2>

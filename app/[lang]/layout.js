@@ -1,22 +1,22 @@
 // 'use client'
 
-import './globals.css'
-import { Inter } from 'next/font/google'
-import TopNav from '@/components/TopNav'
-import { Provider } from '../../context/index'
-import LearningCard from '@/components/cards/LearningCard'
-import { getDictionary } from './dictionaries.js'
+import './globals.css';
+import { Inter } from 'next/font/google';
+import TopNav from '@/components/TopNav';
+import { Provider } from '../../context/index';
+import LearningCard from '@/components/cards/LearningCard';
+import { getDictionary } from './dictionaries.js';
 // import { useState, useEffect } from 'react'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'XLearners',
   description: 'Your best experience in Learning and Teaching',
-}
+};
 
 export default async function RootLayout({ children, params: { lang } }) {
-  const dict = await getDictionary(lang)
+  const { dict, topNav } = await getDictionary(lang);
   // set cookie to lang
 
   // const [isOpen, setIsOpen] = useState(false)
@@ -59,6 +59,7 @@ export default async function RootLayout({ children, params: { lang } }) {
             LearningCard={LearningCard}
             dict={dict}
             lang={lang}
+            topNav={topNav}
             // setIsOpen={setIsOpen}
             // isOpen={isOpen}
           />
@@ -74,5 +75,5 @@ export default async function RootLayout({ children, params: { lang } }) {
         </Provider>
       </body>
     </html>
-  )
+  );
 }

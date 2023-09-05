@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import LearningCard from './cards/LearningCard';
 
-const MyLearningMenu = () => {
+const MyLearningMenu = ({ topNav }) => {
   const [myLearning, setMyLearning] = useState([]);
 
   const loadCompletedLessons = async (id) => {
@@ -42,19 +42,20 @@ const MyLearningMenu = () => {
           setMyLearning={setMyLearning}
           loadCompletedLessons={loadCompletedLessons}
           loadCourses={loadCourses}
+          topNav={topNav}
         />
       </div>
-      <div className=' w-full justify-center p-3 border-t-2 border-black-500'>
+      <div className=' w-full justify-center p-3 border-t-2 border-slate-300'>
         {myLearning.length !== 0 ? (
           <Link href='/user'>
             <button className='btn btn-primary bg-indigo-500 w-full'>
-              Go to My Learning
+              {topNav.Go_My_Learning}
             </button>
           </Link>
         ) : (
           <Link href='/marketplace'>
             <button className='btn btn-primary bg-indigo-500 w-full'>
-              Start Learning Today!
+              {topNav.Start_Learn}
             </button>
           </Link>
         )}
