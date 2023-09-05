@@ -300,14 +300,14 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
   const handlePaidEnrollment = async (e) => {
     e.preventDefault()
     setLoading(true)
-    const referralCode = sessionStorage.getItem('referralCode')
+    const referralCode = sessionStorage.getItem('courseReferralCode')
     try {
       if (!user) router.push('/login')
       if (enroll.status)
-        return router.push(
-          `/user/course/${enroll.course.slug}/?cref=${referralCode}`
-        )
-      const { data } = await axios.post(`/api/paid-enrollment/${course._id}`)
+        return router.push(`/user/course/${enroll.course.slug}`)
+      const { data } = await axios.post(
+        `/api/paid-enrollment/${course._id}/?cref=${referralCode}`
+      )
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
       stripe.redirectToCheckout({ sessionId: data })
     } catch (err) {

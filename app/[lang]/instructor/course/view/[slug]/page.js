@@ -9,6 +9,8 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 import { AiFillEdit } from 'react-icons/ai'
 import { generateCourseDirectLink, copyToClipboard } from '@/utils/helpers'
+import { calculateVideoDuration, formatDuration } from '@/utils/helpers'
+import { FaPhotoVideo } from 'react-icons/fa'
 
 const CourseView = ({ params }) => {
   const [course, setCourse] = useState('')
@@ -26,6 +28,7 @@ const CourseView = ({ params }) => {
     title: '',
     content: '',
     video: {},
+    duration: 1,
     uploading: false,
     free_preview: false,
     supplementary_resources: [],
@@ -61,6 +64,7 @@ const CourseView = ({ params }) => {
         video: {},
         uploading: false,
         free_preview: false,
+        duration: 1,
         supplementary_resources: [],
       })
       setProgress(0)
@@ -89,6 +93,7 @@ const CourseView = ({ params }) => {
     setValues({ ...values, uploading: true })
     try {
       const file = e.target.files[0]
+      const durationInMinutes = await calculateVideoDuration(file)
       const videoData = new FormData()
       videoData.append('video', file)
       // save progress bar and send video as form data to backend
@@ -103,7 +108,12 @@ const CourseView = ({ params }) => {
       // once response is received
       toast.success('Video Uploaded')
 
-      setValues({ ...values, uploading: false, video: data })
+      setValues({
+        ...values,
+        uploading: false,
+        video: data,
+        duration: durationInMinutes,
+      })
     } catch (err) {
       console.log(err)
       toast.error('Video Upload Failed')
@@ -119,7 +129,7 @@ const CourseView = ({ params }) => {
         values.video
       )
       video_input.current.value = ''
-      setValues({ ...values, uploading: false, video: {} })
+      setValues({ ...values, uploading: false, video: {}, duration: 1 })
       setProgress(0)
       toast.success('Video Removed')
     } catch (err) {
@@ -332,6 +342,10 @@ const CourseView = ({ params }) => {
                 </div>
               </div>
               {/* <h1 className='card-title mt-2'>Course Name:</h1> */}
+              <h1 className='font-bold text-[16px]'>
+                Total Course Duration: {Math.floor(course.totalDuration)}{' '}
+                Minutes
+              </h1>
               {course && course.published && (
                 <div className='rounded-lg border-2 px-4 py-2 bg-slate-200'>
                   <h2 className='font-bold text-[18px] my-2'>
@@ -353,7 +367,7 @@ const CourseView = ({ params }) => {
                   </div>
                 </div>
               )}
-              <h1 className='card-title mt-2'>{course.name}</h1>
+              <h1 className='card-title mt-2 text-[18px]'>{course.name}</h1>
               {/* <h1 className='card-title mt-2'>Course Short Description:</h1> */}
               <div className='py-6'>{course.description}</div>
               <div className='flex flex-col md:flex-row justify-start md:items-end h-full'>
@@ -420,6 +434,20 @@ const CourseView = ({ params }) => {
                       </div>
                       <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
                         {lesson.title}
+                      </p>
+                      <p className='mx-2 md:mx-8 text-[14px] md:text-[16px] break-all max-md:overflow-x-hidden '>
+                        {lesson.video ? (
+                          <div className='flex justify-start items-center gap-2'>
+                            <span className='text-gray-400'>
+                              {formatDuration(lesson.duration)}
+                            </span>
+                            <FaPhotoVideo className='mx-2' />
+                          </div>
+                        ) : (
+                          <span className='text-gray-400'>
+                            {Math.ceil(lesson.duration)} minutes
+                          </span>
+                        )}
                       </p>
                     </div>
                     {course?.mainPreview?.video?.Key !== undefined &&

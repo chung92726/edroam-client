@@ -51,3 +51,37 @@ export const copyToClipboard = (text) => {
   // Remove the temporary textarea
   document.body.removeChild(textarea)
 }
+
+export const calculateVideoDuration = (file) => {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video')
+    video.preload = 'metadata'
+
+    video.onloadedmetadata = function () {
+      window.URL.revokeObjectURL(video.src)
+      const durationInMinutes = (video.duration / 60).toFixed(2)
+      resolve(durationInMinutes)
+    }
+
+    video.onerror = function () {
+      reject('Error loading video file.')
+    }
+
+    video.src = URL.createObjectURL(file)
+  })
+}
+
+export function formatDuration(minutes) {
+  // Split the whole number and decimal parts
+  const wholeMinutes = Math.floor(minutes)
+  const decimalPart = minutes - wholeMinutes
+
+  // Convert the decimal part to seconds
+  const seconds = Math.round(decimalPart * 60)
+
+  // Convert them to strings. If seconds is less than 10, prepend with '0'
+  const minutesStr = String(wholeMinutes)
+  const secondsStr = seconds < 10 ? '0' + String(seconds) : String(seconds)
+
+  return `${minutesStr}:${secondsStr}`
+}
