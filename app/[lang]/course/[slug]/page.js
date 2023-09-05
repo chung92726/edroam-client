@@ -33,9 +33,9 @@ const StickyBar = ({
         position: 'sticky',
         zIndex: 1000,
       }}
-      className='top-0 flex justify-center md:justify-between max-md:flex-col items-center py-3 px-4 md:px-10 bg-gray-700 shadow-md w-full z-40'
+      className='top-0 flex justify-center sm:justify-between max-sm:flex-col items-center py-3 px-4 sm:px-10 bg-gray-700 shadow-md w-full z-40'
     >
-      <div className=' max-md:mb-3'>
+      <div className=' max-sm:mb-3'>
         <div className='font-bold text-left text-base text-white lg:text-2xl'>
           {course.name}
         </div>
@@ -72,7 +72,7 @@ const StickyBar = ({
           </span>
         </div>
       </div>
-      <div className=' flex flex-row justify-end items-center max-md:w-full'>
+      <div className=' flex flex-row justify-end items-center max-sm:w-full'>
         <div className='hidden md:block text-[12px] lg:text-[16px] font-black text-white md:mr-4 '>
           {course.paid
             ? currencyFormatter({
@@ -90,7 +90,7 @@ const StickyBar = ({
             : ''}
         </span>
         <button
-          className='btn btn-primary hidden md:block ml-0 md:ml-8'
+          className='btn btn-primary hidden sm:block ml-0 md:ml-8'
           disabled={loading}
           onClick={
             user
@@ -118,7 +118,7 @@ const StickyBar = ({
           )}
         </button>
         <button
-          className='btn btn-primary block md:hidden !py-0 w-full !px-4 !min-h-[2rem] !h-[2rem]'
+          className='btn btn-primary block sm:hidden !py-0 w-full !px-4 !min-h-[2rem] !h-[2rem]'
           disabled={loading}
           onClick={
             user
@@ -180,22 +180,24 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
         enrollButtonMdRef.current &&
         enrollButtonMdRef.current.getBoundingClientRect().bottom > 0
 
-      if (!largerScreenButtonVisible && !smallerScreenButtonVisible) {
-        if (stickyBarRef.current.style.opacity !== '1') {
-          gsap.fromTo(
-            stickyBarRef.current,
-            { opacity: 0, y: -100 },
-            { opacity: 1, y: 0, duration: 0 }
-          )
-        }
-      } else {
-        // If the button is visible
-        if (stickyBarRef.current.style.opacity !== '0') {
-          gsap.to(stickyBarRef.current, {
-            opacity: 0,
-            y: -100,
-            duration: 0,
-          })
+      if (stickyBarRef.current) {
+        if (!largerScreenButtonVisible && !smallerScreenButtonVisible) {
+          if (stickyBarRef.current.style.opacity !== '1') {
+            gsap.fromTo(
+              stickyBarRef.current,
+              { opacity: 0, y: -100 },
+              { opacity: 1, y: 0, duration: 0 }
+            )
+          }
+        } else {
+          // If the button is visible
+          if (stickyBarRef.current.style.opacity !== '0') {
+            gsap.to(stickyBarRef.current, {
+              opacity: 0,
+              y: -100,
+              duration: 0,
+            })
+          }
         }
       }
     }
@@ -206,42 +208,6 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
       window.removeEventListener('scroll', checkScrollPosition)
     }
   }, [])
-
-  // useEffect(() => {
-  //   const checkScrollPosition = () => {
-  //     if (enrollButtonRef.current) {
-  //       const buttonBottomPosition =
-  //         enrollButtonRef.current.getBoundingClientRect().bottom;
-  //       const viewportHeight = window.innerHeight;
-
-  //       if (buttonBottomPosition < 0) {
-  //         // If the button is not visible (i.e., scrolled above the top of the viewport)
-  //         if (stickyBarRef.current.style.opacity !== '1') {
-  //           gsap.fromTo(
-  //             stickyBarRef.current,
-  //             { opacity: 0, y: -100 },
-  //             { opacity: 1, y: 0, duration: 0.2 }
-  //           );
-  //         }
-  //       } else {
-  //         // If the button is visible
-  //         if (stickyBarRef.current.style.opacity !== '0') {
-  //           gsap.to(stickyBarRef.current, {
-  //             opacity: 0,
-  //             y: -100,
-  //             duration: 0.5,
-  //           });
-  //         }
-  //       }
-  //     }
-  //   };
-
-  //   window.addEventListener('scroll', checkScrollPosition);
-
-  //   return () => {
-  //     window.removeEventListener('scroll', checkScrollPosition);
-  //   };
-  // }, []);
 
   const handlePreview = async (preview) => {
     console.log(preview)
@@ -304,10 +270,10 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
     try {
       if (!user) router.push('/login')
       if (enroll.status)
-        return router.push(`/user/course/${enroll.course.slug}`)
-      const { data } = await axios.post(
-        `/api/paid-enrollment/${course._id}/?cref=${referralCode}`
-      )
+        return router.push(
+          `/user/course/${enroll.course.slug}/?cref=${referralCode}`
+        )
+      const { data } = await axios.post(`/api/paid-enrollment/${course._id}`)
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
       stripe.redirectToCheckout({ sessionId: data })
     } catch (err) {
@@ -341,7 +307,7 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
             </button>
           </div>
 
-          {course && course.lessons && preview && (
+          {course && course.lessons && course.lessons[0].video && (
             <ReactPlayer
               url={preview}
               width='100%'
@@ -465,12 +431,13 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
           </div>
 
           <div className='flex flex-col justify-center items-center w-[100vw] md:w-[45vw] '>
-            {course && course.lessons && course?.mainPreview?.video ? (
-              // course.lessons[0].video &&
-              // course.lessons[0].video.Location ? (
+            {course &&
+            course.lessons &&
+            course.lessons[0].video &&
+            course.lessons[0].video.Location ? (
               <div
                 onClick={() => {
-                  handlePreview(course?.mainPreview?.video)
+                  handlePreview(course.lessons[0].video)
                 }}
                 className='relative cursor-pointer w-full h-[56vw] md:h-[25vw] lg:max-h-[300px]'
               >
@@ -533,7 +500,7 @@ const SingleCourse = ({ params, numberOfReviews, averageRating, i }) => {
       <div style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
         <div
           ref={stickyBarRef}
-          style={{ opacity: 0, transform: 'translateY(-100px)' }}
+          style={{ opacity: 0, transform: 'translateY(-1000px)' }}
         >
           <StickyBar
             course={course}

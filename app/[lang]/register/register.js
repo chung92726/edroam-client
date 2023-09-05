@@ -1,57 +1,52 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useContext } from 'react'
-import { Context } from '@/context/index'
-import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, useContext } from 'react';
+import { Context } from '@/context/index';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-
-
-const Register = ({register}) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [promotion, setPromotion] = useState(true)
-  const [loading, setLoading] = useState(false)
+const Register = ({ register }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [promotion, setPromotion] = useState(true);
+  const [loading, setLoading] = useState(false);
   //   const [confirmPassword, setConfirmPassword] = useState('')
 
-  
-  const router = useRouter()
-  
+  const router = useRouter();
+
   // global state
-  const { state, dispatch } = useContext(Context)
-  const { user } = state
-  
-  
-  
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
+
   useEffect(() => {
-    if (user !== null) router.push('/user')
-  }, [user])
-  
+    if (user !== null) router.push('/user');
+  }, [user]);
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // console.table({ name, email, password })
-    setLoading(true)
+    setLoading(true);
     try {
       const { data } = await axios.post(`/api/register`, {
         name,
         email,
         password,
         promotion,
-      })
-      toast.success('Registration Successful. Please Login.')
-      setName('')
-      setEmail('')
-      setPassword('')
-      setLoading(false)
-      router.push('/login')
+      });
+      toast.success(`${register.RegSuccess}`);
+      setName('');
+      setEmail('');
+      setPassword('');
+      setLoading(false);
+      router.push('/login');
     } catch (err) {
-      toast.error(err.response.data)
-      setLoading(false)
+      toast.error(err.response.data);
+      setLoading(false);
     }
-  }
+  };
   return (
     <>
       {/* <ToastContainer position='top-center' /> */}
@@ -62,13 +57,11 @@ const Register = ({register}) => {
           className='justify-center items-center form-control'
         >
           <div className='w-full max-w-sm my-2 flex'>
-            <h2 className='text-base font-bold mx-2'>
-              {register.title}
-            </h2>
+            <h2 className='text-base font-bold mx-2'>{register.Title}</h2>
           </div>
           <input
             type='text'
-            placeholder='Name'
+            placeholder={register.PlaceholderName}
             alt='name'
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={name}
@@ -78,7 +71,7 @@ const Register = ({register}) => {
           <input
             type='email'
             alt='email'
-            placeholder='Email'
+            placeholder={register.PlaceholderEmail}
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -87,7 +80,7 @@ const Register = ({register}) => {
           <input
             type='password'
             alt='password'
-            placeholder='Password'
+            placeholder={register.PlaceholderPw}
             className='input input-bordered w-full max-w-sm my-2 border-2'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -101,9 +94,7 @@ const Register = ({register}) => {
               className='checkbox mx-1'
               onChange={(e) => setPromotion(e.target.checked)}
             />
-            <span className='label-text mx-1'>
-                {register.send_offers}
-            </span>
+            <span className='label-text mx-1'>{register.Send_Offers}</span>
           </label>
 
           {/* <input
@@ -122,24 +113,22 @@ const Register = ({register}) => {
             {loading ? (
               <span className='loading loading-spinner loading-md'></span>
             ) : (
-              'Register'
+              [`${register.PlaceholderRegister}`]
             )}
           </button>
           <div className='w-full max-w-sm my-3'>
-            <p className='mx-2 text-[12px]'>
-              {register.T_C}
-            </p>
+            <p className='mx-2 text-[12px]'>{register.T_C}</p>
             <p className='text-center text-[14px] my-2'>
-              {register.hv_acc}{' '}
+              {register.Have_Acc}{' '}
               <Link href='/login' className='link link-primary'>
-                Login
+                {register.Login}
               </Link>
             </p>
           </div>
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
