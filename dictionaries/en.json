@@ -64,6 +64,7 @@
   },
   "register": {
     "Title": "Register and Start Learning",
+    "Subtitle": "Enter your email below to create your account",
     "Send_Offers": "Send me special offers, recommendations and learning tips.",
     "T_C": "By signing up, you agree to our Terms of Use and Privacy Policy.",
     "Have_Acc": "Already have an account ?",
@@ -83,8 +84,8 @@
     "FaliedtoLoginFb": "Falied to login with Facebook",
     "FaliedtoLoginGlg": "Falied to login with Google",
     "LoginSuccess": "Login successfully",
-    "LoginFb": "login with Facebook",
-    "LoginGlg": "login with Google",
+    "LoginFb": "Facebook",
+    "LoginGlg": "Google",
     "PlaceholderEmail": "Email",
     "PlaceholderPw": "Password"
   },

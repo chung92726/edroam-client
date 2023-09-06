@@ -64,6 +64,7 @@
   },
   "register": {
     "Title": "註冊並開始學習",
+    "Subtitle": "輸入您的電子郵件以創建您的帳戶",
     "Send_Offers": "傳送特別優惠、課程推薦及學習貼士給我。",
     "T_C": "註冊即表示您同意我們的使用條款和隱私政策。",
     "Have_Acc": "已經註冊帳號了嗎？",
@@ -83,8 +84,8 @@
     "FaliedtoLoginFb": "無法連接 Facebook",
     "FaliedtoLoginGlg": "無法連接 Google",
     "LoginSuccess": "登入成功",
-    "LoginFb": "連接 Facebook 登入",
-    "LoginGlg": "連接 Google 登入",
+    "LoginFb": "Facebook",
+    "LoginGlg": "Google",
     "PlaceholderEmail": "電郵地址",
     "PlaceholderPw": "密碼"
   },
