@@ -118,6 +118,12 @@
     "PlaceholderEmail": "電郵地址",
     "PlaceholderPw": "密碼"
   },
+  "forgot_pw": {
+    "reset_pw": "重設密碼",
+		"Forgot_Pw": "忘記密碼",
+    "haveAcc": "還沒有帳號嗎？",
+    "signup": "註冊帳號"
+	},
   "about": {
     "unlock": "在數位世界中開發您的創意潛力！",
     "aboutus": "關於我們",

@@ -108,7 +108,7 @@
     "Or": "或",
     "Forgot_Pw": "忘记密码",
     "Have_Acc": "还没有帐号吗？",
-    "Signup": "登记帐号",
+    "Signup": "注冊帐号",
     "FaliedtoLoginFb": "无法连接 Facebook",
     "FaliedtoLoginGlg": "无法连接 Google",
     "LoginSuccess": "成功登录",
@@ -118,6 +118,12 @@
     "PlaceholderEmail": "电子邮箱",
     "PlaceholderPw": "密码"
   },
+  "forgot_pw": {
+    "reset_pw": "重设密码",
+		"Forgot_Pw": "忘记密码",
+    "haveAcc": "还没有帐号吗？",
+    "signup":"注冊帐号"
+	},
   "about": {
     "unlock": "在数字世界中开发您的创意潜力！",
     "aboutus": "关于我们",
