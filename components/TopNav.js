@@ -26,7 +26,7 @@ const languages = {
 };
 const languages_array = ['en', 'zh', 'cn'];
 
-const TopNav = ({ dict, lang, topNav }) => {
+const TopNav = ({ dict, lang, topNav, allCat }) => {
   const [currentPage, setCurrentPage] = useState('');
   const path = usePathname();
   const searchParams = useSearchParams();
@@ -218,27 +218,36 @@ const TopNav = ({ dict, lang, topNav }) => {
                 </Link>
               </li>
               <li>
-                <Link href='/marketplace/WebDesign'>{topNav.WebDesign}</Link>
+                <Link href='/marketplace/WebDesign'>
+                  {allCat['Web Design']}
+                  {allCat.Courses}
+                </Link>
                 {/* <a>Web Development Courses</a> */}
               </li>
               <li>
-                <Link href='/marketplace/UIUXDesign'>{topNav.UIUX_Design}</Link>
+                <Link href='/marketplace/UIUXDesign'>
+                  {allCat['UI/UX Design']}
+                  {allCat.Courses}
+                </Link>
                 {/* <a>UI/UX Design Courses</a> */}
               </li>
               <li>
                 <Link href='/marketplace/GraphicDesign'>
-                  {topNav.Graphic_Design}
+                  {allCat['Graphic Design']}
+                  {allCat.Courses}
                 </Link>
               </li>
               <li>
                 <Link href='/marketplace/3DModeling'>
-                  {topNav.ThreeD_Modelling}
+                  {allCat['3D Modeling']}
+                  {allCat.Courses}
                 </Link>
                 {/* <a>3D Modelling Courses</a> */}
               </li>
               <li>
                 <Link href='/marketplace/VideoEditing'>
-                  {topNav.Video_Editing}
+                  {allCat['Video Editing']}
+                  {allCat.Courses}
                 </Link>
                 {/* <a>Video Editing Courses</a> */}
               </li>

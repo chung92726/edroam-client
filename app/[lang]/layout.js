@@ -3,8 +3,9 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import TopNav from '@/components/TopNav';
-import { Provider } from '../../context/index';
 import LearningCard from '@/components/cards/LearningCard';
+import Footer from '@/components/Footer';
+import { Provider } from '../../context/index';
 import { getDictionary } from './dictionaries.js';
 // import { useState, useEffect } from 'react'
 
@@ -16,7 +17,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params: { lang } }) {
-  const { dict, topNav } = await getDictionary(lang);
+  const { dict, topNav, allCat, footer } = await getDictionary(lang);
   // set cookie to lang
 
   // const [isOpen, setIsOpen] = useState(false)
@@ -60,6 +61,7 @@ export default async function RootLayout({ children, params: { lang } }) {
             dict={dict}
             lang={lang}
             topNav={topNav}
+            allCat={allCat}
             // setIsOpen={setIsOpen}
             // isOpen={isOpen}
           />
@@ -72,6 +74,7 @@ export default async function RootLayout({ children, params: { lang } }) {
               ></div>
             )} */}
           </div>
+          <Footer footer={footer} allCat={allCat} />
         </Provider>
       </body>
     </html>

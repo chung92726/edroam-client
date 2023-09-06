@@ -33,11 +33,6 @@
     "Become_Instructor": "成为导师",
     "Browse_Course": "浏览课程",
     "All_Course": "所有课程",
-    "WebDesign": "网页设计课程",
-    "UIUX_Design": "用户界面/用户体验设计课程",
-    "Graphic_Design": "平面设计课程",
-    "ThreeD_Modelling": "3D 建模课程",
-    "Video_Editing": "视频编辑课程",
     "Search_Placeholder": "搜寻...",
     "My_Learning": "我的课堂",
     "Profile": "我的资料",
@@ -49,6 +44,19 @@
     "Start_Learn": "开始学习!",
     "No_course": "没有课堂购买记录",
     "Explore": "请前往影片库探索更多"
+  },
+  "footer": {
+    "Footer_descr": "顶尖的学习体验可以成就更多的人才",
+    "Browse_Course": "浏览课程",
+    "All_Course": "所有课程",
+    "Footer_Company": "企业",
+    "Footer_About": "关于我们",
+    "Footer_Contact": "联络我们",
+    "Footer_Legal": "条款及细则",
+    "Footer_Terms": "使用条款",
+    "Footer_Privacy": "隐私政策",
+    "Footer_Cookies": "Cookie 政策",
+    "Copyright": "版权所有 © 2023 - XLearners"
   },
   "home": {
     "Up_Your": "提升您的",
@@ -72,23 +80,7 @@
     "Explore_All_Programs": "浏览所有课程",
     "Tutors": "导师",
     "Tutors_Heroes": "认识我们的导师",
-    "Tutors_descr": "来自世界各地的导师在 XLearners 上指导数百万学生，为我们提供知识和力量。",
-    "Footer_descr": "顶尖的学习体验可以成就更多的人才",
-    "Browse_Course": "浏览课程",
-    "All_Course": "所有课程",
-    "WebDesign": "网页设计课程",
-    "UIUX_Design_Courses": "用户界面/用户体验设计课程",
-    "Graphic_Design": "平面设计课程",
-    "ThreeD_Modelling_Courses": "3D 建模课程",
-    "Video_Editing_Courses": "视频编辑课程",
-    "Footer_Company": "企业",
-    "Footer_About": "关于我们",
-    "Footer_Contact": "联络我们",
-    "Footer_Legal": "条款及细则",
-    "Footer_Terms": "使用条款",
-    "Footer_Privacy": "隐私政策",
-    "Footer_Cookies": "Cookie 政策",
-    "Copyright": "版权所有 © 2023 - XLearners"
+    "Tutors_descr": "来自世界各地的导师在 XLearners 上指导数百万学生，为我们提供知识和力量。"
   },
   "register": {
     "Title": "注册并开始学习",
@@ -136,7 +128,6 @@
   },
   "marketPlace": {
     "result": "搜索结果为 ",
-
     "sort_by": "排序方式",
     "lowest_price": "按最低价格",
     "latest_created": "按最新创建",

@@ -651,7 +651,7 @@ const HomePage = ({ params, home }) => {
       </div>
 
       {/* Footer */}
-      <footer className='footer p-10 bg-base-200 text-base-content'>
+      {/* <footer className='footer p-10 bg-base-200 text-base-content'>
         <div>
           <img src='/xltra.png' className='w-[250px] mb-10' />
           <p>{home.Footer_descr}</p>
@@ -688,7 +688,7 @@ const HomePage = ({ params, home }) => {
             <div className='link link-hover'>{home.Footer_Contact}</div>
           </Link>
           {/* <a className='link link-hover'>Corporate Services</a> */}
-        </div>
+      {/* </div>
         <div>
           <span className='footer-title'>{home.Footer_Legal}</span>
           <Link href='/terms'>
@@ -701,14 +701,14 @@ const HomePage = ({ params, home }) => {
             <div className='link link-hover'>{home.Footer_Cookies}</div>
           </Link>
         </div>
-      </footer>
+      </footer> */}
 
       {/* Copy Right */}
-      <footer className='footer footer-center p-4 bg-base-300 text-base-content'>
+      {/* <footer className='footer footer-center p-4 bg-base-300 text-base-content'>
         <div>
           <p>{home.Copyright}</p>
         </div>
-      </footer>
+      </footer>  */}
     </div>
   );
 };
