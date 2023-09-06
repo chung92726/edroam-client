@@ -92,6 +92,7 @@
   },
   "register": {
     "Title": "注册并开始学习",
+    "Subtitle": "输入您的电子邮件以创建您的帐户",
     "Send_Offers": "发送特别优惠、课程推荐及学习提示给我。",
     "T_C": "注册即表示您同意我们的使用条款和隐私政策。",
     "Have_Acc": "已经注册账号了吗？",
@@ -111,8 +112,8 @@
     "FaliedtoLoginFb": "无法连接 Facebook",
     "FaliedtoLoginGlg": "无法连接 Google",
     "LoginSuccess": "成功登录",
-    "LoginFb": "连接 Facebook 登录",
-    "LoginGlg": "连接 Google 登录",
+    "LoginFb": "Facebook",
+    "LoginGlg": "Google",
     "PlaceholderEmail": "电子邮箱",
     "PlaceholderPw": "密码"
   },
