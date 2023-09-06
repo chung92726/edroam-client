@@ -1,4 +1,32 @@
 {
+  "courseInfo": {
+    "Duration": "課程時長: ",
+    "Free": "免費",
+    "Lessons": "課",
+    "Last Created": "最新創建",
+    "Last Updated": "最新更新 "
+  },
+  "allCat": {
+    "All": "所有類別",
+    "Web Design": "網頁設計",
+    "UI/UX Design": "用戶界面/用戶體驗設計",
+    "Graphic Design": "平面設計",
+    "3D Modeling": "3D 建模",
+    "Video Editing": "影片編輯",
+    "Others": "其他",
+    "Courses": "課程"
+  },
+  "levels": {
+    "All Levels": "所有級別",
+    "Beginner": "初學者",
+    "Intermediate": "中級",
+    "Expert": "高階"
+  },
+  "allLang": {
+    "All_Lang": "所有語言",
+    "English": "英語",
+    "Chinese": "中文"
+  },
   "topNav": {
     "toast_success": "已登出",
     "Create_Course": "創建課程",
@@ -107,20 +135,6 @@
   },
   "marketPlace": {
     "result": "搜尋結果為 ",
-    "all_cat": "所有類別",
-    "web_des": "網頁設計",
-    "uiux_des": "UI/UX 設計",
-    "graphic_des": "平面設計",
-    "threed_mod": "3D 建模",
-    "video_edit": "影片剪輯",
-    "others": "其他",
-    "all_level": "所有級別",
-    "beginner": "初學者",
-    "intermediate": "中級",
-    "expert": "高階",
-    "all_lang": "所有語言",
-    "eng": "英語",
-    "chi": "中文",
     "sort_by": "排序方式",
     "lowest_price": "按最低價格",
     "latest_created": "按最新創建",

@@ -1,4 +1,32 @@
 {
+  "courseInfo": {
+    "Duration": "课程时长: ",
+    "Free": "免费",
+    "Lessons": "课",
+    "Last Created": "最新创建",
+    "Last Updated": "最新更新 "
+  },
+  "allCat": {
+    "All": "所有分类",
+    "Web Design": "网页设计",
+    "UI/UX Design": "用户界面/用户体验设计",
+    "Graphic Design": "平面设计",
+    "3D Modeling": "3D 建模",
+    "Video Editing": "视频剪辑",
+    "Others": "其他",
+    "Courses": "課程"
+  },
+  "levels": {
+    "All Levels": "所有級別",
+    "Beginner": "初学者",
+    "Intermediate": "中級",
+    "Expert": "高级"
+  },
+  "allLang": {
+    "All_Lang": "所有语言",
+    "English": "英语",
+    "Chinese": "中文"
+  },
   "topNav": {
     "toast_success": "已登出",
     "Create_Course": "创建课程",
@@ -107,20 +135,7 @@
   },
   "marketPlace": {
     "result": "搜索结果为 ",
-    "all_cat": "所有分类",
-    "web_des": "网页设计",
-    "uiux_des": "UI/UX 设计",
-    "graphic_des": "平面设计",
-    "threed_mod": "3D 建模",
-    "video_edit": "视频剪辑",
-    "others": "其他",
-    "all_level": "所有级别",
-    "beginner": "初学者",
-    "intermediate": "中级",
-    "expert": "高级",
-    "all_lang": "所有语言",
-    "eng": "英语",
-    "chi": "中文",
+
     "sort_by": "排序方式",
     "lowest_price": "按最低价格",
     "latest_created": "按最新创建",

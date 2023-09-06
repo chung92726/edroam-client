@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { currencyFormatter } from '@/utils/helpers'
-import RatingStars from '@/components/stars/RatingStars'
-import { formatDurationToHoursAndMinutes } from '@/utils/helpers'
+import Link from 'next/link';
+import { currencyFormatter } from '@/utils/helpers';
+import RatingStars from '@/components/stars/RatingStars';
+import { formatDurationToHoursAndMinutes } from '@/utils/helpers';
 
-const CourseCard = ({ course, i }) => {
+const CourseCard = ({ course, i, allCat, levels, allLang, courseInfo }) => {
   const {
     name,
     instructor,
@@ -19,7 +19,7 @@ const CourseCard = ({ course, i }) => {
     language,
     averageRating,
     numberOfReviews,
-  } = course
+  } = course;
   return (
     <Link href={`/course/${slug}`}>
       <div className='card bg-gray-50 w-[90vw] sm:w-[45vw] xl:w-[30vw] 2xl:w-[440px] min-h-[580px]'>
@@ -55,7 +55,7 @@ const CourseCard = ({ course, i }) => {
             {category &&
               category.slice(0, 3).map((c, index) => (
                 <span className='badgeuidesign mr-2' key={index}>
-                  {c.label}
+                  {allCat[c.label]}
                 </span>
               ))}
           </div>
@@ -102,24 +102,26 @@ const CourseCard = ({ course, i }) => {
             <span className='text-[14px] font-black'>
               {paid
                 ? currencyFormatter({ amount: price, currency: 'usd' })
-                : 'Free'}
+                : `${courseInfo.Free}`}
             </span>
-            <span className='text-slate-400 line-through  text-[12px]'>
+            <span className='text-slate-400 line-through text-[12px]'>
               {paid
                 ? currencyFormatter({ amount: price + 10, currency: 'usd' })
                 : ''}
             </span>
           </div>
-          <p className='text-[14px]'>{level && level}</p>
-          <p className='text-[14px]'>{language && language}</p>
-          <p className='text-[14px]'>{lessons && lessons.length} Lessons</p>
+          <p className='text-[14px]'>{level && levels[level]}</p>
+          <p className='text-[14px]'>{language && allLang[language]}</p>
           <p className='text-[14px]'>
-            Duration:{' '}
+            {lessons && lessons.length} <span>{courseInfo.Lessons}</span>
+          </p>
+          <p className='text-[14px]'>
+            <span>{courseInfo.Duration}</span>
             {totalDuration &&
               formatDurationToHoursAndMinutes(Math.floor(totalDuration))}
           </p>
           <p className='text-[14px]'>
-            Last Updated{' '}
+            <span>{courseInfo['Last Updated']}</span>
             {course &&
               course.updatedAt &&
               new Date(course.updatedAt).toLocaleDateString('en-GB')}
@@ -127,7 +129,7 @@ const CourseCard = ({ course, i }) => {
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default CourseCard
+export default CourseCard;

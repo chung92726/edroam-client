@@ -1,4 +1,32 @@
 {
+  "courseInfo": {
+    "Duration": "Course Duration: ",
+    "Free": "Free",
+    "Lessons": "Lessons",
+    "Last Created": "Last Created",
+    "Last Updated": "Last Updated "
+  },
+  "allCat": {
+    "All": "All Categories",
+    "Web Design": "Web Design",
+    "UI/UX Design": "UI/UX Design",
+    "Graphic Design": "Graphic Design",
+    "3D Modeling": "3D Modeling",
+    "Video Editing": "Video Editing",
+    "Others": "Others",
+    "Courses": " Courses"
+  },
+  "levels": {
+    "All Levels": "All Levels",
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Expert": "Expert"
+  },
+  "allLang": {
+    "All_Lang": "All Language",
+    "English": "English",
+    "Chinese": "Chinese"
+  },
   "topNav": {
     "toast_success": "Logout Successfully",
     "Create_Course": "Create Course",
@@ -107,20 +135,6 @@
   },
   "marketPlace": {
     "result": "Result for ",
-    "all_cat": "All Categories",
-    "web_des": "Web Design",
-    "uiux_des": "UI/UX Design",
-    "graphic_des": "Graphic Design",
-    "threed_mod": "3D Modeling",
-    "video_edit": "Video Editing",
-    "others": "Others",
-    "all_level": "All Levels",
-    "beginner": "Beginner",
-    "intermediate": "Intermediate",
-    "expert": "Expert",
-    "all_lang": "All Language",
-    "eng": "English",
-    "chi": "Chinese",
     "sort_by": "Sort By",
     "lowest_price": "By lowest price",
     "latest_created": "By latest created",

@@ -2,10 +2,18 @@ import { getDictionary } from '../../dictionaries.js';
 import MarketplacePage from './marketplace.js';
 
 const Marketplace = async ({ params }) => {
-  const { marketPlace } = await getDictionary(params.lang);
+  const { marketPlace, allCat, levels, allLang, courseInfo } =
+    await getDictionary(params.lang);
   return (
     <>
-      <MarketplacePage marketPlace={marketPlace} params={params} />
+      <MarketplacePage
+        marketPlace={marketPlace}
+        allCat={allCat}
+        levels={levels}
+        allLang={allLang}
+        courseInfo={courseInfo}
+        params={params}
+      />
     </>
   );
 };
