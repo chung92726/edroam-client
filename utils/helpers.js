@@ -33,7 +33,7 @@ export const getNumberOfDays = (start, end) => {
 }
 
 export const generateCourseDirectLink = (courseSlug, referralCode) => {
-  return `localhost:3000/course/${courseSlug}?cref=${referralCode}`
+  return `x-learners.com/course/${courseSlug}?cref=${referralCode}`
 }
 
 export const copyToClipboard = (text) => {

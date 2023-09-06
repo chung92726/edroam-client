@@ -5,6 +5,8 @@ import Select from 'react-select'
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css'
+import { IoAddCircleOutline } from 'react-icons/io5'
+import { CiCircleRemove } from 'react-icons/ci'
 
 const optionList = [
   { value: 'WebDesign', label: 'Web Design' },
@@ -55,6 +57,9 @@ const CourseCreateForm = ({
   handleOptionsChange,
   imgRef,
   editPage = false,
+  handleAddBullet,
+  handleRemoveBullet,
+  handleBulletChange,
 }) => {
   const children = []
   for (let i = 1.99; i <= 100.99; i++) {
@@ -143,6 +148,78 @@ const CourseCreateForm = ({
               <span className='label-text-alt'>Max: 300 characters</span>
             </label>
           </div>
+          {/* bullet point input for requirement and what you'll learn */}
+          <div className='form-control w-full max-w-xl mx-2'>
+            <label className='label'>
+              <span className='label-text'>What students will learn</span>
+            </label>
+            {values.whatYouWillLearn.map((point, index) => (
+              <div key={index} className='flex items-center my-2'>
+                <input
+                  type='text'
+                  value={point}
+                  onChange={(e) =>
+                    handleBulletChange('whatYouWillLearn', index, e)
+                  }
+                  className='input input-bordered flex-grow mr-2 text-[14px]'
+                  placeholder={
+                    index == 0
+                      ? `e.g Become an advanced JavaScript developer from scratch`
+                      : `Point ${index + 1}`
+                  }
+                />
+                <button
+                  onClick={(e) =>
+                    handleRemoveBullet('whatYouWillLearn', index, e)
+                  }
+                >
+                  <CiCircleRemove size={24} className='text-red-500' />
+                </button>
+              </div>
+            ))}
+            <button
+              onClick={(e) => handleAddBullet('whatYouWillLearn', e)}
+              className='flex justify-center items-center gap-2 text-gray-500'
+            >
+              <p className='text-[14px]'>Add Point</p>
+              <IoAddCircleOutline />
+            </button>
+          </div>
+
+          <div className='form-control w-full max-w-xl mx-2'>
+            <label className='label'>
+              <span className='label-text'>Course Requirements</span>
+            </label>
+            {values.requirements.map((point, index) => (
+              <div key={index} className='flex items-center my-2'>
+                <input
+                  type='text'
+                  value={point}
+                  onChange={(e) => handleBulletChange('requirements', index, e)}
+                  className='input input-bordered flex-grow mr-2 text-[14px]'
+                  placeholder={
+                    index == 0
+                      ? `e.g No coding experience is necessary to take this course`
+                      : `Requirement ${index + 1}`
+                  }
+                />
+                <button
+                  onClick={(e) => handleRemoveBullet('requirements', index, e)}
+                >
+                  <CiCircleRemove size={24} className='text-red-500' />
+                </button>
+              </div>
+            ))}
+            <button
+              onClick={(e) => handleAddBullet('requirements', e)}
+              className='flex justify-center items-center gap-2 text-gray-500'
+            >
+              <p className='text-[14px]'>Add Requirement</p>
+              <IoAddCircleOutline />
+            </button>
+          </div>
+
+          {/* bullet point input for requirement and what you'll learn */}
           <div className='form-control w-full max-w-xl mx-2'>
             <label className='label'>
               <span className='label-text'>Detail Description</span>
