@@ -427,40 +427,40 @@ const TopNav = ({ dict, lang, topNav, allCat }) => {
         ) : (
           <>
             <div className='hidden md:block mr-5'>
-              <label
-                tabIndex={0}
-                className='btn btn-ghost rounded-btn  max-md:!pl-4 px-2'
+              <Link
+                href='/login'
+                className=' cursor-pointer border-transparent'
+                onClick={() => setCurrentPage('login')}
               >
-                <div className='flex flex-row items-center text-[12px]'>
-                  <Link
-                    href='/login'
-                    className='mx-2 my-1 cursor-pointer border-transparent'
-                    onClick={() => setCurrentPage('login')}
-                  >
+                <label
+                  tabIndex={0}
+                  className='ml-1 btn btn-ghost rounded-btn  max-md:!pl-4 px-2'
+                >
+                  <div className='flex flex-row items-center text-[12px]'>
                     <div className='flex flex-row items-center'>
                       <AiOutlineLogin className='inline-block mx-[0.5px]' />
                       <p className='mx-1'>{topNav.Login}</p>
                     </div>
-                  </Link>
-                </div>
-              </label>
-              <label
-                tabIndex={0}
-                className='btn btn-ghost rounded-btn  max-md:!pl-4 px-2 border-indigo-500 '
+                  </div>
+                </label>
+              </Link>
+              <Link
+                href='/register'
+                className=' cursor-pointer border-transparent '
+                onClick={() => setCurrentPage('register')}
               >
-                <div className='flex flex-row items-center text-[12px] '>
-                  <Link
-                    href='/register'
-                    className='mx-2 my-1 cursor-pointer border-transparent '
-                    onClick={() => setCurrentPage('register')}
-                  >
+                <label
+                  tabIndex={0}
+                  className='mx-1 btn btn-ghost rounded-btn  max-md:!pl-4 px-2 border-indigo-500 '
+                >
+                  <div className='flex flex-row items-center text-[12px] '>
                     <div className='flex flex-row items-center'>
                       <RiRegisteredLine className='  inline-block mx-[0.5px]' />
                       <p className='mx-1 '>{topNav.Signup}</p>
                     </div>
-                  </Link>
-                </div>
-              </label>
+                  </div>
+                </label>
+              </Link>
             </div>
             <div className='dropdown dropdown-end m-2 font-sans block md:hidden'>
               <label

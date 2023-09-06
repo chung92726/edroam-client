@@ -1,63 +1,64 @@
-'use client'
+'use client';
 
-import { useState, useContext, useEffect } from 'react'
-import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify'
-import Link from 'next/link'
-import { Context } from '@/context/index'
-import { useRouter } from 'next/navigation'
-import { FacebookLoginButton } from 'react-social-login-buttons'
-import { GoogleLoginButton } from 'react-social-login-buttons'
+import { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import Link from 'next/link';
+import { Context } from '@/context/index';
+import { useRouter } from 'next/navigation';
+import { FacebookLoginButton } from 'react-social-login-buttons';
+import { GoogleLoginButton } from 'react-social-login-buttons';
+import Footer from '@/components/Footer';
 
-const Login = ({ login }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+const Login = ({ login, footer, allCat }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   //   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const router = useRouter()
+  const router = useRouter();
 
   // global state
-  const { state, dispatch } = useContext(Context)
-  const { user } = state
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
   useEffect(() => {
-    if (user !== null) router.push('/user')
-  }, [user])
+    if (user !== null) router.push('/user');
+  }, [user]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // console.table({ name, email, password })
-    setLoading(true)
+    setLoading(true);
     try {
       const { data } = await axios.post(`/api/login`, {
         email,
         password,
-      })
+      });
       dispatch({
         type: 'LOGIN',
         payload: data,
-      })
+      });
       // save in local storage => the browser
-      window.localStorage.setItem('user', JSON.stringify(data))
+      window.localStorage.setItem('user', JSON.stringify(data));
 
-      toast.success(`${login.LoginSuccess}`)
-      setEmail('')
-      setPassword('')
+      toast.success(`${login.LoginSuccess}`);
+      setEmail('');
+      setPassword('');
       // console.log(data)
-      setLoading(false)
-      router.push('/user')
+      setLoading(false);
+      router.push('/user');
     } catch (err) {
-      toast.error(err.response.data)
-      setLoading(false)
+      toast.error(err.response.data);
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
       {/* <ToastContainer position='top-center' /> */}
 
-      <div className='mt-10'>
+      <div className='mt-10 h-[82vh]'>
         <form
           onSubmit={handleSubmit}
           className='justify-center items-center form-control max-sm:mx-5'
@@ -77,7 +78,7 @@ const Login = ({ login }) => {
                   boxShadow: 'rgba(0, 0, 0, 0.8) 2px 2px 5px',
                 }}
               >
-                <span>{login.LoginFb}</span>
+                <span>Facebook</span>
               </FacebookLoginButton>
             </a>
             <a href='/api/auth/google' className='w-full max-w-sm'>
@@ -89,7 +90,7 @@ const Login = ({ login }) => {
                   boxShadow: 'rgba(0, 0, 0, 0.8) 2px 2px 5px',
                 }}
               >
-                <span>{login.LoginGlg}</span>
+                <span>Google</span>
               </GoogleLoginButton>
             </a>
           </div>
@@ -100,7 +101,7 @@ const Login = ({ login }) => {
             </div>
             <div className='relative flex justify-center text-xs uppercase'>
               <span className='bg-background px-2 text-muted-foreground'>
-                Or continue with
+                {login.Continue}
               </span>
             </div>
           </div>
@@ -151,8 +152,9 @@ const Login = ({ login }) => {
           </div>
         </form>
       </div>
+      <Footer footer={footer} allCat={allCat} />
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

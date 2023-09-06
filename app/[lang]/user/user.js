@@ -6,8 +6,16 @@ import UserRoute from '@/components/routes/UserRoutes';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { formatDurationToHoursAndMinutes } from '@/utils/helpers';
 
-const UserIndex = ({ userMyLearning, userRoute }) => {
+const UserIndex = ({
+  userMyLearning,
+  userRoute,
+  courseInfo,
+  allCat,
+  levels,
+  allLang,
+}) => {
   const {
     state: { user },
   } = useContext(Context);
@@ -150,38 +158,47 @@ const UserIndex = ({ userMyLearning, userRoute }) => {
           onChange={(event) => setCategoryQuery(event.target.value)}
           value={categoryQuery}
         >
-          <option value=''>{userMyLearning.PlaceholderAll_Cat}</option>
+          <option value=''>{allCat.All}</option>
           <option value='WebDesign'>
-            {userMyLearning.PlaceholderWebDesign}
+            {allCat['Web Design']}
+            {allCat.Courses}
           </option>
-          <option value='UIUXDesign'>{userMyLearning.PlaceholderUIUX}</option>
+          <option value='UIUXDesign'>
+            {allCat['UI/UX Design']}
+            {allCat.Courses}
+          </option>
           <option value='GraphicDesign'>
-            {userMyLearning.PlaceholderGraph}
+            {allCat['Graphic Design']}
+            {allCat.Courses}
           </option>
-          <option value='3DModeling'>{userMyLearning.Placeholder3D}</option>
+          <option value='3DModeling'>
+            {allCat['3D Modeling']}
+            {allCat.Courses}
+          </option>
           <option value='VideoEditing'>
-            {userMyLearning.PlaceholderVideo}
+            {allCat['Video Editing']}
+            {allCat.Courses}
           </option>
-          <option value='Others'>{userMyLearning.PlaceholderOthers}</option>
+          <option value='Others'>{allCat.Others}</option>
         </select>
         <select
           className='select select-bordered mx-[1%] my-2 w-[44%] md:w-[20.5%] 2xl:w-[14%]'
           onChange={(e) => setLevelQuery(e.target.value)}
           value={levelQuery}
         >
-          <option value=''>{userMyLearning['All Levels']}</option>
-          <option value='Beginner'>{userMyLearning.Beginner}</option>
-          <option value='Intermediate'>{userMyLearning.Intermediate}</option>
-          <option value='Expert'>{userMyLearning.Expert}</option>
+          <option value=''>{levels['All Levels']}</option>
+          <option value='Beginner'>{levels.Beginner}</option>
+          <option value='Intermediate'>{levels.Intermediate}</option>
+          <option value='Expert'>{levels.Expert}</option>
         </select>
         <select
           className='select select-bordered mx-[1%] my-2 w-[44%] md:w-[20.5%] 2xl:w-[14%]'
           onChange={(e) => setLangQuery(e.target.value)}
           value={langQuery}
         >
-          <option value=''>{userMyLearning.PlaceholderAll_Lang}</option>
-          <option value='English'>{userMyLearning.English}</option>
-          <option value='Chinese'>{userMyLearning.Chinese}</option>
+          <option value=''>{allLang.All_Lang}</option>
+          <option value='English'>{allLang.English}</option>
+          <option value='Chinese'>{allLang.Chinese}</option>
         </select>
         <select
           className='select select-bordered mx-[1%] my-2 w-[44%] md:w-[20.5%] 2xl:w-[14%]'
@@ -236,9 +253,9 @@ const UserIndex = ({ userMyLearning, userRoute }) => {
                 <div className='my-2'>
                   <div className='flex flex-wrap items-center'>
                     {course.category &&
-                      course.category.map((c, index) => (
+                      course.category.slice(0, 3).map((c, index) => (
                         <span className='badgeuidesign mr-2' key={index}>
-                          {c.label}
+                          {allCat[c.label]}
                         </span>
                       ))}
                   </div>
@@ -262,9 +279,20 @@ const UserIndex = ({ userMyLearning, userRoute }) => {
                       {course.instructor.name}
                     </p>
                   </div>
-                  <p className='text-[12px] '>{userMyLearning[course.level]}</p>
+                  <p className='text-[12px] '>{levels[course.level]}</p>
+                  <p className='text-[12px] '>{allLang[course.language]}</p>
                   <p className='text-[12px] '>
-                    {userMyLearning[course.language]}
+                    <span>{courseInfo.Duration}</span>
+                    {course.totalDuration &&
+                      formatDurationToHoursAndMinutes(
+                        Math.floor(course.totalDuration)
+                      )}
+                  </p>
+                  <p className='text-[12px] '>
+                    <span>{courseInfo['Last Updated']}</span>
+                    {course &&
+                      course.updatedAt &&
+                      new Date(course.updatedAt).toLocaleDateString('en-GB')}
                   </p>
                   <div className='card-actions justify-end'>
                     <button

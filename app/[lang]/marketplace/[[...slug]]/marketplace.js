@@ -6,6 +6,7 @@ import axios from 'axios';
 import CourseCard from '@/components/cards/CourseCard';
 import { Pagination } from 'antd';
 import CourseCardSkeleton from '@/components/skeleton/CourseCardSkeleton';
+import Footer from '@/components/Footer';
 
 const marketplace = ({
   params,
@@ -14,6 +15,7 @@ const marketplace = ({
   levels,
   allLang,
   courseInfo,
+  footer,
 }) => {
   const [courses, setCourses] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -139,14 +141,15 @@ const marketplace = ({
   }, [filtered]);
 
   return (
-    <div className='flex flex-col justify-center items-center mt-10 w-full mb-10'>
-      <div className='flex flex-wrap justify-center items-center'>
-        {localSearchQuery && (
-          <div className='flex font-bold text-2xl mx-[1.5vw] my-2 w-[90vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'>
-            <span>{marketPlace.result}</span>"{localSearchQuery}"
-          </div>
-        )}
-        {/* <input
+    <>
+      <div className='flex flex-col justify-center items-center mt-10 w-full mb-10'>
+        <div className='flex flex-wrap justify-center items-center'>
+          {localSearchQuery && (
+            <div className='flex font-bold text-2xl mx-[1.5vw] my-2 w-[90vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'>
+              <span>{marketPlace.result}</span>"{localSearchQuery}"
+            </div>
+          )}
+          {/* <input
           className='input input-bordered mx-[1.5vw] my-2 w-[90vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
@@ -159,125 +162,127 @@ const marketplace = ({
           value={localSearchQuery}
           onChange={(e) => setLocalSearchQuery(e.target.value)}
         /> */}
-        <select
-          className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'
-          onChange={handleCategory}
-          value={categoryQuery}
-        >
-          <option value=''>{allCat.All}</option>
-          <option value='WebDesign'>
-            {allCat['Web Design']}
-            {allCat.Courses}
-          </option>
-          <option value='UIUXDesign'>
-            {allCat['UI/UX Design']}
-            {allCat.Courses}
-          </option>
-          <option value='GraphicDesign'>
-            {allCat['Graphic Design']}
-            {allCat.Courses}
-          </option>
-          <option value='3DModeling'>
-            {allCat['3D Modeling']}
-            {allCat.Courses}
-          </option>
-          <option value='VideoEditing'>
-            {allCat['Video Editing']}
-            {allCat.Courses}
-          </option>
-          <option value='Others'>{allCat['Others']}</option>
-        </select>
-        <select
-          className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[12vw] 2xl:mx-[0.5vw]'
-          onChange={(e) => setLevelQuery(e.target.value)}
-          value={levelQuery}
-        >
-          <option value=''>{levels['All Levels']}</option>
-          <option value='Beginner'>{levels.Beginner}</option>
-          <option value='Intermediate'>{levels.Intermediate}</option>
-          <option value='Expert'>{levels.Expert}</option>
-        </select>
-        <select
-          className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'
-          onChange={(e) => setLangQuery(e.target.value)}
-          value={langQuery}
-        >
-          <option value=''>{allLang.All_Lang}</option>
-          <option value='English'>{allLang.English}</option>
-          <option value='Chinese'>{allLang.Chinese}</option>
-        </select>
-        <select
-          className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[10vw] 2xl:mx-[0.5vw]'
-          onChange={(e) => setSortBy(e.target.value)}
-          value={sortBy}
-        >
-          <option value=''>{marketPlace.sort_by}</option>
-          <option value='price'>{marketPlace.lowest_price}</option>
-          <option value='-created'>{marketPlace.latest_created}</option>
-          <option value='-updated'>{marketPlace.latest_updated}</option>
-        </select>
-        <div className='flex flex-row justify-center items-center mx-[1.5vw] my-2 h-[3rem] w-[86vw] sm:w-[59vw] 2xl:w-[20vw] 2xl:mx-[0.5vw]'>
-          <div className='min-w-[4rem] mx-[1vw] my-2 2xl:mx-[0.5vw]'>
-            <h1 className=''>{marketPlace.price}</h1>
-          </div>
-          <input
-            type='range'
-            min={-0.01}
-            max='99.99'
-            step={1}
-            value={localPriceQuery}
-            className='range range-xs my-2'
-            onChange={(e) =>
-              e.target.value > 0
-                ? setLocalPriceQuery(e.target.value)
-                : setLocalPriceQuery(0)
-            }
-            onMouseUp={handlePriceQuery}
-            onTouchEnd={handlePriceQuery}
-          />
-          <p className='mx-[1vw] my-2 w-[60px] 2xl:mx-[0.5vw]'>
-            ${localPriceQuery}
-          </p>
-        </div>
-      </div>
-
-      {filtered && loading == false ? (
-        <>
-          <div className='flex flex-row justify-center w-full mt-10 flex-wrap gap-10 '>
-            {filtered.map((course, i) => (
-              <CourseCard
-                key={course._id}
-                course={course}
-                index={i}
-                allCat={allCat}
-                levels={levels}
-                allLang={allLang}
-                courseInfo={courseInfo}
-              />
-            ))}
-          </div>
-          <div className='mt-5'>
-            <Pagination
-              total={courses.total}
-              defaultPageSize={limit}
-              defaultCurrent={1}
-              current={page}
-              onChange={(page, pageSize) => {
-                setPage(page);
-              }}
+          <select
+            className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'
+            onChange={handleCategory}
+            value={categoryQuery}
+          >
+            <option value=''>{allCat.All}</option>
+            <option value='WebDesign'>
+              {allCat['Web Design']}
+              {allCat.Courses}
+            </option>
+            <option value='UIUXDesign'>
+              {allCat['UI/UX Design']}
+              {allCat.Courses}
+            </option>
+            <option value='GraphicDesign'>
+              {allCat['Graphic Design']}
+              {allCat.Courses}
+            </option>
+            <option value='3DModeling'>
+              {allCat['3D Modeling']}
+              {allCat.Courses}
+            </option>
+            <option value='VideoEditing'>
+              {allCat['Video Editing']}
+              {allCat.Courses}
+            </option>
+            <option value='Others'>{allCat['Others']}</option>
+          </select>
+          <select
+            className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[12vw] 2xl:mx-[0.5vw]'
+            onChange={(e) => setLevelQuery(e.target.value)}
+            value={levelQuery}
+          >
+            <option value=''>{levels['All Levels']}</option>
+            <option value='Beginner'>{levels.Beginner}</option>
+            <option value='Intermediate'>{levels.Intermediate}</option>
+            <option value='Expert'>{levels.Expert}</option>
+          </select>
+          <select
+            className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[14vw] 2xl:mx-[0.5vw]'
+            onChange={(e) => setLangQuery(e.target.value)}
+            value={langQuery}
+          >
+            <option value=''>{allLang.All_Lang}</option>
+            <option value='English'>{allLang.English}</option>
+            <option value='Chinese'>{allLang.Chinese}</option>
+          </select>
+          <select
+            className='select select-bordered mx-[1.5vw] my-2 w-[43.5vw] sm:w-[28vw] 2xl:w-[10vw] 2xl:mx-[0.5vw]'
+            onChange={(e) => setSortBy(e.target.value)}
+            value={sortBy}
+          >
+            <option value=''>{marketPlace.sort_by}</option>
+            <option value='price'>{marketPlace.lowest_price}</option>
+            <option value='-created'>{marketPlace.latest_created}</option>
+            <option value='-updated'>{marketPlace.latest_updated}</option>
+          </select>
+          <div className='flex flex-row justify-center items-center mx-[1.5vw] my-2 h-[3rem] w-[86vw] sm:w-[59vw] 2xl:w-[20vw] 2xl:mx-[0.5vw]'>
+            <div className='min-w-[4rem] mx-[1vw] my-2 2xl:mx-[0.5vw]'>
+              <h1 className=''>{marketPlace.price}</h1>
+            </div>
+            <input
+              type='range'
+              min={-0.01}
+              max='99.99'
+              step={1}
+              value={localPriceQuery}
+              className='range range-xs my-2'
+              onChange={(e) =>
+                e.target.value > 0
+                  ? setLocalPriceQuery(e.target.value)
+                  : setLocalPriceQuery(0)
+              }
+              onMouseUp={handlePriceQuery}
+              onTouchEnd={handlePriceQuery}
             />
+            <p className='mx-[1vw] my-2 w-[60px] 2xl:mx-[0.5vw]'>
+              ${localPriceQuery}
+            </p>
           </div>
-        </>
-      ) : (
-        <div className='flex flex-row justify-center w-full mt-10 flex-wrap gap-10 sm:gap-5'>
-          <CourseCardSkeleton />
-          <CourseCardSkeleton />
-          <CourseCardSkeleton />
-          <CourseCardSkeleton />
-          <CourseCardSkeleton />
         </div>
-      )}
-    </div>
+
+        {filtered && loading == false ? (
+          <>
+            <div className='flex flex-row justify-center w-full mt-10 flex-wrap gap-10 '>
+              {filtered.map((course, i) => (
+                <CourseCard
+                  key={course._id}
+                  course={course}
+                  index={i}
+                  allCat={allCat}
+                  levels={levels}
+                  allLang={allLang}
+                  courseInfo={courseInfo}
+                />
+              ))}
+            </div>
+            <div className='mt-5'>
+              <Pagination
+                total={courses.total}
+                defaultPageSize={limit}
+                defaultCurrent={1}
+                current={page}
+                onChange={(page, pageSize) => {
+                  setPage(page);
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          <div className='flex flex-row justify-center w-full mt-10 flex-wrap gap-10 sm:gap-5'>
+            <CourseCardSkeleton />
+            <CourseCardSkeleton />
+            <CourseCardSkeleton />
+            <CourseCardSkeleton />
+            <CourseCardSkeleton />
+          </div>
+        )}
+      </div>
+      <Footer footer={footer} allCat={allCat} />
+    </>
   );
 };
 

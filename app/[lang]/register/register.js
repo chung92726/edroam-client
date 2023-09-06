@@ -1,59 +1,60 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useContext } from 'react'
-import { Context } from '@/context/index'
-import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { FacebookLoginButton } from 'react-social-login-buttons'
-import { GoogleLoginButton } from 'react-social-login-buttons'
+import { useState, useEffect, useContext } from 'react';
+import { Context } from '@/context/index';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { FacebookLoginButton } from 'react-social-login-buttons';
+import { GoogleLoginButton } from 'react-social-login-buttons';
+import Footer from '@/components/Footer';
 
-const Register = ({ register }) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [promotion, setPromotion] = useState(true)
-  const [loading, setLoading] = useState(false)
+const Register = ({ register, footer, allCat }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [promotion, setPromotion] = useState(true);
+  const [loading, setLoading] = useState(false);
   //   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const router = useRouter()
+  const router = useRouter();
 
   // global state
-  const { state, dispatch } = useContext(Context)
-  const { user } = state
+  const { state, dispatch } = useContext(Context);
+  const { user } = state;
 
   useEffect(() => {
-    if (user !== null) router.push('/user')
-  }, [user])
+    if (user !== null) router.push('/user');
+  }, [user]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // console.table({ name, email, password })
-    setLoading(true)
+    setLoading(true);
     try {
       const { data } = await axios.post(`/api/register`, {
         name,
         email,
         password,
         promotion,
-      })
-      toast.success(`${register.RegSuccess}`)
-      setName('')
-      setEmail('')
-      setPassword('')
-      setLoading(false)
-      router.push('/login')
+      });
+      toast.success(`${register.RegSuccess}`);
+      setName('');
+      setEmail('');
+      setPassword('');
+      setLoading(false);
+      router.push('/login');
     } catch (err) {
-      toast.error(err.response.data)
-      setLoading(false)
+      toast.error(err.response.data);
+      setLoading(false);
     }
-  }
+  };
   return (
     <>
       {/* <ToastContainer position='top-center' /> */}
 
-      <div className='mt-10'>
+      <div className='mt-10 h-[82vh]'>
         <form
           onSubmit={handleSubmit}
           className='justify-center items-center form-control max-sm:mx-5'
@@ -68,7 +69,6 @@ const Register = ({ register }) => {
             <a href='/api/auth/facebook' className='w-full max-w-sm'>
               <FacebookLoginButton
                 className='w-full my-3 font-bold'
-                placeholder='Facebook'
                 style={{
                   fontSize: '14px',
 
@@ -99,7 +99,7 @@ const Register = ({ register }) => {
             </div>
             <div className='relative flex justify-center text-xs uppercase'>
               <span className='bg-background px-2 text-muted-foreground'>
-                Or continue with
+                {register.Continue}
               </span>
             </div>
           </div>
@@ -161,7 +161,21 @@ const Register = ({ register }) => {
             )}
           </button>
           <div className='w-full max-w-sm my-3'>
-            <p className='mx-2 text-[12px]'>{register.T_C}</p>
+            <div className='flex flex-wrap mx-2 items-center'>
+              <p className='text-[12px]'>{register.Agree}</p>&nbsp;
+              <Link href='/terms' className='text-[12px] link link-primary'>
+                {register.Terms}
+              </Link>
+              &nbsp;
+              <Link href='/privacy' className='text-[12px] link link-primary'>
+                {register.Privacy}
+              </Link>
+              &nbsp;
+              <p className='text-[12px]'>{register.And}</p>&nbsp;
+              <Link href='/cookies' className='text-[12px] link link-primary'>
+                {register.Cookies}
+              </Link>
+            </div>
             <p className='text-center text-[14px] my-2'>
               {register.Have_Acc}{' '}
               <Link href='/login' className='link link-primary'>
@@ -171,8 +185,9 @@ const Register = ({ register }) => {
           </div>
         </form>
       </div>
+      <Footer footer={footer} allCat={allCat} />
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

@@ -74,7 +74,6 @@ export default async function RootLayout({ children, params: { lang } }) {
               ></div>
             )} */}
           </div>
-          <Footer footer={footer} allCat={allCat} />
         </Provider>
       </body>
     </html>

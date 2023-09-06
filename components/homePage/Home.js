@@ -4,8 +4,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import HomeCourseCard from '../cards/HomeCourseCard';
+import Footer from '@/components/Footer';
 
-const HomePage = ({ params, home }) => {
+const HomePage = ({ params, home, footer, allCat }) => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -651,6 +652,7 @@ const HomePage = ({ params, home }) => {
       </div>
 
       {/* Footer */}
+      <Footer footer={footer} allCat={allCat} />
       {/* <footer className='footer p-10 bg-base-200 text-base-content'>
         <div>
           <img src='/xltra.png' className='w-[250px] mb-10' />

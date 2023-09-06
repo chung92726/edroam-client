@@ -46,6 +46,9 @@
     "Explore": "Let's go to Library to explore more!"
   },
   "footer": {
+    "WannaTeach": "Wanna teach on XLearners?",
+    "WannaTeach_sub": "Become an instructor to inspire millions of students worldwide and start earning online.",
+    "LearnMore": "Learn More",
     "Footer_descr": "Top learning experiences that create more talent in the world.",
     "Browse_Course": "Browse Course",
     "All_Course": "All Courses",
@@ -86,9 +89,14 @@
     "Title": "Register and Start Learning",
     "Subtitle": "Enter your email below to create your account",
     "Send_Offers": "Send me special offers, recommendations and learning tips.",
-    "T_C": "By signing up, you agree to our Terms of Use and Privacy Policy.",
+    "Agree": "By signing up, you agree to our ",
+    "And": "and ",
+    "Terms": "Terms of use",
+    "Privacy": "Privacy policy",
+    "Cookies": "Cookies policy",
     "Have_Acc": "Already have an account ?",
     "RegSuccess": "Account Registred Successfully. Please Login.",
+    "Continue": "Or continue with",
     "PlaceholderName": "Name",
     "PlaceholderEmail": "Email",
     "PlaceholderPw": "Password",
@@ -106,6 +114,7 @@
     "LoginSuccess": "Login successfully",
     "LoginFb": "Facebook",
     "LoginGlg": "Google",
+    "Continue": "Or continue with",
     "PlaceholderEmail": "Email",
     "PlaceholderPw": "Password"
   },
@@ -134,6 +143,7 @@
     "latest_updated": "By latest updated",
     "price": "Price:"
   },
+  "courseDetailPage": {},
 
   "userRoute": {
     "My_Learning": "My Learning",
@@ -144,20 +154,6 @@
   "userMyLearning": {
     "My_Learning": "My Learning",
     "PlaceholderSearch": "Search...",
-    "PlaceholderAll_Cat": "All Category",
-    "PlaceholderWebDesign": "Web Design",
-    "PlaceholderUIUX": "UI/UX Design",
-    "PlaceholderGraph": "Graphic Design",
-    "Placeholder3D": "3D Modeling",
-    "PlaceholderVideo": "Video Editing",
-    "PlaceholderOthers": "Others",
-    "All Levels": "All Levels",
-    "Beginner": "Beginner",
-    "Intermediate": "Intermediate",
-    "Expert": "Expert",
-    "PlaceholderAll_Lang": "All Language",
-    "English": "English",
-    "Chinese": "Chinese",
     "PlaceholderSort": "Sort By",
     "PlaceholderLast_Create": "By lastest created",
     "PlaceholderLast_Update": "By lastest updated",
