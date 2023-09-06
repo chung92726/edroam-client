@@ -7,13 +7,13 @@ let locales = ['en', 'zh', 'cn']
 function getLocale(request) {
   // 1. From cookies
   const queryLocale = request.nextUrl.searchParams.get('lang')
-  console.log('queryLocale', queryLocale)
+  // console.log('queryLocale', queryLocale)
   if (queryLocale && locales.includes(queryLocale)) {
     return queryLocale
   }
   try {
     const cookieLocale = request.cookies.get('locale').value
-    console.log('cookieLocale', cookieLocale)
+    // console.log('cookieLocale', cookieLocale)
     if (cookieLocale && locales.includes(cookieLocale)) {
       return cookieLocale
     }

@@ -13,7 +13,7 @@ const dictionaries = {
 
 export const getDictionary = async (locale) => {
   const lang = locale.slice(0, 2)
-  console.log(lang)
+  // console.log(lang)
   if (!locales.includes(lang)) {
     return dictionaries['en']()
   }

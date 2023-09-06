@@ -1,29 +1,31 @@
-"use client"
+'use client'
 
-import CourseCreateForm from "@/components/form/CourseCreateForm"
-import { useState, useEffect, useRef } from "react"
-import Resizer from "react-image-file-resizer"
-import { toast } from "react-toastify"
-import axios from "axios"
-import { useRouter } from "next/navigation"
+import CourseCreateForm from '@/components/form/CourseCreateForm'
+import { useState, useEffect, useRef } from 'react'
+import Resizer from 'react-image-file-resizer'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 const CourseEdit = ({ params }) => {
   const [values, setValues] = useState({
-    name: "",
-    description: "",
-    detailDescription: "",
-    price: "",
+    name: '',
+    description: '',
+    detailDescription: '',
+    price: '',
     uploading: false,
     paid: true,
     category: [],
-    level: "",
-    language: "",
+    whatYouWillLearn: [],
+    requirements: [],
+    level: '',
+    language: '',
     loading: false,
   })
   const router = useRouter()
   const imgRef = useRef()
   const { slug } = params
-  const [preview, setPreview] = useState("")
+  const [preview, setPreview] = useState('')
   const [image, setImage] = useState({})
 
   useEffect(() => {
@@ -50,25 +52,50 @@ const CourseEdit = ({ params }) => {
     // console.log(cat);
     setValues({ ...values, category: data })
   }
+  const handleAddBullet = (section, e) => {
+    e.preventDefault()
+    setValues((prev) => ({
+      ...prev,
+      [section]: [...prev[section], ''],
+    }))
+  }
+
+  const handleRemoveBullet = (section, index, e) => {
+    e.preventDefault()
+    setValues((prev) => ({
+      ...prev,
+      [section]: prev[section].filter((_, idx) => idx !== index),
+    }))
+  }
+
+  const handleBulletChange = (section, index, e) => {
+    e.preventDefault()
+    const newBulletPoints = [...values[section]]
+    newBulletPoints[index] = e.target.value
+    setValues({
+      ...values,
+      [section]: newBulletPoints,
+    })
+  }
 
   const handleImage = (e) => {
     let file = e.target.files[0]
     setPreview(window.URL.createObjectURL(file))
 
     setValues({ ...values, uploading: true })
-    Resizer.imageFileResizer(file, 720, 500, "JPEG", 100, 0, async (url) => {
+    Resizer.imageFileResizer(file, 720, 500, 'JPEG', 100, 0, async (url) => {
       try {
-        let { data } = await axios.post("/api/course/upload-image", {
+        let { data } = await axios.post('/api/course/upload-image', {
           image: url,
         })
-        console.log("Image uploaded", data)
+        console.log('Image uploaded', data)
         setImage(data)
         setValues({ ...values, uploading: false })
-        toast.success("Image uploaded")
+        toast.success('Image uploaded')
       } catch (err) {
         console.log(err)
         setValues({ ...values, uploading: false })
-        toast.error("Image upload failed. Try later")
+        toast.error('Image upload failed. Try later')
       }
     })
   }
@@ -76,17 +103,17 @@ const CourseEdit = ({ params }) => {
   const handleImageRemove = async () => {
     setValues({ ...values, uploading: true })
     try {
-      const res = await axios.post("/api/course/remove-image", {
+      const res = await axios.post('/api/course/remove-image', {
         image: image,
       })
       setImage({})
-      setPreview("")
-      imgRef.current.value = ""
+      setPreview('')
+      imgRef.current.value = ''
       setValues({ ...values, uploading: false })
     } catch (err) {
       console.log(err)
       setValues({ ...values, uploading: false })
-      toast.error("Image Remove failed. Try later")
+      toast.error('Image Remove failed. Try later')
     }
   }
 
@@ -98,10 +125,10 @@ const CourseEdit = ({ params }) => {
         ...values,
         image: image,
       })
-      toast.success("Course updated successfully")
+      toast.success('Course updated successfully')
       setValues({ ...values, loading: false })
 
-      router.push("/instructor")
+      router.push('/instructor')
     } catch (err) {
       console.log(err)
       toast.error(err.response.data)
@@ -130,6 +157,9 @@ const CourseEdit = ({ params }) => {
         handleOptionsChange={handleOptionsChange}
         editPage={true}
         imgRef={imgRef}
+        handleAddBullet={handleAddBullet}
+        handleRemoveBullet={handleRemoveBullet}
+        handleBulletChange={handleBulletChange}
       />
     </div>
   )
