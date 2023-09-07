@@ -168,6 +168,16 @@
     "latest_updated": "按最新更新",
     "price": "費用："
   },
+  "userCourse": {
+    "mark_complete": "Mark as completed123"
+  },
+  "instructor_detail": {
+    "instructor": "導師",
+    "name": "姓名：",
+    "aboutme": "關於我",
+    "createdCourse": "已創建的課程",
+    "noCreatedCourse": "用戶沒有已創建的課程"
+},
   "courseDetailPage": {
     "toast_success": "成功購買課程。 立即開始學習吧！",
     "toast_fail": "購買失敗。請再試一次",

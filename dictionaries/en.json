@@ -168,6 +168,17 @@
     "latest_updated": "By latest updated",
     "price": "Price:"
   },
+  "userCourse": {
+    "mark_complete": "Mark as completed123"
+  },
+  "instructor_detail":{
+    "instructor": "instructor",
+    "name":"Name: ",
+    "aboutme": "About me",
+    "createdCourse": "Created Courses",
+    "noCreatedCourse": "User has No Created Courses"
+
+  },
   "courseDetailPage": {
     "toast_success": "Enrolled Successfully. Start Learning Now!",
     "toast_fail": "Failed to Enroll. Please Try Again",
