@@ -122,7 +122,13 @@
     "reset_pw": "Reset Password",
     "Forgot_Pw": "Forgot Password",
     "haveAcc": "Don't have an account ?",
-    "signup": "Sign up"
+    "signup": "Sign up",
+    "submit": "Submit",
+    "placeholder": {
+      "email": "Enter Email",
+      "reset_code": "Enter reset code",
+      "new_pw": "Enter New Password"
+    }
   },
   "about": {
     "unlock": "Unlock Your Creative Potential in the Digital World!",

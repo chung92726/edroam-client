@@ -122,7 +122,13 @@
     "reset_pw": "重設密碼",
 		"Forgot_Pw": "忘記密碼",
     "haveAcc": "還沒有帳號嗎？",
-    "signup": "註冊帳號"
+    "signup": "註冊帳號",
+    "submit": "提交",
+    "placeholder": {
+      "email": "輸入電郵地址",
+      "reset_code": "輸入重設代碼",
+      "new_pw": "輸入新密碼"
+    }
 	},
   "about": {
     "unlock": "在數位世界中開發您的創意潛力！",

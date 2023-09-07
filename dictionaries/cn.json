@@ -122,7 +122,13 @@
     "reset_pw": "重设密码",
 		"Forgot_Pw": "忘记密码",
     "haveAcc": "还没有帐号吗？",
-    "signup":"注冊帐号"
+    "signup":"注冊帐号",
+    "submit": "提交",
+    "placeholder": {
+      "email": "输入电邮地址",
+      "reset_code": "输入重置代码",
+      "new_pw": "输入新密码"
+    }
 	},
   "about": {
     "unlock": "在数字世界中开发您的创意潜力！",
