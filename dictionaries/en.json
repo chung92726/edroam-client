@@ -150,7 +150,21 @@
     "price": "Price:"
   },
   "courseDetailPage": {
-    "Reviews": " reviews"
+    "toast_success": "Enrolled Successfully. Start Learning Now!",
+    "toast_fail": "Failed to Enroll. Please Try Again",
+    "Preview": "Course Preview",
+    "Close": "close",
+    "Reviews": " reviews",
+    "CreateBy": "Created By ",
+    "Level": "Level: ",
+    "Language": "Language: ",
+    "Lessons": " Lessons",
+    "Duration": "Total Duration: ",
+    "Loading": "Loading...",
+    "Start": "Start Learning",
+    "Enroll": "Enroll To This Course",
+    "Login_To": "Login To Enroll",
+    "PreviewtheCourse": "Preview the Course"
   },
 
   "userRoute": {

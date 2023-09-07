@@ -31,7 +31,6 @@ const StickyBar = ({
   handlePaidEnrollment,
   handleFreeEnrollment,
   handleCheckLogin,
-  footer,
   allCat,
   courseInfo,
   levels,
@@ -60,11 +59,14 @@ const StickyBar = ({
             {courseDetailPage.Reviews}
           </span>
           <span className='text-[10px] lg:text-[14px] ml-2 text-white'>
-            Level: <strong>{course && course.level && course.level}</strong>
+            {courseDetailPage.Level}
+            <strong>{course && course.level && levels[course.level]}</strong>
           </span>
           <span className='text-[10px] lg:text-[14px] ml-2 text-white'>
-            Language:{' '}
-            <strong>{course && course.language && course.language}</strong>
+            {courseDetailPage.Language}
+            <strong>
+              {course && course.language && allLang[course.language]}
+            </strong>
           </span>
           <div className='block md:hidden text-[12px] lg:text-[16px] font-black text-white mx-4 '>
             {course.paid
@@ -72,7 +74,7 @@ const StickyBar = ({
                   amount: course.price,
                   currency: 'usd',
                 })
-              : 'Free'}
+              : `${courseInfo.Free}`}
           </div>
           <span className='block md:hidden text-slate-400 line-through text-[10px] lg:text-[12px]'>
             {course.paid
@@ -91,7 +93,7 @@ const StickyBar = ({
                 amount: course.price,
                 currency: 'usd',
               })
-            : 'Free'}
+            : `${courseInfo.Free}`}
         </div>
         <span className='hidden md:block text-slate-400 line-through text-[10px] lg:text-[12px]'>
           {course.paid
@@ -117,16 +119,16 @@ const StickyBar = ({
           {loading ? (
             <div>
               <span className='loading loading-spinner'></span>
-              Loading...
+              {courseDetailPage.Loading}
             </div>
           ) : user ? (
             enroll.status ? (
-              'Start Learning'
+              `${courseDetailPage.Start}`
             ) : (
-              'Enroll To This Course'
+              `${courseDetailPage.Enroll}`
             )
           ) : (
-            'Login To Enroll'
+            `${courseDetailPage.Login_To}`
           )}
         </button>
         <button
@@ -145,16 +147,16 @@ const StickyBar = ({
           {loading ? (
             <div>
               <span className='loading loading-spinner'></span>
-              Loading...
+              {courseDetailPage.Loading}
             </div>
           ) : user ? (
             enroll.status ? (
-              'Start Learning'
+              `${courseDetailPage.Start}`
             ) : (
-              'Enroll To This Course'
+              `${courseDetailPage.Enroll}`
             )
           ) : (
-            'Login To Enroll'
+            `${courseDetailPage.Login_To}`
           )}
         </button>
       </div>
@@ -167,11 +169,11 @@ const SingleCourse = ({
   numberOfReviews,
   averageRating,
   i,
-  footer,
   allCat,
   courseInfo,
   levels,
   allLang,
+  courseDetailPage,
 }) => {
   const urlParams = useSearchParams();
   const referralCode = urlParams.get('cref');
@@ -277,12 +279,12 @@ const SingleCourse = ({
       console.log(data);
       setLoading(false);
 
-      toast.success('Enrollment Success. Start Learning Now!');
+      toast.success(`${courseDetailPage.toast_success}`);
 
       router.push(`/user/course/${data.course.slug}`);
     } catch (err) {
       setLoading(false);
-      toast.error('Enrollment Failed. Try Again');
+      toast.error(`${courseDetailPage.toast_fail}`);
     }
   };
   const handlePaidEnrollment = async (e) => {
@@ -299,7 +301,7 @@ const SingleCourse = ({
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
       stripe.redirectToCheckout({ sessionId: data });
     } catch (err) {
-      toast.error('Enrollment Failed. Try Again');
+      toast.error(`${courseDetailPage.toast_fail}`);
       setLoading(false);
     }
   };
@@ -320,7 +322,7 @@ const SingleCourse = ({
       <dialog id='my_modal_3' className='modal'>
         <form method='dialog' className='modal-box'>
           <div className='flex justify-between items-center pb-2 border-b-2'>
-            <h3 className='font-bold'>Course Preview</h3>
+            <h3 className='font-bold'>{courseDetailPage.Preview}</h3>
             <button
               className='btn btn-sm btn-circle  absolute right-2 top-2 btn-error'
               onClick={() => setVideoPlay(false)}
@@ -343,7 +345,7 @@ const SingleCourse = ({
           className='modal-backdrop'
           onClick={() => setVideoPlay(false)}
         >
-          <button>close</button>
+          <button>{courseDetailPage.Close}</button>
         </form>
       </dialog>
       <div className='text-center bg-gray-700 text-white w-full lg:pb-[100px] pb-[40px] md:pt-[50px] flex flex-col justify-center text-[28px] items-center font-bold '>
@@ -364,7 +366,7 @@ const SingleCourse = ({
                   // .split(' ')
                   .map((c) => (
                     <Link href={`/marketplace/${c.value}`}>
-                      <span className='badgeuidesign'>{c.label}</span>
+                      <span className='badgeuidesign'>{allCat[c.label]}</span>
                     </Link>
                   ))}
             </div>
@@ -377,11 +379,12 @@ const SingleCourse = ({
                 index={i}
               />
               <span className='text-slate-400 text-sm'>
-                ({course.numberOfReviews} reviews)
+                ({course.numberOfReviews}
+                {courseDetailPage.Reviews})
               </span>
             </div>
             <p className='text-[10px] lg:text-[14px]'>
-              Created By{' '}
+              {courseDetailPage.CreateBy}
               <Link
                 href={`/instructor-details/${course.instructor._id}`}
                 className='underline underline-offset-1 text-gray-300 hover:text-white'
@@ -391,25 +394,28 @@ const SingleCourse = ({
             </p>
             <div className='flex flex-row items-center gap-x-10'>
               <p className='text-[10px] lg:text-[14px]'>
-                Level: {course && course.level && course.level}
+                {courseDetailPage.Level}
+                {course && course.level && levels[course.level]}
               </p>
               <p className='text-[10px] lg:text-[14px]'>
-                Language: {course && course.language && course.language}
+                {courseDetailPage.Language}
+                {course && course.language && allLang[course.language]}
               </p>
             </div>
             <div className='flex flex-row items-center gap-x-10'>
               <p className='text-[10px] lg:text-[14px]'>
-                {course && course.lessons && course.lessons.length} Lessons
+                {course && course.lessons && course.lessons.length}
+                {courseDetailPage.Lessons}
               </p>
               <p className='text-[10px] lg:text-[14px]'>
-                Total Duration:{' '}
+                {courseDetailPage.Duration}
                 {course &&
                   formatDurationToHoursAndMinutes(course.totalDuration)}{' '}
               </p>
             </div>
 
             <p className='text-[10px] lg:text-[14px]'>
-              Last Updated{' '}
+              {courseInfo['Last Updated']}
               {course &&
                 course.updatedAt &&
                 new Date(course.updatedAt).toLocaleDateString()}
@@ -421,7 +427,7 @@ const SingleCourse = ({
                       amount: course.price,
                       currency: 'usd',
                     })
-                  : 'Free'}
+                  : `${courseInfo.Free}`}
               </span>
               <span className='text-slate-400 line-through text-[10px] lg:text-[12px]'>
                 {course.paid
@@ -449,16 +455,16 @@ const SingleCourse = ({
               {loading ? (
                 <div>
                   <span className='loading loading-spinner'></span>
-                  Loading...
+                  {courseDetailPage.Loading}
                 </div>
               ) : user ? (
                 enroll.status ? (
-                  'Start Learning'
+                  `${courseDetailPage.Start}`
                 ) : (
-                  'Enroll To This Course'
+                  `${courseDetailPage.Enroll}`
                 )
               ) : (
-                'Login To Enroll'
+                `${courseDetailPage.Login_To}`
               )}
             </button>
           </div>
@@ -486,7 +492,9 @@ const SingleCourse = ({
                     height={70}
                     className='my-[10px]'
                   />
-                  <p className='text-[14px]'>Preview the Course</p>
+                  <p className='text-[14px]'>
+                    {courseDetailPage.PreviewtheCourse}
+                  </p>
                 </div>
               </div>
             ) : (
@@ -515,16 +523,16 @@ const SingleCourse = ({
               {loading ? (
                 <div>
                   <span className='loading loading-spinner'></span>
-                  Loading...
+                  {courseDetailPage.Loading}
                 </div>
               ) : user ? (
                 enroll.status ? (
-                  'Start Learning'
+                  `${courseDetailPage.Start}`
                 ) : (
-                  'Enroll To This Course'
+                  `${courseDetailPage.Enroll}`
                 )
               ) : (
-                'Login To Enroll'
+                `${courseDetailPage.Login_To}`
               )}
             </button>
           </div>
@@ -544,6 +552,10 @@ const SingleCourse = ({
             handlePaidEnrollment={handlePaidEnrollment}
             handleFreeEnrollment={handleFreeEnrollment}
             handleCheckLogin={handleCheckLogin}
+            courseInfo={courseInfo}
+            levels={levels}
+            allLang={allLang}
+            courseDetailPage={courseDetailPage}
           />
         </div>
       </div>
