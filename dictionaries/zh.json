@@ -27,6 +27,19 @@
     "English": "英語",
     "Chinese": "中文"
   },
+  "allRate": {
+    "All_Rate": "所有評級",
+    "Five": "五星",
+    "Four": "四星",
+    "Three": "三星",
+    "Two": "二星",
+    "One": "一星",
+    "NoReviews": "沒有評論。"
+  },
+  "readMore": {
+    "More": "顯示更多",
+    "Less": "顯示較少"
+  },
   "topNav": {
     "toast_success": "已登出",
     "Create_Course": "創建課程",
@@ -34,15 +47,15 @@
     "Browse_Course": "瀏覽課程",
     "All_Course": "所有課程",
     "Search_Placeholder": "搜尋...",
-    "My_Learning": "我的課堂",
+    "My_Learning": "我的課程",
     "Profile": "我的資料",
     "Dashboard": "導師儀表板",
     "Login": "登入",
     "Logout": "登出",
     "Signup": "註冊帳號",
-    "Go_My_Learning": "前往我的課堂",
+    "Go_My_Learning": "前往我的課程",
     "Start_Learn": "開始學習!",
-    "No_course": "沒有課堂購買記錄",
+    "No_course": "沒有課程購買記錄",
     "Explore": "請前往影片庫探索更多"
   },
   "footer": {
@@ -120,7 +133,7 @@
   },
   "forgot_pw": {
     "reset_pw": "重設密碼",
-		"Forgot_Pw": "忘記密碼",
+    "Forgot_Pw": "忘記密碼",
     "haveAcc": "還沒有帳號嗎？",
     "signup": "註冊帳號",
     "submit": "提交",
@@ -129,7 +142,7 @@
       "reset_code": "輸入重設代碼",
       "new_pw": "輸入新密碼"
     }
-	},
+  },
   "about": {
     "unlock": "在數位世界中開發您的創意潛力！",
     "aboutus": "關於我們",
@@ -155,16 +168,40 @@
     "latest_updated": "按最新更新",
     "price": "費用："
   },
-
+  "courseDetailPage": {
+    "toast_success": "成功購買課程。 立即開始學習吧！",
+    "toast_fail": "購買失敗。請再試一次",
+    "CoursePreview": "課程預覽",
+    "Close": "關閉",
+    "Reviews": " 則評論",
+    "CreateBy": "創作者 ",
+    "Level": "級別: ",
+    "Language": "語言: ",
+    "Lessons": " 課",
+    "Duration": "總時長: ",
+    "Loading": "加載中...",
+    "Start": "開始學習",
+    "Enroll": "購買課程",
+    "Login_To": "請登入以購買課程",
+    "PreviewtheCourse": "預覽課程",
+    "Course_Content": "課程內容",
+    "Minutes": " 分鐘",
+    "Preview": "預覽",
+    "Paid": "付費課堂",
+    "Load": "顯示更多",
+    "Course_Descr": "課程簡介",
+    "Overview": "評論概覽",
+    "SearchReviews": "搜尋評論"
+  },
   "userRoute": {
-    "My_Learning": "我的課堂",
+    "My_Learning": "我的課程",
     "My_Profile": "我的資料",
     "Change_Pw": "更改密碼",
-    "Enrol_History": "課堂購買記錄"
+    "Enrol_History": "課程購買記錄"
   },
   "userMyLearning": {
-    "My_Learning": "我的課堂",
-    "PlaceholderSearch": "搜尋課堂...",
+    "My_Learning": "我的課程",
+    "PlaceholderSearch": "搜尋課程...",
     "PlaceholderSort": "排序方式",
     "PlaceholderLast_Create": "按最新創建",
     "PlaceholderLast_Update": "按最新更新",
@@ -245,10 +282,10 @@
       "Save_Changes": "儲存更變"
     },
     "historyPage": {
-      "Columns_Course_Name": "課堂名稱",
+      "Columns_Course_Name": "課程名稱",
       "Columns_Price": "價格",
       "Columns_Date": "日期",
-      "My_Enrol_History": "我的課堂購買記錄",
+      "My_Enrol_History": "我的課程購買記錄",
       "Free": "免費"
     }
   }

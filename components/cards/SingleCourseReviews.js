@@ -5,7 +5,12 @@ import { toast } from 'react-toastify';
 import Readmore from '@/components/readmore/Readmore';
 import moment from 'moment';
 
-const SingleCourseReviews = ({ course }) => {
+const SingleCourseReviews = ({
+  course,
+  courseDetailPage,
+  allRate,
+  readMore,
+}) => {
   const [search, setSearch] = useState('');
   const [ratingFilter, setRatingFilter] = useState('');
   const [review, setReview] = useState('');
@@ -63,7 +68,9 @@ const SingleCourseReviews = ({ course }) => {
     <div className='flex flex-col justify-center items-center pb-8'>
       <div className=' w-full lg:max-w-[1080px]'>
         <div className='flex flex-col justify-start mx-10 pt-6 pb-3'>
-          <h4 className='text-[20px] font-bold mb-4'>Reviews Overview</h4>
+          <h4 className='text-[20px] font-bold mb-4'>
+            {courseDetailPage.Overview}
+          </h4>
         </div>
         <div className='flex flex-col md:flex-row w-full justify-start items-center mb-4 md:px-10'>
           <div className='flex flex-col justify-start items-center mb-4 md:mb-0'>
@@ -163,7 +170,8 @@ const SingleCourseReviews = ({ course }) => {
               />
             </div>
             <p className='text-md font-bold text-indigo-400'>
-              {reviewCount} reviews
+              {reviewCount}
+              {courseDetailPage.Reviews}
             </p>
           </div>
           <div className=' hidden md:flex flex-col justify-start items-start ml-8 w-full'>
@@ -257,13 +265,15 @@ const SingleCourseReviews = ({ course }) => {
           </div>
         </div>
         <div className='flex w-full justify-start items-center px-10'>
-          <h1 className='text-2xl font-bold mb-3'>Reviews</h1>
+          <h1 className='text-2xl font-bold mb-3'>
+            {courseDetailPage.ReviewsHead}
+          </h1>
         </div>
         <div className='flex flex-col md:flex-row w-full  items-center justify-center md:items-end md:px-0 px-4'>
           <div className='flex flex-row justify-center items-center w-full max-w-md mx-2 mb-2 bg-white border-2 rounded-lg'>
             <input
               type='text'
-              placeholder='Search Reviews'
+              placeholder={courseDetailPage.SearchReviews}
               className='input  input-ghost  w-full max-w-md '
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -279,17 +289,17 @@ const SingleCourseReviews = ({ course }) => {
               setRatingFilter(e.target.value);
             }}
           >
-            <option value={''}>All Ratings</option>
-            <option value={5}>Five Stars</option>
-            <option value={4}>Four Stars</option>
-            <option value={3}>Three Stars</option>
-            <option value={2}>Two Stars</option>
-            <option value={1}>One Stars</option>
+            <option value={''}>{allRate.All_Rate}</option>
+            <option value={5}>{allRate.Five}</option>
+            <option value={4}>{allRate.Four}</option>
+            <option value={3}>{allRate.Three}</option>
+            <option value={2}>{allRate.Two}</option>
+            <option value={1}>{allRate.One}</option>
           </select>
         </div>
         {reviews.length === 0 && (
           <div className='flex justify-center items-center py-10'>
-            <p className=' font-bold'>No Reviews yet.</p>
+            <p className=' font-bold'>{courseDetailPage.NoReviews}</p>
           </div>
         )}
         {reviews.length > 0 &&
@@ -381,7 +391,7 @@ const SingleCourseReviews = ({ course }) => {
                     {moment(new Date(review.createdAt)).fromNow()}
                   </p>
                 </div>
-                <Readmore>{review.review}</Readmore>
+                <Readmore readMore={readMore}>{review.review}</Readmore>
               </div>
             </div>
           ))}
@@ -391,7 +401,7 @@ const SingleCourseReviews = ({ course }) => {
               className='btn btn-active w-[90%]'
               onClick={loadMoreReviews}
             >
-              Load More
+              {courseDetailPage.Load}
             </button>
           </div>
         )}

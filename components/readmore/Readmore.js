@@ -1,14 +1,15 @@
-'use client'
-import React, { useState } from 'react'
+'use client';
 
-const ReadMore = ({ children, maxCharacterCount = 250 }) => {
-  const text = children
-  const [isTruncated, setIsTruncated] = useState(true)
+import React, { useState } from 'react';
 
-  const resultString = isTruncated ? text.slice(0, maxCharacterCount) : text
+const ReadMore = ({ readMore, children, maxCharacterCount = 250 }) => {
+  const text = children;
+  const [isTruncated, setIsTruncated] = useState(true);
+
+  const resultString = isTruncated ? text.slice(0, maxCharacterCount) : text;
 
   function toggleIsTruncated() {
-    setIsTruncated(!isTruncated)
+    setIsTruncated(!isTruncated);
   }
 
   return (
@@ -22,11 +23,11 @@ const ReadMore = ({ children, maxCharacterCount = 250 }) => {
           onClick={toggleIsTruncated}
           className='text-indigo-500 text-md font-bold mt-2'
         >
-          {isTruncated ? 'Read more' : ' Show less'}
+          {isTruncated ? `${readMore.More}` : `${readMore.Less}`}
         </button>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ReadMore
+export default ReadMore;
