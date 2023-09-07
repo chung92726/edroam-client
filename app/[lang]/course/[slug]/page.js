@@ -2,8 +2,15 @@ import { getDictionary } from '../../dictionaries';
 import CourseDetailPage from './course-detail.js';
 
 const SingleCourse = async ({ params }) => {
-  const { courseDetailPage, allCat, levels, allLang, courseInfo, footer } =
-    await getDictionary(params.lang);
+  const {
+    courseDetailPage,
+    allCat,
+    levels,
+    allLang,
+    courseInfo,
+    allRate,
+    readMore,
+  } = await getDictionary(params.lang);
   return (
     <>
       <CourseDetailPage
@@ -12,8 +19,9 @@ const SingleCourse = async ({ params }) => {
         levels={levels}
         allLang={allLang}
         courseInfo={courseInfo}
-        footer={footer}
+        allRate={allRate}
         courseDetailPage={courseDetailPage}
+        readMore={readMore}
       />
     </>
   );

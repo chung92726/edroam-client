@@ -1,19 +1,26 @@
-import { useState } from 'react'
-import { formatDuration } from '@/utils/helpers'
-import { FaPhotoVideo } from 'react-icons/fa'
+import { useState } from 'react';
+import { formatDuration } from '@/utils/helpers';
+import { FaPhotoVideo } from 'react-icons/fa';
 
-const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
-  const [displayedLessons, setDisplayedLessons] = useState(5)
+const SingleCourseLessons = ({
+  lessons,
+  setPreview,
+  handlePreview,
+  courseDetailPage,
+}) => {
+  const [displayedLessons, setDisplayedLessons] = useState(5);
   const loadMoreLessons = () => {
-    setDisplayedLessons(lessons.length)
-  }
+    setDisplayedLessons(lessons.length);
+  };
   return (
     <div className='flex justify-center item-center pb-5'>
       <div className=' w-full lg:max-w-[1080px]'>
         <div className='flex flex-col justify-start mx-10 pt-6 pb-3'>
-          <h4 className='text-[20px] font-bold mb-4'>Course content</h4>
+          <h4 className='text-[20px] font-bold mb-4'>
+            {courseDetailPage.Course_Content}
+          </h4>
           <h4 className='text-[16px] font-bold'>
-            {lessons && lessons.length} Lessons
+            {lessons && lessons.length} {courseDetailPage.Lessons}
           </h4>
         </div>
         <div className=' w-full'>
@@ -42,7 +49,7 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                           <span
                             className='mx-8 text-[14px] sm:text-[16px] break-all link text-purple-500 z-40'
                             onClick={() => {
-                              handlePreview(lesson.video)
+                              handlePreview(lesson.video);
                             }}
                           >
                             {lesson.title}
@@ -62,7 +69,8 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                             </div>
                           ) : (
                             <span className='text-gray-400'>
-                              {Math.ceil(lesson.duration)} minutes
+                              {Math.ceil(lesson.duration)}
+                              {courseDetailPage.Minutes}
                             </span>
                           )}
                         </p>
@@ -72,14 +80,14 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                       <div
                         className='text-[14px] z-40 link text-purple-500 text-center min-w-[110px] mr-2'
                         onClick={() => {
-                          handlePreview(lesson.video)
+                          handlePreview(lesson.video);
                         }}
                       >
-                        Preview
+                        {courseDetailPage.Preview}
                       </div>
                     ) : (
                       <div className='badge badge-success gap-2 min-w-[110px] mr-2'>
-                        Paid Lesson
+                        {courseDetailPage.Paid}
                       </div>
                     )}
                   </div>
@@ -95,14 +103,14 @@ const SingleCourseLessons = ({ lessons, setPreview, handlePreview }) => {
                 className='btn btn-active w-[90%]'
                 onClick={loadMoreLessons}
               >
-                Load More
+                {courseDetailPage.Load}
               </button>
             </div>
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SingleCourseLessons
+export default SingleCourseLessons;

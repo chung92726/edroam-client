@@ -174,6 +174,8 @@ const SingleCourse = ({
   levels,
   allLang,
   courseDetailPage,
+  allRate,
+  readMore,
 }) => {
   const urlParams = useSearchParams();
   const referralCode = urlParams.get('cref');
@@ -322,7 +324,7 @@ const SingleCourse = ({
       <dialog id='my_modal_3' className='modal'>
         <form method='dialog' className='modal-box'>
           <div className='flex justify-between items-center pb-2 border-b-2'>
-            <h3 className='font-bold'>{courseDetailPage.Preview}</h3>
+            <h3 className='font-bold'>{courseDetailPage.CoursePreview}</h3>
             <button
               className='btn btn-sm btn-circle  absolute right-2 top-2 btn-error'
               onClick={() => setVideoPlay(false)}
@@ -564,12 +566,23 @@ const SingleCourse = ({
           lessons={course.lessons}
           setPreview={setPreview}
           handlePreview={handlePreview}
+          courseDetailPage={courseDetailPage}
         />
       )}
       {course && course.detailDescription && (
-        <CourseDescription detailDescription={course.detailDescription} />
+        <CourseDescription
+          detailDescription={course.detailDescription}
+          courseDetailPage={courseDetailPage}
+        />
       )}
-      {course && <SingleCourseReviews course={course} />}
+      {course && (
+        <SingleCourseReviews
+          course={course}
+          courseDetailPage={courseDetailPage}
+          allRate={allRate}
+          readMore={readMore}
+        />
+      )}
     </div>
   );
 };

@@ -27,6 +27,19 @@
     "English": "English",
     "Chinese": "Chinese"
   },
+  "allRate": {
+    "All_Rate": "All Ratings",
+    "Five": "Five Stars",
+    "Four": "Four Stars",
+    "Three": "Three Stars",
+    "Two": "Two Stars",
+    "One": "One Stars",
+    "NoReviews": "No Reviews yet."
+  },
+  "readMore": {
+    "More": "Read more",
+    "Less": "Show less"
+  },
   "topNav": {
     "toast_success": "Logout Successfully",
     "Create_Course": "Create Course",
@@ -152,9 +165,10 @@
   "courseDetailPage": {
     "toast_success": "Enrolled Successfully. Start Learning Now!",
     "toast_fail": "Failed to Enroll. Please Try Again",
-    "Preview": "Course Preview",
+    "CoursePreview": "Course Preview",
     "Close": "close",
     "Reviews": " reviews",
+    "ReviewsHead": "Reviews",
     "CreateBy": "Created By ",
     "Level": "Level: ",
     "Language": "Language: ",
@@ -164,9 +178,16 @@
     "Start": "Start Learning",
     "Enroll": "Enroll To This Course",
     "Login_To": "Login To Enroll",
-    "PreviewtheCourse": "Preview the Course"
+    "PreviewtheCourse": "Preview the Course",
+    "Course_Content": "Course content",
+    "Minutes": " minutes",
+    "Preview": "Preview",
+    "Paid": "Paid Lesson",
+    "Load": "Load More",
+    "Course_Descr": "Course Description",
+    "Overview": "Reviews Overview",
+    "SearchReviews": "Search Reviews"
   },
-
   "userRoute": {
     "My_Learning": "My Learning",
     "My_Profile": "My Profile",

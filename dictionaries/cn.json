@@ -17,15 +17,28 @@
     "Courses": "课程"
   },
   "levels": {
-    "All Levels": "所有級別",
+    "All Levels": "所有级别",
     "Beginner": "初学者",
-    "Intermediate": "中級",
+    "Intermediate": "中级",
     "Expert": "高级"
   },
   "allLang": {
     "All_Lang": "所有语言",
     "English": "英语",
     "Chinese": "中文"
+  },
+  "allRate": {
+    "All_Rate": "所有评级",
+    "Five": "五星",
+    "Four": "四星",
+    "Three": "三星",
+    "Two": "二星",
+    "One": "一星",
+    "NoReviews": "没有评论。"
+  },
+  "readMore": {
+    "More": "显示更多",
+    "Less": "显示较少"
   },
   "topNav": {
     "toast_success": "已登出",
@@ -120,10 +133,10 @@
   },
   "forgot_pw": {
     "reset_pw": "重设密码",
-		"Forgot_Pw": "忘记密码",
+    "Forgot_Pw": "忘记密码",
     "haveAcc": "还没有帐号吗？",
-    "signup":"注冊帐号"
-	},
+    "signup": "注冊帐号"
+  },
   "about": {
     "unlock": "在数字世界中开发您的创意潜力！",
     "aboutus": "关于我们",
@@ -148,6 +161,31 @@
     "latest_created": "按最新创建",
     "latest_updated": "按最新更新",
     "price": "费用："
+  },
+  "courseDetailPage": {
+    "toast_success": "成功购买课程。马上开始学习吧！",
+    "toast_fail": "购买失败。请再试一次",
+    "CoursePreview": "预览课程",
+    "Close": "关闭",
+    "Reviews": " 则评论",
+    "CreateBy": "创作者 ",
+    "Level": "级别: ",
+    "Language": "语言: ",
+    "Lessons": " 课",
+    "Duration": "总时长: ",
+    "Loading": "加载中...",
+    "Start": "开始学习",
+    "Enroll": "购买课程",
+    "Login_To": "请登录以购买课程",
+    "PreviewtheCourse": "预览课程",
+    "Course_Content": "课程内容",
+    "Minutes": " 分钟",
+    "Preview": "预览",
+    "Paid": "付费课堂",
+    "Load": "显示更多",
+    "Course_Descr": "课程简介",
+    "Overview": "评论概览",
+    "SearchReviews": "搜索评论"
   },
   "userRoute": {
     "My_Learning": "我的课堂",
