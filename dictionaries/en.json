@@ -100,7 +100,7 @@
   },
   "register": {
     "Title": "Register and Start Learning",
-    "Subtitle": "Enter your email below to create your account",
+    "Subtitle": "Connect to social media or enter your email below to create your account",
     "Send_Offers": "Send me special offers, recommendations and learning tips.",
     "Agree": "By signing up, you agree to our ",
     "And": "and ",
@@ -171,13 +171,12 @@
   "userCourse": {
     "mark_complete": "Mark as completed123"
   },
-  "instructor_detail":{
+  "instructor_detail": {
     "instructor": "instructor",
-    "name":"Name: ",
+    "name": "Name: ",
     "aboutme": "About me",
     "createdCourse": "Created Courses",
     "noCreatedCourse": "User has No Created Courses"
-
   },
   "courseDetailPage": {
     "toast_success": "Enrolled Successfully. Start Learning Now!",
@@ -222,7 +221,7 @@
     "By": "By",
     "Learn": "LEARN NOW!"
   },
-  "userBeInstructorPage": {
+  "userRegInstructorPage": {
     "toast_updated": "Profile updated successfully.",
     "toast_failed": "Profile update failed. Please try again later.",
     "Upload_ProfileImg": "Upload a New Profile Image",
@@ -253,6 +252,16 @@
     "Course_Detail_Placeholder": "A brief description of the Course you want to create",
     "Loading": "loading...",
     "Continue": "Continue"
+  },
+  "userBeInstructorPage": {
+    "BeInstructor": "Become Instructor"
+  },
+  "userCreateStripe": {
+    "Header": "Setup payout to publish courses on XLearners",
+    "Sub_head": "XLearners partner with Stripe to transfer earning to your bank account seamlessly",
+    "Process": "Processing . . .",
+    "Payout_Set": "Payout Setup",
+    "Redirect": "You will be redirected to Stripe to complete onboarding process"
   },
   "userProfilePage": {
     "toast_updated": "Profile updated successfully.",

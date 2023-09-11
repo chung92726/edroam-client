@@ -58,7 +58,7 @@ const Login = ({ login, footer, allCat }) => {
     <>
       {/* <ToastContainer position='top-center' /> */}
 
-      <div className='mt-10 h-[82vh]'>
+      <div className='mt-10 h-[90vh]'>
         <form
           onSubmit={handleSubmit}
           className='justify-center items-center form-control max-sm:mx-5'
@@ -127,7 +127,7 @@ const Login = ({ login, footer, allCat }) => {
 
           <button
             type='submit'
-            className='btn mt-4 w-full max-w-sm btn-neutral'
+            className='btn mt-4 w-full max-w-sm btn-primary'
             disabled={!email || !password || loading}
           >
             {loading ? (

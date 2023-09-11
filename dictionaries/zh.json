@@ -100,7 +100,7 @@
   },
   "register": {
     "Title": "註冊並開始學習",
-    "Subtitle": "輸入您的電子郵件以創建您的帳戶",
+    "Subtitle": "連結社交媒體帳戶或輸入您的電子郵件以創建帳戶",
     "Send_Offers": "傳送特別優惠、課程推薦及學習貼士給我。",
     "Agree": "註冊即表示您同意我們的",
     "And": "和",
@@ -177,7 +177,7 @@
     "aboutme": "關於我",
     "createdCourse": "已創建的課程",
     "noCreatedCourse": "用戶沒有已創建的課程"
-},
+  },
   "courseDetailPage": {
     "toast_success": "成功購買課程。 立即開始學習吧！",
     "toast_fail": "購買失敗。請再試一次",
@@ -220,7 +220,7 @@
     "By": "創作者",
     "Learn": "立即開始!"
   },
-  "userBeInstructorPage": {
+  "userRegInstructorPage": {
     "toast_updated": "成功更新個人資料。",
     "toast_failed": "更新失敗。請稍後再試。",
     "Upload_ProfileImg": "上傳新的用戶圖片",
@@ -251,6 +251,16 @@
     "Course_Detail_Placeholder": "簡述您即將要創建的課程內容",
     "Loading": "加載中...",
     "Continue": "繼續"
+  },
+  "userBeInstructorPage": {
+    "BeInstructor": "註冊成為導師"
+  },
+  "userCreateStripe": {
+    "Header": "完成設置收款方式後便可在 XLearners 上進行教學",
+    "Sub_head": "XLearners 與 Stripe 合作，將收入準確無誤地轉入您的銀行賬戶",
+    "Process": "處理中 . . .",
+    "Payout_Set": "設置收款",
+    "Redirect": "您的頁面將會被導向到 Stripe 以完成註冊流程"
   },
   "userProfilePage": {
     "toast_updated": "成功更新個人資料。",

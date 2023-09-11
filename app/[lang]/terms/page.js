@@ -65,7 +65,7 @@ const termsOfUse = [
 
 const Term = () => {
   return (
-    <div className=' bg-base-000 mx-auto py-10 px-2 sm:px-6 lg:px-8 w-full overflow-x-hidden'>
+    <div className=' bg-base-000 mx-auto py-10 px-2 sm:px-6 lg:px-8 max-w-3xl max-md:w-full overflow-x-hidden'>
       <div className='flex justify-center items-center text-3xl font-bold'>
         Terms of use
       </div>

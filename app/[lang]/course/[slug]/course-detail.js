@@ -17,10 +17,10 @@ import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 import SingleCourseLessons from '@/components/cards/SingleCourseLessons';
 import CourseDescription from '@/components/cards/CourseDescription';
+import SingleCourseReviews from '@/components/cards/SingleCourseReviews.js';
+import RatingStars from '@/components/stars/RatingStars.js';
 import { Context } from '@/context';
 import SingleCourseSkeleton from './loading.js';
-import RatingStars from '@/components/stars/RatingStars.js';
-import SingleCourseReviews from '@/components/cards/SingleCourseReviews.js';
 
 const StickyBar = ({
   course,

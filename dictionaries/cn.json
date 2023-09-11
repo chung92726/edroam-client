@@ -47,15 +47,15 @@
     "Browse_Course": "浏览课程",
     "All_Course": "所有课程",
     "Search_Placeholder": "搜寻...",
-    "My_Learning": "我的课堂",
+    "My_Learning": "我的课程",
     "Profile": "我的资料",
     "Dashboard": "导师仪表板",
     "Login": "登录",
     "Logout": "登出",
     "Signup": "注冊账号",
-    "Go_My_Learning": "前往我的课堂",
+    "Go_My_Learning": "前往我的课程",
     "Start_Learn": "开始学习!",
-    "No_course": "没有课堂购买记录",
+    "No_course": "没有课程购买记录",
     "Explore": "请前往影片库探索更多"
   },
   "footer": {
@@ -100,7 +100,7 @@
   },
   "register": {
     "Title": "注冊并开始学习",
-    "Subtitle": "输入您的电子邮件以创建您的帐户",
+    "Subtitle": "连接社交媒体帐户或输入您的电子邮件以创建您的帐户",
     "Send_Offers": "发送特别优惠、课程推荐及学习提示给我。",
     "Agree": "注冊即表示您同意我们的",
     "And": "和",
@@ -204,14 +204,14 @@
     "SearchReviews": "搜索评论"
   },
   "userRoute": {
-    "My_Learning": "我的课堂",
+    "My_Learning": "我的课程",
     "My_Profile": "我的资料",
     "Change_Pw": "更改密码",
-    "Enrol_History": "课堂购买记录"
+    "Enrol_History": "课程购买记录"
   },
   "userMyLearning": {
-    "My_Learning": "我的课堂",
-    "PlaceholderSearch": "搜索课堂...",
+    "My_Learning": "我的课程",
+    "PlaceholderSearch": "搜索课程...",
     "PlaceholderSort": "排序方式",
     "PlaceholderLast_Create": "按最新创建",
     "PlaceholderLast_Update": "按最新更新",
@@ -220,7 +220,7 @@
     "By": "创作者",
     "Learn": "开始学习!"
   },
-  "userBeInstructorPage": {
+  "userRegInstructorPage": {
     "toast_updated": "个人资料更新成功。",
     "toast_failed": "更新失败。请稍后再试。",
     "Upload_ProfileImg": "上传新的用户图片",
@@ -251,6 +251,16 @@
     "Course_Detail_Placeholder": "简短描述您想要创建的课程的内容",
     "Loading": "加载中...",
     "Continue": "继续"
+  },
+  "userBeInstructorPage": {
+    "BeInstructor": "注册成为导师"
+  },
+  "userCreateStripe": {
+    "Header": "完成设定收款方式后便可以在 XLearners 上进行教学",
+    "Sub_head": "XLearners 与 Stripe 合作，将收入准确无误地转入您的银行账户",
+    "Process": "处理中 . . .",
+    "Payout_Set": "设定收款",
+    "Redirect": "的页面将会被导向到 Stripe 以完成注册流程"
   },
   "userProfilePage": {
     "toast_updated": "个人资料更新成功。",
@@ -292,10 +302,10 @@
       "Save_Changes": "储存更变"
     },
     "historyPage": {
-      "Columns_Course_Name": "课堂名称",
+      "Columns_Course_Name": "课程名称",
       "Columns_Price": "价格",
       "Columns_Date": "日期",
-      "My_Enrol_History": "我的课堂购买记录",
+      "My_Enrol_History": "我的课程购买记录",
       "Free": "免费"
     }
   }
