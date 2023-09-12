@@ -7,13 +7,13 @@ import Readmore from '@/components/readmore/Readmore'
 import { getNumberOfDays } from '@/utils/helpers'
 import moment from 'moment'
 
-const CourseReviews = ({ course }) => {
+const CourseReviews = ({ course, reviews_tap, readMore, allRate}) => {
   const [search, setSearch] = useState('')
   const [ratingFilter, setRatingFilter] = useState('')
   const [review, setReview] = useState('')
   const [rating, setRating] = useState(5)
   const [reviews, setReviews] = useState([])
-  const [reviewCount, setReviewCount] = useState(0)
+  const [reviewCount, setReviewCount] = useState(0) 
   const [averageRating, setAverageRating] = useState(0)
   const [modifiedAverageRating, setModifiedAverageRating] = useState(0)
   const [reviewPercentage, setReviewPercentage] = useState([0, 0, 0, 0, 0])
@@ -74,7 +74,7 @@ const CourseReviews = ({ course }) => {
   return (
     <div className='flex flex-col justify-start items-center w-11/12 px-8 mt-2'>
       <div className='flex w-full justify-start items-center'>
-        <h1 className='text-2xl font-bold mb-3'>Reviews Overview</h1>
+        <h1 className='text-2xl font-bold mb-3'>{reviews_tap.overview}</h1>
       </div>
       <div className='flex flex-col md:flex-row w-full justify-start items-center mb-4'>
         <div className='flex flex-col justify-start items-center mb-4 md:mb-0'>
@@ -174,7 +174,7 @@ const CourseReviews = ({ course }) => {
             />
           </div>
           <p className='text-md font-bold text-indigo-400'>
-            {reviewCount} reviews
+            {reviewCount}{reviews_tap.reviews}
           </p>
         </div>
         <div className='flex flex-col justify-start items-start ml-8 w-full'>
@@ -268,13 +268,13 @@ const CourseReviews = ({ course }) => {
         </div>
       </div>
       <div className='flex w-full justify-start items-center'>
-        <h1 className='text-2xl font-bold mb-3'>Reviews</h1>
+        <h1 className='text-2xl font-bold mb-3'>{reviews_tap.title}</h1>
       </div>
       <div className='flex flex-col md:flex-row w-full  items-center justify-center md:items-end '>
         <div className='flex flex-row justify-center items-center w-full max-w-md mx-2 mb-2 bg-white border-2 rounded-lg'>
           <input
             type='text'
-            placeholder='Search Reviews'
+            placeholder={reviews_tap.search}
             className='input  input-ghost  w-full max-w-md '
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -290,12 +290,12 @@ const CourseReviews = ({ course }) => {
             setRatingFilter(e.target.value)
           }}
         >
-          <option value={''}>All Ratings</option>
-          <option value={5}>Five Stars</option>
-          <option value={4}>Four Stars</option>
-          <option value={3}>Three Stars</option>
-          <option value={2}>Two Stars</option>
-          <option value={1}>One Stars</option>
+          <option value={''}>{allRate.All_Rate}</option>
+          <option value={5}>{allRate.Five}</option>
+          <option value={4}>{allRate.Four}</option>
+          <option value={3}>{allRate.Three}</option>
+          <option value={2}>{allRate.Two}</option>
+          <option value={1}>{allRate.One}</option>
         </select>
       </div>
       {reviews.length > 0 &&
@@ -387,12 +387,12 @@ const CourseReviews = ({ course }) => {
                   {moment(new Date(review.createdAt)).fromNow()}
                 </p>
               </div>
-              <Readmore>{review.review}</Readmore>
+              <Readmore readMore={readMore}>{review.review}</Readmore>
             </div>
           </div>
         ))}
       <div className='flex flex-col justify-start items-start my-4 w-full'>
-        <h1 className='text-2xl font-bold mb-3 mt-4'>Add a Review</h1>
+        <h1 className='text-2xl font-bold mb-3 mt-4'>{reviews_tap.add_review}</h1>
         <div className='rating rating-md rating-half mb-2'>
           <input
             type='radio'
@@ -472,7 +472,7 @@ const CourseReviews = ({ course }) => {
           value={review}
         ></textarea>
         <button className='btn  btn-neutral my-3' onClick={handleSubmit}>
-          Submit
+          {reviews_tap.submit}
         </button>
       </div>
     </div>

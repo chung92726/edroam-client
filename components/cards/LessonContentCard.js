@@ -9,7 +9,7 @@ const Quill = dynamic(
   { ssr: false }
 )
 
-const LessonContentCard = ({ course, currentLesson, content }) => {
+const LessonContentCard = ({ course, currentLesson, content, content_tap }) => {
   return (
     <div className='flex justify-center item-center my-2 h-full'>
       <div className='w-full lg:max-w-[1080px]'>
@@ -25,7 +25,7 @@ const LessonContentCard = ({ course, currentLesson, content }) => {
           />
         ) : (
           <h1 className='font-bold my-4'>
-            There is no additional contents in this lesson
+            {content_tap.no_content}
           </h1>
         )}
       </div>

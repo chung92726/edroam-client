@@ -10,19 +10,25 @@ import LessonContentCard from '../cards/LessonContentCard'
 import CourseReviews from './CourseReviews'
 
 const { children } = Tabs
-const tapTitle = [
-  'Course Details',
-  'Lesson Content',
-  'Supplementary Resources',
-  'Quiz',
-  'Q&A',
-  'Reviews',
-]
 
-const CourseTaps = ({ course, currentLesson, slug }) => {
+
+
+
+
+
+const CourseTaps = ({ course, currentLesson, slug, courseTaps, readMore, allRate }) => {
   const [tap, setTap] = useState('1')
 
   const [isDisable, setIsDisable] = useState(false)
+
+  const tapTitle = [
+    courseTaps.overview_tap.title,
+    courseTaps.content_tap.title,
+    courseTaps.supplementary_res_tap.title,
+    courseTaps.quiz_tap.title,
+    courseTaps.qa_tap.title,
+    courseTaps.reviews_tap.title,
+  ]
 
   useEffect(() => {
     const tab2Disable = !course.lessons[currentLesson].video
@@ -62,23 +68,24 @@ const CourseTaps = ({ course, currentLesson, slug }) => {
           )
         })}
       </Tabs>
-      {tap === '1' && <Overview course={course} />}
+      {tap === '1' && <Overview course={course} overview_tap={courseTaps.overview_tap}/>}
       {tap === '2' && (
         <LessonContentCard
           content={course.lessons[currentLesson].content}
           course={course}
           currentLesson={currentLesson}
+          content_tap = {courseTaps.content_tap}
         />
       )}
       {tap === '3' && (
-        <LectureNotes course={course} currentLesson={currentLesson} />
+        <LectureNotes course={course} currentLesson={currentLesson} supplementary_res_tap = {courseTaps.supplementary_res_tap}/>
       )}
       {tap === '4' && (
-        <Quiz course={course} currentLesson={currentLesson} slug={slug} />
+        <Quiz course={course} currentLesson={currentLesson} slug={slug} quiz_tap={courseTaps.quiz_tap}/>
       )}
-      {tap === '5' && <QandA course={course} currentLesson={currentLesson} />}
+      {tap === '5' && <QandA course={course} currentLesson={currentLesson} qa_tap={courseTaps.qa_tap} />}
       {tap === '6' && (
-        <CourseReviews course={course} currentLesson={currentLesson} />
+        <CourseReviews course={course} currentLesson={currentLesson} reviews_tap = {courseTaps.reviews_tap} readMore = {readMore} allRate={allRate}/>
       )}
     </div>
   )

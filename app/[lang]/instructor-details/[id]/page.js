@@ -1,5 +1,5 @@
 import { getDictionary } from '../../dictionaries.js';
-import InstructorDetailsPage from '../[id]/instructor_details.js';
+import InstructorDetailsPage from './instructor_details.js';
 
 const InstructorDetails = async ({ params }) => {
   const { instructor_detail, allCat, levels, allLang, courseInfo} =

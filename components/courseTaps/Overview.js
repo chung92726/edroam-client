@@ -1,24 +1,24 @@
 import Link from 'next/link';
 import React from 'react';
 
-const Overview = ({ course }) => {
+const Overview = ({ course, overview_tap }) => {
   return (
     <div className='flex flex-col mx-4'>
       <div className='border-b-2'>
-        <h1 className='font-bold text-[22px] my-2'>About This Course</h1>
+        <h1 className='font-bold text-[22px] my-2'>{overview_tap.about}</h1>
         <h2 className='font-bold text-[18px] my-2 max-w-2xl'>{course.name}</h2>
         <p className='text-[14px] my-2 max-w-2xl'>{course.description}</p>
         <p className='text-[14px] my-2'>Lessons: {course.lessons.length}</p>
         <p className='text-[14px] my-2'>
-          Created at: {new Date(course.createdAt).toLocaleDateString()}
+          {overview_tap.createAt}{new Date(course.createdAt).toLocaleDateString()}
         </p>
         <p className='text-[14px] my-2'>
-          Updated at: {new Date(course.updatedAt).toLocaleDateString()}
+          {overview_tap.updateAt}{new Date(course.updatedAt).toLocaleDateString()}
         </p>
       </div>
       <div className='border-b-2'>
         <h1 className='font-bold text-[22px] my-2'>
-          Instructor of This Course
+          {overview_tap.instructor}
         </h1>
         <div className='flex flex-row justify-start items-center my-3 gap-3'>
           <img

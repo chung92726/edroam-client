@@ -3,7 +3,7 @@ import { AiOutlineFileZip } from 'react-icons/ai'
 import { BiDownload } from 'react-icons/bi'
 import axios from 'axios'
 
-const LectureNotes = ({ course, currentLesson }) => {
+const LectureNotes = ({ course, currentLesson, supplementary_res_tap }) => {
   const downloadFile = async (file, fileName) => {
     const res = await axios.get(
       `/api/course/supplementary-download/${file.Key}`,
@@ -49,11 +49,11 @@ const LectureNotes = ({ course, currentLesson }) => {
                   {resource.description && resource.description}
                 </p>
                 <p className='text-[12px] my-1'>
-                  Created At:{' '}
+                  {supplementary_res_tap.createAt}
                   {new Date(resource.createdAt).toLocaleDateString()}
                 </p>
                 <p className='text-[12px] mb-4'>
-                  Updated At:{' '}
+                  {supplementary_res_tap.updateAt}
                   {new Date(resource.updatedAt).toLocaleDateString()}
                 </p>
               </div>
@@ -75,7 +75,7 @@ const LectureNotes = ({ course, currentLesson }) => {
         )
       ) : (
         <h1 className='font-bold my-4'>
-          There is no supplementary file in this lesson
+          {supplementary_res_tap.no_sup}
         </h1>
       )}
     </div>

@@ -36,7 +36,7 @@ const modules = {
   },
 }
 
-const QandA = ({ course, currentLesson }) => {
+const QandA = ({ course, currentLesson, qa_tap }) => {
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [title, setTitle] = useState('')
@@ -137,6 +137,7 @@ const QandA = ({ course, currentLesson }) => {
             setComment={setComment}
             publishComment={publishComment}
             course={course}
+            detailsPage={qa_tap.detailsPage}
           />
         </div>
       ) : (
@@ -145,7 +146,7 @@ const QandA = ({ course, currentLesson }) => {
             <div className='flex flex-row justify-center items-center w-full max-w-md mx-2 mb-2 bg-white border-2 rounded-lg'>
               <input
                 type='text'
-                placeholder='Search All Course Questions'
+                placeholder={qa_tap.placeholder.search_all}
                 className='input  input-ghost  w-full max-w-md '
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -161,12 +162,12 @@ const QandA = ({ course, currentLesson }) => {
                 setDisplayAllLesson(e.target.value === 'true' ? true : false)
               }}
             >
-              <option value={true}>All Lessons</option>
-              <option value={false}>Current Lessons</option>
+              <option value={true}>{qa_tap.all_lesson}</option>
+              <option value={false}>{qa_tap.current_lesson}</option>
             </select>
           </div>
           <h1 className='font-bold text-[20px] my-4'>
-            All Questions in This Course
+            {qa_tap.all_qs}
           </h1>
           {questions &&
             questions.map((question) => (
@@ -179,13 +180,13 @@ const QandA = ({ course, currentLesson }) => {
                   <h1 className='font-bold text-[16px]'>{question.title}</h1>
                   <div className='flex flex-row justify-start items-center'>
                     <p className='text-[12px] text-blue-500 mr-1'>
-                      By {question.askedBy.name}
+                      {qa_tap.by}{question.askedBy.name}
                     </p>
                     <p className='text-[12px] text-blue-500 mr-1'>
-                      Lesson {question.lessonIndex + 1}
+                      {qa_tap.lesson}{question.lessonIndex + 1}
                     </p>
                     <p className='text-[12px] text-gray-500 mr-1'>
-                      on {new Date(question.createdAt).toLocaleDateString()}
+                      {qa_tap.on}{new Date(question.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
@@ -205,16 +206,16 @@ const QandA = ({ course, currentLesson }) => {
             ))}
 
           {/* // ask question area */}
-          <h1 className='font-bold text-[20px] my-4'>Ask a New Question</h1>
-          <p className='font-bold text-[14px] my-2'>Title or summary</p>
+          <h1 className='font-bold text-[20px] my-4'>{qa_tap.ask_new_qs}</h1>
+          <p className='font-bold text-[14px] my-2'>{qa_tap.qstitle}</p>
           <input
             type='text'
             className='input input-secondary w-full h-[38px] mr-2'
-            placeholder='Enter your question title'
+            placeholder={qa_tap.placeholder.enter_qstitle}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <p className='font-bold text-[14px] my-2'>Details</p>
+          <p className='font-bold text-[14px] my-2'>{qa_tap.details}</p>
           <div className='w-full mb-4'>
             <Quill
               modules={modules}
@@ -232,11 +233,9 @@ const QandA = ({ course, currentLesson }) => {
             {loading ? (
               <div>
                 <span className='loading loading-spinner'></span>
-                Loading...
+                {qa_tap.loading}
               </div>
-            ) : (
-              'Publish'
-            )}
+            ) : qa_tap.publish}
           </button>
         </div>
       )}

@@ -169,15 +169,83 @@
     "price": "Price:"
   },
   "userCourse": {
-    "mark_complete": "Mark as completed123"
+    "mark_complete": "Mark as completed",
+    "mark_incomplete": "Mark as incompleted",
+    "courseTaps": {
+      "overview_tap": {
+        "title": "Course Details",
+        "about": "About This Course",
+        "createAt": "Created at: ",
+        "updateAt": "Updated at: ",
+        "instructor": "Instructor of This Course"
+      },
+      "content_tap": {
+        "title": "Lesson Content",
+        "no_content": "There is no additional contents in this lesson"
+      },
+      "supplementary_res_tap": {
+        "title": "Supplementary Resoruces",
+        "createAt": "Created At: ",
+        "updateAt": "Updated At: ",
+        "no_sup": "There is no supplementary file in this lesson"
+      },
+      "quiz_tap": {
+        "title": "Quiz",
+        "qslen": " Questions",
+        "pass_rate": "To Pass: ",
+        "score": "Your Score: ",
+        "passed": "Passed ✅",
+        "fail": "Failed ❌",
+        "notCompleted": "Not Completed",
+        "review": "Review",
+        "goQuiz": "Go Quiz",
+        "noQuiz": "No Quiz in This Lesson"
+      },
+      "qa_tap": {
+        "title": "Q&A",
+        "placeholder": {
+          "search_all": "Search All Course Questions",
+          "enter_qstitle": "Enter your question title"
+        },
+        "all_qs": "All Questions in This Course",
+        "all_lesson": "All Lessons",
+        "current_lession": "Current Lessons",
+        "by": "By ",
+        "lesson": "Lesson ",
+        "on": "on ",
+        "ask_new_qs": "Ask a New Question",
+        "qstitle": "Title or summary",
+        "details": "Details",
+        "loading": "Loading...",
+        "publish": "Publish",
+        "detailsPage": {
+          "back": "Back to All Questions",
+          "by": "By ",
+          "lesson": "Lesson ",
+          "on": "on ",
+          "replies": " replies",
+          "instructor": "Instructor",
+          "no_reply": "There is no reply for this question",
+          "write_reply": "Write Your Reply Here:",
+          "add_ans": "Add an answer"
+        }
+      },
+      "reviews_tap": {
+        "title": "Reviews",
+        "overview": "Reviews Overview",
+        "reviews": " reviews",
+        "search": "Search Reviews",
+        "add_review": "Add a Review",
+        "submit": "Submit"
+      }
+    }
   },
-  "instructor_detail":{
+  "instructor_detail": {
     "instructor": "instructor",
-    "name":"Name: ",
+    "name": "Name: ",
     "aboutme": "About me",
     "createdCourse": "Created Courses",
     "noCreatedCourse": "User has No Created Courses"
-
   },
   "courseDetailPage": {
     "toast_success": "Enrolled Successfully. Start Learning Now!",

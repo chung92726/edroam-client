@@ -28,7 +28,7 @@
     "Chinese": "中文"
   },
   "allRate": {
-    "All_Rate": "所有评级",
+    "All_Rate": "所有评分",
     "Five": "五星",
     "Four": "四星",
     "Three": "三星",
@@ -169,7 +169,76 @@
     "price": "费用："
   },
   "userCourse": {
-    "mark_complete": "Mark as completed123"
+    "mark_complete": "標記為已完成",
+    "mark_incomplete": "標記為未完成",
+    "courseTaps": {
+      "overview_tap": {
+        "title": "课程资讯",
+        "about": "关于此课程",
+        "createAt": "课程创建于: ",
+        "updateAt": "最后更新: ",
+        "instructor": "课程导师"
+      },
+      "content_tap": {
+        "title": "课程内容",
+        "no_content": "此课程没有加入额外内容"
+      },
+      "supplementary_res_tap": {
+        "title": "补充资源",
+        "createAt": "内容创建于：",
+        "updateAt": "最后更新：",
+        "no_sup": "此课程没有补充资源可提供"
+      },
+      "quiz_tap": {
+        "title": "测验",
+        "qslen": " 条题目",
+        "pass_rate": "及格条件：",
+        "score": "您的成绩：",
+        "passed": "及格 ✅",
+        "fail": "不及格 ❌",
+        "notCompleted": "未完成",
+        "review": "查看答案",
+        "goQuiz": "进行测验",
+        "noQuiz": "此课堂没有测验"
+      },
+      "qa_tap": {
+        "title": "Q&A",
+        "placeholder": {
+          "search_all": "搜索所有课堂问题",
+          "enter_qstitle": "输入标题"
+        },
+        "all_qs": "本课程的所有问题",
+        "all_lesson": "所有课堂",
+        "current_lession": "当前课堂",
+        "by": "by ",
+        "lesson": "Lesson ",
+        "on": "on ",
+        "ask_new_qs": "建立新问题",
+        "qstitle": "标题或摘要",
+        "details": "问题内容",
+        "loading": "加载中...",
+        "publish": "发布问题",
+        "detailsPage": {
+          "back": "返回所有问题页",
+          "by": "by ",
+          "lesson": "Lesson ",
+          "on": "on ",
+          "replies": " 項回应",
+          "instructor": "导师",
+          "no_reply": "此问题暂时没有人回答",
+          "write_reply": "在此输入您的回应: ",
+          "add_ans": "新增回应"
+        }
+      },
+      "reviews_tap": {
+        "title": "课程评价",
+        "overview": "评价概述",
+        "reviews": " 条评分",
+        "search": "搜索评论",
+        "add_review": "新增评论",
+        "submit": "提交"
+    }
+    }
   },
   "instructor_detail": {
     "instructor": "导师",

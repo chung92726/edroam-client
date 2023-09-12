@@ -28,7 +28,7 @@
     "Chinese": "中文"
   },
   "allRate": {
-    "All_Rate": "所有評級",
+    "All_Rate": "所有評分",
     "Five": "五星",
     "Four": "四星",
     "Three": "三星",
@@ -169,7 +169,76 @@
     "price": "費用："
   },
   "userCourse": {
-    "mark_complete": "Mark as completed123"
+    "mark_complete": "標記為已完成",
+    "mark_incomplete": "標記為未完成",
+    "courseTaps": {
+      "overview_tap": {
+        "title": "課程資訊",
+        "about": "關於此課程",
+        "createAt": "課程創建於: ",
+        "updateAt": "最後更新: ",
+        "instructor": "課程導師"
+      },
+      "content_tap": {
+        "title": "課程內容",
+        "no_content": "此課堂沒有加入額外內容"
+      },
+      "supplementary_res_tap": {
+        "title": "補充資源",
+        "createAt": "內容創建於: ",
+        "updateAt": "最後更新: ",
+        "no_sup": "此課堂沒有補充資源可提供"
+      },
+      "quiz_tap": {
+        "title": "測驗",
+        "qslen": " 條題目",
+        "pass_rate": "合格條件: ",
+        "score": "您的成績: ",
+        "passed": "合格 ✅",
+        "fail": "不合格 ❌",
+        "notCompleted": "未完成",
+        "review": "查看答案",
+        "goQuiz": "進行測驗",
+        "noQuiz": "此課堂沒有測驗"
+      },
+      "qa_tap": {
+        "title": "Q&A",
+        "placeholder": {
+            "search_all": "搜尋所有課堂問題",
+            "enter_qstitle": "輸入標題"
+        },
+        "all_qs": "本課程的所有問題",
+        "all_lesson": "所有課堂",
+        "current_lession": "當前課堂",
+        "by": "by ",
+        "lesson": "Lesson ",
+        "on": "on ",
+        "ask_new_qs": "建立新問題",
+        "qstitle": "標題或摘要",
+        "details": "問題內容",
+        "loading": "載入中...",
+        "publish": "發佈問題",
+        "detailsPage": {
+            "back": "返回所有問題頁",
+            "by": "by",
+            "lesson": "Lesson ",
+            "on": "on ",
+            "replies": " 項回應",
+            "instructor": "instructor",
+            "no_reply": "此問題暫時沒有人回答",
+            "write_reply": "在此輸入您的回應: ",
+            "add_ans": "新增回應"
+        }
+    },
+    "reviews_tap": {
+      "title": "課程評價",
+      "overview": "評價概述",
+      "reviews": " 條評分",
+      "search": "搜尋評分與評論",
+      "add_review": "新增評論",
+      "submit": "提交"
+  }
+    }
   },
   "instructor_detail": {
     "instructor": "導師",
@@ -177,7 +246,7 @@
     "aboutme": "關於我",
     "createdCourse": "已創建的課程",
     "noCreatedCourse": "用戶沒有已創建的課程"
-},
+  },
   "courseDetailPage": {
     "toast_success": "成功購買課程。 立即開始學習吧！",
     "toast_fail": "購買失敗。請再試一次",

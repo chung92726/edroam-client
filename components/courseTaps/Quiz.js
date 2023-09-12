@@ -5,7 +5,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-const Quiz = ({ course, currentLesson, slug }) => {
+const Quiz = ({ course, currentLesson, slug, quiz_tap }) => {
   const [quizzes, setQuizzes] = useState([])
   const [highestScore, setHighestScores] = useState([])
   const router = useRouter()
@@ -63,14 +63,14 @@ const Quiz = ({ course, currentLesson, slug }) => {
                     {quiz.coursePassingQuiz ? 'Course Passing Quiz' : ''}
                   </p>
                   <p className='text-[14px] font-bold my-2 text-gray-400'>
-                    {quiz.questions.length} Questions
+                    {quiz.questions.length}{quiz_tap.qslen}
                   </p>
                   <p className='text-[14px] font-bold mb-2 text-gray-400'>
-                    Passing Rate: {quiz.passingRate}%
+                    {quiz.pass_rate}{quiz.passingRate}%
                   </p>
                   {highestScore[quiz._id] ? (
                     <p className='text-[14px] font-bold mb-2 text-gray-400'>
-                      Your Score:{' '}
+                      {quiz_tap.score}
                       {Number(highestScore[quiz._id]) >
                       Number(quiz.passingRate) ? (
                         <span className='text-green-500'>
@@ -87,15 +87,15 @@ const Quiz = ({ course, currentLesson, slug }) => {
                     Number(highestScore[quiz._id]) >
                     Number(quiz.passingRate) ? (
                       <p className='text-[14px] font-bold mb-2 text-green-400'>
-                        Passed ✅
+                        {quiz_tap.passed}
                       </p>
                     ) : (
                       <p className='text-[14px] font-bold mb-2 text-red-400'>
-                        Failed ❌
+                        {quiz_tap.fail}
                       </p>
                     )
                   ) : (
-                    <p>Not Completed</p>
+                    <p>{quiz_tap.notCompleted}</p>
                   )}
                 </div>
                 <div className='flex flex-col justify-start items-start '>
@@ -106,7 +106,7 @@ const Quiz = ({ course, currentLesson, slug }) => {
                         router.push(`/quiz/review/${quiz._id}`)
                       }}
                     >
-                      Review
+                      {quiz_tap.review}
                     </p>
                   </button>
                   <button className='btn btn-secondary mb-2 w-[100px] btn-sm '>
@@ -114,7 +114,7 @@ const Quiz = ({ course, currentLesson, slug }) => {
                       href={`/quiz/${slug}/${quiz._id}`}
                       className='text-[12px]'
                     >
-                      Go Quiz
+                      {quiz_tap.goQuiz}
                     </Link>
                   </button>
                 </div>
@@ -123,7 +123,7 @@ const Quiz = ({ course, currentLesson, slug }) => {
           ))}
         </div>
       ) : (
-        <h1 className='text-[14px] py-4 font-bold'>No Quiz in This Lesson</h1>
+        <h1 className='text-[14px] py-4 font-bold'>{quiz_tap.noQuiz}</h1>
       )}
     </>
   )
