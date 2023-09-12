@@ -1,11 +1,34 @@
 'use client';
 
+import { Context } from '@/context';
+import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const Footer = ({ footer, allCat }) => {
+  const router = useRouter();
+
+  // global state
+  const { state } = useContext(Context);
+  const { user } = state;
+
+  const handleKnowMore = () => {
+    try {
+      if (!user) router.push('/login');
+    } catch (error) {
+      toast.error(
+        'Please log in to learn more about becoming an instructor on XLearners.'
+      );
+    } finally {
+      if (user) router.push('/user/become-instructor');
+    }
+  };
+
   return (
     <div>
-      <div className='flex footer p-10 bg-base-200 text-base-content items-center justify-between border-b-2 border-slate-400'>
+      <div className='flex max-sm:flex-col footer p-10 bg-base-200 text-base-content items-center justify-between border-b-2 border-slate-400'>
         <div className=''>
           <h1 className='text-[25px] font-bold leading-relaxed'>
             {footer.WannaTeach}
@@ -14,19 +37,19 @@ const Footer = ({ footer, allCat }) => {
         </div>
 
         <div className='flex justify-end w-[8rem] md:mr-4'>
-          <Link
-            href='/user/become-instructor'
+          <button
+            onClick={handleKnowMore}
             className=' cursor-pointer border-transparent'
           >
             <label
               tabIndex={0}
               className='mx-1 btn btn-ghost rounded-btn px-2 border-indigo-500 '
             >
-              <div className='flex flex-row items-center text-[12px]'>
+              <div className='flex items-center text-[12px]'>
                 <p className='mx-1 '>{footer.LearnMore}</p>
               </div>
             </label>
-          </Link>
+          </button>
         </div>
       </div>
       <footer className='footer p-10 bg-base-200 text-base-content'>

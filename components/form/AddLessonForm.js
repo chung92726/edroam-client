@@ -1,17 +1,17 @@
-import React from 'react'
-import { AiOutlineFolderAdd } from 'react-icons/ai'
-import { BsFillTrash3Fill } from 'react-icons/bs'
-import dynamic from 'next/dynamic'
-import 'react-quill/dist/quill.snow.css'
-import { useRef } from 'react'
-import { toast } from 'react-toastify'
+import React from 'react';
+import { AiOutlineFolderAdd } from 'react-icons/ai';
+import { BsFillTrash3Fill } from 'react-icons/bs';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css';
+import { useRef } from 'react';
+import { toast } from 'react-toastify';
 
 const Quill = dynamic(
   () => {
-    return import('react-quill')
+    return import('react-quill');
   },
   { ssr: false }
-)
+);
 
 const modules = {
   toolbar: [
@@ -32,7 +32,7 @@ const modules = {
     // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
-}
+};
 
 const AddLessonForm = ({
   values,
@@ -48,18 +48,19 @@ const AddLessonForm = ({
   supplementary_input,
   handleSupplementary,
   handleSupplementaryRemove,
+  addLessonForm,
 }) => {
-  const SupFormRef = useRef(null)
-  const lessonFormRef = useRef(null)
+  const SupFormRef = useRef(null);
+  const lessonFormRef = useRef(null);
   return (
     <div>
       <dialog id='my_modal_3' className='modal'>
         <form method='dialog' className='modal-box w-[350px]' ref={SupFormRef}>
-          <h3 className='font-bold text-md my-2'>Add Supplementary File</h3>
+          <h3 className='font-bold text-md my-2'>{addLessonForm.Heading}</h3>
           <input
             type='text'
             name='title'
-            placeholder='Title'
+            placeholder={addLessonForm.Title}
             onChange={(e) =>
               e.target.value.length <= 80 &&
               setSupplementary({ ...supplementary, title: e.target.value })
@@ -70,7 +71,7 @@ const AddLessonForm = ({
             autoFocus
           />
           <label className='label w-11/12 justify-end pb-2 '>
-            <span className='label-text-alt mx-2 '>Max: 80 characters</span>
+            <span className='label-text-alt mx-2 '>{addLessonForm.Max}</span>
           </label>
           {/* <select
             className='select select-bordered w-11/12 my-2'
@@ -90,7 +91,7 @@ const AddLessonForm = ({
           <textarea
             type='text'
             name='description'
-            placeholder='Description'
+            placeholder={addLessonForm.Descr}
             onChange={(e) =>
               setSupplementary({
                 ...supplementary,
@@ -122,22 +123,22 @@ const AddLessonForm = ({
                   SupFormRef.current.checkValidity() &&
                   supplementary_input.current.checkValidity()
                 ) {
-                  handleSupplementary()
-                  window.my_modal_3.close()
+                  handleSupplementary();
+                  window.my_modal_3.close();
                 } else {
-                  console.error('Supplementary Form is not valid!')
+                  console.error('Supplementary Form is not valid!');
                   // Optionally, you can make the form display validation feedback
-                  SupFormRef.current.reportValidity()
+                  SupFormRef.current.reportValidity();
                 }
               }}
             >
               {supplementary.uploading ? (
                 <div className='flex justify-center items-center'>
                   <span className='loading loading-spinner'></span>
-                  loading
+                  {addLessonForm.Load}
                 </div>
               ) : (
-                'Add File'
+                `${addLessonForm.Add}`
               )}
             </button>
             <button
@@ -145,7 +146,7 @@ const AddLessonForm = ({
               className='btn btn-error'
               onClick={() => window.my_modal_3.close()}
             >
-              Cancel
+              {addLessonForm.Cancel}
             </button>
           </div>
         </form>
@@ -155,10 +156,10 @@ const AddLessonForm = ({
           <input
             type='text'
             name='title'
-            placeholder='Title'
+            placeholder={addLessonForm.Title}
             onChange={(e) => {
               e.target.value.length <= 80 &&
-                setValues({ ...values, title: e.target.value })
+                setValues({ ...values, title: e.target.value });
             }}
             value={values.title}
             className='input input-bordered w-full max-w-md mx-2'
@@ -166,7 +167,7 @@ const AddLessonForm = ({
             autoFocus
           />
           <label className='label w-full justify-end py-0 '>
-            <span className='label-text-alt mx-2'>Max: 80 characters</span>
+            <span className='label-text-alt mx-2'>{addLessonForm.Max}</span>
           </label>
           {/* <textarea
             type='text'
@@ -181,36 +182,36 @@ const AddLessonForm = ({
             theme='snow'
             className='custom-quill-container w-full border-2 rounded-lg bg-white'
             name='content'
-            placeholder='Lesson Content...'
+            placeholder={addLessonForm.Content}
             value={values.content}
             onChange={(text) => {
-              setValues({ ...values, content: text })
+              setValues({ ...values, content: text });
             }}
           />
           <label className='label w-full justify-end py-0 mb-8'>
             <span className='label-text-alt mx-2'>
-              *You must either upload a video or fill in the content
+              {addLessonForm.ContentFill}
             </span>
           </label>
           <select
             className='select select-bordered w-full max-w-md mx-2'
             onChange={(v) => {
               // setValues({ ...values, free_preview: v.target.value })
-              const isFreePreview = v.target.value === 'true' // This will be a boolean
-              setValues({ ...values, free_preview: isFreePreview })
+              const isFreePreview = v.target.value === 'true'; // This will be a boolean
+              setValues({ ...values, free_preview: isFreePreview });
             }}
             value={values.free_preview.toString()}
           >
-            <option value='true'>Free Preview Video</option>
-            <option value='false'>Paid to Watch Video</option>
+            <option value='true'>{addLessonForm.FreePreview}</option>
+            <option value='false'>{addLessonForm.PaidtoWatch}</option>
           </select>
           <div className='w-full max-w-md mx-2 my-2 flex justify-between items-center'>
-            <p className='font-bold text-[14px]'>Lesson Duration (minutes) </p>
+            <p className='font-bold text-[14px]'>{addLessonForm.Duration}</p>
             <input
               value={values.duration}
               className='w-12 border-2 px-2 py-1 rounded-lg text-[12px]'
               onChange={(e) => {
-                setValues({ ...values, duration: e.target.value })
+                setValues({ ...values, duration: e.target.value });
               }}
               disabled={values.video.Location ? true : false}
             ></input>
@@ -218,14 +219,16 @@ const AddLessonForm = ({
           <div className='form-control w-full max-w-md mx-2'>
             <label className='label'>
               <span className='label-text'>
-                {values.uploading ? 'Uploading . . .' : 'Upload Lesson Video'}
+                {values.uploading
+                  ? `${addLessonForm.Uploading}`
+                  : `${addLessonForm.Upload}`}
               </span>
               {!values.uploading && values.video.Location && (
                 <span
                   className='justify-end text-red-500 cursor-pointer'
                   onClick={handleVideoRemove}
                 >
-                  Remove Video
+                  {addLessonForm.RemoveVideo}
                 </span>
               )}
             </label>
@@ -248,7 +251,9 @@ const AddLessonForm = ({
           <div className='form-control w-full max-w-md '>
             <label className='label'>
               <span className='label-text'>
-                {values.uploading ? 'Uploading . . .' : 'Add Supplemental File'}
+                {values.uploading
+                  ? `${addLessonForm.Uploading}`
+                  : `${addLessonForm.Heading}`}
               </span>
               {!values.uploading && (
                 <AiOutlineFolderAdd
@@ -259,7 +264,7 @@ const AddLessonForm = ({
               )}
             </label>
           </div>
-          <h1 className='font-bold'>Supplementary files: </h1>
+          <h1 className='font-bold'>{addLessonForm.SupFiles}</h1>
           <div className='flex flex-col justify-center items-start gap-2 w-full max-w-md mx-2'>
             {values.supplementary_resources.map((file, i) => (
               <div className='flex justify-between items-center max-w-md w-full '>
@@ -274,7 +279,7 @@ const AddLessonForm = ({
                   <BsFillTrash3Fill
                     className='text-red-500 cursor-pointer'
                     onClick={() => {
-                      handleSupplementaryRemove(i)
+                      handleSupplementaryRemove(i);
                     }}
                   />
                 </div>
@@ -286,11 +291,11 @@ const AddLessonForm = ({
             type='button'
             className='btn btn-block btn-info'
             onClick={(e) => {
-              e.preventDefault()
+              e.preventDefault();
               if (!lessonFormRef.current.checkValidity()) {
-                console.error('Lesson Form is not valid!')
-                lessonFormRef.current.reportValidity()
-                return
+                console.error('Lesson Form is not valid!');
+                lessonFormRef.current.reportValidity();
+                return;
               }
 
               if (
@@ -298,11 +303,9 @@ const AddLessonForm = ({
                 values.content === ''
               ) {
                 // toast.dismiss()
-                window.alert(
-                  'Both file and content fields are empty. Please provide at least one'
-                )
+                window.alert(`${addLessonForm.Empty}`);
               } else {
-                handleAddLesson()
+                handleAddLesson();
               }
             }}
             disabled={values.uploading}
@@ -310,17 +313,17 @@ const AddLessonForm = ({
             {values.uploading ? (
               <div className='flex justify-center items-center'>
                 <span className='loading loading-spinner'></span>
-                "loading"
+                {addLessonForm.Load}
               </div>
             ) : (
-              'Add Lesson'
+              `${addLessonForm.AddLesson}`
             )}
           </button>
           {/* <pre>{JSON.stringify(values, null, 4)}</pre> */}
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddLessonForm
+export default AddLessonForm;

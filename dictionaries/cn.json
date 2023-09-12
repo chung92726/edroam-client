@@ -47,15 +47,15 @@
     "Browse_Course": "浏览课程",
     "All_Course": "所有课程",
     "Search_Placeholder": "搜寻...",
-    "My_Learning": "我的课堂",
+    "My_Learning": "我的课程",
     "Profile": "我的资料",
     "Dashboard": "导师仪表板",
     "Login": "登录",
     "Logout": "登出",
     "Signup": "注冊账号",
-    "Go_My_Learning": "前往我的课堂",
+    "Go_My_Learning": "前往我的课程",
     "Start_Learn": "开始学习!",
-    "No_course": "没有课堂购买记录",
+    "No_course": "没有课程购买记录",
     "Explore": "请前往影片库探索更多"
   },
   "footer": {
@@ -100,7 +100,7 @@
   },
   "register": {
     "Title": "注冊并开始学习",
-    "Subtitle": "输入您的电子邮件以创建您的帐户",
+    "Subtitle": "连接社交媒体帐户或输入您的电子邮件以创建您的帐户",
     "Send_Offers": "发送特别优惠、课程推荐及学习提示给我。",
     "Agree": "注冊即表示您同意我们的",
     "And": "和",
@@ -273,14 +273,14 @@
     "SearchReviews": "搜索评论"
   },
   "userRoute": {
-    "My_Learning": "我的课堂",
+    "My_Learning": "我的课程",
     "My_Profile": "我的资料",
     "Change_Pw": "更改密码",
-    "Enrol_History": "课堂购买记录"
+    "Enrol_History": "课程购买记录"
   },
   "userMyLearning": {
-    "My_Learning": "我的课堂",
-    "PlaceholderSearch": "搜索课堂...",
+    "My_Learning": "我的课程",
+    "PlaceholderSearch": "搜索课程...",
     "PlaceholderSort": "排序方式",
     "PlaceholderLast_Create": "按最新创建",
     "PlaceholderLast_Update": "按最新更新",
@@ -289,7 +289,7 @@
     "By": "创作者",
     "Learn": "开始学习!"
   },
-  "userBeInstructorPage": {
+  "userRegInstructorPage": {
     "toast_updated": "个人资料更新成功。",
     "toast_failed": "更新失败。请稍后再试。",
     "Upload_ProfileImg": "上传新的用户图片",
@@ -320,6 +320,16 @@
     "Course_Detail_Placeholder": "简短描述您想要创建的课程的内容",
     "Loading": "加载中...",
     "Continue": "继续"
+  },
+  "userBeInstructorPage": {
+    "BeInstructor": "注册成为导师"
+  },
+  "userCreateStripe": {
+    "Header": "完成设定收款方式后便可以在 XLearners 上进行教学",
+    "Sub_head": "XLearners 与 Stripe 合作，将收入准确无误地转入您的银行账户",
+    "Process": "处理中 . . .",
+    "Payout_Set": "设定收款",
+    "Redirect": "的页面将会被导向到 Stripe 以完成注册流程"
   },
   "userProfilePage": {
     "toast_updated": "个人资料更新成功。",
@@ -361,11 +371,74 @@
       "Save_Changes": "储存更变"
     },
     "historyPage": {
-      "Columns_Course_Name": "课堂名称",
+      "Columns_Course_Name": "课程名称",
       "Columns_Price": "价格",
       "Columns_Date": "日期",
-      "My_Enrol_History": "我的课堂购买记录",
+      "My_Enrol_History": "我的课程购买记录",
       "Free": "免费"
     }
+  },
+  "instructorPage": {
+    "toast_confirm": "若您选择发布课程，它将立即上架并接受学生购买。请确保您的课程内容是最新的版本。您确定要继续发布此课程吗？",
+    "toast_confirm_un": "若您选择取消发布课程，此课程将会立即下架，学生将无法浏览及购买。您确定要取消发布此课程吗？",
+    "toast_success": "成功发布课程",
+    "toast_success_un": "成功取消发布课程",
+    "toast_fail": "发布失败，请再尝试",
+    "toast_fail_un": "取消发布失败，请再尝试",
+    "Title": "我的教学",
+    "Publish": "已发布",
+    "Ready": "可发布",
+    "More_Lessons": " 课才可以发布",
+    "Lesson": " 课",
+    "Paid": "付费课程",
+    "Free": "免费课程",
+    "Unpublish": "取消发布此课程",
+    "Publish_Course": "发布此课程"
+  },
+  "instructorViewPage": {
+    "toast_success_copy": "成功复制链结",
+    "toast_success_add": "成功添加课堂",
+    "toast_fail_create": "课堂添加失败，请再尝试",
+    "toast_success_video": "成功上传视频",
+    "toast_fail_video": "视频上传失败，请再尝试",
+    "toast_success_remove": "成功移除视频",
+    "toast_fail_remove": "视频移除失败，请再尝试",
+    "toast_success_sup": "成功上传课堂补充资料",
+    "toast_fail_sup": "课堂补充资料上传失败，请再尝试",
+    "toast_success_sup_remove": "成功移除课堂补充资料",
+    "toast_fail_sup_remove": "课堂补充资料移除失败，请再尝试",
+    "EditCourse": "编辑课程资料",
+    "Warning": "您必须在主要预览中包含至少一节免费视频才可以发布。",
+    "Enrolled": "已注册学生人数",
+    "Revenue": "本课程总收入",
+    "TotalDuration": "课程总时长: ",
+    "Minutes": " 分钟",
+    "DirectLink": "直接链结",
+    "Copy": "复制",
+    "Lesson": " 课",
+    "EditLesson": "编辑课堂资料",
+    "MainPreview": "主要预览",
+    "FreeLesson": "免费课堂",
+    "PaidLesson": "付费课堂"
+  },
+  "addLessonForm": {
+    "Heading": "上传课堂补充资料",
+    "Title": "课堂标题",
+    "Max": "最多 80 个字符",
+    "Descr": "描述",
+    "Load": "加载中. . .",
+    "Add": "上传文件",
+    "Cancel": "取消",
+    "Content": "课堂内容...",
+    "ContentFill": "*需上传视频或提供课堂内容。",
+    "FreePreview": "免费预览",
+    "PaidtoWatch": "付费观看",
+    "Duration": "本课堂时长 (分钟) ",
+    "Uploading": "上传中. . .",
+    "Upload": "上传",
+    "RemoveVideo": "移除视频",
+    "SupFiles": "课堂补充资料:",
+    "Empty": "文件和文宇内容均为空白。请至少提供一项以继续。",
+    "AddLesson": "添加课堂"
   }
 }
