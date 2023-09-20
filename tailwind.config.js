@@ -12,6 +12,12 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  corePlugins: {
+    // ...
+    transform: true,
+    transformOrigin: true,
+    // ...
+  },
   theme: {
     container: {
       center: true,

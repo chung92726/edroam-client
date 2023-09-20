@@ -62,10 +62,6 @@ const CourseCreate = () => {
     })
   }
 
-  useEffect(() => {
-    console.log(values)
-  }, [values])
-
   const handleOptionsChange = async (data) => {
     // const cat = data.map(({ value }) => value);
     // console.log(cat);
